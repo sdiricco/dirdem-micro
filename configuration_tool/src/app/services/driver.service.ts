@@ -13,56 +13,24 @@ export class DriverService {
   gptDriverConfigurations: GptDriverConfig[] = [];
   // genera il file di testo in base alle configurazioni presenti nella tabella delle configurazioni del gpt driver
   generateGptConfigFile() {
-    var configFile =
-      '/* file Gpt_Cfg auto-generated with Dirdem Micro Wizard software tool*/\n\
-      #define CONFIGURED_CHANNELS 2\n\
-      #include "Arduino.h"\n\
-      #include "Gpt_Cfg.h1"\n\
-      \n\
-      typedef struct GptConfig{\n\
-      uint8_t GptChannelID;\n\
-      GptContainerHwChannel GptHwChannel;\n\
-      GptContainerClockReference GptClockReference;\n\
-      uint32_t GptChannelTickValueMax;\n\
-      char GptNotification[30];\n\
-      bool GptEnableDisableNotificationApi;\n\
-      } ConfigPtr;\n\
-      \n\
-      Cfg[CONFIGURED_CHANNELS] = \n\
-      {';
-
-    // rimozione delle "" dalle proprietà
-    configFile = configFile.replace(/\"([^(\")"]+)\":/g, "$1:");
-    // rimozione degli spazi a inizio delle linee
-    configFile = configFile.replace(/^ +/gm, '');
-    // spazio di indentazione
-    var indentSpace = '    ';
 
     // iterazione, formattazione e inserimento nel configFile delle singole configurazioni
+    var configFile='';
     for (let i = 0; i < this.gptDriverConfigurations.length; i++) {
-      const element = this.gptDriverConfigurations[i];
-      //let result = JSON.stringify(element);
-      i == this.gptDriverConfigurations.length - 1 ?
-        configFile = configFile + '\n' + indentSpace +
-        '{' + element.gptChannelID + ', ' +
-        element.gptContainerHwChannel + ', ' +
-        element.gptContainerClockReference + ', ' +
-        element.gptClockPrescaler + ', ' +
-        element.gptChannelTickValueMax + ', ' +
-        '"' + element.gptNotification + '"}'
-        :
-        configFile = configFile + '\n' + indentSpace +
-        '{' + element.gptChannelID + ', ' +
-        element.gptContainerHwChannel + ', ' +
-        element.gptContainerClockReference + ', ' +
-        element.gptClockPrescaler + ', ' +
-        element.gptChannelTickValueMax + ', ' +
-        '"' + element.gptNotification + '"},'
+      const config = this.gptDriverConfigurations[i];
+      configFile += 'configSet:' + i + '\n';
+      for(var property in config)
+      {
+        let value = config[property];
+        configFile += (property +':'+ value + '\n');
+        console.log(configFile);
+      }
+      configFile += '\n';
     }
-    configFile = configFile + '\n' + '};';
+    console.log(configFile);
     //generazione e salvataggio file Gpt_Cfg.h
     var blob = new Blob([configFile], { type: "text/plain;charset=utf-8" });
-    FileSaver.saveAs(blob, "Gpt_Cfg.cpp");
+    FileSaver.saveAs(blob, "Gpt_Cfg.txt");
   }
   /*
    *
