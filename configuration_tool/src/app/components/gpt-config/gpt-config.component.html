@@ -1,0 +1,115 @@
+<h1 id="mainTitle" class="colorText">GPT Driver configuration</h1>
+<div id="configContainer">
+  <div>
+    <mat-form-field class="configWidth" appearance="outline">
+      <mat-label> Channel ID</mat-label>
+      <mat-select [(value)]="config.gptChannelID" #select1>
+        <mat-option *ngFor="let channelId of atMega328values.gptChannelIdValues" [value]="channelId">
+          {{ channelId }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="configWidth" appearance="outline">
+      <mat-label>HW Channel</mat-label>
+      <mat-select [(value)]="config.gptContainerHwChannel" (selectionChange)="onHwSelectionChange($event)" #select2>
+        <mat-option *ngFor="let hwChannel of atMega328values.gptContainerHwChannelValues" [value]="hwChannel" #hwOption>
+          {{ hwChannel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="configWidth" appearance="outline">
+      <mat-label>Clock reference</mat-label>
+      <mat-select [(value)]="config.gptContainerClockReference" #select3>
+        <mat-option *ngFor="let clockReference of atMega328values.gptContainerClockReferenceValues"
+          [value]="clockReference">
+          {{ clockReference }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="configWidth" appearance="outline">
+        <mat-label>Clock prescaler</mat-label>
+        <mat-select [(value)]="config.gptClockPrescaler" #select4>
+          <mat-option *ngFor="let clockPrescaler of atMega328values.gptClockPrescalerValues"
+            [value]="clockPrescaler">
+            {{ clockPrescaler }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+  </div>
+
+  <div>
+    <mat-form-field class="configWidth" appearance="outline">
+      <!--mat-label>Tick Value Max</mat-label-->
+      <input matInput placeholder="Tick Value Max" [(ngModel)]="config.gptChannelTickValueMax" class="colorText" readonly> 
+    </mat-form-field>
+
+    <mat-form-field class="configWidth" appearance="outline">
+      <input matInput placeholder="Notification" [(ngModel)]="config.gptNotification" maxlength="30"
+        (keydown)="onGptNotificationKeydown($event)">
+    </mat-form-field>
+
+  </div>
+
+  <div>
+    <button mat-raised-button color="primary" class="configButtons" (click)="addConfig(config)"
+      [disabled]="select1.empty || select2.empty || select3.empty || select4.empty">Add</button>
+  </div>
+</div>
+
+
+<!--- tabella per visualizzazione delle istanze di configurazione -->
+<table mat-table [dataSource]="configurations" id="configsTable" *ngIf="enableTable">
+
+  <!-- gptChannelID Column -->
+  <ng-container matColumnDef="gptChannelID">
+    <th mat-header-cell *matHeaderCellDef> Channel ID </th>
+    <td mat-cell *matCellDef="let element"> {{ element.gptChannelID }} </td>
+  </ng-container>
+
+  <!-- gptContainerHwChannel Column -->
+  <ng-container matColumnDef="gptContainerHwChannel">
+    <th mat-header-cell *matHeaderCellDef> HW channel </th>
+    <td mat-cell *matCellDef="let element"> {{ element.gptContainerHwChannel }} </td>
+  </ng-container>
+
+  <!-- gptContainerClockReference Column -->
+  <ng-container matColumnDef="gptContainerClockReference">
+    <th mat-header-cell *matHeaderCellDef> Clock reference </th>
+    <td mat-cell *matCellDef="let element"> {{ element.gptContainerClockReference }} </td>
+  </ng-container>
+
+  <!-- gptClockPrescaler Column -->
+  <ng-container matColumnDef="gptClockPrescaler">
+    <th mat-header-cell *matHeaderCellDef> Clock prescaler </th>
+    <td mat-cell *matCellDef="let element"> {{ element.gptClockPrescaler }} </td>
+  </ng-container>
+
+  <!-- gptChannelTickValueMax Column -->
+  <ng-container matColumnDef="gptChannelTickValueMax">
+    <th mat-header-cell *matHeaderCellDef> Tick value max </th>
+    <td mat-cell *matCellDef="let element"> {{ element.gptChannelTickValueMax }} </td>
+  </ng-container>
+
+  <!-- gptNotification Column -->
+  <ng-container matColumnDef="gptNotification">
+    <th mat-header-cell *matHeaderCellDef> Notification </th>
+    <td mat-cell *matCellDef="let element"> {{ element.gptNotification }} </td>
+  </ng-container>
+
+  <!-- deleteRow Column -->
+  <ng-container matColumnDef="deleteRow">
+    <th mat-header-cell *matHeaderCellDef> Delete </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon color="warn" class="pointer" (click)="deleteConfig(element)"> clear </mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

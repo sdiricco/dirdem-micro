@@ -1,0 +1,166 @@
+<div id="titleBar">
+    <div id="leftSideBar" class="d-none d-sm-flex">
+        <div>
+            <img src="assets/images/microWhite.png" id="logoImage">
+        </div>
+    </div>
+    <div id="mainTitle" class="colorTextLight centerText">DIRDEM MICRO WIZARD</div>
+    <div id="rightSideBar" class="d-none d-sm-flex">
+        <span id="versionSpan" class="colorTextLight">Version 0.0.0</span>
+    </div>
+</div>
+
+<div id="microSelection">
+    <h5 class="colorText centerText">Please select one device to start</h5>
+    <mat-form-field appearance="outline">
+        <mat-label>Microcontroller</mat-label>
+        <mat-select [(value)]="microcontroller" (selectionChange)="onMicroSelected()" #micro>
+            <mat-option *ngFor="let micro of microcontrollers" [value]="micro">
+                {{ micro.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<!--div che compare solo dopo aver selezionato il microcontrollore-->
+<div *ngIf="microcontroller.name" class="row d-flex" id="microContainer">
+    <div class="col-xl-1 verticalColSpacing"></div>
+    <div class="col-xl-3">
+        <mat-card class="backgroundLightPrimary infoCards">
+            <div class="cardTitle">Technical specifications </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Name:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.name }} </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Family:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.family }} </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Brand:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.brand }} </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Datasheet:</div><a class="col-7 colorAccent"
+                    href="{{ microcontroller.datasheet }}">-> Official datasheet</a>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Pins:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.pins }} </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Total timers:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.totalTimers }} </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Data bus:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.dataBus.size }}
+                    {{ microcontroller.dataBus.measureUnit}} </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Eprom:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.eprom.size }} {{ microcontroller.eprom.measureUnit}}
+                </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Flash:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.flash.size }} {{ microcontroller.flash.measureUnit}}
+                </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Ram:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.ram.size }} {{ microcontroller.ram.measureUnit}}
+                </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> SRam:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.sram.size }} {{ microcontroller.sram.measureUnit}}
+                </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Internal oscillator:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.internalOscillator.value }}
+                    {{ microcontroller.internalOscillator.measureUnit}}
+                    {{ microcontroller.internalOscillator.material }} {{ microcontroller.internalOscillator.type}}
+                </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Min voltage:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.minVoltage.value }}
+                    {{ microcontroller.minVoltage.measureUnit }} </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-5"> Max voltage:</div>
+                <div class="col-7 colorPrimary"> {{ microcontroller.maxVoltage.value }}
+                    {{ microcontroller.maxVoltage.measureUnit }} </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-xl-1 verticalColSpacing"></div>
+    <div class="col-xl-2 d-flex align-items-center justify-content-center">
+        <img src="{{ microcontroller.imageSrc }}" alt="{{ microcontroller.name }}" (click)="showPinout()"
+            class="pointer" matTooltip="Show pinout" id="microImage">
+    </div>
+    <div class="col-xl-1 verticalColSpacing"></div>
+    <div class="col-xl-2 d-flex flex-column justify-content-between">
+        <mat-card class="backgroundLightPrimary infoCards">
+            <div class="cardTitle">Drivers configuration </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-8" [ngClass]="slider1.checked? 'colorAccent' : 'colorText'"> GPT driver</div>
+                <div class="col-2">
+                    <mat-slide-toggle #slider1 (change)="onGptDriverSwitched($event)"></mat-slide-toggle>
+                </div>
+                <button mat-icon-button class="col-2" [disabled]="!slider1.checked" matTooltip="Edit driver"
+                    (click)="onGptDriverSwitched(null, true)">
+                    <mat-icon [ngClass]="slider1.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+                </button>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-8" [ngClass]="slider2.checked? 'colorAccent' : 'colorText'"> PWM</div>
+                <div class="col-2">
+                    <mat-slide-toggle #slider2></mat-slide-toggle>
+                </div>
+                <button mat-icon-button class="col-2" [disabled]="!slider2.checked" matTooltip="Edit driver">
+                    <mat-icon [ngClass]="slider2.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+                </button>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-8" [ngClass]="slider3.checked? 'colorAccent' : 'colorText'"> Input / output</div>
+                <div class="col-2">
+                    <mat-slide-toggle #slider3></mat-slide-toggle>
+                </div>
+                <button mat-icon-button class="col-2" [disabled]="!slider3.checked" matTooltip="Edit driver">
+                    <mat-icon [ngClass]="slider3.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+        <mat-card class="backgroundLightPrimary infoCards">
+            <div class="cardTitle">Fuse bits</div>
+            <div class="row">
+                <div class="col-8" [ngClass]="slider4.checked? 'colorAccent' : 'colorText'"> LOW FUSES</div>
+                <div class="col-4">
+                    <mat-slide-toggle #slider4></mat-slide-toggle>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8" [ngClass]="slider5.checked? 'colorAccent' : 'colorText'"> HIGH FUSES</div>
+                <div class="col-4">
+                    <mat-slide-toggle #slider5></mat-slide-toggle>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8" [ngClass]="slider6.checked? 'colorAccent' : 'colorText'"> LOCKBIT </div>
+                <div class="col-4">
+                    <mat-slide-toggle #slider6></mat-slide-toggle>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-xl-2"></div>
+
+    <div id="generateConfigButtonDiv">
+        <button mat-raised-button color="accent" (click)="generateConfig()" [disabled]="!thereAreConfigurations" matTooltip="Generate configuration">Micro
+            Wizard</button>
+    </div>
+
+</div>
