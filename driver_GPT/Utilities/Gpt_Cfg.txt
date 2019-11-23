@@ -1,4 +1,4 @@
-configSet:0
+gptConfigSet:0
 gptChannelID:1
 gptContainerHwChannel:TMR1
 gptChannelTickValueMax:65535
@@ -6,7 +6,7 @@ gptContainerClockReference:SYS_CLK
 gptClockPrescaler:8
 gptNotification:isbdc
 
-configSet:1
+gptConfigSet:1
 gptChannelID:2
 gptContainerHwChannel:TMR2
 gptChannelTickValueMax:255
@@ -14,7 +14,7 @@ gptContainerClockReference:EXT_CLK
 gptClockPrescaler:256
 gptNotification:sfgbsdf
 
-configSet:2
+gptConfigSet:2
 gptChannelID:0
 gptContainerHwChannel:TMR0
 gptChannelTickValueMax:255
