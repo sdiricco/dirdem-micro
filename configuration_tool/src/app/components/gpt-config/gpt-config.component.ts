@@ -56,9 +56,6 @@ export class GptCfgConfigComponent implements AfterViewInit {
    **************************/
   // aggiunge una nuova configurazione (nuova riga in tabella)
   addConfig(config: GptDriverConfig) {
-    // aggiornamento dei channelId e hwChannel già selezionati
-    this.driverService.channelIdSelected.push(config.gptChannelID);
-    this.driverService.hwChannelSelected.push(config.gptContainerHwChannel);
     // inserimento nell'array delle configurazioni
     let result = Object.assign({}, config);
     this.driverService.gptDriverConfigurations.push(result);
@@ -66,16 +63,6 @@ export class GptCfgConfigComponent implements AfterViewInit {
   }
   // cancella una configurazione (tasto X sulla tabella)
   deleteConfig(config: GptDriverConfig) {
-    // rimozione hwChannel da quelli già selezionati (visualizzaione dropdown)
-    let hwChannelIndex = this.driverService.hwChannelSelected.indexOf(
-      config.gptContainerHwChannel
-    );
-    this.driverService.hwChannelSelected.splice(hwChannelIndex, 1);
-    // rimozione channelId da quelli già selezionati (visualizzaione dropdown)
-    let channelIdIndex = this.driverService.channelIdSelected.indexOf(
-      config.gptChannelID
-    );
-    this.driverService.channelIdSelected.splice(channelIdIndex, 1);
       // rimozione configuraione dall'array configurazioni
     let element = this.driverService.gptDriverConfigurations.find(
       _ => _.gptContainerHwChannel == config.gptContainerHwChannel
@@ -113,11 +100,15 @@ export class GptCfgConfigComponent implements AfterViewInit {
   private _refreshDropDownAndTable() {
     this.configurations = this.driverService.gptDriverConfigurations;
     this.configurations = [...this.configurations]
-    this.hwChannelDropDown.options.forEach(_ => {
-      _.disabled = this.driverService.hwChannelSelected.includes(_.value);
+    this.channelIdDropDown.options.forEach(chId => {
+      chId.disabled = this.driverService.gptDriverConfigurations.find(config => {
+        return config.gptChannelID == chId.value;
+      })
     });
-    this.channelIdDropDown.options.forEach(_ => {
-      _.disabled = this.driverService.channelIdSelected.includes(_.value);
+    this.hwChannelDropDown.options.forEach(chHw => {
+      chHw.disabled = this.driverService.gptDriverConfigurations.find(config => {
+        return config.gptContainerHwChannel == chHw.value;
+      })
     });
     this.hwChannelDropDown.value = null;
     this.channelIdDropDown.value = null;

@@ -10,8 +10,6 @@ export class DriverService {
   /*
    *  GPT DRIVER
    */
-  hwChannelSelected: string[] = [];                                                 // gli hwChannel già aggiunti nelle configurazioni (tabella)
-  channelIdSelected: number[] = [];                                                 // i ChannelId già selezionati nelle configurazioni (tabella)
   gptDriverConfigurations: GptDriverConfig[] = [];
   // genera il file di testo in base alle configurazioni presenti nella tabella delle configurazioni del gpt driver
   generateGptConfigFile() {
@@ -67,7 +65,7 @@ export class DriverService {
     FileSaver.saveAs(blob, "Gpt_Cfg.cpp");
   }
   /*
-   * 
+   *
    */
 
   constructor() { }

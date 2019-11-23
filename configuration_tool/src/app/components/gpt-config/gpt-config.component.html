@@ -13,7 +13,7 @@
     <mat-form-field class="configWidth" appearance="outline">
       <mat-label>HW Channel</mat-label>
       <mat-select [(value)]="config.gptContainerHwChannel" (selectionChange)="onHwSelectionChange($event)" #select2>
-        <mat-option *ngFor="let hwChannel of atMega328values.gptContainerHwChannelValues" [value]="hwChannel" #hwOption>
+        <mat-option *ngFor="let hwChannel of atMega328values.gptContainerHwChannelValues" [value]="hwChannel">
           {{ hwChannel }}
         </mat-option>
       </mat-select>
@@ -46,7 +46,7 @@
   <div>
     <mat-form-field class="configWidth" appearance="outline">
       <!--mat-label>Tick Value Max</mat-label-->
-      <input matInput placeholder="Tick Value Max" [(ngModel)]="config.gptChannelTickValueMax" class="colorText" readonly> 
+      <input matInput placeholder="Tick Value Max" [(ngModel)]="config.gptChannelTickValueMax" class="colorText" readonly>
     </mat-form-field>
 
     <mat-form-field class="configWidth" appearance="outline">

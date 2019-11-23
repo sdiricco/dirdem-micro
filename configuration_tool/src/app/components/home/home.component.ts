@@ -73,8 +73,6 @@ export class HomeComponent {
     }
     // se lo slider viene spento
     else {
-      this.driverService.channelIdSelected = [];
-      this.driverService.hwChannelSelected = [];
       this.driverService.gptDriverConfigurations = [];
     }
   }
