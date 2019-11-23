@@ -10,10 +10,21 @@ struct Node
 struct Node *list = NULL, **nextp = &list;
 char buffer[1024];
 
-typedef enum {TMR0, TMR1, TMR2}type_GptHwChannel;
-typedef enum {SYS_CLK, EXT_CLK_FE = 6, EXT_CLK_RE = 7}type_GptClockReference;
+typedef enum
+{
+    TMR0,
+    TMR1,
+    TMR2
+} type_GptHwChannel;
+typedef enum
+{
+    SYS_CLK,
+    EXT_CLK_FE = 6,
+    EXT_CLK_RE = 7
+} type_GptClockReference;
 
-typedef struct {
+typedef struct
+{
     int GptConfigSet;
     int GptChannelID;
     type_GptHwChannel GptHwChannel;
@@ -21,86 +32,97 @@ typedef struct {
     int GptClockPrescaler;
     int GptChannelTickValueMax;
     char GptNotification[30];
-}ConfigPtr;
+} ConfigPtr;
 
-
-
-int main() {
+int main()
+{
 
     FILE *fp;
-    char* file = "./Gpt_Cfg.txt";
+    char *file = "./Gpt_Cfg.txt";
 
-
-    ConfigPtr Cfg;
+    ConfigPtr Cfg[3];
 
     fp = fopen(file, "r");
 
-    if (fp == NULL){
-        printf("Could not open file",file);
+    if (fp == NULL)
+    {
+        printf("Could not open file", file);
         return 1;
     }
 
-    while (fgets(buffer, sizeof buffer, fp) != NULL) {
+    int index = 0;
 
+    while (fgets(buffer, sizeof buffer, fp) != NULL)
+    {
 
-        if (buffer[0] == '\n'){
-            break;
+        if (buffer[0] == '\n')
+        {
+            index++;
+            printf("\n");
         }
 
         struct Node *node;
 
         node = malloc(sizeof(struct Node) + strlen(buffer) + 1);
-        node->key = strtok(strcpy((char*)(node+1), buffer), ":\r\n");
+        node->key = strtok(strcpy((char *)(node + 1), buffer), ":\r\n");
         node->value = strtok(NULL, "\r\n");
         node->next = NULL;
         *nextp = node;
         nextp = &node->next;
 
-        if (node->key != NULL && node->value != NULL){
-            if ( strcmp(node->key, "gptConfigSet") == 0 ){
-                Cfg.GptConfigSet = 0;
-                sscanf(node->value, "%d", &Cfg.GptConfigSet);
+        if (node->key != NULL && node->value != NULL)
+        {
+            if (strcmp(node->key, "gptConfigSet") == 0)
+            {
+                Cfg[index].GptConfigSet = 0;
+                sscanf(node->value, "%d", &Cfg[index].GptConfigSet);
                 printf("%s", node->key);
-                printf(" = %d", Cfg.GptConfigSet);
+                printf(" = %d", Cfg[index].GptConfigSet);
                 printf("\n");
             }
-            else if ( strcmp(node->key, "gptChannelID") == 0 ){
-                Cfg.GptChannelID = 0;
-                sscanf(node->value, "%d", &Cfg.GptChannelID);
+            else if (strcmp(node->key, "gptChannelID") == 0)
+            {
+                Cfg[index].GptChannelID = 0;
+                sscanf(node->value, "%d", &Cfg[index].GptChannelID);
                 printf("%s", node->key);
-                printf(" = %d", Cfg.GptChannelID);
+                printf(" = %d", Cfg[index].GptChannelID);
                 printf("\n");
             }
-            else if ( strcmp(node->key, "gptContainerHwChannel") == 0 ){
-                Cfg.GptHwChannel = (type_GptHwChannel)node->value;
+            else if (strcmp(node->key, "gptContainerHwChannel") == 0)
+            {
+                Cfg[index].GptHwChannel = (type_GptHwChannel)node->value;
                 printf("%s", node->key);
-                printf(" = %s", Cfg.GptHwChannel);
+                printf(" = %s", Cfg[index].GptHwChannel);
                 printf("\n");
             }
-            else if ( strcmp(node->key, "gptChannelTickValueMax") == 0 ){
-                Cfg.GptChannelTickValueMax = 0;
-                sscanf(node->value, "%d", &Cfg.GptChannelTickValueMax);
+            else if (strcmp(node->key, "gptChannelTickValueMax") == 0)
+            {
+                Cfg[index].GptChannelTickValueMax = 0;
+                sscanf(node->value, "%d", &Cfg[index].GptChannelTickValueMax);
                 printf("%s", node->key);
-                printf(" = %d", Cfg.GptChannelTickValueMax);
+                printf(" = %d", Cfg[index].GptChannelTickValueMax);
                 printf("\n");
             }
-            else if ( strcmp(node->key, "gptContainerClockReference") == 0 ){
-                Cfg.GptClockReference = (type_GptClockReference)node->value;
+            else if (strcmp(node->key, "gptContainerClockReference") == 0)
+            {
+                Cfg[index].GptClockReference = (type_GptClockReference)node->value;
                 printf("%s", node->key);
-                printf(" = %s", Cfg.GptClockReference);
+                printf(" = %s", Cfg[index].GptClockReference);
                 printf("\n");
             }
-            else if ( strcmp(node->key, "gptClockPrescaler") == 0 ){
-                Cfg.GptClockPrescaler = 0;
-                sscanf(node->value, "%d", &Cfg.GptClockPrescaler);
+            else if (strcmp(node->key, "gptClockPrescaler") == 0)
+            {
+                Cfg[index].GptClockPrescaler = 0;
+                sscanf(node->value, "%d", &Cfg[index].GptClockPrescaler);
                 printf("%s", node->key);
-                printf(" = %d", Cfg.GptClockPrescaler);
+                printf(" = %d", Cfg[index].GptClockPrescaler);
                 printf("\n");
             }
-            else if ( strcmp(node->key, "gptNotification") == 0 ){
-                strcpy(Cfg.GptNotification , node->value);
+            else if (strcmp(node->key, "gptNotification") == 0)
+            {
+                strcpy(Cfg[index].GptNotification, node->value);
                 printf("%s", node->key);
-                printf(" = %s", Cfg.GptNotification);
+                printf(" = %s", Cfg[index].GptNotification);
                 printf("\n");
             }
         }
