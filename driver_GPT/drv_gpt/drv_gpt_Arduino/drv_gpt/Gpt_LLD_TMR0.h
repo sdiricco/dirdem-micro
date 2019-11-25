@@ -12,7 +12,7 @@ void Gpt_DisableNotification_LLD_TMR0(void);
 */
 
 typedef enum { 
-	TMRO_NO_CLK, 
+	TMR0_NO_CLK, 
 	TMR0_SYS_CLK_P0, TMR0_SYS_CLK_P8, TMR0_SYS_CLK_P64, TMR0_SYS_CLK_P256, TMR0_SYS_CLK_P1024,
 }type_GptClockSelect_TMR0;
 
