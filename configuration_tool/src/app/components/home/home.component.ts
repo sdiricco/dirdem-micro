@@ -27,6 +27,8 @@ export class HomeComponent {
   //
   microcontroller = new Microcontroller();
   microcontrollers: Microcontroller[];
+  // configurazioni da inserire nel div che servirà per scaricare il file .C
+  configurations = this.driverService.gptDriverConfigurations;
 
 
   constructor(public dialog: MatDialog, private driverService: DriverService, private toast: ToastrService) {
@@ -48,9 +50,10 @@ export class HomeComponent {
   }
   // genera il file di configurazione in base ai dati presenti nel driverService
   generateConfig() {
-    this.driverService.generateGptConfigFile();
-    this.toast.success("Download success!");
-  }
+    // file c da scaricare (contenuto dentro il div invisibile)
+    let cFile = document.getElementById("cFileToDownload").innerText;
+    this.driverService.generateGptConfigFile(cFile);
+    this.toast.success("Download success!");  }
 
   /*
    * eventi su tasti slider

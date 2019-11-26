@@ -24,7 +24,7 @@
     justify-content: center;
 }
 
-#rightSideBar {    
+#rightSideBar {
     flex: 1;
     display: flex;
     justify-content: flex-end;
@@ -49,7 +49,7 @@
 }
 
 #microContainer {
-    padding: 20px;    
+    padding: 20px;
 }
 
 .infoCards {
@@ -68,4 +68,8 @@
     display: flex;
     justify-content: center;
     margin-top: 5%;
+}
+
+#cFileToDownload {
+  display: none;
 }

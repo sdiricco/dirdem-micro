@@ -162,5 +162,33 @@
         <button mat-raised-button color="accent" (click)="generateConfig()" [disabled]="!thereAreConfigurations" matTooltip="Generate configuration">Micro
             Wizard</button>
     </div>
+</div>
 
+<!-- div contentente il file C da scaricare -->
+<div id="cFileToDownload">
+      /*
+      File: Gpt_Cfg.c
+      */
+
+      /**************************************** INCLUDE FILES ****************************************/
+      #include "Arduino.h"
+      #include "Gpt_Cfg.h"
+      /***********************************************************************************************/
+
+      #define CONFIGURED_CHANNELS 3
+
+      ConfigPtr Cfg[CONFIGURED_CHANNELS] =
+      {{ '{' }}
+    <div *ngFor="let config of configurations; last as isLast">
+
+        {{'{'}}
+          {{ config.gptChannelID }},
+          {{ config.gptContainerHwChannel }},
+          {{ config.gptContainerClockReference }},
+          {{ config.gptClockPrescaler }},
+          {{ config.gptChannelTickValueMax }},
+          "{{ config.gptNotification }}"
+        {{'}'}} <span *ngIf="!isLast">,</span>
+      </div>
+      {{ '}' }}
 </div>
