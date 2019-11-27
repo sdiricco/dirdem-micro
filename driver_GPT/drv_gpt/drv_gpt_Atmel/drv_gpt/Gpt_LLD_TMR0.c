@@ -91,7 +91,7 @@ Enable), and TOV0 are set, the Timer/Counter0 Overflow interrupt is executed.
 /**************************************** INCLUDE FILES ****************************************/
 #include <avr/io.h>
 #include "Gpt_LLD_TMR0.h"
-#include "Gpt_Cfg.h"
+#include "Gpt_Extern_Generated.h"
 /***********************************************************************************************/
 
 #define SET_BIT_REGISTER(Reg_type, REGISTER, mask) { REGISTER |= (Reg_type)mask; }

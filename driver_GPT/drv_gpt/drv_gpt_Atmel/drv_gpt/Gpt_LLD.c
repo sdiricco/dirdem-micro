@@ -22,7 +22,7 @@ void Gpt_SetMode_LLD(enum)
 #include "Gpt_LLD_TMR0.h"
 #include "Gpt_LLD_TMR1.h"
 #include "Gpt_LLD_TMR2.h"
-#include "Gpt_Cfg.h"
+#include "Gpt_Extern_Generated.h"
 /***********************************************************************************************/
 
 void Gpt_Init_LLD(uint8_t channel)

@@ -152,7 +152,7 @@ void TIM16_WriteTCNT1( unsigned int i )
 //#include "Arduino.h"
 #include <avr/io.h>
 #include "Gpt_LLD_TMR1.h"
-#include "Gpt_Cfg.h"
+#include "Gpt_Extern_Generated.h"
 /***********************************************************************************************/
 
 #define SET_BIT_REGISTER(Reg_type, REGISTER, mask) { REGISTER |= (Reg_type)mask; }
