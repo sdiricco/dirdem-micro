@@ -18,7 +18,7 @@ void Gpt_SetMode( enum mode )
 /**************************************** INCLUDE FILES ****************************************/
 //#include <avr/io.h>
 #include "Arduino.h"
-#include "Gpt_Cfg.h"
+#include "Gpt_Cfg_Extern_Generated.h"
 #include "Gpt.h"
 #include "Gpt_LLD.h"
 /***********************************************************************************************/
