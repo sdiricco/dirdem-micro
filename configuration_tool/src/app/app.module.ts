@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
 import { MicroPinoutDialogComponent } from './components/micro-pinout-dialog/micro-pinout-dialog.component';
+import { FuseBitComponent } from './components/fuse-bit/fuse-bit.component';
 
 
 
@@ -30,11 +31,13 @@ import { MicroPinoutDialogComponent } from './components/micro-pinout-dialog/mic
     AppComponent,
     GptCfgConfigComponent,
     HomeComponent,
-    MicroPinoutDialogComponent
+    MicroPinoutDialogComponent,
+    FuseBitComponent
   ],
   entryComponents: [
     MicroPinoutDialogComponent,
-    GptCfgConfigComponent
+    GptCfgConfigComponent,
+    FuseBitComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,7 @@ import { MicroPinoutDialogComponent } from './components/micro-pinout-dialog/mic
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatCheckboxModule, 
+    MatCheckboxModule,
     MatButtonModule,
     MatSelectModule,
     MatSlideToggleModule,

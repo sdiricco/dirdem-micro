@@ -1,4 +1,5 @@
 import { ElelectronicMemory, MemoryUnitMeasures, VoltageUnitMeasures, Voltage, FrequencyUnitMeasure, ElectronicOscillator, OscillatorMaterial, OscillatorType } from './ElectronicUtilities';
+import { FusesType } from './FuseBit';
 
 export class Microcontroller {
     name: string;
@@ -17,6 +18,7 @@ export class Microcontroller {
     maxVoltage: Voltage;
     totalTimers: number;
     internalOscillator: ElectronicOscillator;
+    fuses: FusesType [] = [];
 
     static getMicrocontrollers(): Microcontroller[]{
         return ALL_MICROS;
@@ -47,5 +49,6 @@ export const ALL_MICROS: Microcontroller[] = [{
     minVoltage: { value: 1.8, measureUnit: VoltageUnitMeasures.V },
     maxVoltage: {  value:5.5, measureUnit: VoltageUnitMeasures.V },
     totalTimers: 3,
-    internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Crystal, material: OscillatorMaterial.Quartz  }
+    internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Crystal, material: OscillatorMaterial.Quartz  },
+    fuses: [FusesType.LOW, FusesType.HIGH, FusesType.EXTENDED, FusesType.LOCKBIT]
 }]
