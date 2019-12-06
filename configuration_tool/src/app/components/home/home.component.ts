@@ -96,7 +96,7 @@ export class HomeComponent {
     }
   }
   // su fuse bit
-  onFuseBitSwitched(evt?: MatSlideToggleChange, isEdit?: boolean) {
+  onFuseSwitched(evt?: MatSlideToggleChange, isEdit?: boolean) {
     if (isEdit || evt.checked) {
       const dialogRef = this.dialog.open(FuseBitComponent, {
         width: "920px",

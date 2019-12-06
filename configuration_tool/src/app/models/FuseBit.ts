@@ -1,31 +1,11 @@
-// configurazione che viene valorizzata nel servizio DriverService
-export class FuseBitConfig {
-  lowFuse?: Fuse;
-  highFuse?: Fuse;
-  extendedFuse?: Fuse;
-  lockbitFuse?: Fuse;
-}
-
 export interface Fuse {
   type: FusesType;
-  bits: FuseBits;
+  bits: FuseBit [];
 }
 
-export interface FuseBits {
-  bit0: FuseBit;
-  bit1: FuseBit;
-  bit2: FuseBit;
-  bit3: FuseBit;
-  bit4: FuseBit;
-  bit5: FuseBit;
-  bit6: FuseBit;
-  bit7: FuseBit;
-}
-
-// singolo bit contente il valore (0 o 1) e l'etichetta (nome) del bit stesso es. CKSEL0
-interface FuseBit {
+export interface FuseBit {
   label: FuseBitLabel;
-  bitValue: boolean;
+  value: boolean;
 }
 
 export enum FusesType {
