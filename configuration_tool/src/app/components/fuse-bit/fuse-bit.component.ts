@@ -1,6 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Fuse, FuseBit } from 'src/app/models/FuseBit';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ConverterUtilities } from 'src/app/models/Utilities/ConverterUtilities';
 
 
 @Component({
@@ -9,38 +10,28 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   styleUrls: ['./fuse-bit.component.css']
 })
 export class FuseBitComponent {
-  columns: FuseTableColumn[] = [];
+  columns: FuseTableColumn [] = [];
   displayedColumns: string [] = [];
-  dataSource: FuseBit [] = [];
-  
+  dataSource: FuseBit [] [];
+
 
   constructor(public dialogRef: MatDialogRef<FuseBitComponent>,
     @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
-      console.log(this.fuses);
-
-      let row = fuses.filter((_,i) => i % 3 == 0);
-
-
-      for (let i = 0; i < fuses.length; i++) {
-        // iterazione dei singoli fuses passati dall'esterno
-        const fuse = fuses[i];
-        const column: FuseTableColumn = {columnDef: fuse.type, header: fuse.type};
-        this.columns.push(column);
-
-        for (let findex = fuse.bits.length-1; findex >= 0; findex--) {
-          const bit = fuse.bits[findex];
-          this.dataSource.push(bit);          
-        }            
-
-      }
-      this.displayedColumns = this.columns.map(x => x.columnDef);
+      // creazione matrice e riempimento dataSource
+      const fuseMatrix: FuseBit [] [] = this.fuses.map(fuse => fuse.bits);
+      this.dataSource = ConverterUtilities.matrixTranspose(fuseMatrix);
+      // mappatura colonne
+      this.fuses.forEach(fuse => {
+        this.columns.push({columnDef: fuse.type, header: fuse.type});
+        this.displayedColumns.push(fuse.type);
+      })
   }
 
+  doThis(row) {
+    console.log(row);
+  }
 }
 
-interface CustomColumn {
-
-}
 
 interface FuseTableColumn {
   columnDef: string;
