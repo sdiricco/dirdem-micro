@@ -4,7 +4,7 @@
             <img src="assets/images/microWhite.png" id="logoImage">
         </div>
     </div>
-    <div id="mainTitle" class="colorTextLight centerText">DIRDEM MICRO WIZARD</div>
+    <div id="mainTitle" class="colorTextLight centerText">DIRDEM MONGOL DRIVER</div>
     <div id="rightSideBar" class="d-none d-sm-flex">
         <span id="versionSpan" class="colorTextLight">Version 0.0.0</span>
     </div>
@@ -104,7 +104,7 @@
     <div class="col-xl-1 verticalColSpacing"></div>
     <div class="col-xl-2 d-flex flex-column justify-content-between">
         <mat-card class="backgroundLightPrimary infoCards">
-            <div class="cardTitle">Drivers configuration </div>
+            <div class="cardTitle">Drivers </div>
             <div class="row d-flex align-items-center">
                 <div class="col-8" [ngClass]="slider1.checked? 'colorAccent' : 'colorText'"> GPT driver</div>
                 <div class="col-2">
@@ -135,32 +135,22 @@
             </div>
         </mat-card>
         <mat-card class="backgroundLightPrimary infoCards">
-            <div class="cardTitle">Fuse bits</div>
-            <div class="row">
-                <div class="col-8" [ngClass]="slider4.checked? 'colorAccent' : 'colorText'"> LOW FUSES</div>
-                <div class="col-4">
-                    <mat-slide-toggle #slider4 (change)="onFuseBitSwitched($event)"></mat-slide-toggle>
+            <div class="cardTitle">Fuses</div>
+            <div class="row d-flex align-items-center">
+                <div class="col-8" [ngClass]="slider4.checked? 'colorAccent' : 'colorText'"> <div *ngFor="let fuse of microcontroller.fuses"> {{ fuse.type }} </div> </div>
+                <div class="col-2">
+                    <mat-slide-toggle #slider4 (change)="onFuseSwitched($event)"></mat-slide-toggle>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-8" [ngClass]="slider5.checked? 'colorAccent' : 'colorText'"> HIGH FUSES</div>
-                <div class="col-4">
-                    <mat-slide-toggle #slider5></mat-slide-toggle>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-8" [ngClass]="slider6.checked? 'colorAccent' : 'colorText'"> LOCKBIT </div>
-                <div class="col-4">
-                    <mat-slide-toggle #slider6></mat-slide-toggle>
-                </div>
+                <button mat-icon-button class="col-2" [disabled]="!slider4.checked" matTooltip="Edit driver">
+                    <mat-icon [ngClass]="slider4.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+                </button>
             </div>
         </mat-card>
     </div>
     <div class="col-xl-2"></div>
 
     <div id="generateConfigButtonDiv">
-        <button mat-raised-button color="accent" (click)="generateConfig()" [disabled]="!thereAreGptConfigurations" matTooltip="Generate configuration">Micro
-            Wizard</button>
+        <button mat-raised-button color="accent" (click)="generateConfig()" [disabled]="!thereAreGptConfigurations" matTooltip="Generate configuration">Mongol it!</button>
     </div>
 </div>
 

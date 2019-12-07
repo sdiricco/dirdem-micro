@@ -50,6 +50,7 @@ export class HomeComponent {
 
   // evento scatenato sulla selezione di un nuovo micro
   onMicroSelected() {
+    // il microcontroller viene assegnato con il binding sul template html
     console.log(this.microcontroller);
   }
   // evento scatenato al passagio del mouse sopra l'immagine
@@ -95,11 +96,11 @@ export class HomeComponent {
     }
   }
   // su fuse bit
-  onFuseBitSwitched(evt?: MatSlideToggleChange, isEdit?: boolean) {
+  onFuseSwitched(evt?: MatSlideToggleChange, isEdit?: boolean) {
     if (isEdit || evt.checked) {
       const dialogRef = this.dialog.open(FuseBitComponent, {
         width: "920px",
-        data: null
+        data: this.microcontroller.fuses // passo al dialog le informazioni sui fuse bit
       })
       dialogRef.afterClosed().subscribe(result => {
         if (this.fuseBitConfiguration) {
