@@ -4,7 +4,7 @@
 	- Complete support of Timer 2 enabling the ASSR register to activate the externa crystal suorce clock
 	- Test the functionality with Arduino
 	- Implement the custom name of ISR setting a user string in Cfg vector 
-	- Add the project into GitHub
+	OK - Add the project into GitHub
 	- Add DoxyGen for user manual generation
 	- Implement error control in Gpt.c for the sequence of the calls for each API. Follow Autosar SWS.
 	- Implement Atomic block.
