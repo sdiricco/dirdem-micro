@@ -10,7 +10,7 @@ ConfigPtr Cfg[] =
 		1,
 		TMR1,
 		SYS_CLK,
-		0,
+		256,
 		65535,
 		"GptNotification01",
 	}
