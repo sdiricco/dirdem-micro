@@ -3,10 +3,10 @@
 
     <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
       <mat-header-cell *cdkHeaderCellDef> {{ column.header }} </mat-header-cell>
-      <!--
-      <mat-cell *cdkCellDef="let row"> <mat-checkbox [checked]="row.value" (change)="doThis(row)"> {{ row.label }} </mat-checkbox> </mat-cell>
-      -->
-      <mat-cell *cdkCellDef="let row"> {{ row }} </mat-cell>
+      <mat-cell *cdkCellDef="let row">
+        <mat-checkbox [checked]="row[column.index].value" (change)="onCellClicked(column.columnDef, row[column.index])">
+          {{ row[column.index].label }} </mat-checkbox>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -14,18 +14,3 @@
 
   </mat-table>
 </div>
-
-<!--
-<table>
-  <thead>
-    <tr>
-      <th *ngFor="let columnHeader of displayedColumns"> {{ columnHeader }} </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td *ngFor="let bit of dataSource">  </td>
-    </tr>
-  </tbody>
-</table>
--->

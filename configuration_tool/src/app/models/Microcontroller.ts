@@ -18,7 +18,7 @@ export class Microcontroller {
     maxVoltage: Voltage;
     totalTimers: number;
     internalOscillator: ElectronicOscillator;
-    fuses: Fuse[];
+    fuses: Fuse[];                              // dall'ultimo al primo
 
     static getMicrocontrollers(): Microcontroller[] {
         return ALL_MICROS;
@@ -58,58 +58,58 @@ export const ALL_MICROS: Microcontroller[] =
                         type: FusesType.LOW,
                         bits:
                             [
-                                { label: FuseBitLabel.CKSEL0, value: false },
-                                { label: FuseBitLabel.CKSEL1, value: false },
-                                { label: FuseBitLabel.CKSEL2, value: false },
-                                { label: FuseBitLabel.CKSEL3, value: false },
-                                { label: FuseBitLabel.SUT0, value: false },
-                                { label: FuseBitLabel.SUT1, value: false },
+                                { label: FuseBitLabel.CKDIV8, value: false },
                                 { label: FuseBitLabel.CKOUT, value: false },
-                                { label: FuseBitLabel.CKDIV8, value: false }
+                                { label: FuseBitLabel.SUT1, value: false },
+                                { label: FuseBitLabel.SUT0, value: false },
+                                { label: FuseBitLabel.CKSEL3, value: false },
+                                { label: FuseBitLabel.CKSEL2, value: false },
+                                { label: FuseBitLabel.CKSEL1, value: false },
+                                { label: FuseBitLabel.CKSEL0, value: false }                        
                             ]
                     },
                     {
                         type: FusesType.HIGH,
                         bits:
                             [
-                                { label: FuseBitLabel.BOOTRST, value: false },
-                                { label: FuseBitLabel.BOOTSZ0, value: false },
-                                { label: FuseBitLabel.BOOTSZ1, value: false },
-                                { label: FuseBitLabel.EESAVE, value: false },
-                                { label: FuseBitLabel.WDTON, value: false },
-                                { label: FuseBitLabel.SPIEN, value: false },
+                                { label: FuseBitLabel.RSTDISBL, value: false },
                                 { label: FuseBitLabel.DWEN, value: false },
-                                { label: FuseBitLabel.RSTDISBL, value: false }
+                                { label: FuseBitLabel.SPIEN, value: false },
+                                { label: FuseBitLabel.WDTON, value: false },
+                                { label: FuseBitLabel.EESAVE, value: false },
+                                { label: FuseBitLabel.BOOTSZ1, value: false },
+                                { label: FuseBitLabel.BOOTSZ0, value: false },
+                                { label: FuseBitLabel.BOOTRST, value: false }                        
                             ]
                     },
                     {
                         type: FusesType.EXTENDED,
                         bits:
                             [
-                                { label: FuseBitLabel.BODLEVEL0, value: false },
-                                { label: FuseBitLabel.BODLEVEL1, value: false },
-                                { label: FuseBitLabel.BODLEVEL2, value: false },
-                                { label: FuseBitLabel.Bit3, value: false },
-                                { label: FuseBitLabel.Bit4, value: false },
-                                { label: FuseBitLabel.Bit5, value: false },
+                                { label: FuseBitLabel.Bit7, value: false },
                                 { label: FuseBitLabel.Bit6, value: false },
-                                { label: FuseBitLabel.Bit7, value: false }
+                                { label: FuseBitLabel.Bit5, value: false },
+                                { label: FuseBitLabel.Bit4, value: false },
+                                { label: FuseBitLabel.Bit3, value: false },
+                                { label: FuseBitLabel.BODLEVEL2, value: false },
+                                { label: FuseBitLabel.BODLEVEL1, value: false },
+                                { label: FuseBitLabel.BODLEVEL0, value: false }                        
                             ]
                     },
                     {
                         type: FusesType.LOCKBIT,
                         bits:
                             [
-                                { label: FuseBitLabel.Bit0, value: false },
-                                { label: FuseBitLabel.Bit1, value: false },
-                                { label: FuseBitLabel.Bit2, value: false },
-                                { label: FuseBitLabel.Bit3, value: false },
-                                { label: FuseBitLabel.Bit4, value: false },
-                                { label: FuseBitLabel.Bit5, value: false },
+                                { label: FuseBitLabel.Bit7, value: false },
                                 { label: FuseBitLabel.Bit6, value: false },
-                                { label: FuseBitLabel.Bit7, value: false }
+                                { label: FuseBitLabel.Bit5, value: false },
+                                { label: FuseBitLabel.Bit4, value: false },
+                                { label: FuseBitLabel.Bit3, value: false },
+                                { label: FuseBitLabel.Bit2, value: false },
+                                { label: FuseBitLabel.Bit1, value: false },
+                                { label: FuseBitLabel.Bit0, value: false }                         
                             ]
-                    }
+                    }                    
                 ]
         }
     ]

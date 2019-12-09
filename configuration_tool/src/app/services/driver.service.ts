@@ -11,16 +11,20 @@ export class DriverService {
   /*
    *  GPT DRIVER
    */
-  gptDriverConfigurations: GptDriverConfig [] = [];
-  fuseBitConfiguration: Fuse [];
+  gptDriverConfiguration: GptDriverConfig [] = [];
+  fuseBitConfiguration: Fuse [] = [];
+
+  constructor() { }
+
   // scarica il Gpt_Cfg.C
-  generateGptConfigFile(cFile: string) { // da trasformare in promise !!!
+  generateGptConfigFile(cFile: string): void { // da trasformare in promise !!!
     var blob = new Blob([cFile], { type: "text/plain;charset=utf-8" });
     FileSaver.saveAs(blob, "Gpt_Cfg.c");
   }
-  /*
-   *
-   */
 
-  constructor() { }
+  // svuota tutte le configurazioni
+  clearAllConfigurations(): void {
+    this.gptDriverConfiguration = [];
+    this.fuseBitConfiguration = [];
+  }
 }
