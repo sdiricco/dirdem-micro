@@ -5,7 +5,7 @@ export class ConverterUtilities {
     }
     /** converte un numero decimale in un numero esadecimale */
     static numberToHex(n: number): string {
-        return n.toString(16);
+        return n.toString(16).toUpperCase();
     }
     /** converte un numero base in decimale (max 255  8-bit) in un array di bit */
     static uint8ToBinaryArray(num: number): boolean[] {

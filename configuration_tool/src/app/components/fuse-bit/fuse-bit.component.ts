@@ -1,9 +1,10 @@
-import { Component, Inject } from '@angular/core';
-import { Fuse, FuseBit, FusesType } from 'src/app/models/FuseBit';
+import { Component, Inject, ChangeDetectorRef } from '@angular/core';
+import { Fuse, FuseBit } from 'src/app/models/FuseBit';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ConverterUtilities } from 'src/app/models/Utilities/ConverterUtilities';
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fuse-bit',
@@ -14,26 +15,22 @@ export class FuseBitComponent {
   columns: FuseTableColumn[] = [];
   displayedColumns: string[] = [];
   dataSource: FuseBit[][] = [];
-  get fuseBitConfiguration() { return this.driverService.fuseBitConfiguration };
-  set fuseBitConfiguration(value) { this.driverService.fuseBitConfiguration = value };
 
-  constructor(public dialogRef: MatDialogRef<FuseBitComponent>, private driverService: DriverService,
-    @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
+  constructor(public dialogRef: MatDialogRef<FuseBitComponent>, private driverService: DriverService, private cd: ChangeDetectorRef,
+    private toastr: ToastrService, @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
     // se già presente una configurazione viene caricata dai dati nel servizio
-    if (this.fuseBitConfiguration.length) {
-      this.dataSource = ConverterUtilities.matrixTranspose(this.fuseBitConfiguration.map(fuse => fuse.bits));
+    if (this.driverService.fuseBitConfiguration.length) {
+      this.dataSource = ConverterUtilities.matrixTranspose(this.driverService.fuseBitConfiguration.map(fuse => fuse.bits));
     }
     // altrimenti viene istanziata una nuova configurazioni con i dati di default passati dall'esterno (Microcontroller.ts)
     else {
-      this.fuseBitConfiguration = _.cloneDeep(this.fuses);
-      const fuseMatrix: FuseBit[][] = this.fuseBitConfiguration.map(fuse => fuse.bits);
+      this.driverService.fuseBitConfiguration = _.cloneDeep(this.fuses);
+      const fuseMatrix: FuseBit[][] = this.driverService.fuseBitConfiguration.map(fuse => fuse.bits);
       this.dataSource = ConverterUtilities.matrixTranspose(fuseMatrix);
     }
     // mappatura colonne
-    this.fuseBitConfiguration.forEach((fuse, i) => {
-      let bitValues = fuse.bits.map(_ => _.value)
-      let fuseFooter = ConverterUtilities.binaryToHex(bitValues.reverse()); // rivoltati perchè il primo è l'ottavo bit
-      this.columns.push({ index: i, columnDef: fuse.type, header: fuse.type, footer: fuseFooter });
+    this.driverService.fuseBitConfiguration.forEach((fuse, i) => {
+      this.columns.push({ index: i, columnDef: fuse.type, header: fuse.type, footer: fuse.hexValue });
       this.displayedColumns.push(fuse.type);
     })
   }
@@ -42,19 +39,30 @@ export class FuseBitComponent {
    * eventi 
    */
   // click su checkbox di una singola cella
-  onCellClicked(colName: string, cell: FuseBit) {
+  onCellClicked(fuseType: string, cell: FuseBit) {
     // settaggio del singolo bit direttamente nella configurazione del servizio
-    var fuse: Fuse = this.fuseBitConfiguration.find(fuse => fuse.type == colName);
+    var fuse: Fuse = this.driverService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
     var bitToSet = fuse.bits.find(bit => bit.label == cell.label);
     bitToSet.value = !bitToSet.value;
+    fuse.hexValue = ConverterUtilities.binaryToHex((fuse.bits.map(bit => bit.value)).reverse());
+    // svuotamento colonne
+    this.columns = [];
+    this.displayedColumns = [];
+    this.cd.detectChanges();
+    // nuovo riempimento per visualizzazione su interfaccia
+    this.driverService.fuseBitConfiguration.forEach((fuse, i) => {
+      this.columns.push({ index: i, columnDef: fuse.type, header: fuse.type, footer: fuse.hexValue });
+      this.displayedColumns.push(fuse.type);
+    })
   }
   // quando viene impostato il valore esadecimale del byte nel footer della colonna
   onFooterChange(hexNumber: string, fuseType: string) {
-    let fuse: Fuse = this.driverService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
     let newBitsValue = ConverterUtilities.hexToBinaryArray(hexNumber).reverse();
+    let fuse: Fuse = this.driverService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
+    fuse.hexValue = hexNumber;
     for (let i = 0; i < fuse.bits.length; i++) {
       var newBitValue = newBitsValue[i];
-      fuse.bits[i].value = newBitValue;   // vengono cambiati i singoli bit nella configurazione del driverService   
+      fuse.bits[i].value = newBitValue;   // vengono cambiati i singoli bit nella configurazione del driverService         
     }
   }
 }
@@ -66,6 +74,7 @@ interface FuseTableColumn {
   header: string;     // intestazione della colonna
   footer: string;     // valore esadecimale del byte
 }
+
 
 
 

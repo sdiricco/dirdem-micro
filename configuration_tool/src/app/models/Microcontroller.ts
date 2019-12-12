@@ -55,20 +55,22 @@ export const ALL_MICROS: Microcontroller[] =
             fuses:
                 [
                     {
+                        hexValue: '0',
                         type: FusesType.LOW,
                         bits:
                             [
                                 { label: FuseBitLabel.CKDIV8, value: false },
                                 { label: FuseBitLabel.CKOUT, value: false },
-                                { label: FuseBitLabel.SUT1, value: true },
+                                { label: FuseBitLabel.SUT1, value: false },
                                 { label: FuseBitLabel.SUT0, value: false },
                                 { label: FuseBitLabel.CKSEL3, value: false },
                                 { label: FuseBitLabel.CKSEL2, value: false },
-                                { label: FuseBitLabel.CKSEL1, value: true },
-                                { label: FuseBitLabel.CKSEL0, value: true }                        
+                                { label: FuseBitLabel.CKSEL1, value: false },
+                                { label: FuseBitLabel.CKSEL0, value: false }                        
                             ]
                     },
                     {
+                        hexValue: '0',
                         type: FusesType.HIGH,
                         bits:
                             [
@@ -83,6 +85,7 @@ export const ALL_MICROS: Microcontroller[] =
                             ]
                     },
                     {
+                        hexValue: '0',
                         type: FusesType.EXTENDED,
                         bits:
                             [
@@ -97,6 +100,7 @@ export const ALL_MICROS: Microcontroller[] =
                             ]
                     },
                     {
+                        hexValue: '0',
                         type: FusesType.LOCKBIT,
                         bits:
                             [

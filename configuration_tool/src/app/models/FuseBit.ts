@@ -1,4 +1,7 @@
-export interface Fuse {
+import { ConverterUtilities } from './Utilities/ConverterUtilities'
+
+export class Fuse {
+  hexValue: string;
   type: FusesType;
   bits: FuseBit [];
 }
