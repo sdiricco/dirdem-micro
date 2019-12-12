@@ -1,16 +1,23 @@
 <div *ngIf="displayedColumns.length">
-  <mat-table #table [dataSource]="dataSource">
-
-    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
-      <mat-header-cell *cdkHeaderCellDef> {{ column.header }} </mat-header-cell>
-      <mat-cell *cdkCellDef="let row">
+  <table mat-table #table [dataSource]="dataSource" id="fuseTable">
+    <ng-container *ngFor="let column of columns;" [cdkColumnDef]="column.columnDef">
+      <!-- header -->
+      <td mat-header-cell *cdkHeaderCellDef [ngClass]="column.index == 0? 'rowPadding' : 'noRowPadding'">
+        {{ column.header }} </td>
+      <!-- celle -->
+      <td mat-cell *cdkCellDef="let row">
         <mat-checkbox [checked]="row[column.index].value" (change)="onCellClicked(column.columnDef, row[column.index])">
           {{ row[column.index].label }} </mat-checkbox>
-      </mat-cell>
+      </td>
+      <!-- nel footer deve esserci una riga contente il valore esadecimale del byte (colonna) -->
+      <!-- footer -->
+      <td mat-footer-cell *matFooterCellDef class="footerCells"> <div class="flexDisplay"> 0X<input matInput [(ngModel)]="column.footer" (ngModelChange)="onFooterChange($event, column.header)"> </div>
+      </td>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 
-  </mat-table>
+  </table>
 </div>

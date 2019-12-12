@@ -1,0 +1,11 @@
+#fuseTable {
+    width: 100%;
+}
+
+.rowPadding {
+    padding-left: 24px;
+}
+
+.footerCells {
+    font-weight: bolder;
+}

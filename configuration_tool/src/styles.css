@@ -75,6 +75,10 @@ body {
   height: 15px;
 }
 
+.flexDisplay {
+  display: flex;
+}
+
 
 
 

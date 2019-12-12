@@ -60,12 +60,12 @@ export const ALL_MICROS: Microcontroller[] =
                             [
                                 { label: FuseBitLabel.CKDIV8, value: false },
                                 { label: FuseBitLabel.CKOUT, value: false },
-                                { label: FuseBitLabel.SUT1, value: false },
+                                { label: FuseBitLabel.SUT1, value: true },
                                 { label: FuseBitLabel.SUT0, value: false },
                                 { label: FuseBitLabel.CKSEL3, value: false },
                                 { label: FuseBitLabel.CKSEL2, value: false },
-                                { label: FuseBitLabel.CKSEL1, value: false },
-                                { label: FuseBitLabel.CKSEL0, value: false }                        
+                                { label: FuseBitLabel.CKSEL1, value: true },
+                                { label: FuseBitLabel.CKSEL0, value: true }                        
                             ]
                     },
                     {
