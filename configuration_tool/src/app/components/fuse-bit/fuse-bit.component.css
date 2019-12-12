@@ -1,11 +1,15 @@
+#legendRow {
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+    opacity: 0.6;
+    font-style: italic;
+}
+
 #fuseTable {
     width: 100%;
 }
 
 .rowPadding {
     padding-left: 24px;
-}
-
-.footerCells {
-    font-weight: bolder;
 }
