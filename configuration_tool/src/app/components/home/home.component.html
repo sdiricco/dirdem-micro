@@ -14,7 +14,7 @@
     <h5 class="colorText centerText">Please select one device to start</h5>
     <mat-form-field appearance="outline">
         <mat-label>Microcontroller</mat-label>
-        <mat-select [(value)]="microcontroller" (selectionChange)="onMicroSelected()" #micro>
+        <mat-select [(value)]="microcontroller" (selectionChange)="onMicroSelected($event)">
             <mat-option *ngFor="let micro of microcontrollers" [value]="micro">
                 {{ micro.name }}
             </mat-option>
@@ -110,7 +110,7 @@
                 <div class="col-2">
                     <mat-slide-toggle #slider1 (change)="onGptDriverSwitched($event)"></mat-slide-toggle>
                 </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider1.checked" matTooltip="Edit driver"
+                <button mat-icon-button class="col-2" [disabled]="!slider1.checked" matTooltip="Edit"
                     (click)="onGptDriverSwitched(null, true)">
                     <mat-icon [ngClass]="slider1.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
                 </button>
@@ -120,7 +120,7 @@
                 <div class="col-2">
                     <mat-slide-toggle #slider2></mat-slide-toggle>
                 </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider2.checked" matTooltip="Edit driver">
+                <button mat-icon-button class="col-2" [disabled]="!slider2.checked" matTooltip="Edit">
                     <mat-icon [ngClass]="slider2.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
                 </button>
             </div>
@@ -129,7 +129,7 @@
                 <div class="col-2">
                     <mat-slide-toggle #slider3></mat-slide-toggle>
                 </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider3.checked" matTooltip="Edit driver">
+                <button mat-icon-button class="col-2" [disabled]="!slider3.checked" matTooltip="Edit">
                     <mat-icon [ngClass]="slider3.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
                 </button>
             </div>
@@ -141,7 +141,8 @@
                 <div class="col-2">
                     <mat-slide-toggle #slider4 (change)="onFuseSwitched($event)"></mat-slide-toggle>
                 </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider4.checked" matTooltip="Edit driver">
+                <button mat-icon-button class="col-2" [disabled]="!slider4.checked" matTooltip="Edit"
+                (click)="onFuseSwitched(null, true)">
                     <mat-icon [ngClass]="slider4.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
                 </button>
             </div>
@@ -150,7 +151,7 @@
     <div class="col-xl-2"></div>
 
     <div id="generateConfigButtonDiv">
-        <button mat-raised-button color="accent" (click)="generateConfig()" [disabled]="!thereAreGptConfigurations" matTooltip="Generate configuration">Mongol it!</button>
+        <button mat-raised-button color="accent" (click)="generateGptFile()" [disabled]="!thereAreGptConfigurations" matTooltip="Generate configuration">Mongol it!</button>
     </div>
 </div>
 

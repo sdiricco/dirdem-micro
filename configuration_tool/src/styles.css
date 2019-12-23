@@ -75,6 +75,14 @@ body {
   height: 15px;
 }
 
+.flexDisplay {
+  display: flex;
+}
+
+.bolder {
+  font-weight: bolder;
+}
+
 
 
 

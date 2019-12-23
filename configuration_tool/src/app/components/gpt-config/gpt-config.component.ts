@@ -45,7 +45,7 @@ export class GptCfgConfigComponent implements AfterViewInit {
     public dialogRef: MatDialogRef<GptCfgConfigComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   )
-  { this.configurations = this.driverService.gptDriverConfigurations }
+  { this.configurations = this.driverService.gptDriverConfiguration }
 
   ngAfterViewInit() {
     this._refreshDropDownAndTable();
@@ -58,17 +58,17 @@ export class GptCfgConfigComponent implements AfterViewInit {
   addConfig(config: GptDriverConfig) {
     // inserimento nell'array delle configurazioni
     let result = Object.assign({}, config);
-    this.driverService.gptDriverConfigurations.push(result);
+    this.driverService.gptDriverConfiguration.push(result);
     this._refreshDropDownAndTable();
   }
   // cancella una configurazione (tasto X sulla tabella)
   deleteConfig(config: GptDriverConfig) {
       // rimozione configuraione dall'array configurazioni
-    let element = this.driverService.gptDriverConfigurations.find(
+    let element = this.driverService.gptDriverConfiguration.find(
       _ => _.gptContainerHwChannel == config.gptContainerHwChannel
     );
-    let configIndex = this.driverService.gptDriverConfigurations.indexOf(element);
-    this.driverService.gptDriverConfigurations.splice(configIndex, 1);
+    let configIndex = this.driverService.gptDriverConfiguration.indexOf(element);
+    this.driverService.gptDriverConfiguration.splice(configIndex, 1);
     this._refreshDropDownAndTable();
   }
   // sull'inserimento delle notification api (area di testo) per controllo caratteri
@@ -98,15 +98,15 @@ export class GptCfgConfigComponent implements AfterViewInit {
    **************************/
   // abilitazione/disabilitazione matSelect (dropdown) hwChannel e channelId e rendering della tabella
   private _refreshDropDownAndTable() {
-    this.configurations = this.driverService.gptDriverConfigurations;
+    this.configurations = this.driverService.gptDriverConfiguration;
     this.configurations = [...this.configurations]
     this.channelIdDropDown.options.forEach(chId => {
-      chId.disabled = this.driverService.gptDriverConfigurations.find(config => {
+      chId.disabled = this.driverService.gptDriverConfiguration.find(config => {
         return config.gptChannelID == chId.value;
       })
     });
     this.hwChannelDropDown.options.forEach(chHw => {
-      chHw.disabled = this.driverService.gptDriverConfigurations.find(config => {
+      chHw.disabled = this.driverService.gptDriverConfiguration.find(config => {
         return config.gptContainerHwChannel == chHw.value;
       })
     });

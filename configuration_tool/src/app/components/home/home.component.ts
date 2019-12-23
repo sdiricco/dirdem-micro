@@ -4,7 +4,8 @@ import { Microcontroller } from "src/app/models/Microcontroller";
 import {
   MatDialog,
   MatSlideToggleChange,
-  MatSlideToggle
+  MatSlideToggle,
+  MatSelectChange
 } from "@angular/material";
 import { MicroPinoutDialogComponent } from "../micro-pinout-dialog/micro-pinout-dialog.component";
 import { GptCfgConfigComponent } from "../gpt-config/gpt-config.component";
@@ -19,17 +20,17 @@ import { ToastrService } from "ngx-toastr";
 export class HomeComponent {
   // proprietà che è vera se è presente almeno una configurazione del gpt (di qualsiasi tipo) nel driverService per abilitazione tasto wizard
   get thereAreGptConfigurations(): boolean {
-    if (this.driverService.gptDriverConfigurations.length) {
+    if (this.driverService.gptDriverConfiguration.length) {
       return true;
     } else {
       return false;
     }
   }
   get gptConfigurationsLength() {
-    return this.driverService.gptDriverConfigurations.length;
+    return this.driverService.gptDriverConfiguration.length;
   }
-  get fuseBitConfiguration() {
-    return this.driverService.fuseBitConfiguration;
+  get fuseBitConfigurationLength() {
+    return this.driverService.fuseBitConfiguration.length;
   }
   // sliders
   @ViewChild("slider1", { static: false }) gptDriverSlider: MatSlideToggle;
@@ -38,7 +39,7 @@ export class HomeComponent {
   microcontroller = new Microcontroller();
   microcontrollers: Microcontroller[];
   // configurazioni da inserire nel div html che servirà per scaricare il file .C
-  gptConfigurations = this.driverService.gptDriverConfigurations;
+  gptConfigurations = this.driverService.gptDriverConfiguration;
 
   constructor(
     public dialog: MatDialog,
@@ -49,9 +50,10 @@ export class HomeComponent {
   }
 
   // evento scatenato sulla selezione di un nuovo micro
-  onMicroSelected() {
+  onMicroSelected(evt: MatSelectChange) {
+    this.driverService.clearAllConfigurations();
     // il microcontroller viene assegnato con il binding sul template html
-    console.log(this.microcontroller);
+    console.log(evt, this.microcontroller);    
   }
   // evento scatenato al passagio del mouse sopra l'immagine
   showPinout() {
@@ -63,7 +65,7 @@ export class HomeComponent {
     });
   }
   // genera il file di configurazione in base ai dati presenti nel driverService
-  generateConfig() {
+  generateGptFile() {
     // file c da scaricare (contenuto dentro il div invisibile)
     let cFile = document.getElementById("cFileToDownload").innerText;
     this.driverService.generateGptConfigFile(cFile);
@@ -92,7 +94,7 @@ export class HomeComponent {
     }
     // se lo slider viene spento svuoto le configurazioni del driverGpt
     else {
-      this.driverService.gptDriverConfigurations = [];
+      this.driverService.gptDriverConfiguration = [];
     }
   }
   // su fuse bit
@@ -103,7 +105,7 @@ export class HomeComponent {
         data: this.microcontroller.fuses // passo al dialog le informazioni sui fuse bit
       })
       dialogRef.afterClosed().subscribe(result => {
-        if (this.fuseBitConfiguration) {
+        if (this.fuseBitConfigurationLength) {
           // se è stata fatta la configurazione dei fuse bit lascio acceso lo slider
           this.fuseBitSlider.checked = true;
         } else {
@@ -112,7 +114,8 @@ export class HomeComponent {
       })
       // se lo slider viene spento svuoto le configurazioni dei fuse bit
     } else {
-      this.driverService.fuseBitConfiguration = null;
+      this.driverService.fuseBitConfiguration = [];
+      // console.log(this.driverService.fuseBitConfiguration);
     }
   }
 }
