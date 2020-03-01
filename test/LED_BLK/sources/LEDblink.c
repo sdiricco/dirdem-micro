@@ -23,8 +23,12 @@
 Define witch microcontroller you want to use.
 You can find the MACRO in avr/io.h
 */
-#ifndef __AVR_ATmega32__
-#   define __AVR_ATmega32__
+#ifndef __AVR_ATmega328P__
+#   define __AVR_ATmega328P__
+#endif
+
+#ifndef F_CPU
+#   define F_CPU 8000000UL
 #endif
 
 #include <avr/io.h>
