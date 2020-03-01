@@ -37,14 +37,16 @@ You can find the MACRO in avr/io.h
 
 int main(void)
 {
-    DDRC = 0xFF;
-    PORTC = 0x00;
+    DDRB = 0xFF;
+    PORTB = 0x00;
 
     //Configurazione TIMER 2
-	TCCR2 = (1 << CS22)|(1 << CS20);	//Prescaler = 128
+    
+	TCCR2B = (1 << CS22)|(1 << CS20);	//Prescaler = 128
 	ASSR = (1 << AS2);					//Attivo ingresso clock asincrono (quarzo 32768Hz)
-	TIMSK  = (1 << TOIE2);				//Abilito interrupt ogni Overflow
+	TIMSK2  = (1 << TOIE2);				//Abilito interrupt ogni Overflow
 	TCNT2 = 0;
+    
 
     sei();
 
@@ -55,12 +57,6 @@ int main(void)
     return 0;
 }
 
-ISR (TIMER2_OVF_vect){
-    static int i=0;
-    i++;
-    if (i >= 5)
-    {
-	    PORTC = ~PORTC;
-        i = 0;
-    }
+ISR (TIMER2_OVF_vect) {
+	    PORTB = ~PORTB;
 }
