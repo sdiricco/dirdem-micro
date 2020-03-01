@@ -32,11 +32,13 @@ You can find the MACRO in avr/io.h
 
 int main(void)
 {
-    DDRC |= 1 << PIN5;
+    DDRB = 0xFF;
     while(1)
     {
         _delay_ms(1000);
-        PORTC ^= 1<<PINC5;
+        PORTB = 0;
+        _delay_ms(1000);
+        PORTB = 255;
     }
     return 0;
 }
