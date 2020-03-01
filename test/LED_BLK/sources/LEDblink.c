@@ -33,16 +33,34 @@ You can find the MACRO in avr/io.h
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 
 int main(void)
 {
-    DDRB = 0xFF;
+    DDRC = 0xFF;
+    PORTC = 0x00;
+
+    //Configurazione TIMER 2
+	TCCR2 = (1 << CS22)|(1 << CS20);	//Prescaler = 128
+	ASSR = (1 << AS2);					//Attivo ingresso clock asincrono (quarzo 32768Hz)
+	TIMSK  = (1 << TOIE2);				//Abilito interrupt ogni Overflow
+	TCNT2 = 0;
+
+    sei();
+
     while(1)
     {
-        _delay_ms(1000);
-        PORTB = 0;
-        _delay_ms(1000);
-        PORTB = 255;
+
     }
     return 0;
+}
+
+ISR (TIMER2_OVF_vect){
+    static int i=0;
+    i++;
+    if (i >= 5)
+    {
+	    PORTC = ~PORTC;
+        i = 0;
+    }
 }
