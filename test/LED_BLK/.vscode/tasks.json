@@ -5,7 +5,7 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Building.....", 
+            "label": "Build LEDBlink.c", 
             "command": "tools\\make.exe",
             "args": [
 
