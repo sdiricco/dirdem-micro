@@ -22,7 +22,10 @@ global action
 
 class Action(Enum):
     build = "build"
+    flash = "flash"
     burn = "burn"
+
+
 
 microcontroller_name = sys.argv[1]
 microcontroller_tag = sys.argv[2]
@@ -52,13 +55,17 @@ global flagsHexFile_avrobjcopy
 global flagsFlash_avrdude
 
 def cmd_compilazione():
-	print (path_avrgcc + input_file_c + flagsObjectFile_avrgcc + file_o)
-	os.system(path_avrgcc + input_file_c + flagsObjectFile_avrgcc + file_o)
-	print (path_avrgcc + input_file_c + flagsElfFile_avrgcc + file_elf)
-	os.system(path_avrgcc + input_file_c + flagsElfFile_avrgcc + file_elf)
-	print (path_avrobjcopy + flagsHexFile_avrobjcopy + file_elf + " " + file_hex)
-	os.system(path_avrobjcopy + flagsHexFile_avrobjcopy + file_elf + " " + file_hex)
-	return 1
+    print (path_avrgcc + input_file_c + flagsObjectFile_avrgcc + file_o)
+    os.system(path_avrgcc + input_file_c + flagsObjectFile_avrgcc + file_o)
+    print (path_avrgcc + input_file_c + flagsElfFile_avrgcc + file_elf)
+    os.system(path_avrgcc + input_file_c + flagsElfFile_avrgcc + file_elf)
+    print (path_avrobjcopy + flagsHexFile_avrobjcopy + file_elf + " " + file_hex)
+    os.system(path_avrobjcopy + flagsHexFile_avrobjcopy + file_elf + " " + file_hex)
+    return 1
+
+def cmd_flash():
+    os.system(path_avrdude + flagsFlash_avrdude)
+    return 1
 
 #Variabili locali#
 ##########################################################################################################
@@ -82,7 +89,15 @@ flagsFlash_avrdude      = " -c " + programmer + " -p "    +  microcontroller_tag
 ##########################################################################################################
 
 if action == Action.build:
+    shutil.rmtree(output_files)
+    os.mkdir(output_files)
     cmd_compilazione()
-
-for param in sys.argv:
-    print ("Argument: " + param)
+elif action == Action.flash:
+    cmd_flash()
+elif action == Action.burn:
+    shutil.rmtree(output_files)
+    os.mkdir(output_files)
+    cmd_compilazione()
+    cmd_flash()
+else:
+    print("Error: No valid action")
