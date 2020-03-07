@@ -19,14 +19,6 @@
 3 - avr-gcc path: C:\Program Files (x86)\Arduino\hardware\tools\avr\bin
 */
 
-/*
-Define witch microcontroller you want to use.
-You can find the MACRO in avr/io.h
-*/
-#ifndef __AVR_ATmega328P__
-#   define __AVR_ATmega328P__
-#endif
-
 #ifndef F_CPU
 #   define F_CPU 8000000UL
 #endif
@@ -42,9 +34,9 @@ int main(void)
 
     //Configurazione TIMER 2
     
-	TCCR2B = (1 << CS22)|(1 << CS20);	//Prescaler = 128
+	TCCR2 = (1 << CS22)|(1 << CS20);	//Prescaler = 128
 	ASSR = (1 << AS2);					//Attivo ingresso clock asincrono (quarzo 32768Hz)
-	TIMSK2  = (1 << TOIE2);				//Abilito interrupt ogni Overflow
+	TIMSK  = (1 << TOIE2);				//Abilito interrupt ogni Overflow
 	TCNT2 = 0;
     
 
