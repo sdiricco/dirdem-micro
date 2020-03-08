@@ -8,14 +8,14 @@ from enum import Enum
 # -microcontroller_name
 # -microcontroller_tag
 # -programmer
-# -input_source_file
+# -input_file_c
 # -output_files
 
 global microcontroller_name
 global microcontroller_tag
 global programmer
 global project_name 
-global input_source_file
+global input_file_c
 global output_files
 
 global action 
@@ -26,20 +26,18 @@ class Action(Enum):
     burn = "burn"
 
 
-
 microcontroller_name = sys.argv[1]
 microcontroller_tag = sys.argv[2]
 programmer = sys.argv[3] 
-input_source_file = sys.argv[4]
+input_file_c = sys.argv[4]
 output_files = sys.argv[5]
 action = Action(sys.argv[6])
 
-#action = int(action)
-#action = Action(action)
+cFileIndex = input_file_c.rindex('\\')
+project_name = input_file_c[(cFileIndex+1):]
+pointIndex = project_name.rindex('.')
+project_name = project_name[:pointIndex]
 
-print (action)
-
-project_name = "LEDblink"
 
 global file_o
 global file_elf
@@ -69,8 +67,6 @@ def cmd_flash():
 
 #Variabili locali#
 ##########################################################################################################
-input_file_c = input_source_file + "\\" + project_name + ".c"
-
 file_o   = output_files + "\\" + project_name + ".o"
 file_elf = output_files + "\\" + project_name + ".elf"
 file_hex = output_files + "\\" + project_name + ".hex"
