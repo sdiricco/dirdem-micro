@@ -34,7 +34,7 @@ action = Action(sys.argv[6])
 
 cFileIndex = input_file_c.rindex('\\')
 project_name = input_file_c[(cFileIndex+1):]
-pointIndex = project_name.rindex('.')
+pointIndex = project_name.rindex('.c')
 project_name = project_name[:pointIndex]
 
 

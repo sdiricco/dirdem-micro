@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "tools\\avr-toolchain\\avr\\include"
+                "../../../core/tools/avr-toolchain/avr/include"
             ],
             "defines": [
                 "_DEBUG",
