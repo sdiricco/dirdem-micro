@@ -6,40 +6,11 @@
 }
 
 #titleBar {
-    height: 90px;
+    height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--primary);
-}
-
-#logoImage {
-    width: 50px;
-    margin-left: 15px;
-}
-
-#mainTitle {
-    font-size: 40px;
-    flex: 2;
-    display: flex;
-    justify-content: center;
-}
-
-#rightSideBar {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-}
-
-#leftSideBar {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-}
-
-#versionSpan{
-    font-size: 12px;
-    margin-right: 15px;
 }
 
 #microSelection {

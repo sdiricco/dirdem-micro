@@ -1,4 +1,7 @@
-<div id="legendRow"> <span> Remember: </span> <mat-checkbox [checked]="true"> = 0 (programmed)</mat-checkbox> <mat-checkbox [checked]="false"> = 1 (unprogrammed) </mat-checkbox> </div>
+<div id="legendRow"> <span> Remember: </span>
+  <mat-checkbox [checked]="true"> = 0 (programmed)</mat-checkbox>
+  <mat-checkbox [checked]="false"> = 1 (unprogrammed) </mat-checkbox>
+</div>
 
 <table mat-table #table [dataSource]="dataSource" id="fuseTable" *ngIf="displayedColumns.length">
 
@@ -24,4 +27,6 @@
 
 </table>
 
-<button mat-raised-button color="accent" (click)="setFuses()">BURN FUSES</button>
+<div id="buttonContainer">
+  <button mat-raised-button color="primary" (click)="setFuses()">BURN FUSES</button>
+</div>

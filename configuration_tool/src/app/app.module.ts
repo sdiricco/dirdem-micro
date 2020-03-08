@@ -12,6 +12,7 @@ import { FuseBitComponent } from './components/fuse-bit/fuse-bit.component';
 import { GptCfgConfigComponent } from './components/gpt-config/gpt-config.component';
 import { MaterialModule } from './modules/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxElectronModule } from 'ngx-electron';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    NgxElectronModule,
     HttpClientModule,
     AppRoutingModule,
     MaterialModule,

@@ -2,6 +2,9 @@
   "name": "driver-config",
   "version": "0.0.0",
   "main": "main.js",
+  "browser": {
+    "child_process": false
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -27,6 +30,7 @@
     "@types/file-saver": "^2.0.1",
     "@types/lodash": "^4.14.149",
     "bootstrap": "^4.3.1",
+    "electron-spawn": "^5.0.0",
     "file-saver": "^2.0.2",
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.15",
@@ -37,15 +41,15 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.22",
+    "@angular-devkit/build-angular": "^0.900.5",
     "@angular/cli": "~8.0.1",
     "@angular/compiler-cli": "~8.0.0",
     "@angular/language-service": "~8.0.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.10.59",
     "codelyzer": "^5.0.0",
-    "electron": "^6.0.12",
+    "electron": "^8.1.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",

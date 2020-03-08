@@ -1,7 +1,8 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, electron } = require('electron')
 
 // Mantiene un riferimento globale all'oggetto window, se non lo fai, la finestra sarà
 // chiusa automaticamente quando l'oggetto JavaScript sarà garbage collected.
+
 let win
 
 function createWindow () {
@@ -11,10 +12,11 @@ function createWindow () {
     height: 920,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
   })
   // and load the index.html of the app.
-  win.loadFile('dist/driver-config/index.html')
+  win.loadFile('../builds/configuration_tool/index.html')
+  win.webContents.openDevTools()
 
   // Apre il Pannello degli Strumenti di Sviluppo.
   //win.webContents.openDevTools()

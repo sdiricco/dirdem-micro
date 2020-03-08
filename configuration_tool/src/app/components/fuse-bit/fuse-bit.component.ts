@@ -1,11 +1,15 @@
 import { Component, Inject, ChangeDetectorRef } from '@angular/core';
 import { Fuse, FuseBit } from '../../../../../core/models/typeScript/FuseBit';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatExpansionPanelDescription } from '@angular/material';
 import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilities/ConverterUtilities';
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { spawn } from 'child_process';
+import { ElectronService } from 'ngx-electron';
+
+// const { shell } = require('electron').shell;
+
 
 @Component({
   selector: 'app-fuse-bit',
@@ -17,8 +21,9 @@ export class FuseBitComponent {
   displayedColumns: string[] = [];
   dataSource: FuseBit[][] = [];
 
-  constructor(public dialogRef: MatDialogRef<FuseBitComponent>, private driverService: DriverService, private cd: ChangeDetectorRef,
-    private toastr: ToastrService, @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
+  constructor(private electronService: ElectronService, dialogRef: MatDialogRef<FuseBitComponent>, 
+    private driverService: DriverService, private cd: ChangeDetectorRef, private toastr: ToastrService, 
+    @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
     // se già presente una configurazione viene caricata dai dati nel servizio
     if (this.driverService.fuseBitConfiguration.length) {
       this.dataSource = ConverterUtilities.matrixTranspose(this.driverService.fuseBitConfiguration.map(fuse => fuse.bits));
@@ -39,14 +44,15 @@ export class FuseBitComponent {
   /**
    * Setta i fuse bit sul microcontrollore
    */
-  
-  setFuses() {
-    console.log("run python script")
-  }
+
+  setFuses() { 
+    let wds = this.electronService.isWindows;
+    console.log(wds)
+  };
 
   /**
    * Evento scatenato click su checkbox di una singola cella
-   */ 
+   */
   onCellClicked(fuseType: string, cell: FuseBit) {
     // settaggio del singolo bit direttamente nella configurazione del servizio
     var fuse: Fuse = this.driverService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
@@ -65,7 +71,7 @@ export class FuseBitComponent {
   }
   /**
    * Evento scatenato quando viene impostato il valore esadecimale del byte nel footer della colonna
-   */ 
+   */
   onFooterChange(hexNumber: string, fuseType: string) {
     let newBitsValue = ConverterUtilities.hexToBinaryArray(hexNumber).reverse();
     let fuse: Fuse = this.driverService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
@@ -84,6 +90,7 @@ interface FuseTableColumn {
   header: string;     // intestazione della colonna
   footer: string;     // valore esadecimale del byte
 }
+
 
 
 
