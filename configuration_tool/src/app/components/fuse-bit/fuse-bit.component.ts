@@ -5,6 +5,7 @@ import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilit
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { spawn } from 'child_process';
 
 @Component({
   selector: 'app-fuse-bit',
@@ -36,9 +37,16 @@ export class FuseBitComponent {
   }
 
   /**
-   * eventi 
+   * Setta i fuse bit sul microcontrollore
    */
-  // click su checkbox di una singola cella
+  
+  setFuses() {
+    console.log("run python script")
+  }
+
+  /**
+   * Evento scatenato click su checkbox di una singola cella
+   */ 
   onCellClicked(fuseType: string, cell: FuseBit) {
     // settaggio del singolo bit direttamente nella configurazione del servizio
     var fuse: Fuse = this.driverService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
@@ -55,7 +63,9 @@ export class FuseBitComponent {
       this.displayedColumns.push(fuse.type);
     })
   }
-  // quando viene impostato il valore esadecimale del byte nel footer della colonna
+  /**
+   * Evento scatenato quando viene impostato il valore esadecimale del byte nel footer della colonna
+   */ 
   onFooterChange(hexNumber: string, fuseType: string) {
     let newBitsValue = ConverterUtilities.hexToBinaryArray(hexNumber).reverse();
     let fuse: Fuse = this.driverService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);

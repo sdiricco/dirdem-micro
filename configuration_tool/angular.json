@@ -12,6 +12,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "extraResources": "../core/tools/python",
           "options": {
             "outputPath": "../builds/configuration_tool",
             "index": "src/index.html",
