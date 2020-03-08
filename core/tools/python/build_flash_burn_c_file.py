@@ -1,7 +1,6 @@
 import os
 import shutil
 import sys
-
 from enum import Enum
 
 #Parametri esterni
