@@ -26,20 +26,16 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include <include/LEDblink.h>
 
 int main(void)
 {
+
     DDRB = 0xFF;
     PORTB = 0x00;
-
     //Configurazione TIMER 2
+    Init_Timer2();
     
-	TCCR2 = (1 << CS22)|(1 << CS20);	//Prescaler = 128
-	ASSR = (1 << AS2);					//Attivo ingresso clock asincrono (quarzo 32768Hz)
-	TIMSK  = (1 << TOIE2);				//Abilito interrupt ogni Overflow
-	TCNT2 = 0;
-    
-
     sei();
 
     while(1)
@@ -50,5 +46,5 @@ int main(void)
 }
 
 ISR (TIMER2_OVF_vect) {
-	    PORTB = ~PORTB;
+	PORTB += 1;
 }

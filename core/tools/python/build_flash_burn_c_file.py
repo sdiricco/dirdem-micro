@@ -71,14 +71,16 @@ file_elf = output_files + "\\" + project_name + ".elf"
 file_hex = output_files + "\\" + project_name + ".hex"
 ##########################################################################################################
 
+include_files = "C:\\Repository\\dirdem-micro\\dirdem-micro\\test\\LED_BLK"
+
 #TOOLS#
 ##########################################################################################################
 path_avrgcc     = "..\\avr-toolchain\\bin\\avr-gcc.exe "
 path_avrobjcopy = "..\\avr-toolchain\\bin\\avr-objcopy.exe "
 path_avrdude    = "..\\avrdude\\avrdude.exe "
 ##########################################################################################################
-flagsObjectFile_avrgcc  = " -I." + " -g"      + " -Os"    + " -mmcu="            + microcontroller_name  + " -o "
-flagsElfFile_avrgcc     = " -I." + " -Os"     + " -mmcu=" + microcontroller_name + " -o "
+flagsObjectFile_avrgcc  = " -I " + include_files + " -g"      + " -Os"    + " -mmcu="            + microcontroller_name  + " -o "
+flagsElfFile_avrgcc     = " -I " + include_files + " -Os"     + " -mmcu=" + microcontroller_name + " -o "
 flagsHexFile_avrobjcopy = " -j " + " .text "  + " -j "    + " .data "            + " -O "                + " ihex "
 flagsFlash_avrdude      = " -c " + programmer + " -p "    +  microcontroller_tag + " -U "                + "flash:w:" + file_hex + ":i"
 ##########################################################################################################
