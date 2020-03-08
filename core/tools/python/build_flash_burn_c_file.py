@@ -1,14 +1,17 @@
 import os
 import shutil
 import sys
+import asyncio
 from enum import Enum
+import glob
 
 #Parametri esterni
-# -microcontroller_name
-# -microcontroller_tag
-# -programmer
-# -input_file_c
-# -output_files
+# -1 microcontroller_name
+# -2 microcontroller_tag
+# -3 programmer
+# -4 input_file_c
+# -5 output_files
+# -6 action
 
 global microcontroller_name
 global microcontroller_tag
@@ -51,6 +54,14 @@ global flagsElfFile_avrgcc
 global flagsHexFile_avrobjcopy
 global flagsFlash_avrdude
 
+async def cmd_pulisci_output(path_to_delete):
+    for the_file in os.listdir(path_to_delete):
+        if the_file == (project_name + ".o") or the_file == (project_name + ".elf") or the_file == (project_name + ".hex"):
+            file_path = os.path.join(path_to_delete, the_file)
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+    return 1
+
 def cmd_compilazione():
     print (path_avrgcc + input_file_c + flagsObjectFile_avrgcc + file_o)
     os.system(path_avrgcc + input_file_c + flagsObjectFile_avrgcc + file_o)
@@ -72,6 +83,7 @@ file_hex = output_files + "\\" + project_name + ".hex"
 ##########################################################################################################
 
 include_files = "C:\\Repository\\dirdem-micro\\dirdem-micro\\test\\LED_BLK"
+input_file_c = input_file_c + " C:\\Repository\\dirdem-micro\\dirdem-micro\\test\\LED_BLK\\sources\\timer2.c"
 
 #TOOLS#
 ##########################################################################################################
@@ -86,15 +98,16 @@ flagsFlash_avrdude      = " -c " + programmer + " -p "    +  microcontroller_tag
 ##########################################################################################################
 
 if action == Action.build:
-    shutil.rmtree(output_files)
-    os.mkdir(output_files)
+    asyncio.run(cmd_pulisci_output(output_files))
     cmd_compilazione()
 elif action == Action.flash:
     cmd_flash()
 elif action == Action.burn:
-    shutil.rmtree(output_files)
-    os.mkdir(output_files)
+    cmd_pulisci_output(output_files)
     cmd_compilazione()
     cmd_flash()
 else:
     print("Error: No valid action")
+
+
+

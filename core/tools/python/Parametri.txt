@@ -1,0 +1,2 @@
+ATmega32 m32 usbasp C:\Repository\dirdem-micro\dirdem-micro\test\LED_BLK\sources\LEDblink.c C:\Repository\dirdem-micro\dirdem-micro\builds\c_file build
+ATmega328p m32p usbasp C:\Repository\dirdem-micro\dirdem-micro\test\LED_BLK\sources\LEDblink.c C:\Repository\dirdem-micro\dirdem-micro\builds\c_file build

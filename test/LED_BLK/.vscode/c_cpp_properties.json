@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "C:\\Repository\\dirdem-micro\\dirdem-micro\\core\\tools\\avr-toolchain\\avr\\include",
-                "C:\\Repository\\dirdem-micro\\dirdem-micro\\test\\LED_BLK\\"
+                "C:\\Repository\\dirdem-micro\\dirdem-micro\\test\\LED_BLK"
             ],
             "defines": [
                 "_DEBUG",
