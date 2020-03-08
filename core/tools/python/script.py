@@ -127,9 +127,9 @@ while 1 == 1:
 
 	#TOOLS#
 	##########################################################################################################
-	path_avrgcc     = "tools\\avr-toolchain\\bin\\avr-gcc.exe "
-	path_avrobjcopy = "tools\\avr-toolchain\\bin\\avr-objcopy.exe "
-	path_avrdude    = "tools\\avrdude\\avrdude.exe "
+	path_avrgcc     = "..\\avr-toolchain\\bin\\avr-gcc.exe "
+	path_avrobjcopy = "..\\avr-toolchain\\bin\\avr-objcopy.exe "
+	path_avrdude    = "..\\avrdude\\avrdude.exe "
 	##########################################################################################################
 	flagsObjectFile_avrgcc  = " -I." + " -g"      + " -Os"    + " -mmcu="            + microcontroller_name  + " -o "
 	flagsElfFile_avrgcc     = " -I." + " -Os"     + " -mmcu=" + microcontroller_name + " -o "
