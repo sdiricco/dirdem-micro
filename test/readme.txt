@@ -1,1 +1,0 @@
-arduino github repo: https://github.com/arduino/ArduinoCore-avr
