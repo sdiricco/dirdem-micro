@@ -1,0 +1,1 @@
+cartella di destinazione compilato del configuration_tool
