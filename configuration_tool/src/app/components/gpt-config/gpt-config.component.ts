@@ -6,7 +6,7 @@ import {
   AfterViewInit,
   AfterViewChecked
 } from "@angular/core";
-import { ATmega328Values, GptDriverConfig } from "src/app/models/GptDriver";
+import { ATmega328Values, GptDriverConfig } from "../../../../../core/models/typeScript/GptDriver";
 import { MatSelect, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { ToastrService } from "ngx-toastr";
 import { DriverService } from "src/app/services/driver.service";

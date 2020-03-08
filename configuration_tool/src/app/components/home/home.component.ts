@@ -1,6 +1,6 @@
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Microcontroller } from "src/app/models/Microcontroller";
+import { Microcontroller } from "../../../../../core/models/typeScript/Microcontroller";
 import {
   MatDialog,
   MatSlideToggleChange,
@@ -45,9 +45,7 @@ export class HomeComponent {
     public dialog: MatDialog,
     private driverService: DriverService,
     private toast: ToastrService
-  ) {
-    this.microcontrollers = Microcontroller.getMicrocontrollers();
-  }
+  ) { this.microcontrollers = Microcontroller.getMicrocontrollers() };
 
   // evento scatenato sulla selezione di un nuovo micro
   onMicroSelected(evt: MatSelectChange) {
@@ -58,7 +56,7 @@ export class HomeComponent {
   // evento scatenato al passagio del mouse sopra l'immagine
   showPinout() {
     const dialogRef = this.dialog.open(MicroPinoutDialogComponent, {
-      data: { microcontroller: this.microcontroller }
+      data: this.microcontroller
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);

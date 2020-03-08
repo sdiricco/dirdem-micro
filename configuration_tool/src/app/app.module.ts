@@ -11,6 +11,7 @@ import { MicroPinoutDialogComponent } from './components/micro-pinout-dialog/mic
 import { FuseBitComponent } from './components/fuse-bit/fuse-bit.component';
 import { GptCfgConfigComponent } from './components/gpt-config/gpt-config.component';
 import { MaterialModule } from './modules/material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MaterialModule } from './modules/material/material.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
@@ -36,7 +38,7 @@ import { MaterialModule } from './modules/material/material.module';
     ToastrModule,
     ToastrModule.forRoot() // ToastrModule added
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

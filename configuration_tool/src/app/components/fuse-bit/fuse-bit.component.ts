@@ -1,7 +1,7 @@
 import { Component, Inject, ChangeDetectorRef } from '@angular/core';
-import { Fuse, FuseBit } from 'src/app/models/FuseBit';
+import { Fuse, FuseBit } from '../../../../../core/models/typeScript/FuseBit';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ConverterUtilities } from 'src/app/models/Utilities/ConverterUtilities';
+import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilities/ConverterUtilities';
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';

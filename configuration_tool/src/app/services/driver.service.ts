@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { GptDriverConfig } from '../models/GptDriver';
+import { GptDriverConfig } from '../../../../core/models/typeScript/GptDriver';
 import FileSaver = require('file-saver');
-import { Fuse } from '../models/FuseBit';
+import { Fuse } from '../../../../core/models/typeScript/FuseBit';
 
 @Injectable({
   providedIn: 'root'
