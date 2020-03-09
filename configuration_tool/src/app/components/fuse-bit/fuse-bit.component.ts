@@ -5,11 +5,8 @@ import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilit
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { spawn } from 'child_process';
 import { ElectronService } from 'ngx-electron';
-
-// const { shell } = require('electron').shell;
-
+import { PythonShell } from 'python-shell';
 
 @Component({
   selector: 'app-fuse-bit',
@@ -47,7 +44,6 @@ export class FuseBitComponent {
 
   setFuses() { 
     let wds = this.electronService.isWindows;
-    console.log(wds)
   };
 
   /**

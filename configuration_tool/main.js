@@ -1,4 +1,5 @@
 const { app, BrowserWindow, electron } = require('electron')
+let {PythonShell} = require('python-shell')
 
 // Mantiene un riferimento globale all'oggetto window, se non lo fai, la finestra sarà
 // chiusa automaticamente quando l'oggetto JavaScript sarà garbage collected.
@@ -11,12 +12,19 @@ function createWindow () {
     width: 1300,
     height: 920,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true
     },
   })
   // and load the index.html of the app.
-  win.loadFile('../builds/configuration_tool/index.html')
+  win.loadFile('./dist/index.html')
   win.webContents.openDevTools()
+
+  PythonShell.run("../core/tools/python/burn_bootloader.py", null, err => {
+    if (err) throw err;
+    console.log('finished');
+  });
+
 
   // Apre il Pannello degli Strumenti di Sviluppo.
   //win.webContents.openDevTools()
@@ -28,7 +36,6 @@ function createWindow () {
     // si dovrebbe eliminare l'elemento corrispondente.
     win = null
   })
-
   win.removeMenu()
 }
 
