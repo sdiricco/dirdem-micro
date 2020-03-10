@@ -1,12 +1,12 @@
 import { Component, Inject, ChangeDetectorRef } from '@angular/core';
-import { Fuse, FuseBit } from '../../../../../core/models/typeScript/FuseBit';
-import { MAT_DIALOG_DATA, MatDialogRef, MatExpansionPanelDescription } from '@angular/material';
+import { Fuse, FuseBit, FusesType } from '../../../../../core/models/typeScript/FuseBit';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilities/ConverterUtilities';
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { ElectronService } from 'ngx-electron';
-import { PythonShell } from 'python-shell';
+
 
 @Component({
   selector: 'app-fuse-bit',
@@ -43,7 +43,14 @@ export class FuseBitComponent {
    */
 
   setFuses() { 
-    let wds = this.electronService.isWindows;
+    let fuses: Fuse [] = this.driverService.fuseBitConfiguration.filter(fuse => fuse.type == FusesType.HIGH || fuse.type == FusesType.LOW || fuse.type == FusesType.EXTENDED)
+    let hexValues: string [] = fuses.map(fuse => fuse.hexValue);
+    console.log(hexValues);
+     
+    let params = 'test params'
+    // this.electronService.ipcRenderer.send('run-script', params);
+    // this.electronService.ipcRenderer.send('execute-script', 'ping google.com')
+
   };
 
   /**
@@ -65,6 +72,7 @@ export class FuseBitComponent {
       this.displayedColumns.push(fuse.type);
     })
   }
+
   /**
    * Evento scatenato quando viene impostato il valore esadecimale del byte nel footer della colonna
    */
