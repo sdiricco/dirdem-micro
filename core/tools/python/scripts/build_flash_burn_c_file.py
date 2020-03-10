@@ -87,9 +87,9 @@ input_file_c = input_file_c + " C:\\Repository\\dirdem-micro\\dirdem-micro\\test
 
 #TOOLS#
 ##########################################################################################################
-path_avrgcc     = "..\\avr-toolchain\\bin\\avr-gcc.exe "
-path_avrobjcopy = "..\\avr-toolchain\\bin\\avr-objcopy.exe "
-path_avrdude    = "..\\avrdude\\avrdude.exe "
+path_avrgcc     = "..\\..\\avr-toolchain\\bin\\avr-gcc.exe "
+path_avrobjcopy = "..\\..\\avr-toolchain\\bin\\avr-objcopy.exe "
+path_avrdude    = "..\\..\\avrdude\\avrdude.exe "
 ##########################################################################################################
 flagsObjectFile_avrgcc  = " -I " + include_files + " -g"      + " -Os"    + " -mmcu="            + microcontroller_name  + " -o "
 flagsElfFile_avrgcc     = " -I " + include_files + " -Os"     + " -mmcu=" + microcontroller_name + " -o "

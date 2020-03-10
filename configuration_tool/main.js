@@ -1,8 +1,18 @@
+// const { spawn } = require('child_process');
+// const path = require('path');
+// const child_process = require('child_process');
 const { app, BrowserWindow, electron } = require('electron');
 const { ipcMain } = require('electron');
-const { spawn } = require('child_process');
-const child_process = require('child_process');
-const path = require('path');
+const { PythonShell } = require('python-shell');
+
+var pyShellOptions = 
+{
+  mode: 'text',
+  pythonPath: 'python',
+  scriptPath: '../core/tools/python/scripts/',
+  pythonOptions: ['-u']
+}
+
 
 
 // Mantiene un riferimento globale all'oggetto window, se non lo fai, la finestra sarà
@@ -21,7 +31,6 @@ function createWindow () {
   // and load the index.html of the app.
   win.loadFile('./dist/index.html')
   win.webContents.openDevTools()
-
 
   // Apre il Pannello degli Strumenti di Sviluppo.
   //win.webContents.openDevTools()
@@ -58,74 +67,16 @@ app.on('activate', () => {
   }
 })
 
-// in questo file possiamo includere il codice specifico necessario 
-// alla nostra app. Si può anche mettere il codice in file separati e richiederlo qui.
-
-
-
-
-ipcMain.on('run-script', (event, arg) => {
-  console.log(
-      arg
-  );
-  let python = spawn('python', ['../core/tools/python/script.py']);
-  python.stdout.on('data', function (data) {
-    console.log('Pipe data from python script ...');
-    dataToSend = data.toString();
-   });
-   // in close event we are sure that stream from child process is closed
-   python.on('close', (code) => {
-   console.log(`child process close all stdio with code ${code}`);
-   // send data to browser
-   res.send(dataToSend)
-   });
-});
-
-
 
 
 
 /**
- * Esegue uno script da riga di comando passato come argomento
+ * Chiamata dal processo di rendering, carica i Fuse bit nel microcontrollore
  */
-function executeScript(command, args, callback) {
-  var child = child_process.spawn(command, args, {
-      encoding: 'utf8',
-      shell: true
-  });
-  // You can also use a variable to save the output for when the script closes later
-  child.on('error', (error) => {
-    console.log(error);
-  });
-
-  child.stdout.setEncoding('utf8');
-  child.stdout.on('data', (data) => {
-      //Here is the output
-      data=data.toString();   
-      console.log(data);      
-  });
-
-  child.stderr.setEncoding('utf8');
-  child.stderr.on('data', (data) => {
-      // Return some data to the renderer process with the mainprocess-response ID
-      mainWindow.webContents.send('mainprocess-response', data);
-      //Here is the output from the command
-      console.log(data);  
-  });
-
-  child.on('close', (code) => {
-      //Here you can get the exit code of the script  
-      switch (code) {
-          case 0:
-              console.log({
-                  title: 'Title',
-                  type: 'info',
-                  message: 'End process.\r\n'
-              });
-              break;
-      }
-
-  });
-  if (typeof callback === 'function')
-      callback();
-}
+ipcMain.on('burn-fuses', (event, arg) => {
+  console.log(arg);
+  PythonShell.run('hello.py', pyShellOptions, (err, results) => {
+    if (err) throw err;
+    console.log('results: %j', results);
+  })
+});
