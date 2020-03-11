@@ -1,13 +1,21 @@
 export class ConverterUtilities {
-    /** converte un numero esadecimale (string) in un numero in base decimale */
+    /**
+     * Converte un numero esadecimale (string) in un numero in base decimale
+     */ 
     static hexToNumber(hex: string): number {
         return parseInt('0x' + hex);
     }
-    /** converte un numero decimale in un numero esadecimale */
+
+    /**
+     * Converte un numero decimale in un numero esadecimale
+     */
     static numberToHex(n: number): string {
         return n.toString(16).toUpperCase();
     }
-    /** converte un numero base in decimale (max 255  8-bit) in un array di bit */
+
+    /**
+     * Converte un numero base in decimale (max 255  8-bit) in un array di bit 
+     */
     static uint8ToBinaryArray(num: number): boolean[] {
         var result = [];
         for (let i = 0; i < 8; i++) {
@@ -15,7 +23,10 @@ export class ConverterUtilities {
         }
         return result.map(_ => _ == 1 ? true : false);
     }
-    /** converte un array di 8 bit in un numero intero segna segno (max 255) */
+
+    /**
+     * Converte un array di 8 bit in un numero intero segna segno (max 255)
+     */
     static binaryArraytoUnint8(arr: boolean[]): number {
         var result = 0;
         for (let i = 0; i < 8; i++) {
@@ -28,19 +39,28 @@ export class ConverterUtilities {
         }
         return result;
     }
-    /** converte un numero esadecimale (stringa  max FF) in un array di bit */
+
+    /**
+     * Converte un numero esadecimale (stringa  max FF) in un array di bit
+     */
     static hexToBinaryArray(hex: string): boolean[] {
         var result = [];
         let decNum = this.hexToNumber(hex);
         result = this.uint8ToBinaryArray(decNum);
         return result;
     }
-    /** coverte un array di 8 bit in una numero esadecimale */
+
+    /**
+     * Converte un array di 8 bit in una numero esadecimale 
+     */
     static binaryToHex(arr: boolean[]): string {
         let n = this.binaryArraytoUnint8(arr);
         return this.numberToHex(n);
     }
-    /** trasposizione di una matrice, le righe diventano colonne e viceversa */
+    
+    /**
+     * Trasposizione di una matrice, le righe diventano colonne e viceversa 
+     */
     static matrixTranspose(a: any[][]) {
         // Calculate the width and height of the Array
         var w = a.length || 0;

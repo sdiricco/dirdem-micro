@@ -6,8 +6,7 @@ import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { ElectronService } from 'ngx-electron';
-import { PythonShell } from 'python-shell';
-
+import { ScriptMethods } from '../../../../../core/models/typeScript/ScriptMethods';
 
 @Component({
   selector: 'app-fuse-bit',
@@ -42,12 +41,10 @@ export class FuseBitComponent {
   /**
    * Setta i fuse bit sul microcontrollore
    */
-
   setFuses() { 
     let fuses: Fuse [] = this.driverService.fuseBitConfiguration.filter(fuse => fuse.type == FusesType.HIGH || fuse.type == FusesType.LOW || fuse.type == FusesType.EXTENDED)
-    let hexValues: string [] = fuses.map(fuse => fuse.hexValue);
-    console.log(hexValues);            
-    this.electronService.ipcRenderer.send('burn-fuses', hexValues);
+    let hexValues: string [] = fuses.map(fuse => fuse.hexValue);     
+    this.electronService.ipcRenderer.send(ScriptMethods.burnFuses, hexValues);
   };
 
   /**
