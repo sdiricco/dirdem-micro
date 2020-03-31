@@ -1,3 +1,14 @@
+TO-DO:
+-Creare uno script python che funge da simulatore dell'interfaccia GUI.exe in sviluppo da Andrea.
+	Questo script dovrà chiamare gli script python per la compilazione e flash nello stesso modo in cui farà la GUI.exe
+	L'utilità è quella di testare e debuggare tutti gli script python scorrelando tale funzionalità dalla GUI.exe
+	Lo script dovrà avere qualche comando e guida all'utilizzo.
+
+-Creare uno script per ogni azione. Per adesso ci dovranno essere tre script differenti:
+	-Script per la compilazione.
+	-Script per il flash dell'hex su micro.
+	-Script per il flash dei fuse bit.
+
 
 Comandi per compilare 2 file ".c" e un file ".h"
 	paths:
@@ -20,3 +31,4 @@ Adesso lo script "build_flash_burn_c_file.py" contiene al suo interno i paths:
 	input_file_c += " C:\Repository\dirdem-micro\dirdem-micro\test\LED_BLK\sources\LEDblink.c "
 
 Questi files sono stati aggiunti al fine di rendere compilabile il codice LEDblink ma andrà trovato un modo per passarli esternamente
+
