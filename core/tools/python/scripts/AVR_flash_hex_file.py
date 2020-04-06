@@ -10,9 +10,7 @@
 # Import globali                                                                                                                             #
 ####################################################################################################################################################
 import os
-# import shutil
 import sys
-# import glob
 
 ####################################################################################################################################################
 # Variabili globali                                                                                                                                #
@@ -26,16 +24,16 @@ programmer = sys.argv[2]
 file_hex = sys.argv[3]
 
 #Esempio:
-# m32
-# usbasp
-# C:\Repository\dirdem-micro\builds\c_file/LEDblink.hex
+# microcontroller_tag: m32
+# programmer: usbasp
+# file_hex: C:\Repository\dirdem-micro\builds\c_file/LEDblink.hex
 # lanciare il seguente comando, il quale chiamerà lo script "AVR_flash_hex_file.py" con i paramentri impostati sopra dall'esempio.
 # >>> AVR_flash_hex_file.py m32 usbasp C:\Repository\dirdem-micro\builds\c_file/LEDblink.hex
 
 ####################################################################################################################################################
 # Assegnamenti globali                                                                                                                             #
 ####################################################################################################################################################
-path_avrdude    = "..\\..\\avrdude\\avrdude.exe "
+path_avrdude    = "..\\..\\avrdude\\avrdude.exe"
 flagsFlash_avrdude      = " -c " + programmer + " -p " +  microcontroller_tag + " -U " + "flash:w:" + file_hex + ":i"
 
 ####################################################################################################################################################
@@ -45,4 +43,5 @@ flagsFlash_avrdude      = " -c " + programmer + " -p " +  microcontroller_tag + 
 ####################################################################################################################################################
 # Logica                                                                                                                                           #
 ####################################################################################################################################################
+print("Calling AVRDUDE..\n>>>" + path_avrdude + flagsFlash_avrdude)
 os.system(path_avrdude + flagsFlash_avrdude)
