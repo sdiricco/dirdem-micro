@@ -4,10 +4,20 @@ TO-DO:
 	L'utilità è quella di testare e debuggare tutti gli script python scorrelando tale funzionalità dalla GUI.exe
 	Lo script dovrà avere qualche comando e guida all'utilizzo.
 
+-AVR_build_c_file.py
+	Il problema di principale da risolvere è che in fase di compilazione è necessario ricevere come input tutti i file da compilare,
+	in particolare tutti i files .c e .h
+	
+	Il primo passo da provare è il seguente: PASSAGGIO DI PARAMETRI VARIABILI
+	é possibile modificare lo script in modo da avere un passaggio di parametri variabile che dipende dal numero di files .c e .h
+	
+	Come prima cosa proverei a passare un numero variabile di files .c e a metterli in coda
+
+DONE:
 -Creare uno script per ogni azione. Per adesso ci dovranno essere tre script differenti:
-	-Script per la compilazione.
-	-Script per il flash dell'hex su micro.
-	-Script per il flash dei fuse bit.
+	-Script per la compilazione. --> Vedi 
+	-Script per il flash dell'hex su micro. --> Vedi AVR_flash_hex_file.py
+	-Script per il flash dei fuse bit. --> Vedi AVR_build_c_file.py
 
 
 Comandi per compilare 2 file ".c" e un file ".h"
