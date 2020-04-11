@@ -72,7 +72,7 @@ if number_of_arg > 4:
 # >>> AVR_build_c_file.py atmega32 C:\Repository\dirdem-micro\builds\c_file C:\Repository\dirdem-micro\test\LED_BLK C:\Repository\dirdem-micro\test\LED_BLK\sources\LEDblink.c C:\Repository\dirdem-micro\test\LED_BLK\sources/timer2.c 
 
 ####################################################################################################################################################
-# Assegnamenti globali                                                                                                                           #
+# Assegnamenti globali                                                                                                                             #
 ####################################################################################################################################################
 
 #Inizio Script
