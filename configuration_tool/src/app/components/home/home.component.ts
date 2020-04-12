@@ -1,16 +1,13 @@
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Microcontroller } from "../../../../../core/models/typeScript/Microcontroller";
-import {
-  MatDialog,
-  MatSlideToggleChange,
-  MatSlideToggle,
-  MatSelectChange
-} from "@angular/material";
 import { MicroPinoutDialogComponent } from "../micro-pinout-dialog/micro-pinout-dialog.component";
 import { GptCfgConfigComponent } from "../gpt-config/gpt-config.component";
 import { DriverService } from "src/app/services/driver.service";
 import { ToastrService } from "ngx-toastr";
+import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: "app-home",
