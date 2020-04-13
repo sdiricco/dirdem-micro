@@ -23,11 +23,6 @@ import { NgxElectronModule } from 'ngx-electron';
     MicroPinoutDialogComponent,
     FuseBitComponent
   ],
-  entryComponents: [
-    MicroPinoutDialogComponent,
-    GptCfgConfigComponent,
-    FuseBitComponent
-  ],
   imports: [
     BrowserModule,
     NgxElectronModule,

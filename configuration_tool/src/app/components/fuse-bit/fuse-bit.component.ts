@@ -1,6 +1,6 @@
 import { Component, Inject, ChangeDetectorRef } from '@angular/core';
 import { Fuse, FuseBit, FusesType } from '../../../../../core/models/typeScript/FuseBit';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilities/ConverterUtilities';
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';

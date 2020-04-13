@@ -7,10 +7,12 @@ import {
   AfterViewChecked
 } from "@angular/core";
 import { ATmega328Values, GptDriverConfig } from "../../../../../core/models/typeScript/GptDriver";
-import { MatSelect, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSelect } from '@angular/material/select';
 import { ToastrService } from "ngx-toastr";
 import { DriverService } from "src/app/services/driver.service";
 import { ChangeDetectorRef } from "@angular/core";
+
 
 @Component({
   selector: "gpt-cfg",
