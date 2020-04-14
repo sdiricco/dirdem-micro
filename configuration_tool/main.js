@@ -4,9 +4,10 @@
 const { app, BrowserWindow, electron } = require('electron');
 const { ipcMain } = require('electron');
 const { PythonShell } = require('python-shell');
+const { dialog } = require('electron')
 // const ScriptMethods = require('../core/models/typeScript/ScriptMethods').ScriptMethods
 
-const pyShellOptions = 
+var pyShellOptions = 
 {
   mode: 'text',
   pythonPath: 'python',
@@ -51,12 +52,14 @@ app.on('activate', () => {
 /**
  * Carica i Fuse bit nel microcontrollore
  */
-ipcMain.on('burnFuses', (event, arg) => {
-  console.log(arg);
-  PythonShell.run('hello.py', pyShellOptions, (err, results) => {
+ipcMain.on('burnFuses', (event, args) => {
+  pyShellOptions['args'] = args;
+  console.log(pyShellOptions);
+  PythonShell.run('AVR_flash_fuses_byte.py', pyShellOptions, (err, results) => {
     if (err) throw err;
     console.log('results: %j', results);
   })
+  
 });
 
 /**
@@ -69,4 +72,22 @@ ipcMain.on('burnUnoBootloader', (event, arg) => {
     console.log('results: %j', results);
   })
 })
+
+/** 
+ * Apre la finestra di selezione per un file .C da compilare 
+ */
+ipcMain.on('openDialog', (event, arg) => {
+  // let win = new BrowserWindow({ width: 800, height: 600 });
+  let options = {
+    title : "Seleziona un file .C da compilare", 
+    defaultPath : "C:\\",
+    buttonLabel : "Custom button",
+    properties: ['openFile','multiSelections']
+   }
+
+  dialog.showOpenDialog(null, options, (filePaths) => {
+    console.log(filePaths);
+  });
+})
+
 

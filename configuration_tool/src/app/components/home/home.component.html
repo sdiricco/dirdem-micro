@@ -142,35 +142,6 @@
     <div class="col-xl-2"></div>
 
     <div id="generateConfigButtonDiv">
-        <button mat-raised-button color="accent" (click)="generateGptFile()" [disabled]="!thereAreGptConfigurations" matTooltip="Generate configuration">Mongol it!</button>
+        <button mat-raised-button color="accent" (click)="selectAndCompileCFile()" [disabled]="!thereAreGptConfigurations" matTooltip="Generate configuration">Mongol it!</button>
     </div>
-</div>
-
-<!-- div contentente il file C da scaricare -->
-<div id="cFileToDownload">
-      /*
-      File: Gpt_Cfg.c
-      */
-
-      /**************************************** INCLUDE FILES ****************************************/
-      #include "Arduino.h"
-      #include "Gpt_Cfg.h"
-      /***********************************************************************************************/
-
-      #define CONFIGURED_CHANNELS 3
-
-      ConfigPtr Cfg[CONFIGURED_CHANNELS] =
-      {{ '{' }}
-    <div *ngFor="let config of gptConfigurations; last as isLast">
-
-        {{'{'}}
-          {{ config.gptChannelID }},
-          {{ config.gptContainerHwChannel }},
-          {{ config.gptContainerClockReference }},
-          {{ config.gptClockPrescaler }},
-          {{ config.gptChannelTickValueMax }},
-          "{{ config.gptNotification }}"
-        {{'}'}} <span *ngIf="!isLast">,</span>
-      </div>
-      {{ '}' }}
 </div>

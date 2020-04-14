@@ -8,6 +8,9 @@ import { ToastrService } from "ngx-toastr";
 import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
+import { ElectronService } from 'ngx-electron';
+import { BrowserWindow, OpenDialogOptions } from 'electron';
+import { CommonMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
 
 @Component({
   selector: "app-home",
@@ -29,11 +32,17 @@ export class HomeComponent {
   get fuseBitConfigurationLength() {
     return this.driverService.fuseBitConfiguration.length;
   }
+
+  get microcontroller(): Microcontroller {
+    return this.driverService.microcontrollerSelected;
+  }
+  set microcontroller(value: Microcontroller) {
+    this.driverService.microcontrollerSelected = value;
+  }
   // sliders
   @ViewChild("slider1", { static: false }) gptDriverSlider: MatSlideToggle;
   @ViewChild("slider4", { static: false }) fuseBitSlider: MatSlideToggle;
   //
-  microcontroller = new Microcontroller();
   microcontrollers: Microcontroller[];
   // configurazioni da inserire nel div html che servirà per scaricare il file .C
   gptConfigurations = this.driverService.gptDriverConfiguration;
@@ -41,37 +50,35 @@ export class HomeComponent {
   constructor(
     public dialog: MatDialog,
     private driverService: DriverService,
+    private electronService: ElectronService,
     private toast: ToastrService
   ) { this.microcontrollers = Microcontroller.getMicrocontrollers() };
 
-  // evento scatenato sulla selezione di un nuovo micro
-  onMicroSelected(evt: MatSelectChange) {
+  /**
+   * Evento scatenato sulla selezione di un nuovo micro
+   */
+  onMicroSelected(evt: MatSelectChange):void {
     this.driverService.clearAllConfigurations();
-    // il microcontroller viene assegnato con il binding sul template html
-    console.log(evt, this.microcontroller);    
+    this.driverService.microcontrollerSelected = evt.value; 
   }
-  // evento scatenato al passagio del mouse sopra l'immagine
+  
+  /**
+   * Evento scatenato al passagio del mouse sopra l'immagine
+   */
   showPinout() {
     const dialogRef = this.dialog.open(MicroPinoutDialogComponent, {
-      data: this.microcontroller
+      data: null
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
-  }
-  // genera il file di configurazione in base ai dati presenti nel driverService
-  generateGptFile() {
-    // file c da scaricare (contenuto dentro il div invisibile)
-    let cFile = document.getElementById("cFileToDownload").innerText;
-    this.driverService.generateGptConfigFile(cFile);
-    this.toast.success("Download success!");
   }
 
   /*
    * eventi su tasti slider ** isEdit è passato true solo nel caso in cui vine premuto il tasto per la modifica
    */
   // su driver gpt //
-  onGptDriverSwitched(evt?: MatSlideToggleChange, isEdit?: boolean) {
+  onGptDriverSwitched(evt?: MatSlideToggleChange, isEdit?: boolean):void {
     // se lo slider virene acceso
     if (isEdit || evt.checked) {
       const dialogRef = this.dialog.open(GptCfgConfigComponent, {
@@ -93,7 +100,7 @@ export class HomeComponent {
     }
   }
   // su fuse bit
-  onFuseSwitched(evt?: MatSlideToggleChange, isEdit?: boolean) {
+  onFuseSwitched(evt?: MatSlideToggleChange, isEdit?: boolean):void {
     if (isEdit || evt.checked) {
       const dialogRef = this.dialog.open(FuseBitComponent, {
         width: "920px",
@@ -110,7 +117,14 @@ export class HomeComponent {
       // se lo slider viene spento svuoto le configurazioni dei fuse bit
     } else {
       this.driverService.fuseBitConfiguration = [];
-      // console.log(this.driverService.fuseBitConfiguration);
     }
   }
+
+  /**
+   * Compilazione di un file .C preso localmente dalla propria macchina 
+   */
+  selectAndCompileCFile() {
+    this.electronService.ipcRenderer.send(CommonMethods.openDialog);
+  }
+
 }
