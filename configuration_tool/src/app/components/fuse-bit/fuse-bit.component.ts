@@ -42,7 +42,7 @@ export class FuseBitComponent {
    * Setta i fuse bit sul microcontrollore
    */
   setFuses() { 
-    let microLabel = this.driverService.microcontrollerSelected.avrLabel;
+    let microLabel = 'm32';
     let programmer = 'usbasp';
     let lowFuse = '0x' + this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.LOW).hexValue;
     let highFuse = '0x' +this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.HIGH).hexValue;

@@ -109,7 +109,7 @@ def menu_flash_fuse_byte():
     pulisci_schermo()
     print("0: Torna indietro\n")
     print("Settaggi fuse byte..")
-
+    os.system("..\\AVR_flash_fuses_byte.py m32 usbasp 0x64 0xDE")
     azione = int(input())
     if azione == 0: menu_11()
     else:

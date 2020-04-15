@@ -10,7 +10,7 @@ const { dialog } = require('electron')
 var pyShellOptions = 
 {
   mode: 'text',
-  pythonPath: 'python',
+  pythonPath: 'py',
   scriptPath: '../core/tools/python/scripts/',
   pythonOptions: ['-u']
 }
@@ -53,13 +53,29 @@ app.on('activate', () => {
  * Carica i Fuse bit nel microcontrollore
  */
 ipcMain.on('burnFuses', (event, args) => {
+  /*
+  pyShellOptions['args'] = args;
+  let pyshell = new PythonShell('AVR_flash_fuses_byte.py', pyShellOptions);
+  //pyshell.send(arg);
+  pyshell.on('message', function (message) {
+    // received a message sent from the Python script (a simple "print" statement)
+    console.log(message);
+  });
+  pyshell.end(function (err,code,signal) {
+    if (err) throw err;
+    console.log('The exit code was: ' + code);
+    console.log('The exit signal was: ' + signal);
+    console.log('finished');
+    console.log('finished');
+  });
+  */
+
   pyShellOptions['args'] = args;
   console.log(pyShellOptions);
   PythonShell.run('AVR_flash_fuses_byte.py', pyShellOptions, (err, results) => {
     if (err) throw err;
-    console.log('results: %j', results);
+    console.log(results);
   })
-  
 });
 
 /**
