@@ -54,7 +54,6 @@ project_name, file_ext = os.path.splitext(file_main_c)
 avrdude_filepath_o   = directorypath_output_files + "\\" + project_name + ".o"
 avrdude_filepath_elf = directorypath_output_files + "\\" + project_name + ".elf"
 avrdude_filepath_hex = directorypath_output_files + "\\" + project_name + ".hex"
-#Fine Script
 
 avrdude_list_of_other_pathFiles = " "
 for root, list_of_pathdirectory, list_of_pathfiles in os.walk(avrdude_path_directory_root_project, topdown=True):
@@ -86,8 +85,8 @@ print("\nChiamo AVRDUDE..")
 # Assegnamenti globali                                                                                                                             #
 ####################################################################################################################################################
 
-path_avrgcc     = "..\\..\\avr-toolchain\\bin\\avr-gcc.exe"
-path_avrobjcopy = "..\\..\\avr-toolchain\\bin\\avr-objcopy.exe"
+path_avrgcc     = "avr-gcc.exe"
+path_avrobjcopy = "avr-objcopy.exe"
 
 ####################################################################################################################################################
 # Funzioni Locali                                                                                                                                  #
