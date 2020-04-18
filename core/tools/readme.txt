@@ -13,12 +13,6 @@ TO-DO:
 	
 	Come prima cosa proverei a passare un numero variabile di files .c e a metterli in coda
 
-DONE:
--Creare uno script per ogni azione. Per adesso ci dovranno essere tre script differenti:
-	-Script per la compilazione. --> Vedi 
-	-Script per il flash dell'hex su micro. --> Vedi AVR_flash_hex_file.py
-	-Script per il flash dei fuse bit. --> Vedi AVR_build_c_file.py
-
 
 Comandi per compilare 2 file ".c" e un file ".h"
 	paths:
