@@ -43,7 +43,7 @@ app.on('activate', () => {
   }
 })
 
-// Chiamate che arrivano dal processo di renderig
+// Chiamate che arrivano dal processo di renderig /
 
 /**
  * Carica i Fuse bit nel microcontrollore
