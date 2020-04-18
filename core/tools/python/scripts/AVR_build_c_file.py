@@ -1,29 +1,29 @@
+##############################
+#           DIRDEM           #
+##############################
+
 #Name: AVR_build_c_file.py
-#Autore:
-#Modifiche 05/04/2020: Aggiunti commenti e descrizioni alle variabili e alle funzioni
-#Modifiche 05/04/2020: Aggiunta la possibilità di compilare piu' file .c passati come argomento allo script e di linkare una directory per 
-#                      gli inlcude file sempre necessaria in fase di compilazione.
-#
-#TO-DO: 
-#
-#Creare un file contenente i path dei tool in modo tale di averli esterni e facilmente manutenibili
-#Questa soluzione permette pure di eliminare i path dei tool nel caso si decidesse di usare le variabili di ambiente
+#Author: Simone Di Ricco
+#Changes
+#05/04/2020: Creazione
+#18/04/2020: https://udirderm.atlassian.net/browse/DIR-24, https://udirderm.atlassian.net/browse/DIR-25
 
 ####################################################################################################################################################
-# Import globali                                                                                                                                   #
+# Import                                                                                                                                           #
 ####################################################################################################################################################
 import os
 import shutil
 import sys
 import asyncio
 import glob
+from AVR_pathTool import absolutePathFile_avrgcc_exe, absolutePathFile_avrobjcopy_exe
+
 
 ####################################################################################################################################################
-# Variabili globali                                                                                                                                #
+# Global variables                                                                                                                                 #
 ####################################################################################################################################################
 #Variabili parametri Esterni
-global avrdude_microcontroller_name
-global path_output_files
+global sysArg_microcotrollerName
 global path_root_project
 global input_main_c_file
 
@@ -35,68 +35,72 @@ global avrdude_filepath_elf
 global avrdude_filepath_hex
 
 #Variabili tools
-global path_avrgcc 
-global path_avrobjcopy    
+global absolutePathFile_avrgcc_exe 
+global absolutePathFile_avrobjcopy    
 
 
 ####################################################################################################################################################
-# Paramentri Esterni                                                                                                                               #
+# Ext Args                                                                                                                                         #
 ####################################################################################################################################################
 
-avrdude_microcontroller_name = sys.argv[1]
-directorypath_output_files = sys.argv[2]
-avrdude_path_directory_root_project = sys.argv[3]
-avrdude_path_file_main_c = sys.argv[4]
+sysArg_microcotrollerName = sys.argv[1]
+sysArg_absolutePathDirectory_Project = sys.argv[2]
 
-file_main_c = os.path.basename(avrdude_path_file_main_c)
-project_name, file_ext = os.path.splitext(file_main_c)
+absolutePathDirectory_outputBuildFiles = sysArg_absolutePathDirectory_Project + "\\" + "outputBuildFiles"
 
-avrdude_filepath_o   = directorypath_output_files + "\\" + project_name + ".o"
-avrdude_filepath_elf = directorypath_output_files + "\\" + project_name + ".elf"
-avrdude_filepath_hex = directorypath_output_files + "\\" + project_name + ".hex"
+avrdude_filepath_o   = absolutePathDirectory_outputBuildFiles + "\\" + "ObjFile.o"
+avrdude_filepath_elf = absolutePathDirectory_outputBuildFiles + "\\" + "ElfFile.elf"
+avrdude_filepath_hex = absolutePathDirectory_outputBuildFiles + "\\" + "HexFile.hex"
 
-avrdude_list_of_other_pathFiles = " "
-for root, list_of_pathdirectory, list_of_pathfiles in os.walk(avrdude_path_directory_root_project, topdown=True):
+#avrgcc_listof_absolutePathFile_FilesToBuild = " "
+#for root, list_of_pathdirectory, list_of_pathfiles in os.walk(sysArg_absolutePathDirectory_Project, topdown=True):
+#   for pathfile in list_of_pathfiles:
+#      file = os.path.basename(pathfile)
+#      file_name, file_ext = os.path.splitext(file)
+#      if file_ext == ".c" and  file_name != project_name:
+#         avrgcc_listof_absolutePathFile_FilesToBuild += " " + os.path.join(root, file)
+#         avrgcc_listof_absolutePathFile_FilesToBuild = " "
+
+avrgcc_listof_absolutePathFile_FilesToBuild = " "
+for root, list_of_pathdirectory, list_of_pathfiles in os.walk(sysArg_absolutePathDirectory_Project, topdown=True):
    for pathfile in list_of_pathfiles:
       file = os.path.basename(pathfile)
       file_name, file_ext = os.path.splitext(file)
-      if file_ext == ".c" and  file_name != project_name:
-         avrdude_list_of_other_pathFiles += " " + os.path.join(root, file)
+      if file_ext == ".c" and file_name != "":
+         avrgcc_listof_absolutePathFile_FilesToBuild += " " + os.path.join(root, file)
 
 print("\nVerranno compilati i file:")
-print(avrdude_path_file_main_c + avrdude_list_of_other_pathFiles)
-print("\nGli include file necessari verranno cercati all'interno di:\n" + avrdude_path_directory_root_project)
+print(avrgcc_listof_absolutePathFile_FilesToBuild)
+print("\nGli include file necessari verranno cercati all'interno di:\n" + sysArg_absolutePathDirectory_Project)
 print("\nChiamo AVRDUDE..")
 
 #Esempio:
 #Parametri esterni
-# -1 avrdude_microcontroller_name: atmega32
-# -2 directorypath_output_files: C:\Repository\dirdem-micro\builds\c_file
-# -3 avrdude_path_directory_root_project: C:\Repository\dirdem-micro\test\LED_BLK (la root directory del progetto)
-# -4 avrdude_path_file_main_c: C:\Repository\dirdem-micro\test\LED_BLK\sources\LEDblink.c 
+# -1 sysArg_microcotrollerName: atmega32
+# -2 sysArg_absolutePathDirectory_Project: C:\Repository\dirdem-micro\test\LED_BLK (la root directory del progetto)
 
 # Guida:
 # dal percorso: 
 # C:\Repository\dirdem-micro\core\tools\python\scripts
-# lanciare il seguente comando, il quale chiamerà lo script "build_flash_burn_c_file.py" con i paramentri impostati sopra dall'esempio.
-# >>> AVR_build_c_file.py atmega32 C:\Repository\dirdem-micro\builds\c_file C:\Repository\dirdem-micro\test\LED_BLK C:\Repository\dirdem-micro\test\LED_BLK\sources\LEDblink.c
+# >>> AVR_build_c_file.py atmega32 C:\Repository\dirdem-micro\test\LED_BLK
 
 ####################################################################################################################################################
-# Assegnamenti globali                                                                                                                             #
+# Global assignments                                                                                                                               #
 ####################################################################################################################################################
 
-path_avrgcc     = "avr-gcc.exe"
-path_avrobjcopy = "avr-objcopy.exe"
+absolutePathFile_avrgcc_exe = "avr-gcc"
+absolutePathFile_avrobjcopy = "avr-objcopy"
 
 ####################################################################################################################################################
-# Funzioni Locali                                                                                                                                  #
+# Global Function                                                                                                                                  #
 ####################################################################################################################################################
 
 #Name: cmd_pulisci_output(path_to_delete)
 #Descrizione: cmd_pulisci_output(path_to_delete) elimina i files ".o", ".elf", ".hex" dal path "path_to_delete"
 async def cmd_pulisci_output(path_to_delete):
     for the_file in os.listdir(path_to_delete):
-        if the_file == (project_name + ".o") or the_file == (project_name + ".elf") or the_file == (project_name + ".hex"):
+        file_name, file_ext = os.path.splitext(the_file)
+        if (file_ext == ".o" or the_file == ".elf" or the_file == ".hex") and file_name != "":
             file_path = os.path.join(path_to_delete, the_file)
             if os.path.isfile(file_path):
                 os.unlink(file_path)
@@ -105,19 +109,20 @@ async def cmd_pulisci_output(path_to_delete):
 #Name: cmd_compilazione()
 #Descrizione: cmd_compilazione() compila i files contenuti in "avrdude_path_file_main_c" e genera i file di output: "avrdude_filepath_o", "avrdude_filepath_elf", "avrdude_filepath_hex"
 def cmd_compilazione():
-    print (path_avrgcc + " " + avrdude_path_file_main_c + avrdude_list_of_other_pathFiles + " -I " + avrdude_path_directory_root_project + " -g" + " -Os" + " -mmcu=" + avrdude_microcontroller_name  + " -o " + avrdude_filepath_o)
-    os.system(path_avrgcc + " " + avrdude_path_file_main_c + avrdude_list_of_other_pathFiles + " -I " + avrdude_path_directory_root_project + " -g" + " -Os" + " -mmcu=" + avrdude_microcontroller_name  + " -o " + avrdude_filepath_o)
-    print (path_avrgcc + " " + avrdude_path_file_main_c + avrdude_list_of_other_pathFiles + " -I " + avrdude_path_directory_root_project + " -Os" + " -mmcu=" + avrdude_microcontroller_name + " -o " + avrdude_filepath_elf)
-    os.system(path_avrgcc + " " + avrdude_path_file_main_c + avrdude_list_of_other_pathFiles + " -I " + avrdude_path_directory_root_project + " -Os" + " -mmcu=" + avrdude_microcontroller_name + " -o " + avrdude_filepath_elf)
-    print (path_avrobjcopy + " " + "-j" + " .text" + " -j" + ".data " + "-O " + "ihex " + avrdude_filepath_elf + " " + avrdude_filepath_hex)
-    os.system(path_avrobjcopy + " " + "-j" + " .text" + " -j" + ".data " + "-O " + "ihex " + avrdude_filepath_elf + " " + avrdude_filepath_hex)
+    print (absolutePathFile_avrgcc_exe + " " + avrgcc_listof_absolutePathFile_FilesToBuild + " -I " + sysArg_absolutePathDirectory_Project + " -g" + " -Os" + " -mmcu=" + sysArg_microcotrollerName  + " -o " + avrdude_filepath_o)
+    os.system(absolutePathFile_avrgcc_exe + " "  + avrgcc_listof_absolutePathFile_FilesToBuild + " -I " + sysArg_absolutePathDirectory_Project + " -g" + " -Os" + " -mmcu=" + sysArg_microcotrollerName  + " -o " + avrdude_filepath_o)
+    print (absolutePathFile_avrgcc_exe + " " + avrgcc_listof_absolutePathFile_FilesToBuild + " -I " + sysArg_absolutePathDirectory_Project + " -Os" + " -mmcu=" + sysArg_microcotrollerName + " -o " + avrdude_filepath_elf)
+    os.system(absolutePathFile_avrgcc_exe + " " + avrgcc_listof_absolutePathFile_FilesToBuild + " -I " + sysArg_absolutePathDirectory_Project + " -Os" + " -mmcu=" + sysArg_microcotrollerName + " -o " + avrdude_filepath_elf)
+    print (absolutePathFile_avrobjcopy + " " + "-j" + " .text" + " -j" + ".data " + "-O " + "ihex " + avrdude_filepath_elf + " " + avrdude_filepath_hex)
+    os.system(absolutePathFile_avrobjcopy + " " + "-j" + " .text" + " -j" + ".data " + "-O " + "ihex " + avrdude_filepath_elf + " " + avrdude_filepath_hex)
     return 1
 
 ####################################################################################################################################################
 # Logica                                                                                                                                           #
 ####################################################################################################################################################
-
-asyncio.run(cmd_pulisci_output(directorypath_output_files))
+if not os.path.exists(absolutePathDirectory_outputBuildFiles):
+    os.mkdir(absolutePathDirectory_outputBuildFiles)
+asyncio.run(cmd_pulisci_output(absolutePathDirectory_outputBuildFiles))
 cmd_compilazione()
 
 
