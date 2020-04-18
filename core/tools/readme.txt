@@ -4,14 +4,7 @@ TO-DO:
 	L'utilità è quella di testare e debuggare tutti gli script python scorrelando tale funzionalità dalla GUI.exe
 	Lo script dovrà avere qualche comando e guida all'utilizzo.
 
--AVR_build_c_file.py
-	Il problema di principale da risolvere è che in fase di compilazione è necessario ricevere come input tutti i file da compilare,
-	in particolare tutti i files .c e .h
-	
-	Il primo passo da provare è il seguente: PASSAGGIO DI PARAMETRI VARIABILI
-	é possibile modificare lo script in modo da avere un passaggio di parametri variabile che dipende dal numero di files .c e .h
-	
-	Come prima cosa proverei a passare un numero variabile di files .c e a metterli in coda
+
 
 
 Comandi per compilare 2 file ".c" e un file ".h"
