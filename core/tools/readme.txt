@@ -1,1 +1,1 @@
-paperino
+obama
