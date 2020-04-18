@@ -9,8 +9,8 @@ import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-to
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { ElectronService } from 'ngx-electron';
-import { BrowserWindow, OpenDialogOptions } from 'electron';
-import { CommonMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
+import { MainProcessMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
+
 
 @Component({
   selector: "app-home",
@@ -18,21 +18,12 @@ import { CommonMethods } from '../../../../../core/models/typeScript/RenderToMai
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent {
-  // proprietà che è vera se è presente almeno una configurazione del gpt (di qualsiasi tipo) nel driverService per abilitazione tasto wizard
-  get thereAreGptConfigurations(): boolean {
-    if (this.driverService.gptDriverConfiguration.length) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   get gptConfigurationsLength() {
     return this.driverService.gptDriverConfiguration.length;
   }
   get fuseBitConfigurationLength() {
     return this.driverService.fuseBitConfiguration.length;
   }
-
   get microcontroller(): Microcontroller {
     return this.driverService.microcontrollerSelected;
   }
@@ -59,9 +50,9 @@ export class HomeComponent {
    */
   onMicroSelected(evt: MatSelectChange):void {
     this.driverService.clearAllConfigurations();
-    this.driverService.microcontrollerSelected = evt.value; 
+    this.driverService.microcontrollerSelected = evt.value;
   }
-  
+
   /**
    * Evento scatenato al passagio del mouse sopra l'immagine
    */
@@ -74,10 +65,9 @@ export class HomeComponent {
     });
   }
 
-  /*
-   * eventi su tasti slider ** isEdit è passato true solo nel caso in cui vine premuto il tasto per la modifica
+  /**
+   * Slider Driver Gpt
    */
-  // su driver gpt //
   onGptDriverSwitched(evt?: MatSlideToggleChange, isEdit?: boolean):void {
     // se lo slider virene acceso
     if (isEdit || evt.checked) {
@@ -99,7 +89,10 @@ export class HomeComponent {
       this.driverService.gptDriverConfiguration = [];
     }
   }
-  // su fuse bit
+
+  /**
+   * Slider fuse bit
+   */
   onFuseSwitched(evt?: MatSlideToggleChange, isEdit?: boolean):void {
     if (isEdit || evt.checked) {
       const dialogRef = this.dialog.open(FuseBitComponent, {
@@ -121,10 +114,11 @@ export class HomeComponent {
   }
 
   /**
-   * Compilazione di un file .C preso localmente dalla propria macchina 
+   * Compilazione di un file .C preso localmente dalla propria macchina
    */
-  selectAndCompileCFile() {
-    this.electronService.ipcRenderer.send(CommonMethods.openDialog);
+  selectAndCompileCProject() {
+    let microcontrollerName = this.driverService.microcontrollerSelected.name;
+    this.electronService.ipcRenderer.send(MainProcessMethods.compileCProject, microcontrollerName);
   }
 
 }

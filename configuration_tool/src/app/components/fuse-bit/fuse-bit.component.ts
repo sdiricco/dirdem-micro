@@ -6,7 +6,7 @@ import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { ElectronService } from 'ngx-electron';
-import { ScriptMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
+import { MainProcessMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
 
 @Component({
   selector: 'app-fuse-bit',
@@ -18,8 +18,8 @@ export class FuseBitComponent {
   displayedColumns: string[] = [];
   dataSource: FuseBit[][] = [];
 
-  constructor(private electronService: ElectronService, dialogRef: MatDialogRef<FuseBitComponent>,  
-    private driverService: DriverService, private cd: ChangeDetectorRef, private toastr: ToastrService, 
+  constructor(private electronService: ElectronService, dialogRef: MatDialogRef<FuseBitComponent>,
+    private driverService: DriverService, private cd: ChangeDetectorRef, private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
     // se già presente una configurazione viene caricata dai dati nel servizio
     if (this.driverService.fuseBitConfiguration.length) {
@@ -41,15 +41,13 @@ export class FuseBitComponent {
   /**
    * Setta i fuse bit sul microcontrollore
    */
-  setFuses() { 
-    let microLabel = 'm32';
+  setFuses() {
+    let microLabel = this.driverService.microcontrollerSelected.avrLabel;
     let programmer = 'usbasp';
     let lowFuse = '0x' + this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.LOW).hexValue;
     let highFuse = '0x' +this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.HIGH).hexValue;
 
-    let params = [microLabel, programmer, lowFuse, highFuse];    
-    
-    this.electronService.ipcRenderer.send(ScriptMethods.burnFuses, params);
+    this.electronService.ipcRenderer.send(MainProcessMethods.burnFuses, [microLabel, programmer, lowFuse, highFuse]);
   };
 
   /**
@@ -81,7 +79,7 @@ export class FuseBitComponent {
     fuse.hexValue = hexNumber;
     for (let i = 0; i < fuse.bits.length; i++) {
       var newBitValue = newBitsValue[i];
-      fuse.bits[i].value = newBitValue;   // vengono cambiati i singoli bit nella configurazione del driverService         
+      fuse.bits[i].value = newBitValue;   // vengono cambiati i singoli bit nella configurazione del driverService
     }
   }
 }

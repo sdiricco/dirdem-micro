@@ -1,8 +1,5 @@
-export enum ScriptMethods {
-    burnFuses = 'burnFuses',
-    burnUnoBootloader = 'burnUnoBootloader'
-}
-
-export enum CommonMethods {
-    openDialog = 'openDialog'
+export enum MainProcessMethods {
+    burnFuses = 'burn-fuses',
+    burnUnoBootloader = 'burn-arduino-uno-bootloader',
+    compileCProject = 'compile-c-project'
 }
