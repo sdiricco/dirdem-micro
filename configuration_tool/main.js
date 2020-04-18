@@ -60,12 +60,8 @@ ipcMain.on('burn-fuses', (event, arg) => {
 /**
  * Carica il bootloader di Aruino UNO su ATmega328
  */
-ipcMain.on('burn-arduino-uno-bootloader', (event, arg) => {
-  console.log(arg);
-  PythonShell.run('burn_uno_bootloader.py', pyShellOptions, (err, results) => {
-    if (err) throw err;
-    console.log('results: %j', results);
-  })
+ipcMain.on('burn-arduino-uno-bootloader', function (event, arg) {
+
 })
 
 /**
@@ -77,7 +73,7 @@ ipcMain.on('compile-c-project', (event, microcontrollerName) => {
   pyShellOptions['args'] = [microcontrollerName, dirPath];
   PythonShell.run('AVR_build_c_file.py', pyShellOptions, (err, results) => {
     if (err) throw err;
-    console.log('results: %j', results);
+    console.log(results);
   })
 })
 
