@@ -1,13 +1,9 @@
-// const { spawn } = require('child_process');
-// const path = require('path');
-// const child_process = require('child_process');
 const { app, BrowserWindow, electron } = require('electron');
 const { ipcMain } = require('electron');
 const { PythonShell } = require('python-shell');
 const { dialog } = require('electron')
-// const ScriptMethods = require('../core/models/typeScript/ScriptMethods').ScriptMethods
 
-var pyShellOptions = 
+var pyShellOptions =
 {
   mode: 'text',
   pythonPath: 'py',
@@ -52,36 +48,19 @@ app.on('activate', () => {
 /**
  * Carica i Fuse bit nel microcontrollore
  */
-ipcMain.on('burnFuses', (event, args) => {
-  /*
-  pyShellOptions['args'] = args;
-  let pyshell = new PythonShell('AVR_flash_fuses_byte.py', pyShellOptions);
-  //pyshell.send(arg);
-  pyshell.on('message', function (message) {
-    // received a message sent from the Python script (a simple "print" statement)
-    console.log(message);
-  });
-  pyshell.end(function (err,code,signal) {
-    if (err) throw err;
-    console.log('The exit code was: ' + code);
-    console.log('The exit signal was: ' + signal);
-    console.log('finished');
-    console.log('finished');
-  });
-  */
-
-  pyShellOptions['args'] = args;
+ipcMain.on('burn-fuses', (event, arg) => {
+  pyShellOptions['args'] = arg;
   console.log(pyShellOptions);
   PythonShell.run('AVR_flash_fuses_byte.py', pyShellOptions, (err, results) => {
     if (err) throw err;
     console.log(results);
   })
-});
+})
 
 /**
  * Carica il bootloader di Aruino UNO su ATmega328
  */
-ipcMain.on('burnUnoBootloader', (event, arg) => {
+ipcMain.on('burn-arduino-uno-bootloader', (event, arg) => {
   console.log(arg);
   PythonShell.run('burn_uno_bootloader.py', pyShellOptions, (err, results) => {
     if (err) throw err;
@@ -89,21 +68,17 @@ ipcMain.on('burnUnoBootloader', (event, arg) => {
   })
 })
 
-/** 
- * Apre la finestra di selezione per un file .C da compilare 
+/**
+ * Apre la finestra per selezione di una cartella e compilazione del progetto al suo interno
  */
-ipcMain.on('openDialog', (event, arg) => {
-  // let win = new BrowserWindow({ width: 800, height: 600 });
-  let options = {
-    title : "Seleziona un file .C da compilare", 
-    defaultPath : "C:\\",
-    buttonLabel : "Custom button",
-    properties: ['openFile','multiSelections']
-   }
-
-  dialog.showOpenDialog(null, options, (filePaths) => {
-    console.log(filePaths);
-  });
+ipcMain.on('compile-c-project', (event, microcontrollerName) => {
+  const options = { properties: ['openDirectory'] };
+  const dirPath = dialog.showOpenDialogSync(options)[0];
+  pyShellOptions['args'] = [microcontrollerName, dirPath];
+  PythonShell.run('AVR_build_c_file.py', pyShellOptions, (err, results) => {
+    if (err) throw err;
+    console.log('results: %j', results);
+  })
 })
 
 

@@ -1,10 +1,4 @@
-
-avrdude.exe: warning: cannot set sck period. please check for usbasp firmware update.
-avrdude.exe: error: program enable: target doesn't answer. 1 
-avrdude.exe: initialization failed, rc=-1
-             Double check connections and try again, or use -F to override
-             this check.
-
+avrdude.exe: error: could not find USB device with vid=0x16c0 pid=0x5dc vendor='www.fischl.de' product='USBasp'
 
 avrdude.exe done.  Thank you.
 

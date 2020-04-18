@@ -1,56 +1,52 @@
-##############################
-#           DIRDEM           #
-##############################
-
 #Name: AVR_flash_hex_file.py
-#Author: Simone Di Ricco
-#Changes
-#05/04/2020: Creazione
-#18/04/2020: https://udirderm.atlassian.net/browse/DIR-24, https://udirderm.atlassian.net/browse/DIR-25
+#Autore:
+#Modifiche 05/04/2020: Creazione
+#TO-DO: 
+#Aggiungere un comando di erase della memoria prima del flash 
+#Creare un file contenente i path dei tool in modo tale di averli esterni e facilmente manutenibili
+#Questa soluzione permette pure di eliminare i path dei tool nel caso si decidesse di usare le variabili di ambiente
 
 ####################################################################################################################################################
-# Import                                                                                                                             #
+# Import globali                                                                                                                             #
 ####################################################################################################################################################
 
 import os
 import sys
+<<<<<<< HEAD
 from AVR_pathTool import absolutePathFile_avrdude_exe
+=======
+>>>>>>> 904403b23e7356494223f811d5b5ec133d5f1c12
 
 ####################################################################################################################################################
-# Global variables                                                                                                                              #
+# Variabili globali                                                                                                                                #
 ####################################################################################################################################################
 
 ####################################################################################################################################################
-# Ext Args                                                                                                                             #
+# Paramentri Esterni                                                                                                                               #
 ####################################################################################################################################################
-sysArg_microcontrollerTag        = sys.argv[1]
-sysArg_programmer                = sys.argv[2] 
-sysArg_absolutePathFile_file_hex = sys.argv[3]
+microcontroller_tag = sys.argv[1]
+programmer = sys.argv[2] 
+file_hex = sys.argv[3]
 
-print("\nThe arguments passed are:")
-print("sys.argv[1] = sysArg_microcontrollerTag: " + sysArg_microcontrollerTag)
-print("sys.argv[2] = sysArg_programmer: " + sysArg_programmer)
-print("sys.argv[3] = sysArg_absolutePathFile_file_hex: " + sysArg_absolutePathFile_file_hex + "\n")
-
-#Example:
-# sysArg_microcontrollerTag: m32
-# sysArg_programmer: usbasp
-# sysArg_absolutePathFile_file_hex: C:\Repository\dirdem-micro\builds\c_file/LEDblink.hex
-#
+#Esempio:
+# microcontroller_tag: m32
+# programmer: usbasp
+# file_hex: C:\Repository\dirdem-micro\builds\c_file/LEDblink.hex
+# lanciare il seguente comando, il quale chiamerà lo script "AVR_flash_hex_file.py" con i paramentri impostati sopra dall'esempio.
 # >>> AVR_flash_hex_file.py m32 usbasp C:\Repository\dirdem-micro\builds\c_file/LEDblink.hex
 
 ####################################################################################################################################################
-# Global assignments                                                                                                                         #
+# Assegnamenti globali                                                                                                                             #
 ####################################################################################################################################################
-argsFlashHexFile_avrdude     = " -c " + sysArg_programmer + " -p " +  sysArg_microcontrollerTag + " -U " + "flash:w:" + sysArg_absolutePathFile_file_hex + ":i"
+path_avrdude    = "..\\..\\avrdude\\avrdude.exe"
+flagsFlash_avrdude      = " -c " + programmer + " -p " +  microcontroller_tag + " -U " + "flash:w:" + file_hex + ":i"
+
 ####################################################################################################################################################
-# Global Functions                                                                                                                                  #
+# Funzioni Locali                                                                                                                                  #
 ####################################################################################################################################################
 
 ####################################################################################################################################################
-# Script                                                                                                                                        #
+# Logica                                                                                                                                           #
 ####################################################################################################################################################
-print("Calling AVRDUDE..")
-print(absolutePathFile_avrdude_exe + argsFlashHexFile_avrdude)
-os.system(absolutePathFile_avrdude_exe + argsFlashHexFile_avrdude)
-print("End Process")
+print("Calling AVRDUDE..\n>>>" + path_avrdude + flagsFlash_avrdude)
+os.system(path_avrdude + flagsFlash_avrdude)
