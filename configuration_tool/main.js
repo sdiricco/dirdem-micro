@@ -11,7 +11,7 @@ var pyShellOptions =
   pythonOptions: ['-u']
 }
 
-function createWindow () {
+function createWindow() {
   let win = new BrowserWindow({
     width: 1300,
     height: 920,
@@ -46,7 +46,7 @@ app.on('activate', () => {
 // Chiamate che arrivano dal processo di renderig /
 
 /**
- * Carica i Fuse bit nel microcontrollore
+ * Flash dei Fuse bit nel microcontrollore
  */
 ipcMain.on('burn-fuses', (event, arg) => {
   pyShellOptions['args'] = arg;
@@ -54,27 +54,47 @@ ipcMain.on('burn-fuses', (event, arg) => {
   PythonShell.run('AVR_flash_fuses_byte.py', pyShellOptions, (err, results) => {
     if (err) throw err;
     console.log(results);
-  })
+  });
 })
 
 /**
- * Carica il bootloader di Aruino UNO su ATmega328
+ * Flash del bootloader di Aruino UNO su ATmega328
  */
 ipcMain.on('burn-arduino-uno-bootloader', function (event, arg) {
-
-})
-
-/**
- * Apre la finestra per selezione di una cartella e compilazione del progetto al suo interno
- */
-ipcMain.on('compile-c-project', (event, microcontrollerName) => {
-  const options = { properties: ['openDirectory'] };
-  const dirPath = dialog.showOpenDialogSync(options)[0];
-  pyShellOptions['args'] = [microcontrollerName, dirPath];
-  PythonShell.run('AVR_build_c_file.py', pyShellOptions, (err, results) => {
+  const microcontrollerLabel = 'm328p';
+  const bootloaderPath = '../core/bootloaders/arduino/optiboot_atmega328.hex';
+  pyShellOptions['args'] = [microcontrollerLabel, bootloaderPath];
+  PythonShell.run('AVR_burn_c_file.py', pyShellOptions, (err, results) => {
     if (err) throw err;
     console.log(results);
   })
 })
 
+/**
+ * Apre la finestra per selezione di una cartella e compilazione del progetto al suo interno
+ */
+ipcMain.on('compile-c-project', (event, arg) => {
+  const options = { properties: ['openDirectory'] };
+  const dirPath = dialog.showOpenDialogSync(options)[0];
+  arg.push(dirPath);
+  pyShellOptions['args'] = arg;
+  PythonShell.run('AVR_build_c_file.py', pyShellOptions, (err, results) => {
+    if (err) throw err;
+    console.log(results);
+  });
+})
+
+/**
+ * Apre la finestra per la selezione di una cartella, compila il prohetto e carica il file .hex dentro al microcontrollore
+ */
+ipcMain.on('compile-and-burn-c-project', (event, arg) => {
+  const options = { properties: ['openDirectory'] };
+  const dirPath = dialog.showOpenDialogSync(options)[0];
+  arg.push(dirPath);
+  pyShellOptions['args'] = arg;
+  PythonShell.run('AVR_burn_c_file.py', pyShellOptions, (err, results) => {
+    if (err) throw err;
+    console.log(results);
+  });
+})
 

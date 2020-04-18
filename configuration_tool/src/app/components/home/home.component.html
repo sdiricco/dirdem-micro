@@ -1,147 +1,159 @@
-<div id="titleBar">
+<div id="buttonsContainer">
+  <div *ngIf="microcontroller.name">
+    <button mat-raised-button color="primary" (click)="selectAndCompileCProject()" matTooltip="Compile" style="margin-right: 10px;">
+      Compile project
+    </button>
+    <button mat-raised-button color="accent" (click)="selectCompileAndBurnCProject()" matTooltip="Burn">
+      Burn project
+    </button>
+  </div>
+  <div class="d-flex justify-content-end" *ngIf="microcontroller.name">
+    <button mat-raised-button color="primary" (click)="burnArduinoUnoBootloader()" matTooltip="Burn bootloader">
+      Burn Arduino UNO bootloader
+    </button>
+  </div>
 </div>
 
 <div id="microSelection">
-    <h5 class="colorText centerText">Please select one device to start</h5>
-    <mat-form-field appearance="outline">
-        <mat-label>Microcontroller</mat-label>
-        <mat-select [(value)]="microcontroller" (selectionChange)="onMicroSelected($event)">
-            <mat-option *ngFor="let micro of microcontrollers" [value]="micro">
-                {{ micro.name }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <h5 class="colorText centerText">Please select one device to start</h5>
+  <mat-form-field appearance="outline">
+    <mat-label>Microcontroller</mat-label>
+    <mat-select [(value)]="microcontroller" (selectionChange)="onMicroSelected($event)">
+      <mat-option *ngFor="let micro of microcontrollers" [value]="micro">
+        {{ micro.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
+
 
 <!--div che compare solo dopo aver selezionato il microcontrollore-->
 <div *ngIf="microcontroller.name" class="row d-flex" id="microContainer">
-    <div class="col-xl-1 verticalColSpacing"></div>
-    <div class="col-xl-3">
-        <mat-card class="backgroundLightPrimary infoCards">
-            <div class="cardTitle">Technical specifications </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Name:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.name }} </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Family:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.family }} </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Brand:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.brand }} </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Datasheet:</div><a class="col-7 colorAccent"
-                    href="{{ microcontroller.datasheet }}">-> Official datasheet</a>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Pins:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.pins }} </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Total timers:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.totalTimers }} </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Data bus:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.dataBus.size }}
-                    {{ microcontroller.dataBus.measureUnit}} </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Eprom:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.eprom.size }} {{ microcontroller.eprom.measureUnit}}
-                </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Flash:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.flash.size }} {{ microcontroller.flash.measureUnit}}
-                </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Ram:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.ram.size }} {{ microcontroller.ram.measureUnit}}
-                </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> SRam:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.sram.size }} {{ microcontroller.sram.measureUnit}}
-                </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Internal oscillator:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.internalOscillator.value }}
-                    {{ microcontroller.internalOscillator.measureUnit}}
-                    {{ microcontroller.internalOscillator.material }} {{ microcontroller.internalOscillator.type}}
-                </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Min voltage:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.minVoltage.value }}
-                    {{ microcontroller.minVoltage.measureUnit }} </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-5"> Max voltage:</div>
-                <div class="col-7 colorPrimary"> {{ microcontroller.maxVoltage.value }}
-                    {{ microcontroller.maxVoltage.measureUnit }} </div>
-            </div>
-        </mat-card>
-    </div>
-    <div class="col-xl-1 verticalColSpacing"></div>
-    <div class="col-xl-2 d-flex align-items-center justify-content-center">
-        <img src="{{ microcontroller.imageSrc }}" alt="{{ microcontroller.name }}" (click)="showPinout()"
-            class="pointer" matTooltip="Show pinout" id="microImage">
-    </div>
-    <div class="col-xl-1 verticalColSpacing"></div>
-    <div class="col-xl-2 d-flex flex-column justify-content-between">
-        <mat-card class="backgroundLightPrimary infoCards">
-            <div class="cardTitle">Drivers </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-8" [ngClass]="slider1.checked? 'colorAccent' : 'colorText'"> GPT driver</div>
-                <div class="col-2">
-                    <mat-slide-toggle #slider1 (change)="onGptDriverSwitched($event)"></mat-slide-toggle>
-                </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider1.checked" matTooltip="Edit"
-                    (click)="onGptDriverSwitched(null, true)">
-                    <mat-icon [ngClass]="slider1.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
-                </button>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-8" [ngClass]="slider2.checked? 'colorAccent' : 'colorText'"> PWM</div>
-                <div class="col-2">
-                    <mat-slide-toggle #slider2></mat-slide-toggle>
-                </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider2.checked" matTooltip="Edit">
-                    <mat-icon [ngClass]="slider2.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
-                </button>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-8" [ngClass]="slider3.checked? 'colorAccent' : 'colorText'"> Input / output</div>
-                <div class="col-2">
-                    <mat-slide-toggle #slider3></mat-slide-toggle>
-                </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider3.checked" matTooltip="Edit">
-                    <mat-icon [ngClass]="slider3.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
-                </button>
-            </div>
-        </mat-card>
-        <mat-card class="backgroundLightPrimary infoCards">
-            <div class="cardTitle">Fuses</div>
-            <div class="row d-flex align-items-center">
-                <div class="col-8" [ngClass]="slider4.checked? 'colorAccent' : 'colorText'"> <div *ngFor="let fuse of microcontroller.fuses"> {{ fuse.type }} </div> </div>
-                <div class="col-2">
-                    <mat-slide-toggle #slider4 (change)="onFuseSwitched($event)"></mat-slide-toggle>
-                </div>
-                <button mat-icon-button class="col-2" [disabled]="!slider4.checked" matTooltip="Edit"
-                (click)="onFuseSwitched(null, true)">
-                    <mat-icon [ngClass]="slider4.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
-                </button>
-            </div>
-        </mat-card>
-    </div>
-    <div class="col-xl-2"></div>
-
-    <div id="generateConfigButtonDiv">
-        <button mat-raised-button color="accent" (click)="selectAndCompileCProject()" matTooltip="Generate configuration"> Compile project </button>
-    </div>
+  <div class="col-xl-1 verticalColSpacing"></div>
+  <div class="col-xl-3">
+    <mat-card class="backgroundLightPrimary infoCards">
+      <div class="cardTitle">Technical specifications </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Name:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.name }} </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Family:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.family }} </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Brand:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.brand }} </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Datasheet:</div><a class="col-7 colorAccent" href="{{ microcontroller.datasheet }}">->
+          Official datasheet</a>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Pins:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.pins }} </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Total timers:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.totalTimers }} </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Data bus:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.dataBus.size }}
+          {{ microcontroller.dataBus.measureUnit}} </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Eprom:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.eprom.size }} {{ microcontroller.eprom.measureUnit}}
+        </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Flash:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.flash.size }} {{ microcontroller.flash.measureUnit}}
+        </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Ram:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.ram.size }} {{ microcontroller.ram.measureUnit}}
+        </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> SRam:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.sram.size }} {{ microcontroller.sram.measureUnit}}
+        </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Internal oscillator:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.internalOscillator.value }}
+          {{ microcontroller.internalOscillator.measureUnit}}
+          {{ microcontroller.internalOscillator.material }} {{ microcontroller.internalOscillator.type}}
+        </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Min voltage:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.minVoltage.value }}
+          {{ microcontroller.minVoltage.measureUnit }} </div>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-5"> Max voltage:</div>
+        <div class="col-7 colorPrimary"> {{ microcontroller.maxVoltage.value }}
+          {{ microcontroller.maxVoltage.measureUnit }} </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-xl-1 verticalColSpacing"></div>
+  <div class="col-xl-2 d-flex align-items-center justify-content-center">
+    <img src="{{ microcontroller.imageSrc }}" alt="{{ microcontroller.name }}" (click)="showPinout()" class="pointer"
+      matTooltip="Show pinout" id="microImage">
+  </div>
+  <div class="col-xl-1 verticalColSpacing"></div>
+  <div class="col-xl-2 d-flex flex-column justify-content-between">
+    <mat-card class="backgroundLightPrimary infoCards">
+      <div class="cardTitle">Drivers </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-8" [ngClass]="slider1.checked? 'colorAccent' : 'colorText'"> GPT driver</div>
+        <div class="col-2">
+          <mat-slide-toggle #slider1 (change)="onGptDriverSwitched($event)"></mat-slide-toggle>
+        </div>
+        <button mat-icon-button class="col-2" [disabled]="!slider1.checked" matTooltip="Edit"
+          (click)="onGptDriverSwitched(null, true)">
+          <mat-icon [ngClass]="slider1.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+        </button>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-8" [ngClass]="slider2.checked? 'colorAccent' : 'colorText'"> PWM</div>
+        <div class="col-2">
+          <mat-slide-toggle #slider2></mat-slide-toggle>
+        </div>
+        <button mat-icon-button class="col-2" [disabled]="!slider2.checked" matTooltip="Edit">
+          <mat-icon [ngClass]="slider2.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+        </button>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="col-8" [ngClass]="slider3.checked? 'colorAccent' : 'colorText'"> Input / output</div>
+        <div class="col-2">
+          <mat-slide-toggle #slider3></mat-slide-toggle>
+        </div>
+        <button mat-icon-button class="col-2" [disabled]="!slider3.checked" matTooltip="Edit">
+          <mat-icon [ngClass]="slider3.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+    <mat-card class="backgroundLightPrimary infoCards">
+      <div class="cardTitle">Fuses</div>
+      <div class="row d-flex align-items-center">
+        <div class="col-8" [ngClass]="slider4.checked? 'colorAccent' : 'colorText'">
+          <div *ngFor="let fuse of microcontroller.fuses"> {{ fuse.type }} </div>
+        </div>
+        <div class="col-2">
+          <mat-slide-toggle #slider4 (change)="onFuseSwitched($event)"></mat-slide-toggle>
+        </div>
+        <button mat-icon-button class="col-2" [disabled]="!slider4.checked" matTooltip="Edit"
+          (click)="onFuseSwitched(null, true)">
+          <mat-icon [ngClass]="slider4.checked? 'colorAccent' : 'colorText'">edit</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-xl-2"></div>
 </div>

@@ -118,7 +118,23 @@ export class HomeComponent {
    */
   selectAndCompileCProject() {
     let microcontrollerName = this.driverService.microcontrollerSelected.name;
-    this.electronService.ipcRenderer.send(MainProcessMethods.compileCProject, microcontrollerName);
+    this.electronService.ipcRenderer.send(MainProcessMethods.compileCProject, [microcontrollerName]);
+  }
+
+  /**
+   * Compilazione e flash di un file .C preso localmente dalla propria macchina
+   */
+  selectCompileAndBurnCProject() {
+    let microcontrollerLabel = this.driverService.microcontrollerSelected.avrLabel;
+    let microcontrollerName = this.driverService.microcontrollerSelected.name;
+    this.electronService.ipcRenderer.send(MainProcessMethods.compileAndBurnCProject, [microcontrollerName, microcontrollerLabel]);
+  }
+
+  /**
+   * Flash del bootloader di Arduino UNO su microcontrollore ATMega328p
+   */
+  burnArduinoUnoBootloader() {
+    this.electronService.ipcRenderer.send(MainProcessMethods.burnUnoBootloader);
   }
 
 }
