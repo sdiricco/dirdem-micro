@@ -30,6 +30,9 @@ export class HomeComponent {
   set microcontroller(value: Microcontroller) {
     this.driverService.microcontrollerSelected = value;
   }
+  get linkToHexFile(): string {
+    return this.driverService.compiledHexFilePath;
+  }
   // sliders
   @ViewChild("slider1", { static: false }) gptDriverSlider: MatSlideToggle;
   @ViewChild("slider4", { static: false }) fuseBitSlider: MatSlideToggle;

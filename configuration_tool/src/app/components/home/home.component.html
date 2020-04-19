@@ -1,13 +1,17 @@
 <div id="buttonsContainer">
-  <div *ngIf="microcontroller.name">
-    <button mat-raised-button color="primary" (click)="selectAndCompileCProject()" matTooltip="Compile" style="margin-right: 10px;">
+  <div *ngIf="microcontroller.name" style="display: flex; align-items: center;">
+    <button mat-raised-button color="primary" (click)="selectAndCompileCProject()" matTooltip="Compile">
       Compile project
     </button>
-    <button mat-raised-button color="accent" (click)="burnCProject()" matTooltip="Burn">
+    <button mat-raised-button color="accent" (click)="burnCProject()" matTooltip="Burn" style="margin-right: 10px; margin-left: 10px;">
       Burn project
     </button>
+    <!-- link al file .hex compilato dai file .C -->
+    <span id="linkToHexFile" *ngIf="linkToHexFile">
+      {{ linkToHexFile }}
+    </span>
   </div>
-  <div class="d-flex justify-content-end" *ngIf="microcontroller.name">
+  <div class="d-flex justify-content-end" *ngIf="microcontroller.name == 'ATmega328P'">
     <button mat-raised-button color="primary" (click)="burnArduinoUnoBootloader()" matTooltip="Burn bootloader">
       Burn Arduino UNO bootloader
     </button>
