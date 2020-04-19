@@ -119,15 +119,18 @@ export class HomeComponent {
   selectAndCompileCProject() {
     let microcontrollerName = this.driverService.microcontrollerSelected.name;
     this.electronService.ipcRenderer.send(MainProcessMethods.compileCProject, [microcontrollerName]);
+    this.electronService.ipcRenderer.on('compile-response', (evt, arg) => {
+      this.driverService.compiledHexFilePath = arg;
+    });
   }
 
   /**
    * Compilazione e flash di un file .C preso localmente dalla propria macchina
    */
-  selectCompileAndBurnCProject() {
+  burnCProject() {
     let microcontrollerLabel = this.driverService.microcontrollerSelected.avrLabel;
-    let microcontrollerName = this.driverService.microcontrollerSelected.name;
-    this.electronService.ipcRenderer.send(MainProcessMethods.compileAndBurnCProject, [microcontrollerName, microcontrollerLabel]);
+    let hexFilePath = this.driverService.compiledHexFilePath;
+    this.electronService.ipcRenderer.send(MainProcessMethods.burnCProject, [microcontrollerLabel, hexFilePath]);
   }
 
   /**

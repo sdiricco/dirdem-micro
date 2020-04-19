@@ -8,16 +8,17 @@ import { Microcontroller } from '../../../../core/models/typeScript/Microcontrol
   providedIn: 'root'
 })
 export class DriverService {
-  
+
   gptDriverConfiguration: GptDriverConfig [] = [];
   fuseBitConfiguration: Fuse [] = [];
   microcontrollerSelected: Microcontroller = new Microcontroller;
+  compiledHexFilePath: string;
 
   constructor() { }
 
   /**
    * svuota tutte le configurazioni
-   */ 
+   */
   clearAllConfigurations(): void {
     this.gptDriverConfiguration = [];
     this.fuseBitConfiguration = [];

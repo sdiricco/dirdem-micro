@@ -43,11 +43,10 @@ export class FuseBitComponent {
    */
   setFuses() {
     let microLabel = this.driverService.microcontrollerSelected.avrLabel;
-    let programmer = 'usbasp';
     let lowFuse = '0x' + this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.LOW).hexValue;
     let highFuse = '0x' +this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.HIGH).hexValue;
 
-    this.electronService.ipcRenderer.send(MainProcessMethods.burnFuses, [microLabel, programmer, lowFuse, highFuse]);
+    this.electronService.ipcRenderer.send(MainProcessMethods.burnFuses, [microLabel, lowFuse, highFuse]);
   };
 
   /**
