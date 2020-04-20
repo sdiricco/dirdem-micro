@@ -1,15 +1,15 @@
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { Microcontroller } from "../../../../../core/models/typeScript/Microcontroller";
 import { MicroPinoutDialogComponent } from "../micro-pinout-dialog/micro-pinout-dialog.component";
 import { GptCfgConfigComponent } from "../gpt-config/gpt-config.component";
 import { DriverService } from "src/app/services/driver.service";
-import { ToastrService } from "ngx-toastr";
 import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { ElectronService } from 'ngx-electron';
 import { MainProcessMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
+import { MainProcessDataService } from 'src/app/services/main-process-data.service';
 
 
 @Component({
@@ -45,7 +45,7 @@ export class HomeComponent {
     public dialog: MatDialog,
     private driverService: DriverService,
     private electronService: ElectronService,
-    private toast: ToastrService
+    private mainProcessDataService: MainProcessDataService,
   ) { this.microcontrollers = Microcontroller.getMicrocontrollers() };
 
   /**
@@ -120,17 +120,16 @@ export class HomeComponent {
    * Compilazione di un file .C preso localmente dalla propria macchina
    */
   selectAndCompileCProject() {
+    this.mainProcessDataService.isPendingProcess = true;
     let microcontrollerName = this.driverService.microcontrollerSelected.name;
     this.electronService.ipcRenderer.send(MainProcessMethods.compileCProject, [microcontrollerName]);
-    this.electronService.ipcRenderer.on('compile-response', (evt, arg) => {
-      this.driverService.compiledHexFilePath = arg;
-    });
   }
 
   /**
    * Compilazione e flash di un file .C preso localmente dalla propria macchina
    */
   burnCProject() {
+    this.mainProcessDataService.isPendingProcess = true;
     let microcontrollerLabel = this.driverService.microcontrollerSelected.avrLabel;
     let hexFilePath = this.driverService.compiledHexFilePath;
     this.electronService.ipcRenderer.send(MainProcessMethods.burnCProject, [microcontrollerLabel, hexFilePath]);
@@ -140,6 +139,7 @@ export class HomeComponent {
    * Flash del bootloader di Arduino UNO su microcontrollore ATMega328p
    */
   burnArduinoUnoBootloader() {
+    this.mainProcessDataService.isPendingProcess = true;
     this.electronService.ipcRenderer.send(MainProcessMethods.burnUnoBootloader);
   }
 

@@ -32,7 +32,6 @@ import { NgxElectronModule } from 'ngx-electron';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule,
     ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [HttpClientModule],

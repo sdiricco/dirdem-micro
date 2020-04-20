@@ -12,7 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CdkTableModule } from '@angular/cdk/table';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [],
   imports: [
@@ -26,6 +26,7 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatSelectModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatTooltipModule,
     CdkTableModule
@@ -41,6 +42,7 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatSelectModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatTooltipModule,
     CdkTableModule

@@ -4,8 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilities/ConverterUtilities';
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
-import { ToastrService } from 'ngx-toastr';
 import { ElectronService } from 'ngx-electron';
+import { MainProcessDataService } from 'src/app/services/main-process-data.service';
 import { MainProcessMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
 
 @Component({
@@ -19,7 +19,8 @@ export class FuseBitComponent {
   dataSource: FuseBit[][] = [];
 
   constructor(private electronService: ElectronService, dialogRef: MatDialogRef<FuseBitComponent>,
-    private driverService: DriverService, private cd: ChangeDetectorRef, private toastr: ToastrService,
+    private mainProcessDataService: MainProcessDataService,
+    private driverService: DriverService, private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
     // se già presente una configurazione viene caricata dai dati nel servizio
     if (this.driverService.fuseBitConfiguration.length) {
@@ -42,6 +43,7 @@ export class FuseBitComponent {
    * Setta i fuse bit sul microcontrollore
    */
   setFuses() {
+    this.mainProcessDataService.isPendingProcess = true;
     let microLabel = this.driverService.microcontrollerSelected.avrLabel;
     let lowFuse = '0x' + this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.LOW).hexValue;
     let highFuse = '0x' +this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.HIGH).hexValue;

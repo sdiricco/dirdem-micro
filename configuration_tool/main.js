@@ -44,30 +44,47 @@ app.on('activate', () => {
 // Chiamate che arrivano dal processo di renderig /
 
 /**
- * Flash del bootloader di Aruino UNO su ATmega328
+ * Flash bootloader Aruino UNO su ATmega328
  */
 ipcMain.on('burn-arduino-uno-bootloader', (event, arg) => {
   const microcontrollerLabel = 'm328p';
   const bootloaderPath = '../core/bootloaders/arduino/optiboot_atmega328.hex';
 
-  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${microcontrollerLabel} -B 0.5 -v -e -U flash:w:"${bootloaderPath}":a`;
-  executeAsyncProcess(commandLine);
+  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${microcontrollerLabel} -e -U flash:w:"${bootloaderPath}":a`;
+
+  child.exec(commandLine, (err, stdout, stderr) => {
+    if (err) {
+      event.reply('main-process-error', err);
+      return;
+    };
+
+    let response = {stdout: stdout, stderr: stderr};
+    event.reply('bootloader-arduino-uno-flashed', response);
+  });
 })
 
 /**
- * Flash dei Fuse bit nel microcontrollore
+ * Flash fuse bit
  */
 ipcMain.on('burn-fuses', (event, arg) => {
   const microLabel = arg[0];
   const lowFuse = arg[1];
   const highFuse = arg[2];
 
-  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${microLabel} -B 0.5 -i 5 -U lfuse:w:${lowFuse}:m -U hfuse:w:${highFuse}:m`;
-  executeAsyncProcess(commandLine);
+  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${microLabel} -U lfuse:w:${lowFuse}:m -U hfuse:w:${highFuse}:m`;
+
+  child.exec(commandLine, (err, stdout, stderr) => {
+    if (err) {
+      event.reply('main-process-error', err);
+      return;
+    }
+    let response = { stdout: stdout, stderr: stderr };
+    event.reply('fuse-flashed', response);
+  });
 })
 
 /**
- * Apre la finestra per selezione di una cartella e compilazione del progetto al suo interno
+ * Compilazione progetto con files .c
  */
 ipcMain.on('compile-c-project', (event, arg) => {
   const microName = arg[0];
@@ -79,41 +96,34 @@ ipcMain.on('compile-c-project', (event, arg) => {
   clearOutputFolder(outputFolderPath);
   findCFiles(projectPath).then(filePathToBuild => {
     compileCFiles(filePathToBuild, projectPath, microName, outputFolderPath).then(compileOutput => {
-      event.reply('compile-response', `${path.join(outputFolderPath, 'build.hex')}`);
+      let response = { fileOutput: `${path.join(outputFolderPath, 'build.hex')}`, compileOutput: compileOutput };
+      event.reply('compile-response', response);
     }, rej => {
-      console.error(rej);
+      event.reply('main-process-error', rej);
     });
   }, reject => {
-    console.error(reject);
+    event.reply('main-process-error', reject);
   })
 })
 
 /**
- * Apre la finestra per la selezione di una cartella, compila il prohetto e carica il file .hex dentro al microcontrollore
+ * Flash del file .hex compilato
  */
 ipcMain.on('burn-c-project', (event, arg) => {
   const microLabel = arg[0];
   const hexFilePath = arg[1];
 
   const commandLine = `avrdude -c ${USB_PROGRAMMER} -p ${microLabel} -U flash:w:${hexFilePath}:i`;
-  executeAsyncProcess(commandLine);
-})
 
-
-/**
- * @param {*} command
- * Esegue un processo asincrono dalla console di Nodejs
- */
-function executeAsyncProcess(command) {
-  child.exec(command, (err, stdout, stderr) => {
+  child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      console.error(err);
+      event.reply('main-process-error', err);
       return;
     }
-    console.log(stdout);
-    console.log(stderr);
+    let response = { stdout: stdout, stderr: stderr };
+    event.reply('hex-flashed', response);
   });
-};
+})
 
 /**
  * Cerca i file .c ricorsivamente in un dato percorso e li trasforma in stringa (path separati da spazi)
@@ -146,19 +156,19 @@ function compileCFiles(filePathsToBuild, projectPath, microName, outputFolderPat
 
     return new Promise((resolve, reject) => {
       try {
-        var res1 = child.execSync(createObjFile);
+        var res1 = child.execSync(createObjFile).toString();
       } catch (error) {
         reject(error);
       }
 
       try {
-        var res2 = child.execSync(createElfFile);
+        var res2 = child.execSync(createElfFile).toString();
       } catch (error) {
         reject(error);
       }
 
       try {
-        var res3 = child.execSync(createHexFile);
+        var res3 = child.execSync(createHexFile).toString();
       } catch (error) {
         reject(error);
       }
@@ -185,5 +195,4 @@ function clearOutputFolder (outputFolderPath) {
       }
     }
   };
-
 }

@@ -1,3 +1,7 @@
 <app-home></app-home>
-<!--gpt-cfg></gpt-cfg-->
+
 <router-outlet></router-outlet>
+
+<div id="spinner" *ngIf="showSpinner">
+  <mat-spinner></mat-spinner>
+</div>
