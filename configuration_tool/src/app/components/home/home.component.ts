@@ -8,9 +8,9 @@ import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-to
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { ElectronService } from 'ngx-electron';
-import { MainProcessMethods } from '../../../../../core/models/typeScript/RenderToMainMethods';
-import { MainProcessDataService } from 'src/app/services/main-process-data.service';
-
+import { MAIN_IN_PROCESSES } from '../../../../../core/models/typeScript/MainProcesses'
+import { Overlay } from '@angular/cdk/overlay';
+import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 
 @Component({
   selector: "app-home",
@@ -45,7 +45,8 @@ export class HomeComponent {
     public dialog: MatDialog,
     private driverService: DriverService,
     private electronService: ElectronService,
-    private mainProcessDataService: MainProcessDataService,
+    private loaderService: LoaderService,
+    private overlay: Overlay,
   ) { this.microcontrollers = Microcontroller.getMicrocontrollers() };
 
   /**
@@ -61,6 +62,7 @@ export class HomeComponent {
    */
   showPinout() {
     const dialogRef = this.dialog.open(MicroPinoutDialogComponent, {
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
       data: null
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -76,6 +78,7 @@ export class HomeComponent {
     if (isEdit || evt.checked) {
       const dialogRef = this.dialog.open(GptCfgConfigComponent, {
         width: "920px",
+        scrollStrategy: this.overlay.scrollStrategies.noop(),
         data: null
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -100,6 +103,7 @@ export class HomeComponent {
     if (isEdit || evt.checked) {
       const dialogRef = this.dialog.open(FuseBitComponent, {
         width: "920px",
+        scrollStrategy: this.overlay.scrollStrategies.noop(),
         data: this.microcontroller.fuses // passo al dialog le informazioni sui fuse bit
       })
       dialogRef.afterClosed().subscribe(result => {
@@ -120,27 +124,27 @@ export class HomeComponent {
    * Compilazione di un file .C preso localmente dalla propria macchina
    */
   selectAndCompileCProject() {
-    this.mainProcessDataService.isPendingProcess = true;
+    this.loaderService.updateProcess(ProcessStatus.pending);
     let microcontrollerName = this.driverService.microcontrollerSelected.name;
-    this.electronService.ipcRenderer.send(MainProcessMethods.compileCProject, [microcontrollerName]);
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.compileCProject, [microcontrollerName]);
   }
 
   /**
    * Compilazione e flash di un file .C preso localmente dalla propria macchina
    */
   burnCProject() {
-    this.mainProcessDataService.isPendingProcess = true;
+    this.loaderService.updateProcess(ProcessStatus.pending);
     let microcontrollerLabel = this.driverService.microcontrollerSelected.avrLabel;
     let hexFilePath = this.driverService.compiledHexFilePath;
-    this.electronService.ipcRenderer.send(MainProcessMethods.burnCProject, [microcontrollerLabel, hexFilePath]);
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnHexFile, [microcontrollerLabel, hexFilePath]);
   }
 
   /**
    * Flash del bootloader di Arduino UNO su microcontrollore ATMega328p
    */
   burnArduinoUnoBootloader() {
-    this.mainProcessDataService.isPendingProcess = true;
-    this.electronService.ipcRenderer.send(MainProcessMethods.burnUnoBootloader);
+    this.loaderService.updateProcess(ProcessStatus.pending);
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnArduinoUnoBootloader);
   }
 
 }

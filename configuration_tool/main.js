@@ -2,10 +2,13 @@
 const { app, BrowserWindow } = require('electron');
 const { ipcMain } = require('electron');
 const { dialog } = require('electron');
+var glob = require("glob")
 const child = require('child_process');
 const fs = require('fs');
 const path = require('path');
-var glob = require("glob")
+const MAIN_IN_PROCESSES = require('../core/models/javascript/MainProcesses').MAIN_IN_PROCESSES;
+const MAIN_OUT_PROCESSES = require('../core/models/javascript/MainProcesses').MAIN_OUT_PROCESSES;
+
 
 const USB_PROGRAMMER = 'usbasp;'
 
@@ -46,7 +49,7 @@ app.on('activate', () => {
 /**
  * Flash bootloader Aruino UNO su ATmega328
  */
-ipcMain.on('burn-arduino-uno-bootloader', (event, arg) => {
+ipcMain.on(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, (event, arg) => {
   const microcontrollerLabel = 'm328p';
   const bootloaderPath = '../core/bootloaders/arduino/optiboot_atmega328.hex';
 
@@ -54,19 +57,18 @@ ipcMain.on('burn-arduino-uno-bootloader', (event, arg) => {
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      event.reply('main-process-error', err);
+      event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
       return;
     };
-
     let response = {stdout: stdout, stderr: stderr};
-    event.reply('bootloader-arduino-uno-flashed', response);
+    event.reply(MAIN_OUT_PROCESSES.burnArduinoUnoBootloaderCompleted, response);
   });
 })
 
 /**
  * Flash fuse bit
  */
-ipcMain.on('burn-fuses', (event, arg) => {
+ipcMain.on(MAIN_IN_PROCESSES.burnFuse, (event, arg) => {
   const microLabel = arg[0];
   const lowFuse = arg[1];
   const highFuse = arg[2];
@@ -75,41 +77,47 @@ ipcMain.on('burn-fuses', (event, arg) => {
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      event.reply('main-process-error', err);
+      event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
       return;
     }
     let response = { stdout: stdout, stderr: stderr };
-    event.reply('fuse-flashed', response);
+    event.reply(MAIN_OUT_PROCESSES.burnFuseCompleted, response);
   });
 })
 
 /**
  * Compilazione progetto con files .c
  */
-ipcMain.on('compile-c-project', (event, arg) => {
+ipcMain.on(MAIN_IN_PROCESSES.compileCProject, (event, arg) => {
   const microName = arg[0];
   const options = { properties: ['openDirectory'] };
-  const projectPath = dialog.showOpenDialogSync(options)[0];
-  const outputFolderName = 'output';
-  const outputFolderPath = path.join(projectPath, outputFolderName);
+
+  try {
+    var projectPath = dialog.showOpenDialogSync(options)[0];
+  } catch (error) {
+    event.reply(MAIN_OUT_PROCESSES.mainProcessError, error);
+    return;
+  }
+
+  const outputFolderPath = path.join(projectPath, 'output');
 
   clearOutputFolder(outputFolderPath);
   findCFiles(projectPath).then(filePathToBuild => {
     compileCFiles(filePathToBuild, projectPath, microName, outputFolderPath).then(compileOutput => {
       let response = { fileOutput: `${path.join(outputFolderPath, 'build.hex')}`, compileOutput: compileOutput };
-      event.reply('compile-response', response);
-    }, rej => {
-      event.reply('main-process-error', rej);
+      event.reply(MAIN_OUT_PROCESSES.compileCProjectCompleted, response);
+    }, rej1 => {
+      event.reply(MAIN_OUT_PROCESSES.mainProcessError, rej1);
     });
-  }, reject => {
-    event.reply('main-process-error', reject);
+  }, rej2 => {
+    event.reply(MAIN_OUT_PROCESSES.mainProcessError, rej2);
   })
 })
 
 /**
  * Flash del file .hex compilato
  */
-ipcMain.on('burn-c-project', (event, arg) => {
+ipcMain.on(MAIN_IN_PROCESSES.burnHexFile, (event, arg) => {
   const microLabel = arg[0];
   const hexFilePath = arg[1];
 
@@ -117,11 +125,11 @@ ipcMain.on('burn-c-project', (event, arg) => {
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      event.reply('main-process-error', err);
+      event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
       return;
     }
     let response = { stdout: stdout, stderr: stderr };
-    event.reply('hex-flashed', response);
+    event.reply(MAIN_OUT_PROCESSES.burnHexFileCompleted, response);
   });
 })
 

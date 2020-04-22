@@ -34,7 +34,7 @@ body {
   justify-content: center;
   background-color: var(--lightPrimary);
   opacity: 0.5;
-  z-index: 999;
+  z-index: 9999999;
 }
 
 /* per nascondere barra laterale scrolling quando compare il popup */
