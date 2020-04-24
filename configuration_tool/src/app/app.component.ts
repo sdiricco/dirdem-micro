@@ -29,7 +29,7 @@ export class AppComponent implements OnInit{
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.mainProcessError, (evt, err) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       console.log(err);
-      window.alert('Error');
+      window.alert(err);
     });
     /**
      * Sottoscrizione alla compilazione di un progetto contentente file .C
@@ -37,7 +37,6 @@ export class AppComponent implements OnInit{
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.compileCProjectCompleted, (evt, arg) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       this.driverService.compiledHexFilePath = arg.fileOutput;
-      let output = arg.compileOutput;
       if (this.driverService.compiledHexFilePath) {
         window.alert('Compiled done successfully!');
       }
