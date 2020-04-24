@@ -83,6 +83,14 @@ export class FuseBitComponent {
       fuse.bits[i].value = newBitValue;   // vengono cambiati i singoli bit nella configurazione del driverService
     }
   }
+
+  /**
+  * Evento scatento sul click degli input nel footer
+  */
+  onFooterInputClick() {
+    var el = <HTMLInputElement>document.getElementById('footerInput');
+    // el.focus();
+  }
 }
 
 

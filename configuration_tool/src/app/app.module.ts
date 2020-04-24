@@ -13,6 +13,7 @@ import { GptCfgConfigComponent } from './components/gpt-config/gpt-config.compon
 import { MaterialModule } from './modules/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxElectronModule } from 'ngx-electron';
+import { LogMessageComponent } from './components/log-message/log-message.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { NgxElectronModule } from 'ngx-electron';
     GptCfgConfigComponent,
     HomeComponent,
     MicroPinoutDialogComponent,
-    FuseBitComponent
+    FuseBitComponent,
+    LogMessageComponent
   ],
   imports: [
     BrowserModule,

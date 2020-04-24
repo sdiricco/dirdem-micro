@@ -16,8 +16,8 @@
     </td>
     <!-- footer -->
     <td mat-footer-cell *matFooterCellDef class="footerCells">
-      <div class="flexDisplay"> 0X<input matInput [(ngModel)]="column.footer"
-          (ngModelChange)="onFooterChange($event, column.header)"> </div>
+      <div class="flexDisplay"> 0X<input matInput [(ngModel)]="column.footer" id="footerInput"
+          (ngModelChange)="onFooterChange($event, column.header)" (click)="onFooterInputClick()"> </div>
     </td>
   </ng-container>
 

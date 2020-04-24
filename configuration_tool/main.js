@@ -23,7 +23,7 @@ function createWindow() {
     },
   })
   win.loadFile('./dist/index.html')
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null
@@ -52,7 +52,7 @@ app.on('activate', () => {
  */
 ipcMain.on(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, (event, arg) => {
   const microcontrollerLabel = 'm328p';
-  const bootloaderPath = '../core/bootloaders/arduino/optiboot_atmega328.hex';
+  const bootloaderPath = './core/bootloaders/arduino/optiboot_atmega328.hex';
 
   const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${microcontrollerLabel} -e -U flash:w:"${bootloaderPath}":a`;
 

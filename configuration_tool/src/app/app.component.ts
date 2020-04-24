@@ -3,6 +3,7 @@ import { ElectronService } from 'ngx-electron';
 import { DriverService } from './services/driver.service';
 import { LoaderService, ProcessStatus } from './services/loader.service';
 import { MAIN_OUT_PROCESSES } from 'core/models/typeScript/MainProcesses';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,10 @@ import { MAIN_OUT_PROCESSES } from 'core/models/typeScript/MainProcesses';
 export class AppComponent implements OnInit{
   title = 'driver-config';
   showSpinner: boolean = false;
+  logMessage: string;
 
-  constructor(private electronService: ElectronService, private driverService: DriverService, private cdr: ChangeDetectorRef, private loaderService: LoaderService) { }
+  constructor(private electronService: ElectronService, private driverService: DriverService, 
+    private cdr: ChangeDetectorRef, private loaderService: LoaderService, private toastr: ToastrService) { }
 
   ngOnInit() {
     /**
@@ -28,8 +31,8 @@ export class AppComponent implements OnInit{
      */
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.mainProcessError, (evt, err) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
-      console.log(err);
-      window.alert(err);
+      this.logMessage = err;
+      this.cdr.detectChanges();
     });
     /**
      * Sottoscrizione alla compilazione di un progetto contentente file .C
@@ -38,7 +41,8 @@ export class AppComponent implements OnInit{
       this.loaderService.updateProcess(ProcessStatus.complete);
       this.driverService.compiledHexFilePath = arg.fileOutput;
       if (this.driverService.compiledHexFilePath) {
-        window.alert('Compiled done successfully!');
+        this.logMessage = 'Compiled done successfully!';
+        this.cdr.detectChanges();
       }
     });
     /**
@@ -49,7 +53,8 @@ export class AppComponent implements OnInit{
       let stdout = arg.stdout;
       let stderr = arg.stderr;
       if (stdout || stderr) {
-        window.alert('Hex file flashed!');
+        this.logMessage = 'Hex file flashed!';
+        this.cdr.detectChanges();
       }
     });
     /**
@@ -60,7 +65,8 @@ export class AppComponent implements OnInit{
       let stdout = arg.stdout;
       let stderr = arg.stderr;
       if (stdout || stderr) {
-        window.alert('Arduino UNO bootloader flashed!');
+        this.logMessage = 'Arduino UNO bootloader flashed!';
+        this.cdr.detectChanges();
       }
     });
     /**
@@ -71,13 +77,15 @@ export class AppComponent implements OnInit{
       let stdout = arg.stdout;
       let stderr = arg.stderr;
       if (stdout || stderr) {
-        window.alert('Fuse flashed!');
+        this.logMessage = 'Fuse flashed!';
+        this.cdr.detectChanges();
       }
     });
   }
 
-  ngAfterViewChecked() {
-
+  onCloseLogMessage(evt) {
+    this.logMessage = null;
+    this.cdr.detectChanges();
   }
 
 }
