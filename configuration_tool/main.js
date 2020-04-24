@@ -10,7 +10,7 @@ const MAIN_IN_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN
 const MAIN_OUT_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN_OUT_PROCESSES;
 
 
-const USB_PROGRAMMER = 'usbasp;'
+const USB_PROGRAMMER = 'usbasp'
 
 function createWindow() {
   let win = new BrowserWindow({
