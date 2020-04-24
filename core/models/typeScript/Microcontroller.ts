@@ -43,8 +43,8 @@ export const ALL_MICROS: Microcontroller[] =
             family: MicroFamily.AVR,
             pins: 28,
             datasheet: "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf",
-            imageSrc: "assets/images/ATMega328.png",
-            pinoutImageSrc: "assets/images/ATMega328pinout.png",
+            imageSrc: "assets/images/ATmega328P.png",
+            pinoutImageSrc: "assets/images/ATmega328Ppinout.png",
             ram: { size: 8, measureUnit: MemoryUnitMeasures.Kilobytes },
             sram: { size: 2048, measureUnit: MemoryUnitMeasures.Bytes },
             flash: { size: 32, measureUnit: MemoryUnitMeasures.Kilobytes },
@@ -53,7 +53,7 @@ export const ALL_MICROS: Microcontroller[] =
             minVoltage: { value: 1.8, measureUnit: VoltageUnitMeasures.V },
             maxVoltage: { value: 5.5, measureUnit: VoltageUnitMeasures.V },
             totalTimers: 3,
-            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Crystal, material: OscillatorMaterial.Quartz },
+            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Circuit, material: OscillatorMaterial.RC },
             fuses:
                 [
                     {
@@ -123,28 +123,28 @@ export const ALL_MICROS: Microcontroller[] =
             avrLabel: "m32",
             brand: MicroBrand.Atmel,
             family: MicroFamily.AVR,
-            pins: 28,
-            datasheet: "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf",
-            imageSrc: "assets/images/ATMega328.png",
-            pinoutImageSrc: "assets/images/ATMega328pinout.png",
+            pins: 40,
+            datasheet: "http://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf",
+            imageSrc: "assets/images/ATmega32.png",
+            pinoutImageSrc: "assets/images/ATmega32pinout.png",
             ram: { size: 8, measureUnit: MemoryUnitMeasures.Kilobytes },
             sram: { size: 2048, measureUnit: MemoryUnitMeasures.Bytes },
             flash: { size: 32, measureUnit: MemoryUnitMeasures.Kilobytes },
             eprom: { size: 1024, measureUnit: MemoryUnitMeasures.Bytes },
             dataBus: { size: 8, measureUnit: MemoryUnitMeasures.Bit },
-            minVoltage: { value: 1.8, measureUnit: VoltageUnitMeasures.V },
+            minVoltage: { value: 2.7, measureUnit: VoltageUnitMeasures.V },
             maxVoltage: { value: 5.5, measureUnit: VoltageUnitMeasures.V },
             totalTimers: 3,
-            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Crystal, material: OscillatorMaterial.Quartz },
+            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Circuit, material: OscillatorMaterial.RC },
             fuses:
                 [
                     {
-                        hexValue: '62',
+                        hexValue: '64',
                         type: FusesType.LOW,
                         bits:
                             [
-                                { label: FuseBitLabel.CKDIV8, value: false },
-                                { label: FuseBitLabel.CKOUT, value: true },
+                                { label: FuseBitLabel.BODLEVEL, value: false },
+                                { label: FuseBitLabel.BODEN, value: true },
                                 { label: FuseBitLabel.SUT1, value: true },
                                 { label: FuseBitLabel.SUT0, value: false },
                                 { label: FuseBitLabel.CKSEL3, value: false },
@@ -154,14 +154,14 @@ export const ALL_MICROS: Microcontroller[] =
                             ]
                     },
                     {
-                        hexValue: 'D9',
+                        hexValue: 'DE',
                         type: FusesType.HIGH,
                         bits:
                             [
-                                { label: FuseBitLabel.RSTDISBL, value: true },
-                                { label: FuseBitLabel.DWEN, value: true },
+                                { label: FuseBitLabel.OCDEN, value: true },
+                                { label: FuseBitLabel.JTAGEN, value: true },
                                 { label: FuseBitLabel.SPIEN, value: false },
-                                { label: FuseBitLabel.WDTON, value: true },
+                                { label: FuseBitLabel.CKOPT, value: true },
                                 { label: FuseBitLabel.EESAVE, value: true },
                                 { label: FuseBitLabel.BOOTSZ1, value: false },
                                 { label: FuseBitLabel.BOOTSZ0, value: false },
@@ -170,7 +170,7 @@ export const ALL_MICROS: Microcontroller[] =
                     },
                     {
                         hexValue: 'FF',
-                        type: FusesType.EXTENDED,
+                        type: FusesType.LOCKBIT,
                         bits:
                             [
                                 { label: FuseBitLabel.Bit7, value: true },
@@ -178,11 +178,11 @@ export const ALL_MICROS: Microcontroller[] =
                                 { label: FuseBitLabel.Bit5, value: true },
                                 { label: FuseBitLabel.Bit4, value: true },
                                 { label: FuseBitLabel.Bit3, value: true },
-                                { label: FuseBitLabel.BODLEVEL2, value: true },
-                                { label: FuseBitLabel.BODLEVEL1, value: true },
-                                { label: FuseBitLabel.BODLEVEL0, value: true }                        
+                                { label: FuseBitLabel.Bit2, value: true },
+                                { label: FuseBitLabel.Bit1, value: true },
+                                { label: FuseBitLabel.Bit0, value: true }                         
                             ]
-                    }              
+                    }            
                 ]
         }
     ]

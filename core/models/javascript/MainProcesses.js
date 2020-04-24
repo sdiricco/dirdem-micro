@@ -1,8 +1,8 @@
 "use strict";
 /**
  * Attenzione
- * Ad ogni modifica di questo file ricompilare anche il rispettivo
- * "MainProcesses.js" con il comando "tsc"
+ * Non modificare manualmente questo file perchè dipende dal rispettivo
+ * "MainProcesses.ts", quindi modificare quest'ultimo e eseguire il comando "tsc"
  */
 exports.__esModule = true;
 exports.MAIN_IN_PROCESSES = {

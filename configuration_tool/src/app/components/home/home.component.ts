@@ -63,7 +63,7 @@ export class HomeComponent {
   showPinout() {
     const dialogRef = this.dialog.open(MicroPinoutDialogComponent, {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
-      data: null
+      data: this.microcontroller
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);

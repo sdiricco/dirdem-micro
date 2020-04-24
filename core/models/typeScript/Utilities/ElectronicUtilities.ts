@@ -49,5 +49,6 @@ export enum OscillatorType {
 
 export enum OscillatorMaterial {
     Quartz = "Quartz",
+    RC = "RC",
     Ceramic = "Ceramic"
 }
