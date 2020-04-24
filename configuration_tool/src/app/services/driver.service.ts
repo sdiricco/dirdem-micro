@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { GptDriverConfig } from '../../../../core/models/typeScript/GptDriver';
 import FileSaver = require('file-saver');
-import { Fuse } from '../../../../core/models/typeScript/FuseBit';
-import { Microcontroller } from '../../../../core/models/typeScript/Microcontroller';
+import { GptDriverConfig } from 'core/models/typeScript/GptDriver';
+import { Microcontroller } from 'core/models/typeScript/Microcontroller';
+import { Fuse } from 'core/models/typeScript/FuseBit';
+
 
 @Injectable({
   providedIn: 'root'

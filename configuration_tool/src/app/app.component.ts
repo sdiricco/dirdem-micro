@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 import { DriverService } from './services/driver.service';
 import { LoaderService, ProcessStatus } from './services/loader.service';
-import { MAIN_OUT_PROCESSES } from '../../../core/models/typeScript/MainProcesses';
+import { MAIN_OUT_PROCESSES } from 'core/models/typeScript/MainProcesses';
 
 @Component({
   selector: 'app-root',

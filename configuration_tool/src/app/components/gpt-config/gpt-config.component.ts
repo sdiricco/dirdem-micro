@@ -1,17 +1,10 @@
-import {
-  Component,
-  ViewChild,
-  Inject,
-  OnInit,
-  AfterViewInit,
-  AfterViewChecked
-} from "@angular/core";
-import { ATmega328Values, GptDriverConfig } from "../../../../../core/models/typeScript/GptDriver";
+import { Component, ViewChild, Inject,  AfterViewInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSelect } from '@angular/material/select';
 import { ToastrService } from "ngx-toastr";
 import { DriverService } from "src/app/services/driver.service";
 import { ChangeDetectorRef } from "@angular/core";
+import { GptDriverConfig, ATmega328Values } from 'core/models/typeScript/GptDriver';
 
 
 @Component({
@@ -31,7 +24,6 @@ export class GptCfgConfigComponent implements AfterViewInit {
     "gptNotification",
     "deleteRow"
   ];
-
 
   configurations: GptDriverConfig[];                                                // tutte le configurazioni istanziate / datasource della tabella
   atMega328values = new ATmega328Values();                                          // per la visualizzazione dei menu a tendina

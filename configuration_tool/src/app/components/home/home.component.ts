@@ -1,6 +1,5 @@
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
 import { Component, ViewChild } from "@angular/core";
-import { Microcontroller } from "../../../../../core/models/typeScript/Microcontroller";
 import { MicroPinoutDialogComponent } from "../micro-pinout-dialog/micro-pinout-dialog.component";
 import { GptCfgConfigComponent } from "../gpt-config/gpt-config.component";
 import { DriverService } from "src/app/services/driver.service";
@@ -8,9 +7,10 @@ import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-to
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { ElectronService } from 'ngx-electron';
-import { MAIN_IN_PROCESSES } from '../../../../../core/models/typeScript/MainProcesses'
 import { Overlay } from '@angular/cdk/overlay';
 import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
+import { Microcontroller } from 'core/models/typeScript/Microcontroller';
+import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
 
 @Component({
   selector: "app-home",

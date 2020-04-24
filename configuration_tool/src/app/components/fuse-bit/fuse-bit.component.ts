@@ -1,12 +1,13 @@
 import { Component, Inject, ChangeDetectorRef } from '@angular/core';
-import { Fuse, FuseBit, FusesType } from '../../../../../core/models/typeScript/FuseBit';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ConverterUtilities } from '../../../../../core/models/typeScript/Utilities/ConverterUtilities';
 import { DriverService } from 'src/app/services/driver.service';
 import * as _ from 'lodash';
 import { ElectronService } from 'ngx-electron';
 import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
-import { MAIN_IN_PROCESSES } from '../../../../../core/models/typeScript/MainProcesses';
+import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
+import { FuseBit, Fuse, FusesType } from 'core/models/typeScript/FuseBit';
+import { ConverterUtilities } from 'core/models/typeScript/Utilities/ConverterUtilities';
+
 
 @Component({
   selector: 'app-fuse-bit',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Microcontroller } from '../../../../../core/models/typeScript/Microcontroller';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Microcontroller } from 'core/models/typeScript/Microcontroller';
 
 @Component({
   selector: 'app-micro-pinout-dialog',

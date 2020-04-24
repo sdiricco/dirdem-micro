@@ -6,8 +6,8 @@ var glob = require("glob")
 const child = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const MAIN_IN_PROCESSES = require('../core/models/javascript/MainProcesses').MAIN_IN_PROCESSES;
-const MAIN_OUT_PROCESSES = require('../core/models/javascript/MainProcesses').MAIN_OUT_PROCESSES;
+const MAIN_IN_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN_IN_PROCESSES;
+const MAIN_OUT_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN_OUT_PROCESSES;
 
 
 const USB_PROGRAMMER = 'usbasp;'
@@ -16,13 +16,14 @@ function createWindow() {
   let win = new BrowserWindow({
     width: 1300,
     height: 920,
+    icon: 'src/assets/logo/electronAppLogo.png',
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInWorker: true
     },
   })
   win.loadFile('./dist/index.html')
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null
