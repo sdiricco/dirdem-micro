@@ -1,4 +1,4 @@
-import { ElelectronicMemory, MemoryUnitMeasures, VoltageUnitMeasures, Voltage, FrequencyUnitMeasure, ElectronicOscillator, OscillatorMaterial, OscillatorType } from './Utilities/ElectronicUtilities';
+import { ElelectronicMemory, MemoryUnitMeasures, VoltageUnitMeasures, Voltage, FrequencyUnitMeasures, ElectronicOscillator, OscillatorMaterial, OscillatorType } from './Utilities/ElectronicUtilities';
 import { FusesType, Fuse, FuseBitLabel } from './FuseBit';
 
 export class Microcontroller {
@@ -53,7 +53,7 @@ export const ALL_MICROS: Microcontroller[] =
             minVoltage: { value: 1.8, measureUnit: VoltageUnitMeasures.V },
             maxVoltage: { value: 5.5, measureUnit: VoltageUnitMeasures.V },
             totalTimers: 3,
-            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Circuit, material: OscillatorMaterial.RC },
+            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasures.MHz, type: OscillatorType.Circuit, material: OscillatorMaterial.RC },
             fuses:
                 [
                     {
@@ -135,7 +135,7 @@ export const ALL_MICROS: Microcontroller[] =
             minVoltage: { value: 2.7, measureUnit: VoltageUnitMeasures.V },
             maxVoltage: { value: 5.5, measureUnit: VoltageUnitMeasures.V },
             totalTimers: 3,
-            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasure.MHz, type: OscillatorType.Circuit, material: OscillatorMaterial.RC },
+            internalOscillator: { value: 8, measureUnit: FrequencyUnitMeasures.MHz, type: OscillatorType.Circuit, material: OscillatorMaterial.RC },
             fuses:
                 [
                     {
