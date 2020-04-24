@@ -10,7 +10,7 @@ export interface Voltage {
 
 export interface Frequency {
     value: number;
-    measureUnit: FrequencyUnitMeasure;
+    measureUnit: FrequencyUnitMeasures;
 }
 
 export interface ElectronicOscillator extends Frequency{
@@ -35,7 +35,7 @@ export enum VoltageUnitMeasures {
     KV = "KV"
 }
 
-export enum FrequencyUnitMeasure {
+export enum FrequencyUnitMeasures {
     Hz = "Hz",
     KHz = "KHz",
     MHz = "MHz",
