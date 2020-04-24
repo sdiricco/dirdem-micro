@@ -1,0 +1,46 @@
+.cardTitle {
+  font-size: 17px;
+  font-weight: 700 !important;
+  text-align: center !important;
+  margin-bottom: 15px !important;
+}
+
+#microSelection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#microContainer {
+  padding: 20px;
+}
+
+.infoCards {
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  z-index: 1;
+}
+
+#microImage:hover {
+  opacity: 0.7;
+}
+
+#cFileToDownload {
+  display: none;
+}
+
+#buttonsContainer {
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+}
+
+#linkToHexFile {
+  color: greenyellow;
+  background-color: black;
+  padding: 5px;
+}

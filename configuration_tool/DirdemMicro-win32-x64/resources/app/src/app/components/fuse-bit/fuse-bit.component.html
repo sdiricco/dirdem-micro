@@ -1,0 +1,32 @@
+<div id="legendRow"> <span> Remember: </span>
+  <mat-checkbox [checked]="true"> = 0 (programmed)</mat-checkbox>
+  <mat-checkbox [checked]="false"> = 1 (unprogrammed) </mat-checkbox>
+</div>
+
+<table mat-table #table [dataSource]="dataSource" id="fuseTable" *ngIf="displayedColumns.length">
+
+  <ng-container *ngFor="let column of columns;" [cdkColumnDef]="column.columnDef">
+    <!-- header -->
+    <td mat-header-cell *cdkHeaderCellDef [ngClass]="column.index == 0? 'rowPadding' : 'noRowPadding'">
+      {{ column.header }} </td>
+    <!-- celle -->
+    <td mat-cell *cdkCellDef="let row">
+      <mat-checkbox [checked]="!row[column.index].value" (change)="onCellClicked(column.columnDef, row[column.index])">
+        {{ row[column.index].label }} </mat-checkbox>
+    </td>
+    <!-- footer -->
+    <td mat-footer-cell *matFooterCellDef class="footerCells">
+      <div class="flexDisplay"> 0X<input matInput [(ngModel)]="column.footer"
+          (ngModelChange)="onFooterChange($event, column.header)"> </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bolder"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns" class="bolder"></tr>
+
+</table>
+
+<div id="buttonContainer">
+  <button mat-raised-button color="primary" (click)="setFuses()">BURN FUSES</button>
+</div>
