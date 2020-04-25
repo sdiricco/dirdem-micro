@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   showSpinner: boolean = false;
   logMessage: string;
 
-  constructor(private electronService: ElectronService, private driverService: DriverService, 
+  constructor(private electronService: ElectronService, private driverService: DriverService,
     private cdr: ChangeDetectorRef, private loaderService: LoaderService, private toastr: ToastrService) { }
 
   ngOnInit() {
