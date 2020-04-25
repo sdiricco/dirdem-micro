@@ -4,6 +4,8 @@
 }
 
 #logMessageContainer {
+    font-size: 13px;
+    font-family: consolas;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -12,8 +14,8 @@
     max-height: 60%;
     width: 50%;
     z-index: 999999;
-    background-color: var(--textLight);
-    color: var(--text);
+    background-color: black;
+    color: greenyellow;
     padding: 15px;
     box-shadow: 2px 2px 10px 0px var(--dark);
 }

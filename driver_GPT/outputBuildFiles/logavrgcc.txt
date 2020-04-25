@@ -1,0 +1,101 @@
+In file included from C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:0:
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.h:5:21: fatal error: Arduino.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt.c:21:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:21: fatal error: Gpt_Cfg.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Irq.c:5:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD.c:25:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR0.c:94:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR1.c:155:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR2.c:338:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+In file included from C:\Repository\dirdem-micro\driver_GPT\Test\Gpt_Test_Arduino\cronometro\Gpt_Cfg_Extern_Generated.c:5:0:
+C:\Repository\dirdem-micro\driver_GPT\Test\Gpt_Test_Arduino\cronometro\Gpt_Cfg_Extern_Generated.h:5:21: fatal error: Arduino.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\Test\Gpt_Test_AtmelStudio7\GccApplication1\GccApplication1\main.c:10:27: fatal error: drv_gpt_4/Gpt.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c: In function 'main':
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:16: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+         node = malloc(sizeof(struct Node) + strlen(buffer) + 1);
+                ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:16: warning: incompatible implicit declaration of built-in function 'malloc'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:16: note: include '<stdlib.h>' or provide a declaration of 'malloc'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:45: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+         node = malloc(sizeof(struct Node) + strlen(buffer) + 1);
+                                             ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:45: warning: incompatible implicit declaration of built-in function 'strlen'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:45: note: include '<string.h>' or provide a declaration of 'strlen'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:21: warning: implicit declaration of function 'strtok' [-Wimplicit-function-declaration]
+         node->key = strtok(strcpy((char *)(node + 1), buffer), ":\r\n");
+                     ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:28: warning: implicit declaration of function 'strcpy' [-Wimplicit-function-declaration]
+         node->key = strtok(strcpy((char *)(node + 1), buffer), ":\r\n");
+                            ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:28: warning: incompatible implicit declaration of built-in function 'strcpy'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:28: note: include '<string.h>' or provide a declaration of 'strcpy'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:19: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+         node->key = strtok(strcpy((char *)(node + 1), buffer), ":\r\n");
+                   ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:68:21: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+         node->value = strtok(NULL, "\r\n");
+                     ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:75:17: warning: implicit declaration of function 'strcmp' [-Wimplicit-function-declaration]
+             if (strcmp(node->key, "gptConfigSet") == 0)
+                 ^
+In file included from C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:0:
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.h:5:21: fatal error: Arduino.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt.c:21:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:21: fatal error: Gpt_Cfg.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Irq.c:5:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD.c:25:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR0.c:94:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR1.c:155:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR2.c:338:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+In file included from C:\Repository\dirdem-micro\driver_GPT\Test\Gpt_Test_Arduino\cronometro\Gpt_Cfg_Extern_Generated.c:5:0:
+C:\Repository\dirdem-micro\driver_GPT\Test\Gpt_Test_Arduino\cronometro\Gpt_Cfg_Extern_Generated.h:5:21: fatal error: Arduino.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\Test\Gpt_Test_AtmelStudio7\GccApplication1\GccApplication1\main.c:10:27: fatal error: drv_gpt_4/Gpt.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c: In function 'main':
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:16: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+         node = malloc(sizeof(struct Node) + strlen(buffer) + 1);
+                ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:16: warning: incompatible implicit declaration of built-in function 'malloc'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:16: note: include '<stdlib.h>' or provide a declaration of 'malloc'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:45: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+         node = malloc(sizeof(struct Node) + strlen(buffer) + 1);
+                                             ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:45: warning: incompatible implicit declaration of built-in function 'strlen'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:66:45: note: include '<string.h>' or provide a declaration of 'strlen'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:21: warning: implicit declaration of function 'strtok' [-Wimplicit-function-declaration]
+         node->key = strtok(strcpy((char *)(node + 1), buffer), ":\r\n");
+                     ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:28: warning: implicit declaration of function 'strcpy' [-Wimplicit-function-declaration]
+         node->key = strtok(strcpy((char *)(node + 1), buffer), ":\r\n");
+                            ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:28: warning: incompatible implicit declaration of built-in function 'strcpy'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:28: note: include '<string.h>' or provide a declaration of 'strcpy'
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:67:19: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+         node->key = strtok(strcpy((char *)(node + 1), buffer), ":\r\n");
+                   ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:68:21: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+         node->value = strtok(NULL, "\r\n");
+                     ^
+C:\Repository\dirdem-micro\driver_GPT\Utilities\textToStructMapper.c:75:17: warning: implicit declaration of function 'strcmp' [-Wimplicit-function-declaration]
+             if (strcmp(node->key, "gptConfigSet") == 0)
+                 ^
+avr-objcopy: 'C:\Repository\dirdem-micro\driver_GPT\outputBuildFiles\ElfFile.elf': No such file

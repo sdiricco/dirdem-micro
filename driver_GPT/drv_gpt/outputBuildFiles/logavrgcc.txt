@@ -1,0 +1,35 @@
+In file included from C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:0:
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.h:5:21: fatal error: Arduino.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt.c:21:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:21: fatal error: Gpt_Cfg.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Irq.c:5:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD.c:25:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR0.c:94:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR1.c:155:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR2.c:338:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+In file included from C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:0:
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Arduino\drv_gpt\Gpt_Cfg_Extern_Generated.h:5:21: fatal error: Arduino.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt.c:21:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Cfg_Extern_Generated.c:5:21: fatal error: Gpt_Cfg.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_Irq.c:5:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD.c:25:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR0.c:94:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR1.c:155:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+C:\Repository\dirdem-micro\driver_GPT\drv_gpt\drv_gpt_Atmel\drv_gpt\Gpt_LLD_TMR2.c:338:34: fatal error: Gpt_Extern_Generated.h: No such file or directory
+compilation terminated.
+avr-objcopy: 'C:\Repository\dirdem-micro\driver_GPT\drv_gpt\outputBuildFiles\ElfFile.elf': No such file

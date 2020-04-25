@@ -31,7 +31,7 @@ export class AppComponent implements OnInit{
      */
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.mainProcessError, (evt, err) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
-      this.logMessage = err//.replace("/\n/g", "<br />");
+      this.logMessage = err.toString();
       this.cdr.detectChanges();
     });
     /**
