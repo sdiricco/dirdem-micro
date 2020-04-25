@@ -1,6 +1,6 @@
 #closeButton:hover {
     cursor: pointer;
-    color: var(--primary);
+    color: var(--accent);
 }
 
 #logMessageContainer {
@@ -20,4 +20,11 @@
 
 #closeButton {
     text-align: end;
+}
+
+#logMessageText {
+    text-align: left; 
+    margin-bottom: 20px; 
+    overflow-y: auto; 
+    white-space: pre-wrap;
 }
