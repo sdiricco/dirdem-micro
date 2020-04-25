@@ -87,5 +87,4 @@ export class AppComponent implements OnInit{
     this.logMessage = null;
     this.cdr.detectChanges();
   }
-
 }

@@ -16,14 +16,14 @@ function createWindow() {
   let win = new BrowserWindow({
     width: 1300,
     height: 920,
-    icon: 'src/assets/logo/electronAppLogo.png',
+    icon: `${__dirname}/src/assets/logo/electronAppLogo.png`,
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInWorker: true
     },
   })
   win.loadFile('./dist/index.html')
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null

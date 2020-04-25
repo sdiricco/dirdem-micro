@@ -12,12 +12,9 @@ export class LogMessageComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.logMessage += '.';
-  }
+  ngOnChanges(changes: SimpleChanges): void {  }
 
   closeLog() {
     this.closeLogMessage.emit(true);
