@@ -11,6 +11,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 import { Microcontroller } from 'core/models/typeScript/Microcontroller';
 import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
+import { MicrocontrollerTimerNames } from 'core/models/typeScript/MicrocontrollerTimer';
 
 @Component({
   selector: "app-home",
@@ -32,6 +33,14 @@ export class HomeComponent {
   }
   get linkToHexFile(): string {
     return this.driverService.compiledHexFilePath;
+  }
+  get MicrocontrolleTimersGrouped(): {timerCount: number, timerWidth: number}{
+    let result = {timerCount:0, timerWidth:0};
+    for (let i = 0; i < this.microcontroller.timers.length; i++) {
+      const timer = this.microcontroller.timers[i];
+      console.log(timer);
+    }
+    return result;
   }
   // sliders
   @ViewChild("slider1", { static: false }) gptDriverSlider: MatSlideToggle;
