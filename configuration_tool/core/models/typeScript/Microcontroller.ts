@@ -85,7 +85,8 @@ export const ALL_MICROS: Microcontroller[] =
                                 { label: FuseBitLabel.BOOTSZ0, value: false },
                                 { label: FuseBitLabel.BOOTRST, value: true }                        
                             ]
-                    },
+                    }
+                    /*
                     {
                         hexValue: 'FF',
                         type: FusesType.EXTENDED,
@@ -115,7 +116,8 @@ export const ALL_MICROS: Microcontroller[] =
                                 { label: FuseBitLabel.Bit1, value: true },
                                 { label: FuseBitLabel.Bit0, value: true }                         
                             ]
-                    }                    
+                    } 
+                    */                   
                 ]
         },
         {
@@ -167,7 +169,8 @@ export const ALL_MICROS: Microcontroller[] =
                                 { label: FuseBitLabel.BOOTSZ0, value: false },
                                 { label: FuseBitLabel.BOOTRST, value: true }                        
                             ]
-                    },
+                    }
+                    /*
                     {
                         hexValue: 'FF',
                         type: FusesType.LOCKBIT,
@@ -182,7 +185,8 @@ export const ALL_MICROS: Microcontroller[] =
                                 { label: FuseBitLabel.Bit1, value: true },
                                 { label: FuseBitLabel.Bit0, value: true }                         
                             ]
-                    }            
+                    } 
+                    */           
                 ]
         }
     ]
