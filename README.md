@@ -1,6 +1,4 @@
-# Hello world!
-
-We are Dirdem-Micro
+# We are Dirdem-Micro
 
 April 30, 2020
 Frist Release v0.1.0
