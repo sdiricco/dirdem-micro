@@ -58,7 +58,7 @@ ipcMain.on(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, (event, arg) => {
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
+      event.reply(MAIN_OUT_PROCESSES.burnArduinoUnoBootloaderFailed, err);
       return;
     };
     let response = {stdout: stdout, stderr: stderr};
@@ -78,7 +78,7 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuse, (event, arg) => {
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
+      event.reply(MAIN_OUT_PROCESSES.burnFuseFailed, err);
       return;
     }
     let response = { stdout: stdout, stderr: stderr };
@@ -96,7 +96,7 @@ ipcMain.on(MAIN_IN_PROCESSES.compileCProject, (event, arg) => {
   try {
     var projectPath = dialog.showOpenDialogSync(options)[0];
   } catch (error) {
-    event.reply(MAIN_OUT_PROCESSES.mainProcessError, error);
+    event.reply(MAIN_OUT_PROCESSES.compileCProjectFailed, error);
     return;
   }
 
@@ -108,10 +108,10 @@ ipcMain.on(MAIN_IN_PROCESSES.compileCProject, (event, arg) => {
       let response = { fileOutput: `${path.join(outputFolderPath, 'build.hex')}`, compileOutput: compileOutput };
       event.reply(MAIN_OUT_PROCESSES.compileCProjectCompleted, response);
     }, rej1 => {
-      event.reply(MAIN_OUT_PROCESSES.mainProcessError, rej1);
+      event.reply(MAIN_OUT_PROCESSES.compileCProjectFailed, rej1);
     });
   }, rej2 => {
-    event.reply(MAIN_OUT_PROCESSES.mainProcessError, rej2);
+    event.reply(MAIN_OUT_PROCESSES.compileCProjectFailed, rej2);
   })
 })
 
@@ -126,7 +126,7 @@ ipcMain.on(MAIN_IN_PROCESSES.burnHexFile, (event, arg) => {
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
+      event.reply(MAIN_OUT_PROCESSES.burnHexFileFailed, err);
       return;
     }
     let response = { stdout: stdout, stderr: stderr };

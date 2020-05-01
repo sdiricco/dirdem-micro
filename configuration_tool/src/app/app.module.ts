@@ -14,6 +14,10 @@ import { MaterialModule } from './modules/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxElectronModule } from 'ngx-electron';
 import { LogMessageComponent } from './components/log-message/log-message.component';
+import { FuseBitCardComponent } from './components/fuse-bit-card/fuse-bit-card.component';
+import { AvrTechnicalSpecificationCardComponent } from './components/avr-technical-specification-card/avr-technical-specification-card.component';
+import { MicroSelectorComponent } from './components/micro-selector/micro-selector.component';
+import { MicroImageShowComponent } from './components/micro-image-show/micro-image-show.component';
 
 
 @NgModule({
@@ -23,7 +27,11 @@ import { LogMessageComponent } from './components/log-message/log-message.compon
     HomeComponent,
     MicroPinoutDialogComponent,
     FuseBitComponent,
-    LogMessageComponent
+    LogMessageComponent,
+    FuseBitCardComponent,
+    AvrTechnicalSpecificationCardComponent,
+    MicroSelectorComponent,
+    MicroImageShowComponent
   ],
   imports: [
     BrowserModule,

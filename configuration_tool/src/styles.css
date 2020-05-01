@@ -9,6 +9,8 @@
   --text: #212121;
   --textLight: #FFFFFF;
   --warn: #f44336;
+  --nerdBackground: black;
+  --nerdText: greenyellow;
 }
 
 html {
@@ -80,4 +82,20 @@ body {
 
 .bolder {
   font-weight: bolder;
+}
+
+
+/**/
+.infoCards {
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 700 !important;
+  text-align: center !important;
+  margin-bottom: 15px !important;
 }

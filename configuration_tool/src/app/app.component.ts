@@ -26,14 +26,53 @@ export class AppComponent implements OnInit{
       status == ProcessStatus.complete? this.showSpinner = false : this.showSpinner = true;
       this.cdr.detectChanges();
     })
+
+
+    // errori
     /**
-     * Sottoscrizione a un errore dal main process
+     * Sottoscrizione a un errore generico dal main process
      */
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.mainProcessError, (evt, err) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       this.logMessage = err.toString();
       this.cdr.detectChanges();
     });
+    /**
+     * Sottoscrizione erorre della compilazione di un progetto con file .C
+     */
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.compileCProjectFailed, (evt, err) => {
+      this.loaderService.updateProcess(ProcessStatus.complete);
+      this.driverService.compiledHexFilePath = null;
+      this.logMessage = err.toString();
+      this.cdr.detectChanges();
+    });
+    /**
+     * Sottoscrizione errore del flash fuse bit
+     */
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnFuseFailed, (evt, err) => {
+      this.loaderService.updateProcess(ProcessStatus.complete);
+      this.logMessage = err.toString();
+      this.cdr.detectChanges();
+    });
+        /**
+     * Sottoscrizione errore del flash bootloader Arduino Uno
+     */
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnArduinoUnoBootloaderFailed, (evt, err) => {
+      this.loaderService.updateProcess(ProcessStatus.complete);
+      this.logMessage = err.toString();
+      this.cdr.detectChanges();
+    });
+    /**
+     * Sottoscrizione errore del flash file .hex
+     */
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnHexFileFailed, (evt, err) => {
+      this.loaderService.updateProcess(ProcessStatus.complete);
+      this.logMessage = err.toString();
+      this.cdr.detectChanges();
+    });
+
+
+    // completati
     /**
      * Sottoscrizione alla compilazione di un progetto contentente file .C
      */

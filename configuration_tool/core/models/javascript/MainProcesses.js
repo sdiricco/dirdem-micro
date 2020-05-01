@@ -1,8 +1,8 @@
 "use strict";
 /**
  * Attenzione
- * Non modificare manualmente questo file perchè dipende dal rispettivo
- * "MainProcesses.ts", quindi modificare quest'ultimo e eseguire il comando "tsc"
+ * Ad ogni modifica di questo file ricompilare anche il rispettivo
+ * "MainProcesses.js" con il comando "tsc"
  */
 exports.__esModule = true;
 exports.MAIN_IN_PROCESSES = {
@@ -15,6 +15,10 @@ exports.MAIN_OUT_PROCESSES = {
     mainProcessError: 'mainProcessError',
     burnFuseCompleted: 'burnFuseCompleted',
     burnArduinoUnoBootloaderCompleted: 'burnArduinoUnoBootloaderCompleted',
-    compileCProjectCompleted: 'compileCProjectCOmpleted',
-    burnHexFileCompleted: 'burnHexFileCompleted'
+    compileCProjectCompleted: 'compileCProjectCompleted',
+    burnHexFileCompleted: 'burnHexFileCompleted',
+    burnFuseFailed: 'burnFuseFailed',
+    burnArduinoUnoBootloaderFailed: 'burnArduinoUnoBootloaderFailed',
+    compileCProjectFailed: 'compileCProjectFailed',
+    burnHexFileFailed: 'burnHexFileFailed'
 };

@@ -4,7 +4,7 @@
  * "MainProcesses.js" con il comando "tsc"
  */
 
- export const MAIN_IN_PROCESSES = 
+ export const MAIN_IN_PROCESSES =
  {
     burnFuse: 'burnFuse',
     burnArduinoUnoBootloader: 'burnArduinoUnoBootloader',
@@ -12,11 +12,15 @@
     burnHexFile: 'burnHexFile'
  }
 
- export const MAIN_OUT_PROCESSES = 
+ export const MAIN_OUT_PROCESSES =
  {
     mainProcessError: 'mainProcessError',
     burnFuseCompleted: 'burnFuseCompleted',
     burnArduinoUnoBootloaderCompleted: 'burnArduinoUnoBootloaderCompleted',
-    compileCProjectCompleted: 'compileCProjectCOmpleted',
-    burnHexFileCompleted: 'burnHexFileCompleted'
+    compileCProjectCompleted: 'compileCProjectCompleted',
+    burnHexFileCompleted: 'burnHexFileCompleted',
+    burnFuseFailed: 'burnFuseFailed',
+    burnArduinoUnoBootloaderFailed: 'burnArduinoUnoBootloaderFailed',
+    compileCProjectFailed: 'compileCProjectFailed',
+    burnHexFileFailed: 'burnHexFileFailed'
  }
