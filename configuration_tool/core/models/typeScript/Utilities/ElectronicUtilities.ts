@@ -1,6 +1,6 @@
-export interface ElelectronicMemory {
-    size: number;
-    measureUnit: MemoryUnitMeasures;
+export interface ElectronicUnit {
+    value: number;
+    measureUnit: ElectronicUnitMeasures;
 }
 
 export interface Voltage {
@@ -20,7 +20,7 @@ export interface ElectronicOscillator extends Frequency{
 
 
 
-export enum MemoryUnitMeasures {
+export enum ElectronicUnitMeasures {
     Bit = "Bit",
     Bytes = "Bytes",
     Kilobytes = "Kilobytes",

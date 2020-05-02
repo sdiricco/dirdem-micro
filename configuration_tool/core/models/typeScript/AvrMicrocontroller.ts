@@ -1,9 +1,10 @@
 import { FuseBitLabel, FusesType, Fuse } from './FuseBit';
 import { MicrocontrollerTimerNames, MicrocontrollerTimer } from './MicrocontrollerTimer';
-import { MemoryUnitMeasures, VoltageUnitMeasures, FrequencyUnitMeasures, OscillatorType, OscillatorMaterial, ElelectronicMemory, Voltage, ElectronicOscillator } from './Utilities/ElectronicUtilities';
+import { ElectronicUnitMeasures, VoltageUnitMeasures, FrequencyUnitMeasures, OscillatorType, OscillatorMaterial, ElectronicUnit, Voltage, ElectronicOscillator } from './Utilities/ElectronicUtilities';
 import { MicroBrand, MicroFamily, Microcontroller } from './Microcontroller';
 
 export class AvrMicrocontroller extends Microcontroller {
+    avrLabel: string;
     technicalSpecification: AvrMicrocontrollerTechnicalSpecification;
     fuses: Fuse [];     
     static getAvrMicrocontrollers(): AvrMicrocontroller [] {
@@ -16,14 +17,8 @@ export class AvrMicrocontrollerTechnicalSpecification {
     datasheet: string;
     imageSrc: string;
     pinoutImageSrc: string;
-    ram: ElelectronicMemory;
-    sram: ElelectronicMemory;
-    flash: ElelectronicMemory;
-    eprom: ElelectronicMemory;
-    dataBus: ElelectronicMemory;
     minVoltage: Voltage;
     maxVoltage: Voltage;
-    timers: MicrocontrollerTimer [];
     internalOscillator: ElectronicOscillator;
 }
 
@@ -42,11 +37,11 @@ export const AVR_MICROS: AvrMicrocontroller [] =
                 datasheet: "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf",
                 imageSrc: "assets/images/ATmega328P.png",
                 pinoutImageSrc: "assets/images/ATmega328Ppinout.png",
-                ram: { size: 8, measureUnit: MemoryUnitMeasures.Kilobytes },
-                sram: { size: 2048, measureUnit: MemoryUnitMeasures.Bytes },
-                flash: { size: 32, measureUnit: MemoryUnitMeasures.Kilobytes },
-                eprom: { size: 1024, measureUnit: MemoryUnitMeasures.Bytes },
-                dataBus: { size: 8, measureUnit: MemoryUnitMeasures.Bit },
+                ram: { value: 8, measureUnit: ElectronicUnitMeasures.Kilobytes },
+                sram: { value: 2048, measureUnit: ElectronicUnitMeasures.Bytes },
+                flash: { value: 32, measureUnit: ElectronicUnitMeasures.Kilobytes },
+                eprom: { value: 1024, measureUnit: ElectronicUnitMeasures.Bytes },
+                dataBus: { size: 8, measureUnit: ElectronicUnitMeasures.Bit },
                 minVoltage: { value: 1.8, measureUnit: VoltageUnitMeasures.V },
                 maxVoltage: { value: 5.5, measureUnit: VoltageUnitMeasures.V },
                 timers:  
@@ -144,11 +139,11 @@ export const AVR_MICROS: AvrMicrocontroller [] =
                 datasheet: "http://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf",
                 imageSrc: "assets/images/ATmega32.png",
                 pinoutImageSrc: "assets/images/ATmega32pinout.png",
-                ram: { size: 8, measureUnit: MemoryUnitMeasures.Kilobytes },
-                sram: { size: 2048, measureUnit: MemoryUnitMeasures.Bytes },
-                flash: { size: 32, measureUnit: MemoryUnitMeasures.Kilobytes },
-                eprom: { size: 1024, measureUnit: MemoryUnitMeasures.Bytes },
-                dataBus: { size: 8, measureUnit: MemoryUnitMeasures.Bit },
+                ram: { value: 8, measureUnit: ElectronicUnitMeasures.Kilobytes },
+                sram: { value: 2048, measureUnit: ElectronicUnitMeasures.Bytes },
+                flash: { value: 32, measureUnit: ElectronicUnitMeasures.Kilobytes },
+                eprom: { value: 1024, measureUnit: ElectronicUnitMeasures.Bytes },
+                dataBus: { size: 8, measureUnit: ElectronicUnitMeasures.Bit },
                 minVoltage: { value: 2.7, measureUnit: VoltageUnitMeasures.V },
                 maxVoltage: { value: 5.5, measureUnit: VoltageUnitMeasures.V },
                 timers:  
