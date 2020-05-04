@@ -12,7 +12,7 @@ export class PeripheralFeatures {
  */
 export class MicrocontrollerTimer {
     name: MicrocontrollerTimerNames;
-    widthCounter?: number;
+    widthCounter?: ElectronicUnit;
     mode?: TimerModes;
 }
 

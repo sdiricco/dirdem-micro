@@ -8,6 +8,11 @@ export interface Voltage {
     measureUnit: VoltageUnitMeasures;
 }
 
+export interface Current {
+    value: number;
+    measureUnit: CurrentUnitMeasures;
+}
+
 export interface Frequency {
     value: number;
     measureUnit: FrequencyUnitMeasures;
@@ -18,7 +23,10 @@ export interface ElectronicOscillator extends Frequency{
     material: OscillatorMaterial;
 }
 
-
+export interface Temperature {
+    value: number;
+    measureUnit: TemperatureMeasures;
+}
 
 export enum ElectronicUnitMeasures {
     Bit = "Bit",
@@ -26,6 +34,14 @@ export enum ElectronicUnitMeasures {
     Kilobytes = "Kilobytes",
     Megabytes = "Megabytes",
     Gigabytes = "Gigabytes"
+}
+
+export enum CurrentUnitMeasures {
+    pA = "pA",
+    nA = "nA",
+    uA = "uA",
+    mA = "mA",
+    A = "A"
 }
 
 export enum VoltageUnitMeasures {
@@ -51,4 +67,9 @@ export enum OscillatorMaterial {
     Quartz = "Quartz",
     RC = "RC",
     Ceramic = "Ceramic"
+}
+
+export enum TemperatureMeasures {
+    Celsius = "Celsius",
+    Kelvin = "Kelvin"
 }

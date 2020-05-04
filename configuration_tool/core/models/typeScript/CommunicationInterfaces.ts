@@ -1,12 +1,16 @@
 export class CommunicationInterface {
-    name: CommunicationInterfaceNames;
-    type: CommunicationInterfaceTypes;
+    name: CommunicationInterfaceNamesEnum;
+    type: CommunicationInterfaceTypesEnum;
 }
 
-export enum CommunicationInterfaceNames {
-
+export enum CommunicationInterfaceNamesEnum {
+    JTAG = "JTAG",
+    ISP = "ISP",
+    TWI = "TWI",
+    USART = "USART",
+    SPI = "SPI"
 }
 
-export enum CommunicationInterfaceTypes {
-    
+export enum CommunicationInterfaceTypesEnum {
+    Serial = "Serial"
 }
