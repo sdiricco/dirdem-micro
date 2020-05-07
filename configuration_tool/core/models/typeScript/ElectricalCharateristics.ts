@@ -1,23 +1,51 @@
-import { Frequency, Voltage, Temperature, ElectronicOscillator } from './Utilities/ElectronicUtilities';
+import { Voltage, Frequency, Temperature, Current } from './Utilities/ElectronicUtilities';
 
 export class ElectricalCharateristics {
-    speedGrades: Frequency [];
-    operatingVoltages: Voltage [];
-    oscillators?: ElectronicOscillator [];
+    clockFrequencyOscillator: ClockFrequencyOscillator [];
+    operatingVoltages: OperatingVoltage [];
     powerConsumption?: PowerConsumption;
 }
 
+
+export class ClockFrequencyOscillator {
+    clockFrequencyOscillatorValue?: Frequency;
+    clockFrequencyOscillatorRange?: Frequency [];
+    clockFrequencyOscillatorType?: ClockFrequenciesOscillatorTypeEnum;
+    clockFrequencyOscillatorMaterial?: ClockFrequenciesOscillatorMaterialEnum;
+}
+
+export class OperatingVoltage {
+    operatingVoltageValue: Voltage;
+    operatingVoltageRange: Voltage [];
+}
+
 export class PowerConsumption {
-    consumptionReference: ConsumptionReference;
-    mode?: PowerConsumptionModesEnum;
+    powerConsumptionReference: PowerConsumptionReference;
+    powerConsumptionMode: PowerConsumptionMode;
 }
 
-export interface ConsumptionReference {
-    frequency?: Frequency;
-    voltage?: Voltage;
-    temperature?: Temperature; 
+export class PowerConsumptionMode {
+    powerConsumptionModeName: PowerConsumptionModeNamesEnum;
+    powerConsumptionModeCurrent: Current;
 }
 
-export enum PowerConsumptionModesEnum{
+export interface PowerConsumptionReference {
+    powerConsumptionReferenceFrequency: Frequency;
+    powerConsumptionReferenceVoltage?: Voltage;
+    powerConsumptionReferenceTemperature?: Temperature; 
+}
+
+export enum PowerConsumptionModeNamesEnum {
     Active = "Active"
+}
+
+export enum ClockFrequenciesOscillatorTypeEnum {
+    Internal = "Internal",
+    External = "External"
+}
+
+export enum ClockFrequenciesOscillatorMaterialEnum {
+    Quartz = "Quartz",
+    RC = "RC",
+    Ceramic = "Ceramic"
 }

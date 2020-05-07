@@ -14,11 +14,11 @@ export class MicrocontrollerPins {
 
 export class Pin {
     number: number;
-    labels: PinLabelsEnum [];
-    types?: PinTypesEnum [];
-    port?: PinPortsEnum;
-    disabled?: boolean;
-    color?: string;
+    pinLabels: PinLabelsEnum [];
+    pinTypes?: PinTypesEnum [];
+    pinPort?: PinPortsEnum;
+    pinDisabled?: boolean;
+    pinColor?: string;
 }
 
 export enum PinLabelsEnum {

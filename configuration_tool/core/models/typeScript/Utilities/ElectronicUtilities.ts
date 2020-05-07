@@ -1,34 +1,29 @@
 export interface ElectronicUnit {
     value: number;
-    measureUnit: ElectronicUnitMeasures;
+    measureUnit: ElectronicUnitMeasuresEnum;
 }
 
 export interface Voltage {
     value: number;
-    measureUnit: VoltageUnitMeasures;
+    measureUnit: VoltageUnitMeasuresEnum;
 }
 
 export interface Current {
-    value: number;
-    measureUnit: CurrentUnitMeasures;
+    currentValue: number;
+    currentMeasureUnit: CurrentsMeasureUnitEnum;
 }
 
 export interface Frequency {
-    value: number;
-    measureUnit: FrequencyUnitMeasures;
-}
-
-export interface ElectronicOscillator extends Frequency{
-    type: OscillatorType;
-    material: OscillatorMaterial;
+    frequencyValue: number;
+    frequencyMeasureUnit: FrequenciesMeasureUnitEnum;
 }
 
 export interface Temperature {
     value: number;
-    measureUnit: TemperatureMeasures;
+    measureUnit: TemperatureMeasuresEnum;
 }
 
-export enum ElectronicUnitMeasures {
+export enum ElectronicUnitMeasuresEnum {
     Bit = "Bit",
     Bytes = "Bytes",
     Kilobytes = "Kilobytes",
@@ -36,7 +31,7 @@ export enum ElectronicUnitMeasures {
     Gigabytes = "Gigabytes"
 }
 
-export enum CurrentUnitMeasures {
+export enum CurrentsMeasureUnitEnum {
     pA = "pA",
     nA = "nA",
     uA = "uA",
@@ -44,32 +39,21 @@ export enum CurrentUnitMeasures {
     A = "A"
 }
 
-export enum VoltageUnitMeasures {
+export enum VoltageUnitMeasuresEnum {
     uV = "uV",
     mV = "mV",
     V = "V",
     KV = "KV"
 }
 
-export enum FrequencyUnitMeasures {
+export enum FrequenciesMeasureUnitEnum {
     Hz = "Hz",
     KHz = "KHz",
     MHz = "MHz",
     GHz = "GHz"
 }
 
-export enum OscillatorType {
-    Crystal = "Crystal",
-    Circuit = "Circuit"
-}
-
-export enum OscillatorMaterial {
-    Quartz = "Quartz",
-    RC = "RC",
-    Ceramic = "Ceramic"
-}
-
-export enum TemperatureMeasures {
+export enum TemperatureMeasuresEnum {
     Celsius = "Celsius",
     Kelvin = "Kelvin"
 }

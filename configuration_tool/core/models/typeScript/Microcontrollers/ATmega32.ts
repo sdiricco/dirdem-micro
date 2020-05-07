@@ -1,10 +1,11 @@
 import { AvrMicrocontroller } from '../AvrMicrocontroller';
 import { MicroBrand, MicroFamily } from '../Microcontroller';
-import { ElectronicUnitMeasures, FrequencyUnitMeasures, VoltageUnitMeasures } from '../Utilities/ElectronicUtilities';
+import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeasuresEnum } from '../Utilities/ElectronicUtilities';
 import { MicrocontrollerTimerNames } from '../PeripheralFeatures';
 import { PinLabelsEnum } from '../MicrocontrollerPins';
 import { CommunicationInterfaceNamesEnum, CommunicationInterfaceTypesEnum } from '../CommunicationInterfaces';
 import { FusesType as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '../FuseBit';
+import { ClockFrequenciesOscillatorTypeEnum, ClockFrequenciesOscillatorMaterialEnum } from '../ElectricalCharateristics';
 
 export const ATMEGA32: AvrMicrocontroller = 
 {
@@ -17,27 +18,42 @@ export const ATMEGA32: AvrMicrocontroller =
     dataBus:
     { 
         value: 8,
-        measureUnit: ElectronicUnitMeasures.Bit 
+        measureUnit: ElectronicUnitMeasuresEnum.Bit 
     },
     electricalCharateristics: 
     {
-        speedGrades: 
+        clockFrequencyOscillator: 
         [
             {
-                value: 16,
-                measureUnit:FrequencyUnitMeasures.MHz
-            } 
+                clockFrequencyOscillatorValue:
+                {
+                    frequencyValue: 2,
+                    frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
+                },
+                clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.Internal,
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC
+            }
         ],
         operatingVoltages: 
         [
             {
-                value: 4.5,
-                measureUnit: VoltageUnitMeasures.V
-            },
-            {
-                value: 5.5,
-                measureUnit: VoltageUnitMeasures.V
-            },
+               operatingVoltageValue:
+               {
+                   value: 5,
+                   measureUnit: VoltageUnitMeasuresEnum.V
+               },
+               operatingVoltageRange:
+               [
+                   {
+                       value: 4.5,
+                       measureUnit: VoltageUnitMeasuresEnum.V
+                   },
+                   {
+                       value: 5.5,
+                       measureUnit: VoltageUnitMeasuresEnum.V
+                   }
+               ] 
+            }
         ]
     },
     microcontrollerPins:
@@ -47,7 +63,7 @@ export const ATMEGA32: AvrMicrocontroller =
         [
             {
                 number: 1,
-                labels:
+                pinLabels:
                 [
                     PinLabelsEnum.PB0,
                     PinLabelsEnum.T0,
@@ -66,7 +82,7 @@ export const ATMEGA32: AvrMicrocontroller =
                 widthCounter:
                 {
                     value: 8,
-                    measureUnit: ElectronicUnitMeasures.Bit
+                    measureUnit: ElectronicUnitMeasuresEnum.Bit
                 }
 
             }
@@ -89,31 +105,31 @@ export const ATMEGA32: AvrMicrocontroller =
             hexValue: '64',
             type: FusesTypeEnum.LOW,
             bits:
-                [
-                    { label: FuseBitLabelEnum.BODLEVEL, value: false },
-                    { label: FuseBitLabelEnum.BODEN, value: true },
-                    { label: FuseBitLabelEnum.SUT1, value: true },
-                    { label: FuseBitLabelEnum.SUT0, value: false },
-                    { label: FuseBitLabelEnum.CKSEL3, value: false },
-                    { label: FuseBitLabelEnum.CKSEL2, value: false },
-                    { label: FuseBitLabelEnum.CKSEL1, value: true },
-                    { label: FuseBitLabelEnum.CKSEL0, value: false }                        
-                ]
+            [
+                { label: FuseBitLabelEnum.BODLEVEL, value: false },
+                { label: FuseBitLabelEnum.BODEN, value: true },
+                { label: FuseBitLabelEnum.SUT1, value: true },
+                { label: FuseBitLabelEnum.SUT0, value: false },
+                { label: FuseBitLabelEnum.CKSEL3, value: false },
+                { label: FuseBitLabelEnum.CKSEL2, value: false },
+                { label: FuseBitLabelEnum.CKSEL1, value: true },
+                { label: FuseBitLabelEnum.CKSEL0, value: false }                        
+            ]
         },
         {
             hexValue: 'DE',
             type: FusesTypeEnum.HIGH,
             bits:
-                [
-                    { label: FuseBitLabelEnum.OCDEN, value: true },
-                    { label: FuseBitLabelEnum.JTAGEN, value: true },
-                    { label: FuseBitLabelEnum.SPIEN, value: false },
-                    { label: FuseBitLabelEnum.CKOPT, value: true },
-                    { label: FuseBitLabelEnum.EESAVE, value: true },
-                    { label: FuseBitLabelEnum.BOOTSZ1, value: false },
-                    { label: FuseBitLabelEnum.BOOTSZ0, value: false },
-                    { label: FuseBitLabelEnum.BOOTRST, value: true }                        
-                ]
+            [
+                { label: FuseBitLabelEnum.OCDEN, value: true },
+                { label: FuseBitLabelEnum.JTAGEN, value: true },
+                { label: FuseBitLabelEnum.SPIEN, value: false },
+                { label: FuseBitLabelEnum.CKOPT, value: true },
+                { label: FuseBitLabelEnum.EESAVE, value: true },
+                { label: FuseBitLabelEnum.BOOTSZ1, value: false },
+                { label: FuseBitLabelEnum.BOOTSZ0, value: false },
+                { label: FuseBitLabelEnum.BOOTRST, value: true }                        
+            ]
         }
     ]
 }
