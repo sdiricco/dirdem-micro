@@ -1,16 +1,14 @@
 export class MicrocontrollerPins {
+    microcontrollerPackage: MicrocontrollerPackageEnum; 
     defaultPinCount: number;
     pins: Pin [];
-    get pinCount(): number 
-    { 
-        let pc = this.pins.length;
-        if (pc == this.defaultPinCount ) {
-            return pc;
-        } else {
-            return null;
-        }
-    };
 }
+
+export enum MicrocontrollerPackageEnum{
+    PDIP = "PDIP",
+    TQFP = "TQFP",
+    MLF = "MLF"
+} 
 
 export class Pin {
     number: number;
@@ -20,6 +18,7 @@ export class Pin {
     pinDisabled?: boolean;
     pinColor?: string;
 }
+ 
 
 export enum PinLabelsEnum {
     XCK = "XCK", 
@@ -56,6 +55,7 @@ export enum PinLabelsEnum {
     TCK = "TCK",
     SDA = "SDA",
     SCL = "SCL",
+    ADC0 = "ADC0",
     ADC1 = "ADC1",
     ADC2 = "ADC2",
     ADC3 = "ADC3",

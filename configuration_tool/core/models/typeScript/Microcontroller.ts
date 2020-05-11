@@ -2,18 +2,25 @@ import { ElectronicUnit, Voltage, Frequency } from './Utilities/ElectronicUtilit
 import { PeripheralFeatures } from './PeripheralFeatures';
 import { CommunicationInterface } from './CommunicationInterfaces';
 import { ElectricalCharateristics } from './ElectricalCharateristics';
-import { MicrocontrollerPins } from './MicrocontrollerPins';
+import { MicrocontrollerPins as MicrocontrollerPinConfiguaration } from './MicrocontrollerPins';
+import { MemorySegment } from './MemorySegment';
 
-export class Microcontroller {
+/**
+ * MicrocontrollerBase
+ * Note:
+ * - imageSrc: è un array perchè avrò un'immagine per ogni package
+ */
+export class MicrocontrollerBase {
     name: string;
     brand: MicroBrand;
     family: MicroFamily;
     datasheetUrl: string;
-    imageSrc: string;
-    pinoutImageSrc: string;
+    imagesSrc: string [];
+    pinoutImagesSrc: string [];
     dataBus: ElectronicUnit;
+    memorySegments: MemorySegment [];
     electricalCharateristics: ElectricalCharateristics;
-    microcontrollerPins: MicrocontrollerPins;
+    microcontrollerPinConfigurations: MicrocontrollerPinConfiguaration [];
     peripheralFeatures: PeripheralFeatures;
     communicationInterfaces: CommunicationInterface [];
 }

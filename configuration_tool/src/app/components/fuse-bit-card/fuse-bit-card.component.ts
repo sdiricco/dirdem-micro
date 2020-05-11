@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
-import { Microcontroller } from 'core/models/typeScript/Microcontroller';
+import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
+import { MicrocontrollerBase } from 'core/models/typeScript/Microcontroller';
 import { MatDialog } from '@angular/material/dialog';
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
 import { Overlay } from '@angular/cdk/overlay';

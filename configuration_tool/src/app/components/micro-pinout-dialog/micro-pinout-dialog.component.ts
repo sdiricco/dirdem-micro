@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AvrMicrocontroller, AvrMicrocontrollerTechnicalSpecification } from 'core/models/typeScript/AvrMicrocontroller';
 
 @Component({
   selector: 'app-micro-pinout-dialog',

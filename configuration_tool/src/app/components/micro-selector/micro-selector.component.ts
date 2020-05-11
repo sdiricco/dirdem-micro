@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DriverService } from 'src/app/services/driver.service';
 import { MatSelectChange } from '@angular/material/select';
-import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
 
 @Component({
   selector: 'app-micro-selector',
@@ -9,10 +9,10 @@ import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
   styleUrls: ['./micro-selector.component.css']
 })
 export class MicroSelectorComponent implements OnInit {
-  microcontrollers: AvrMicrocontroller[];
+  microcontrollers: AvrMicrocontrollerBase[];
 
   constructor(private driverService: DriverService) {
-    this.microcontrollers = AvrMicrocontroller.getAvrMicrocontrollers()
+    this.microcontrollers = AvrMicrocontrollerBase.getAvrMicrocontrollers()
   }
 
   ngOnInit(): void {

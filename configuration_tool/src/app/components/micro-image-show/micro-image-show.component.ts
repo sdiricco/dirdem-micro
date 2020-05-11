@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
 import { MicroPinoutDialogComponent } from '../micro-pinout-dialog/micro-pinout-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Overlay } from '@angular/cdk/overlay';
@@ -10,7 +10,7 @@ import { Overlay } from '@angular/cdk/overlay';
   styleUrls: ['./micro-image-show.component.css']
 })
 export class MicroImageShowComponent implements OnInit {
-  @Input() microcontroller: AvrMicrocontroller;
+  @Input() microcontroller: AvrMicrocontrollerBase;
 
   constructor(public dialog: MatDialog, private overlay: Overlay  ) { }
 

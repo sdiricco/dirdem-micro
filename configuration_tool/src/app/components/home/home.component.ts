@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ElectronService } from 'ngx-electron';
 import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
-import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
 
 @Component({
   selector: "app-home",
@@ -12,10 +12,10 @@ import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent {
-  get microcontroller(): AvrMicrocontroller {
+  get microcontroller(): AvrMicrocontrollerBase {
     return this.driverService.microcontrollerSelected;
   }
-  set microcontroller(value: AvrMicrocontroller) {
+  set microcontroller(value: AvrMicrocontrollerBase) {
     this.driverService.microcontrollerSelected = value;
   }
   get linkToHexFile(): string {

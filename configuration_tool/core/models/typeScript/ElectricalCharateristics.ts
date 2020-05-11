@@ -6,7 +6,12 @@ export class ElectricalCharateristics {
     powerConsumption?: PowerConsumption;
 }
 
-
+/**
+ * Le sorgenti di clock possono essere espresse o tramite una lista di valori assoluti
+ * o tramite un range di valori. Il clock inoltre può essere prodotto interamente da
+ * un circuito interno o può essere il risultato di componentistica esterna come 
+ * un quarzo o un filtro RC selezionati dall'utente 
+ */
 export class ClockFrequencyOscillator {
     clockFrequencyOscillatorValue?: Frequency;
     clockFrequencyOscillatorRange?: Frequency [];
@@ -30,7 +35,7 @@ export class PowerConsumptionMode {
 }
 
 export interface PowerConsumptionReference {
-    powerConsumptionReferenceFrequency: Frequency;
+    powerConsumptionReferenceFrequency?: Frequency;
     powerConsumptionReferenceVoltage?: Voltage;
     powerConsumptionReferenceTemperature?: Temperature; 
 }
@@ -45,7 +50,7 @@ export enum ClockFrequenciesOscillatorTypeEnum {
 }
 
 export enum ClockFrequenciesOscillatorMaterialEnum {
-    Quartz = "Quartz",
+    Crystal = "Crystal",
     RC = "RC",
     Ceramic = "Ceramic"
 }

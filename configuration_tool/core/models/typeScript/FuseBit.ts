@@ -1,7 +1,21 @@
 import { ConverterUtilities } from './Utilities/ConverterUtilities'
 
 export class Fuse {
-  hexValue: string;
+  //hexValue: string;
+  get hexValue(): string {
+    let result = 0;
+
+    for (let i = this.bits.length-1 ; i >= 0; i--) {
+      const bit = this.bits[i];
+      let bitValue: number;
+      bit.value? bitValue = 1 : bitValue = 0;
+      result += (bitValue)*Math.pow(2, i);     
+    }
+    return ConverterUtilities.numberToHex(result)
+  }
+  set hexValue(hexValue) {
+    this.hexValue = hexValue;
+  } 
   type: FusesType;
   bits: FuseBit [];
 }

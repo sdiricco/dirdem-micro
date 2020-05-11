@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import FileSaver = require('file-saver');
 import { GptDriverConfig } from 'core/models/typeScript/GptDriver';
-import { Microcontroller } from 'core/models/typeScript/Microcontroller';
+import { MicrocontrollerBase } from 'core/models/typeScript/Microcontroller';
 import { Fuse } from 'core/models/typeScript/FuseBit';
-import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ export class DriverService {
 
   gptDriverConfiguration: GptDriverConfig [] = [];
   fuseBitConfiguration: Fuse [] = [];
-  microcontrollerSelected: AvrMicrocontroller = new AvrMicrocontroller();
+  microcontrollerSelected: AvrMicrocontrollerBase = new AvrMicrocontrollerBase();
   compiledHexFilePath: string;
 
   constructor() { }
