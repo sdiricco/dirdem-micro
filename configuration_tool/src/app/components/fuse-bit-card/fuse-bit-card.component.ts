@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
+import { AvrMicrocontrollerBase, AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { MicrocontrollerBase } from 'core/models/typeScript/Microcontroller';
 import { MatDialog } from '@angular/material/dialog';
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
 import { Overlay } from '@angular/cdk/overlay';
+import { DriverService } from 'src/app/services/driver.service';
 
 @Component({
   selector: 'app-fuse-bit-card',
@@ -11,12 +12,13 @@ import { Overlay } from '@angular/cdk/overlay';
   styleUrls: ['./fuse-bit-card.component.css']
 })
 export class FuseBitCardComponent implements OnInit {
-
-  @Input() microcontroller: any;
-
-  constructor(public dialog: MatDialog, private overlay: Overlay) { }
+  microcontroller: AvrMicrocontroller;
+  constructor(public dialog: MatDialog, private overlay: Overlay, private driverService: DriverService) { }
 
   ngOnInit(): void {
+    this.driverService.microcontrollerSelected.subscribe(microcontroller => {
+      this.microcontroller = microcontroller;
+    })
   }
 
   /**
@@ -26,7 +28,7 @@ export class FuseBitCardComponent implements OnInit {
     const dialogRef = this.dialog.open(FuseBitComponent, {
       width: "920px",
       scrollStrategy: this.overlay.scrollStrategies.noop(),
-      data: this.microcontroller.fuses
+      data: this.microcontroller.avrMicrocontrollerBase.fuses
     })
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);

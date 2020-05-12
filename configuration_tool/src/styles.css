@@ -1,28 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
 
+@import '~bootstrap/dist/css/bootstrap.min.css';
 /* color palette */
+
 :root {
-  --lightPrimary: #C5CAE9;
-  --primary: #3F51B5;
-  --accent: #FF4081;
-  --text: #212121;
-  --textLight: #FFFFFF;
-  --warn: #f44336;
-  --nerdBackground: black;
-  --nerdText: greenyellow;
+  --nerdPrimary: var(--cyan);
+  --nerdAccent: greenyellow;
+  --nerdDark: black;
+  --nerdLight: white;
+  --matPrimary: #3f51b5;
+  --matAccent: #FF4081;
+}
+
+@font-face {
+  font-family: DirdemCustomFont;
+  src: url('assets/fonts/PressStart2P-Regular.ttf');
+}
+
+* {
+  font-family: consolas;
 }
 
 html {
   height: 100%;
   margin: 0;
   overflow-x: hidden;
+  font-family: consolas;
 }
 
 body {
   height: 100%;
   margin: 0;
-  background-color: var(--textLight);
+}
+
+#dirdem-toolbar-container {
+  background-color: var(--matPrimary);
+  height: 32px;
+  border-bottom: solid 2px var( --nerdAccent);
+  color: var(--nerdDark);
 }
 
 #spinner {
@@ -34,29 +49,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--lightPrimary);
+  background-color: var(--nerdPrimary);
   opacity: 0.5;
   z-index: 9999999;
 }
 
-/* per nascondere barra laterale scrolling quando compare il popup */
-.cdk-global-scrollblock {
-  overflow: hidden !important;
-}
-
-.backgroundLightPrimary {
-  background-color: var(--lightPrimary);
-}
-
-.colorText {
-  color: var(--text);
-}
-
-.colorTextLight {
-  color: var(--textLight);
-}
-
-.centerText {
+.centered-text {
   text-align: center;
 }
 
@@ -64,38 +62,35 @@ body {
   cursor: pointer;
 }
 
-.colorAccent {
-  color: var(--accent);
-}
-
-.colorPrimary {
-  color: var(--primary);
-}
-
-.verticalColSpacing {
-  height: 15px;
-}
-
-.flexDisplay {
-  display: flex;
-}
-
 .bolder {
   font-weight: bolder;
 }
 
-
-/**/
-.infoCards {
+.dirdem-info-cards {
   display: flex;
   flex-direction: column;
+  background-color: var(--matPrimary);
+  color: var(--nerdLight);
   min-width: 280px;
   z-index: 1;
 }
 
-.cardTitle {
-  font-size: 17px;
-  font-weight: 700 !important;
-  text-align: center !important;
-  margin-bottom: 15px !important;
+.dirdem-card-headers {
+  background-color: var(--nerdPrimary);
+  color: var(--nerdAccent);
+}
+
+.dirdem-page-container {
+  margin-top: 30px;
+}
+
+.dirdem-toolbar-buttons {
+  height: 30px;
+  border: solid 2px var(--nerdAccent);
+}
+
+.dirdem-toolbar-buttons:hover {
+  background-color: var(--nerdPrimary);
+  color: var(--nerdLight);
+  border: solid 2px var(--matAccent);
 }

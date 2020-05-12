@@ -1,0 +1,17 @@
+<div id="dirdem-toolbar-container">
+  <button (click)="selectAndCompileCProject()" matTooltip="Compile" class="dirdem-toolbar-buttons">
+    Compile .C project
+  </button>
+  <button (click)="burnCProject()" matTooltip="Flash" class="dirdem-toolbar-buttons">
+    Flash project
+  </button>
+  <span id="linkToHexFile" *ngIf="linkToHexFile">
+    {{ linkToHexFile }}
+  </span>
+
+
+  <button (click)="burnArduinoUnoBootloader()" matTooltip="Burn bootloader" class="dirdem-toolbar-buttons" style="position: absolute; right: 0;">
+    Burn Arduino UNO bootloader
+  </button>
+
+</div>

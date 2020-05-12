@@ -1,8 +1,10 @@
-<mat-card class="backgroundLightPrimary infoCards">
-  <div class="cardTitle">Fuses</div>
+<mat-card class="dirdem-info-cards">
+  <div class="dirdem-card-headers">
+    <h6 class="centered-text">Fuses</h6>
+  </div>
   <div class="row d-flex align-items-center">
     <div class="col-8">
-      <div *ngFor="let fuse of microcontroller.fuses"> {{ fuse.type }} </div>
+      <div *ngFor="let fuse of microcontroller.avrMicrocontrollerBase.fuses"> {{ fuse.type }} </div>
     </div>
     <div class="col-2">
       <button mat-icon-button (click)="openFuseBitComponent($event)">

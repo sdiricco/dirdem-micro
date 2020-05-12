@@ -12,8 +12,8 @@ import { MemorySegment } from './MemorySegment';
  */
 export class MicrocontrollerBase {
     name: string;
-    brand: MicroBrand;
-    family: MicroFamily;
+    brand: MicroBrandsEnum;
+    family: MicroFamiliesEnum;
     datasheetUrl: string;
     imagesSrc: string [];
     pinoutImagesSrc: string [];
@@ -25,11 +25,11 @@ export class MicrocontrollerBase {
     communicationInterfaces: CommunicationInterface [];
 }
 
-export enum MicroFamily {
+export enum MicroFamiliesEnum {
     AVR = "AVR"
 }
 
-export enum MicroBrand {
+export enum MicroBrandsEnum {
     Atmel = "Atmel"
 }
 

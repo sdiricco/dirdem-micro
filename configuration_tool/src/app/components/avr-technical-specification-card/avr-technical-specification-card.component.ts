@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AvrMicrocontrollerTechnicalSpecification } from 'core/models/typeScript/AvrMicrocontroller';
+import { DriverService } from 'src/app/services/driver.service';
 
 @Component({
   selector: 'app-avr-technical-specification-card',
@@ -8,12 +8,16 @@ import { AvrMicrocontrollerTechnicalSpecification } from 'core/models/typeScript
 })
 export class AvrTechnicalSpecificationCardComponent implements OnInit {
 
-  @Input() avrTechincalSpecification: AvrMicrocontrollerTechnicalSpecification;
-
-
-  constructor() { }
+  constructor(private driverService: DriverService) { }
 
   ngOnInit(): void {
+    this.driverService.microcontrollerSelected.subscribe(microcontroller => {
+      console.log(microcontroller);
+    })
+  }
+
+  ngOnChanges(): void {
+
   }
 
 }

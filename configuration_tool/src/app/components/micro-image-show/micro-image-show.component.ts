@@ -23,7 +23,7 @@ export class MicroImageShowComponent implements OnInit {
   showPinout() {
     const dialogRef = this.dialog.open(MicroPinoutDialogComponent, {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
-      data: this.microcontroller.technicalSpecification
+      data: this.microcontroller
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);

@@ -1,5 +1,5 @@
-<div id="buttonsContainer">
-  <div *ngIf="microcontroller.name" style="display: flex; align-items: center;">
+<!--div id="buttonsContainer" *ngIf="microcontroller.avrMicrocontrollerBase">
+  <div *ngIf="microcontroller.avrMicrocontrollerBase.name" style="display: flex; align-items: center;">
     <button mat-raised-button color="primary" (click)="selectAndCompileCProject()" matTooltip="Compile">
       Compile project
     </button>
@@ -7,28 +7,31 @@
       style="margin-right: 10px; margin-left: 10px;">
       Burn project
     </button>
-    <!-- link al file .hex compilato dai file .C -->
+
     <span id="linkToHexFile" *ngIf="linkToHexFile">
       {{ linkToHexFile }}
     </span>
   </div>
-  <div class="d-flex justify-content-end" *ngIf="microcontroller.name == 'ATmega328P'">
+  <div class="d-flex justify-content-end" *ngIf="microcontroller.avrMicrocontrollerBase.name == 'ATmega328P'">
     <button mat-raised-button color="primary" (click)="burnArduinoUnoBootloader()" matTooltip="Burn bootloader">
       Burn Arduino UNO bootloader
     </button>
   </div>
+</div-->
+
+
+<div *ngIf="microcontroller.avrMicrocontrollerBase">
+  <app-toolbar></app-toolbar>
 </div>
 
-<app-micro-selector [microcontroller]="microcontroller"></app-micro-selector>
+<div class="dirdem-page-container">
 
-<!--div che compare solo dopo aver selezionato il microcontrollore-->
-<div *ngIf="microcontroller.name" class="row d-flex justify-content-around">
+  <app-micro-selector></app-micro-selector>
 
-  <app-avr-technical-specification-card [avrTechincalSpecification]="microcontroller.technicalSpecification">
-  </app-avr-technical-specification-card>
-
-  <app-micro-image-show [microcontroller]="microcontroller"></app-micro-image-show>
-
-  <app-fuse-bit-card [microcontroller]="microcontroller"></app-fuse-bit-card>
+  <div *ngIf="microcontroller.avrMicrocontrollerBase" class="row d-flex justify-content-around">
+    <app-avr-technical-specification-card> </app-avr-technical-specification-card>
+    <app-micro-image-show> </app-micro-image-show>
+    <app-fuse-bit-card> </app-fuse-bit-card>
+  </div>
 
 </div>

@@ -16,7 +16,7 @@
 }
 
 #linkToHexFile {
-  color: var(--nerdText);
-  background-color: var(--nerdBackground);
+  color: var(--nerdAccent);
+  background-color: var(--nerdDark);
   padding: 5px;
 }

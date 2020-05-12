@@ -18,6 +18,7 @@ import { FuseBitCardComponent } from './components/fuse-bit-card/fuse-bit-card.c
 import { AvrTechnicalSpecificationCardComponent } from './components/avr-technical-specification-card/avr-technical-specification-card.component';
 import { MicroSelectorComponent } from './components/micro-selector/micro-selector.component';
 import { MicroImageShowComponent } from './components/micro-image-show/micro-image-show.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MicroImageShowComponent } from './components/micro-image-show/micro-ima
     FuseBitCardComponent,
     AvrTechnicalSpecificationCardComponent,
     MicroSelectorComponent,
-    MicroImageShowComponent
+    MicroImageShowComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

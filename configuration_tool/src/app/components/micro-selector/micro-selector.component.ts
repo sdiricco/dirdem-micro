@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DriverService } from 'src/app/services/driver.service';
 import { MatSelectChange } from '@angular/material/select';
-import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
+import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { ATMEGA32 } from 'core/models/typeScript/Microcontrollers/ATmega32';
 
 @Component({
   selector: 'app-micro-selector',
@@ -9,10 +10,10 @@ import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontrolle
   styleUrls: ['./micro-selector.component.css']
 })
 export class MicroSelectorComponent implements OnInit {
-  microcontrollers: AvrMicrocontrollerBase[];
+  microcontrollers: AvrMicrocontroller [];
 
   constructor(private driverService: DriverService) {
-    this.microcontrollers = AvrMicrocontrollerBase.getAvrMicrocontrollers()
+    this.microcontrollers = this.generateMicocontrollersList();
   }
 
   ngOnInit(): void {
@@ -23,7 +24,27 @@ export class MicroSelectorComponent implements OnInit {
    */
   onMicroSelected(evt: MatSelectChange):void {
     this.driverService.clearAllConfigurations();
-    this.driverService.microcontrollerSelected = evt.value;
+    this.driverService.microcontrollerSelected.next(evt.value);
+  }
+
+  /**
+   * Generazione della lista di tutti i microcontrollori selezionabili
+   */
+  private generateMicocontrollersList(): AvrMicrocontroller [] {
+    let microcontrollersList = [];
+    /**
+     * inserimento Atmega32
+     */
+    let atmega32 = new AvrMicrocontroller(ATMEGA32);
+    microcontrollersList.push(atmega32);
+    /**
+     * inserimento Atmega328 toDo
+     */
+
+     /**
+      * restituzione della lista valorizzata con i microcontrollori
+      */
+     return microcontrollersList;
   }
 
 }

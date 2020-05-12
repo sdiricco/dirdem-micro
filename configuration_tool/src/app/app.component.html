@@ -1,11 +1,8 @@
 <app-home></app-home>
 
-<router-outlet></router-outlet>
-
 <div id="spinner" *ngIf="showSpinner">
   <mat-spinner></mat-spinner>
 </div>
 
 <app-log-message [logMessage]="logMessage" (closeLogMessage)="onCloseLogMessage()" *ngIf="logMessage">
-
 </app-log-message>

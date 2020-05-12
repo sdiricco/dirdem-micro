@@ -1,5 +1,5 @@
 import { AvrMicrocontrollerBase } from '../AvrMicrocontroller';
-import { MicroBrand, MicroFamily } from '../Microcontroller';
+import { MicroBrandsEnum, MicroFamiliesEnum } from '../Microcontroller';
 import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeasuresEnum, TemperatureMeasuresEnum, CurrentsMeasureUnitEnum } from '../Utilities/ElectronicUtilities';
 import { MicrocontrollerTimerNames } from '../PeripheralFeatures';
 import { PinLabelsEnum, MicrocontrollerPackageEnum } from '../MicrocontrollerPins';
@@ -8,11 +8,11 @@ import { FusesType as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '..
 import { ClockFrequenciesOscillatorTypeEnum, ClockFrequenciesOscillatorMaterialEnum, PowerConsumptionModeNamesEnum } from '../ElectricalCharateristics';
 import { MemorySegmentNamesEnum } from '../MemorySegment';
 
-export const ATMEGA32: AvrMicrocontrollerBase = 
+export const ATMEGA32: AvrMicrocontrollerBase =
 {
     name: "ATmega32",
-    brand: MicroBrand.Atmel,
-    family: MicroFamily.AVR,
+    brand: MicroBrandsEnum.Atmel,
+    family: MicroFamiliesEnum.AVR,
     datasheetUrl: "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf",
     imagesSrc:
     [
@@ -23,9 +23,9 @@ export const ATMEGA32: AvrMicrocontrollerBase =
         "assets/images/ATmega32pinout.png",
     ],
     dataBus:
-    { 
+    {
         value: 8,
-        measureUnit: ElectronicUnitMeasuresEnum.Bit 
+        measureUnit: ElectronicUnitMeasuresEnum.Bit
     },
     memorySegments:
     [
@@ -54,9 +54,9 @@ export const ATMEGA32: AvrMicrocontrollerBase =
             }
         }
     ],
-    electricalCharateristics: 
+    electricalCharateristics:
     {
-        clockFrequencyOscillator: 
+        clockFrequencyOscillator:
         [
             {
                 clockFrequencyOscillatorValue:
@@ -152,7 +152,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
             },
         ],
-        operatingVoltages: 
+        operatingVoltages:
         [
             {
                operatingVoltageValue:
@@ -170,7 +170,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                        value: 5.5,
                        measureUnit: VoltageUnitMeasuresEnum.V
                    }
-               ] 
+               ]
             }
         ],
         powerConsumption:
@@ -930,7 +930,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 {
                     value: 16,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
-                } 
+                }
             },
             {
                 name: MicrocontrollerTimerNames.Timer2,
@@ -938,7 +938,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 {
                     value: 8,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
-                } 
+                }
             },
 
         ]
@@ -980,7 +980,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 { label: FuseBitLabelEnum.CKSEL3, value: false },
                 { label: FuseBitLabelEnum.CKSEL2, value: false },
                 { label: FuseBitLabelEnum.CKSEL1, value: true },
-                { label: FuseBitLabelEnum.CKSEL0, value: false }                        
+                { label: FuseBitLabelEnum.CKSEL0, value: false }
             ]
         },
         {
@@ -995,7 +995,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 { label: FuseBitLabelEnum.EESAVE, value: true },
                 { label: FuseBitLabelEnum.BOOTSZ1, value: false },
                 { label: FuseBitLabelEnum.BOOTSZ0, value: false },
-                { label: FuseBitLabelEnum.BOOTRST, value: true }                        
+                { label: FuseBitLabelEnum.BOOTRST, value: true }
             ]
         }
     ]

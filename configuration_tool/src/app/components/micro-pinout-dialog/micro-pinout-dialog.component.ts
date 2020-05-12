@@ -10,7 +10,7 @@ export class MicroPinoutDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<MicroPinoutDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AvrMicrocontrollerTechnicalSpecification) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
     console.log(this.data)

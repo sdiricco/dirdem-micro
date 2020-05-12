@@ -44,7 +44,8 @@ export class FuseBitComponent {
    */
   setFuses() {
     this.loaderService.updateProcess(ProcessStatus.pending);
-    let microLabel = this.driverService.microcontrollerSelected.avrLabel;
+    let microLabel = this.driverService.microcontrollerSelected.getValue();
+    console.log(microLabel);
     let lowFuse = '0x' + this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.LOW).hexValue;
     let highFuse = '0x' +this.driverService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.HIGH).hexValue;
 
