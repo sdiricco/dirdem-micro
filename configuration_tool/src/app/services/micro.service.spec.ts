@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DriverService } from './driver.service';
+import { MicroService } from './micro.service';
 
 describe('DriverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DriverService = TestBed.get(DriverService);
+    const service: MicroService = TestBed.get(MicroService);
     expect(service).toBeTruthy();
   });
 });

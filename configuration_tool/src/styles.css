@@ -94,3 +94,11 @@ body {
   color: var(--nerdLight);
   border: solid 2px var(--matAccent);
 }
+
+.dirdem-technical-specification-values {
+  color: var(--nerdAccent);
+}
+
+.dirdem-technical-specification-overviews {
+  color: var(--matAccent);
+}

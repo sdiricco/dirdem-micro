@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AvrMicrocontrollerBase } from 'core/models/typeScript/AvrMicrocontroller';
+import { Component, OnInit } from '@angular/core';
+import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { MicroPinoutDialogComponent } from '../micro-pinout-dialog/micro-pinout-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Overlay } from '@angular/cdk/overlay';
+import { MicroService } from 'src/app/services/micro.service';
 
 @Component({
   selector: 'app-micro-image-show',
@@ -10,11 +11,15 @@ import { Overlay } from '@angular/cdk/overlay';
   styleUrls: ['./micro-image-show.component.css']
 })
 export class MicroImageShowComponent implements OnInit {
-  @Input() microcontroller: AvrMicrocontrollerBase;
+  microcontroller: AvrMicrocontroller;
+  get imgSrc():string { return this.microcontroller.avrMicrocontrollerBase.imagesSrc[0] }
 
-  constructor(public dialog: MatDialog, private overlay: Overlay  ) { }
+  constructor(public dialog: MatDialog, private overlay: Overlay, private microService: MicroService) { }
 
   ngOnInit(): void {
+    this.microService.microcontrollerSelected.subscribe(microcontroller => {
+      this.microcontroller = microcontroller;
+    })
   }
 
   /**

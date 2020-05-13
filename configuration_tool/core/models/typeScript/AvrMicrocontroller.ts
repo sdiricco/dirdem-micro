@@ -1,7 +1,5 @@
-import { FuseBitLabel, FusesType, Fuse } from './FuseBit';
-import { MicroBrandsEnum, MicroFamiliesEnum, MicrocontrollerBase } from './Microcontroller';
-import { AvrTechnicalSpecificationCardComponent } from 'src/app/components/avr-technical-specification-card/avr-technical-specification-card.component';
-import { ATMEGA32 } from './Microcontrollers/ATmega32';
+import { Fuse } from './FuseBit';
+import { MicrocontrollerBase } from './Microcontroller';
 import { MicrocontrollerPackageEnum } from './MicrocontrollerPins';
 
 export class AvrMicrocontrollerBase extends MicrocontrollerBase {
@@ -9,11 +7,10 @@ export class AvrMicrocontrollerBase extends MicrocontrollerBase {
   fuses: Fuse[];
 }
 
-export class AvrMicrocontroller extends AvrMicrocontrollerBase {
+export class AvrMicrocontroller {
   avrMicrocontrollerBase: AvrMicrocontrollerBase;
 
   constructor(avrMicrocontrollerBase?: AvrMicrocontrollerBase) {
-    super();
     if (avrMicrocontrollerBase) {
       this.avrMicrocontrollerBase = avrMicrocontrollerBase;
     }

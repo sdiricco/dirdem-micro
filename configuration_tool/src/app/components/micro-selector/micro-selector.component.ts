@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DriverService } from 'src/app/services/driver.service';
+import { MicroService } from 'src/app/services/micro.service';
 import { MatSelectChange } from '@angular/material/select';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { ATMEGA32 } from 'core/models/typeScript/Microcontrollers/ATmega32';
@@ -12,7 +12,7 @@ import { ATMEGA32 } from 'core/models/typeScript/Microcontrollers/ATmega32';
 export class MicroSelectorComponent implements OnInit {
   microcontrollers: AvrMicrocontroller [];
 
-  constructor(private driverService: DriverService) {
+  constructor(private driverService: MicroService) {
     this.microcontrollers = this.generateMicocontrollersList();
   }
 
@@ -24,7 +24,7 @@ export class MicroSelectorComponent implements OnInit {
    */
   onMicroSelected(evt: MatSelectChange):void {
     this.driverService.clearAllConfigurations();
-    this.driverService.microcontrollerSelected.next(evt.value);
+    this.driverService.updateMicrocontroller(evt.value);
   }
 
   /**

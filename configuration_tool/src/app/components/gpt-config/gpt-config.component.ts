@@ -2,7 +2,7 @@ import { Component, ViewChild, Inject,  AfterViewInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSelect } from '@angular/material/select';
 import { ToastrService } from "ngx-toastr";
-import { DriverService } from "src/app/services/driver.service";
+import { MicroService } from "src/app/services/micro.service";
 import { ChangeDetectorRef } from "@angular/core";
 import { GptDriverConfig, ATmega328Values } from 'core/models/typeScript/GptDriver';
 
@@ -33,13 +33,13 @@ export class GptCfgConfigComponent implements AfterViewInit {
   }
 
   constructor(
-    private driverService: DriverService,
+    private microService: MicroService,
     private toastr: ToastrService,
     private cdRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<GptCfgConfigComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   )
-  { this.configurations = this.driverService.gptDriverConfiguration }
+  { this.configurations = this.microService.gptDriverConfiguration }
 
   ngAfterViewInit() {
     this._refreshDropDownAndTable();
@@ -52,17 +52,17 @@ export class GptCfgConfigComponent implements AfterViewInit {
   addConfig(config: GptDriverConfig) {
     // inserimento nell'array delle configurazioni
     let result = Object.assign({}, config);
-    this.driverService.gptDriverConfiguration.push(result);
+    this.microService.gptDriverConfiguration.push(result);
     this._refreshDropDownAndTable();
   }
   // cancella una configurazione (tasto X sulla tabella)
   deleteConfig(config: GptDriverConfig) {
       // rimozione configuraione dall'array configurazioni
-    let element = this.driverService.gptDriverConfiguration.find(
+    let element = this.microService.gptDriverConfiguration.find(
       _ => _.gptContainerHwChannel == config.gptContainerHwChannel
     );
-    let configIndex = this.driverService.gptDriverConfiguration.indexOf(element);
-    this.driverService.gptDriverConfiguration.splice(configIndex, 1);
+    let configIndex = this.microService.gptDriverConfiguration.indexOf(element);
+    this.microService.gptDriverConfiguration.splice(configIndex, 1);
     this._refreshDropDownAndTable();
   }
   // sull'inserimento delle notification api (area di testo) per controllo caratteri
@@ -92,15 +92,15 @@ export class GptCfgConfigComponent implements AfterViewInit {
    **************************/
   // abilitazione/disabilitazione matSelect (dropdown) hwChannel e channelId e rendering della tabella
   private _refreshDropDownAndTable() {
-    this.configurations = this.driverService.gptDriverConfiguration;
+    this.configurations = this.microService.gptDriverConfiguration;
     this.configurations = [...this.configurations]
     this.channelIdDropDown.options.forEach(chId => {
-      chId.disabled = this.driverService.gptDriverConfiguration.find(config => {
+      chId.disabled = this.microService.gptDriverConfiguration.find(config => {
         return config.gptChannelID == chId.value;
       })
     });
     this.hwChannelDropDown.options.forEach(chHw => {
-      chHw.disabled = this.driverService.gptDriverConfiguration.find(config => {
+      chHw.disabled = this.microService.gptDriverConfiguration.find(config => {
         return config.gptContainerHwChannel == chHw.value;
       })
     });

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
-import { DriverService } from './services/driver.service';
+import { MicroService } from './services/micro.service';
 import { LoaderService, ProcessStatus } from './services/loader.service';
 import { MAIN_OUT_PROCESSES } from 'core/models/typeScript/MainProcesses';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   showSpinner: boolean = false;
   logMessage: string;
 
-  constructor(private electronService: ElectronService, private driverService: DriverService,
+  constructor(private electronService: ElectronService, private driverService: MicroService,
     private cdr: ChangeDetectorRef, private loaderService: LoaderService, private toastr: ToastrService) { }
 
   ngOnInit() {

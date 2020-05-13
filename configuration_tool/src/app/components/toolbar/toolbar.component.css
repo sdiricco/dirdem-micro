@@ -1,0 +1,5 @@
+#linkToHexFile {
+  color: var(--nerdAccent);
+  background-color: var(--nerdDark);
+  padding: 5px;
+}

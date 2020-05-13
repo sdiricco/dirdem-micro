@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DriverService } from 'src/app/services/driver.service';
+import { MicroService } from 'src/app/services/micro.service';
+import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { MicrocontrollerPackageEnum } from 'core/models/typeScript/MicrocontrollerPins';
 
 @Component({
   selector: 'app-avr-technical-specification-card',
@@ -8,16 +10,22 @@ import { DriverService } from 'src/app/services/driver.service';
 })
 export class AvrTechnicalSpecificationCardComponent implements OnInit {
 
-  constructor(private driverService: DriverService) { }
+  microcontroller: AvrMicrocontroller;
+  get microcontrollerPackage(): MicrocontrollerPackageEnum { return this.microService.microcontrollerPackage };
+  /**
+   * se ritorna nullo il defaultPinCount non corrisponde alla somma dei pin nell'array pins in MicrocontrollerPinConfiguaration
+   */
+  get microcontrollerPinCount(): number {
+    return this.microcontroller.pinCount(this.microService.microcontrollerPackage);
+  }
+
+  constructor(private microService: MicroService) { }
 
   ngOnInit(): void {
-    this.driverService.microcontrollerSelected.subscribe(microcontroller => {
-      console.log(microcontroller);
+    this.microService.microcontrollerSelected.subscribe(microcontroller => {
+      this.microcontroller = microcontroller;
     })
   }
 
-  ngOnChanges(): void {
-
-  }
 
 }

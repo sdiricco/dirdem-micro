@@ -4,7 +4,7 @@
     {
       "name": "Debug Main Process",
       "protocol": "inspector",
-      "type": "node",
+      "type": "node2",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",

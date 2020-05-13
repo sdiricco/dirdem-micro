@@ -4,7 +4,7 @@ import { MicrocontrollerBase } from 'core/models/typeScript/Microcontroller';
 import { MatDialog } from '@angular/material/dialog';
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
 import { Overlay } from '@angular/cdk/overlay';
-import { DriverService } from 'src/app/services/driver.service';
+import { MicroService } from 'src/app/services/micro.service';
 
 @Component({
   selector: 'app-fuse-bit-card',
@@ -13,10 +13,10 @@ import { DriverService } from 'src/app/services/driver.service';
 })
 export class FuseBitCardComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
-  constructor(public dialog: MatDialog, private overlay: Overlay, private driverService: DriverService) { }
+  constructor(public dialog: MatDialog, private overlay: Overlay, private microService: MicroService) { }
 
   ngOnInit(): void {
-    this.driverService.microcontrollerSelected.subscribe(microcontroller => {
+    this.microService.microcontrollerSelected.subscribe(microcontroller => {
       this.microcontroller = microcontroller;
     })
   }

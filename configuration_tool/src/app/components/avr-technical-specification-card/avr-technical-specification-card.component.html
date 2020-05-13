@@ -1,5 +1,50 @@
 <mat-card class="dirdem-info-cards">
+
   <div class="dirdem-card-headers">
     <h6 class="centered-text">Avr Technical Specifications</h6>
   </div>
+
+  <div>
+    <span class="dirdem-technical-specification-overviews">
+      {{ microcontroller.avrMicrocontrollerBase.dataBus.value }} -
+      {{ microcontroller.avrMicrocontrollerBase.dataBus.measureUnit }} Microcontroller
+    </span>
+  </div>
+  <!-- Name -->
+  <div>
+    <span> Name: </span> <span class="dirdem-technical-specification-values">
+      {{ microcontroller.avrMicrocontrollerBase.name }} </span>
+  </div>
+  <!-- Family -->
+  <div>
+    <span> Family: </span> <span class="dirdem-technical-specification-values">
+      {{ microcontroller.avrMicrocontrollerBase.family }} </span>
+  </div>
+  <!-- Avr label -->
+  <div>
+    <span> Avr label: </span> <span class="dirdem-technical-specification-values">
+      {{ microcontroller.avrMicrocontrollerBase.avrLabel }} </span>
+  </div>
+  <!-- Memory segments -->
+  <div>
+    <span> Memory Segments: </span>
+    <div *ngFor="let segment of microcontroller.avrMicrocontrollerBase.memorySegments">
+      <li class="dirdem-technical-specification-values">
+        {{ segment.memorySegmentName }}:{{ segment.memorySegmentValue.value }}
+        {{ segment.memorySegmentValue.measureUnit }}
+      </li>
+    </div>
+  </div>
+  <!-- I/O -->
+  <div>
+    <span> I/O (package {{ microcontrollerPackage }}): </span>
+    <span class="dirdem-technical-specification-values">
+      {{ microcontrollerPinCount }} Programmable I/O Lines
+    </span>
+  </div>
+  <!-- Speed grades -->
+  <div>
+
+  </div>
+
 </mat-card>
