@@ -9,7 +9,6 @@ export class AvrMicrocontrollerBase extends MicrocontrollerBase {
 
 export class AvrMicrocontroller {
   avrMicrocontrollerBase: AvrMicrocontrollerBase;
-
   constructor(avrMicrocontrollerBase?: AvrMicrocontrollerBase) {
     if (avrMicrocontrollerBase) {
       this.avrMicrocontrollerBase = avrMicrocontrollerBase;

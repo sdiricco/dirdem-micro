@@ -12,7 +12,7 @@ import { MicroService } from 'src/app/services/micro.service';
 })
 export class MicroImageShowComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
-  get imgSrc():string { return this.microcontroller.avrMicrocontrollerBase.imagesSrc[0] }
+  get imgSrc():string { return this.microcontroller.avrMicrocontrollerBase.pinoutImagesSrc[0] }
 
   constructor(public dialog: MatDialog, private overlay: Overlay, private microService: MicroService) { }
 

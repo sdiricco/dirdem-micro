@@ -20,7 +20,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
     ],
     pinoutImagesSrc:
     [
-        "assets/images/ATmega32pinout.png",
+        "assets/images/ATmega328Ppinout.png",
     ],
     dataBus:
     {
@@ -56,6 +56,11 @@ export const ATMEGA32: AvrMicrocontrollerBase =
     ],
     electricalCharateristics:
     {
+        clockFrequencyMaxValue: 
+        {
+            frequencyValue: 16,
+            frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
+        },
         clockFrequencyOscillator:
         [
             {

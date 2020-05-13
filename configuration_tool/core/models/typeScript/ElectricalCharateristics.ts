@@ -1,6 +1,7 @@
 import { Voltage, Frequency, Temperature, Current } from './Utilities/ElectronicUtilities';
 
 export class ElectricalCharateristics {
+    clockFrequencyMaxValue: Frequency;
     clockFrequencyOscillator: ClockFrequencyOscillator [];
     operatingVoltages: OperatingVoltage [];
     powerConsumption?: PowerConsumption;

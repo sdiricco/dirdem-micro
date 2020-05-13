@@ -7,9 +7,13 @@
   <app-micro-selector></app-micro-selector>
 
   <div *ngIf="microcontroller.avrMicrocontrollerBase" class="row d-flex justify-content-around">
-    <app-avr-technical-specification-card class="col-md-4"> </app-avr-technical-specification-card>
-    <app-micro-image-show class="col-md-4 d-flex align-items-center justify-content-center"> </app-micro-image-show>
-    <app-fuse-bit-card class="col-md-4"> </app-fuse-bit-card>
+    <div class="col-md-1"></div>
+    <div class="col-md-4 d-flex flex-column">
+      <app-avr-technical-specification-card> </app-avr-technical-specification-card>
+      <app-fuse-bit-card> </app-fuse-bit-card>
+    </div>
+    <app-micro-image-show class="col-md-6 d-flex align-items-center justify-content-center"> </app-micro-image-show>
+    <div class="col-md-1"></div>
   </div>
 
 </div>

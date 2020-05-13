@@ -13,7 +13,8 @@
   </div>
   <!-- Datasheet -->
   <div>
-    <a href="{{ microcontroller.avrMicrocontrollerBase.datasheetUrl }}" class="dirdem-clickable-link"> Official datasheet
+    <a href="{{ microcontroller.avrMicrocontrollerBase.datasheetUrl }}" class="dirdem-clickable-link"> Official
+      datasheet
     </a>
   </div>
   <!-- Name -->
@@ -25,11 +26,6 @@
   <div>
     <span> Family: </span> <span class="dirdem-technical-specification-values">
       {{ microcontroller.avrMicrocontrollerBase.family }} </span>
-  </div>
-  <!-- Avr label -->
-  <div>
-    <span> Avr label: </span> <span class="dirdem-technical-specification-values">
-      {{ microcontroller.avrMicrocontrollerBase.avrLabel }} </span>
   </div>
   <!-- Memory segments -->
   <div>
@@ -43,14 +39,18 @@
   </div>
   <!-- I/O -->
   <div>
-    <span> I/O (package {{ microcontrollerPackage }}): </span>
+    <span> Pin (package {{ microcontrollerPackage }}): </span>
     <span class="dirdem-technical-specification-values">
-      {{ microcontrollerPinCount }} Programmable I/O Lines
+      {{ microcontrollerPinCount }} (32 Programmable I/O Lines)
     </span>
   </div>
   <!-- Speed grades -->
   <div>
-
+    <span> Speed grade (Max): </span>
+    <span class="dirdem-technical-specification-values">
+      {{ microcontroller.avrMicrocontrollerBase.electricalCharateristics.clockFrequencyMaxValue.frequencyValue }}
+      {{ microcontroller.avrMicrocontrollerBase.electricalCharateristics.clockFrequencyMaxValue.frequencyMeasureUnit }}
+    </span>
   </div>
 
 </mat-card>

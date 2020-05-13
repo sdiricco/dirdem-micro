@@ -35,7 +35,7 @@ body {
 
 #dirdem-toolbar-container {
   background-color: var(--matPrimary);
-  height: 32px;
+  height: 40px;
   border-bottom: solid 2px var( --nerdAccent);
   color: var(--nerdDark);
 }
@@ -111,6 +111,11 @@ body {
   color: var(--nerdLight);
 }
 
+.dirdem-icons {
+  cursor: pointer;
+  color: var(--nerdLight);
+}
+
 .dirdem-icons:hover {
   cursor: pointer;
   color: var(--matAccent);
@@ -129,6 +134,16 @@ body {
   cursor: pointer;
   background-color: var(--matAccent);
   color: var(--nerdAccent);
+}
+
+.dirdem-toolbar-icon-buttons {
+  font-size: 20px;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+#dirdem-fuse-bit-card {
+  margin-top: 10px;
 }
 
 /**
