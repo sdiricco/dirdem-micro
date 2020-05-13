@@ -54,6 +54,12 @@ body {
   z-index: 9999999;
 }
 
+#linkToHexFile {
+  color: var(--nerdAccent);
+  background-color: var(--nerdDark);
+  padding: 5px;
+}
+
 .centered-text {
   text-align: center;
 }
@@ -82,17 +88,19 @@ body {
 
 .dirdem-page-container {
   margin-top: 30px;
+  padding: 10px;
 }
 
-.dirdem-toolbar-buttons {
+.dirdem-buttons {
   height: 30px;
   border: solid 2px var(--nerdAccent);
 }
 
-.dirdem-toolbar-buttons:hover {
-  background-color: var(--nerdPrimary);
-  color: var(--nerdLight);
-  border: solid 2px var(--matAccent);
+.dirdem-buttons:hover {
+  cursor: pointer;
+  background-color: var(--matAccent);
+  color: var(--nerdAccent);
+  border: solid 2px var(--nerdPrimary);
 }
 
 .dirdem-technical-specification-values {
@@ -100,5 +108,41 @@ body {
 }
 
 .dirdem-technical-specification-overviews {
+  color: var(--nerdLight);
+}
+
+.dirdem-icons:hover {
+  cursor: pointer;
   color: var(--matAccent);
+}
+
+.dirdem-clickable-link {
+  color: var(--nerdLight);
+  animation-name: fadeInOpacity;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+}
+
+.dirdem-clickable-link:hover {
+  animation-name: none;
+  cursor: pointer;
+  background-color: var(--matAccent);
+  color: var(--nerdAccent);
+}
+
+/**
+* Animazioni
+*/
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
