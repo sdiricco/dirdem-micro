@@ -8,12 +8,12 @@ import { FusesType as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '..
 import { ClockFrequenciesOscillatorTypeEnum, ClockFrequenciesOscillatorMaterialEnum, PowerConsumptionModeNamesEnum } from '../ElectricalCharateristics';
 import { MemorySegmentNamesEnum } from '../MemorySegment';
 
-export const ATMEGA32: AvrMicrocontrollerBase =
+export const ATMEGA328P: AvrMicrocontrollerBase =
 {
-    name: "ATmega32",
+    name: "ATmega32P",
     brand: MicroBrandsEnum.Atmel,
     family: MicroFamiliesEnum.AVR,
-    datasheetUrl: "http://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf",
+    datasheetUrl: "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf",
     dataBus:
     {
         value: 8,
@@ -205,7 +205,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
     [
         {
             microcontrollerPackage:  MicrocontrollerPackageEnum.PDIP,
-            defaultPinCount: 40,
+            defaultPinCount: 28,
             pinoutImagesSrc:
             [
                 "assets/images/ATmega32pinoutPDIP_A.png",
