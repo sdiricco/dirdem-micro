@@ -1,6 +1,6 @@
 import { ElectronicUnit } from './Utilities/ElectronicUtilities';
 
-export class PeripheralFeatures {
+export interface PeripheralFeatures {
     timers?: MicrocontrollerTimer [];
     adcs?: MicrocontrollerAdc [];
     analogComparators?: MicrocontrollerAnalogComparator [];
@@ -10,7 +10,7 @@ export class PeripheralFeatures {
 /**
  * Timers
  */
-export class MicrocontrollerTimer {
+export interface MicrocontrollerTimer {
     name: MicrocontrollerTimerNames;
     widthCounter?: ElectronicUnit;
     mode?: TimerModes;
@@ -32,7 +32,7 @@ export enum TimerModes {
 /**
  * ADCs
  */
-export class MicrocontrollerAdc {
+export interface MicrocontrollerAdc {
     name: MicrocontrollerAdcNames;
     resolution: ElectronicUnit;
 }
@@ -44,7 +44,7 @@ export enum MicrocontrollerAdcNames {
 /**
  * ADCs
  */
-export class MicrocontrollerAnalogComparator {
+export interface MicrocontrollerAnalogComparator {
     name: MicrocontrollerAnalogComparatorNames;
 }
 
@@ -55,7 +55,7 @@ export enum MicrocontrollerAnalogComparatorNames {
 /**
  * SleepModes
  */
-export class MicrontrollerSleepMode {
+export interface MicrontrollerSleepMode {
     name: MicrontrollerSleepModeNames;
 }
 

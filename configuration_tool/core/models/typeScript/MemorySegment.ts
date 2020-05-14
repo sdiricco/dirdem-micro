@@ -1,6 +1,6 @@
 import { ElectronicUnit } from './Utilities/ElectronicUtilities';
 
-export class MemorySegment {
+export interface MemorySegment {
     memorySegmentName: MemorySegmentNamesEnum;
     memorySegmentValue: ElectronicUnit;
 }

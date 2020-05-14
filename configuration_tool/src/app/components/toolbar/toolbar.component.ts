@@ -29,7 +29,7 @@ export class ToolbarComponent implements OnInit {
    */
   selectAndCompileCProject() {
     this.loaderService.updateProcess(ProcessStatus.pending);
-    let microcontrollerName = this.microcontroller.avrMicrocontrollerBase.name;
+    let microcontrollerName = this.microcontroller.name;
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.compileCProject, [microcontrollerName]);
   }
 
@@ -38,7 +38,7 @@ export class ToolbarComponent implements OnInit {
    */
   burnCProject() {
     this.loaderService.updateProcess(ProcessStatus.pending);
-    let microcontrollerLabel = this.microcontroller.avrMicrocontrollerBase.avrLabel;
+    let microcontrollerLabel = this.microcontroller.avrLabel;
     let hexFilePath = this.microService.compiledHexFilePath;
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnHexFile, [microcontrollerLabel, hexFilePath]);
   }

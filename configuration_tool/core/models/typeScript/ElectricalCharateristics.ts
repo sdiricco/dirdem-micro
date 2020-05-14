@@ -1,6 +1,6 @@
 import { Voltage, Frequency, Temperature, Current } from './Utilities/ElectronicUtilities';
 
-export class ElectricalCharateristics {
+export interface ElectricalCharateristics {
     clockFrequencyMaxValue: Frequency;
     clockFrequencyOscillator: ClockFrequencyOscillator [];
     operatingVoltages: OperatingVoltage [];
@@ -13,24 +13,24 @@ export class ElectricalCharateristics {
  * un circuito interno o può essere il risultato di componentistica esterna come 
  * un quarzo o un filtro RC selezionati dall'utente 
  */
-export class ClockFrequencyOscillator {
+export interface ClockFrequencyOscillator {
     clockFrequencyOscillatorValue?: Frequency;
     clockFrequencyOscillatorRange?: Frequency [];
     clockFrequencyOscillatorType?: ClockFrequenciesOscillatorTypeEnum;
     clockFrequencyOscillatorMaterial?: ClockFrequenciesOscillatorMaterialEnum;
 }
 
-export class OperatingVoltage {
+export interface OperatingVoltage {
     operatingVoltageValue: Voltage;
     operatingVoltageRange: Voltage [];
 }
 
-export class PowerConsumption {
+export interface PowerConsumption {
     powerConsumptionReference: PowerConsumptionReference;
     powerConsumptionMode: PowerConsumptionMode;
 }
 
-export class PowerConsumptionMode {
+export interface PowerConsumptionMode {
     powerConsumptionModeName: PowerConsumptionModeNamesEnum;
     powerConsumptionModeCurrent: Current;
 }

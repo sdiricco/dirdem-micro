@@ -12,7 +12,7 @@ import { MicroService } from 'src/app/services/micro.service';
 })
 export class MicroImageShowComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
-  get imgSrc():string { let microPackage = this.microcontroller.avrMicrocontrollerBase.microcontrollerPinConfigurations.find(config => {
+  get imgSrc():string { let microPackage = this.microcontroller.microcontrollerPinConfigurations.find(config => {
     return config.microcontrollerPackage == this.microService.microcontrollerPackage
   })
   return microPackage.pinoutImagesSrc[0];

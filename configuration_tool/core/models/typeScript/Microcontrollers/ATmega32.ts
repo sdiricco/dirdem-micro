@@ -1,5 +1,5 @@
 import { AvrMicrocontrollerBase } from '../AvrMicrocontroller';
-import { MicroBrandsEnum, MicroFamiliesEnum } from '../Microcontroller';
+import { MicroBrandsEnum, MicroFamiliesEnum, MicrocontrollerNamesEnum } from '../Microcontroller';
 import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeasuresEnum, TemperatureMeasuresEnum, CurrentsMeasureUnitEnum } from '../Utilities/ElectronicUtilities';
 import { MicrocontrollerTimerNames } from '../PeripheralFeatures';
 import { PinLabelsEnum, MicrocontrollerPackageEnum, PinTypesEnum } from '../MicrocontrollerPins';
@@ -10,7 +10,7 @@ import { MemorySegmentNamesEnum } from '../MemorySegment';
 
 export const ATMEGA32: AvrMicrocontrollerBase =
 {
-    name: "ATmega32",
+    name: MicrocontrollerNamesEnum.Atmega32,
     brand: MicroBrandsEnum.Atmel,
     family: MicroFamiliesEnum.AVR,
     datasheetUrl: "http://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf",

@@ -9,7 +9,7 @@ import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent {
-  microcontroller: AvrMicrocontroller = new AvrMicrocontroller();
+  microcontroller: AvrMicrocontroller;
 
   constructor(
     public dialog: MatDialog, private microService: MicroService) { };

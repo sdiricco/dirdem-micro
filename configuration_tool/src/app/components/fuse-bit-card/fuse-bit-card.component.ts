@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AvrMicrocontrollerBase, AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
-import { MicrocontrollerBase } from 'core/models/typeScript/Microcontroller';
+import { Component, OnInit } from '@angular/core';
+import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { MatDialog } from '@angular/material/dialog';
 import { FuseBitComponent } from '../fuse-bit/fuse-bit.component';
 import { Overlay } from '@angular/cdk/overlay';
@@ -28,7 +27,7 @@ export class FuseBitCardComponent implements OnInit {
     const dialogRef = this.dialog.open(FuseBitComponent, {
       width: "920px",
       scrollStrategy: this.overlay.scrollStrategies.noop(),
-      data: this.microcontroller.avrMicrocontrollerBase.fuses
+      data: this.microcontroller.fuses
     })
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
