@@ -31,8 +31,7 @@ To check if avr-gcc and avrdude are installed correctly, open cmd and digit:<br 
 Download the dirderm-micro softwre for linux here:<br />
 https://drive.google.com/file/d/1h6sAK3r9Q5_x8mgi7zyu9XG9QzDNmcY-/view?usp=sharing
 
-You need to install the avr-toolchain and avrdude.<br />
-Open the terminal and digit:<br />
+You need to install the avr-toolchain and avrdude, open the terminal and digit:<br />
 ```
 $ sudo apt-get install gcc-avr binutils-avr avr-libc
 $ sudo apt-get install avrdude
