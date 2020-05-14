@@ -15,8 +15,6 @@ export class MicrocontrollerBase {
     brand: MicroBrandsEnum;
     family: MicroFamiliesEnum;
     datasheetUrl: string;
-    imagesSrc: string [];
-    pinoutImagesSrc: string [];
     dataBus: ElectronicUnit;
     memorySegments: MemorySegment [];
     electricalCharateristics: ElectricalCharateristics;

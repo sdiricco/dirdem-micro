@@ -1,7 +1,8 @@
 export class MicrocontrollerPins {
     microcontrollerPackage: MicrocontrollerPackageEnum; 
     defaultPinCount: number;
-    pins: Pin [];
+    pinoutImagesSrc?: string [];
+    pins?: Pin [];
 }
 
 export enum MicrocontrollerPackageEnum{
@@ -13,7 +14,7 @@ export enum MicrocontrollerPackageEnum{
 export class Pin {
     number: number;
     pinLabels: PinLabelsEnum [];
-    pinTypes?: PinTypesEnum [];
+    pinType: PinTypesEnum;
     pinPort?: PinPortsEnum;
     pinDisabled?: boolean;
     pinColor?: string;
