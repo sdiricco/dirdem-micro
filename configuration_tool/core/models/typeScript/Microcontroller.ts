@@ -1,4 +1,4 @@
-import { ElectronicUnit, Voltage, Frequency } from './Utilities/ElectronicUtilities';
+import { ElectronicUnit } from './Utilities/ElectronicUtilities';
 import { PeripheralFeatures } from './PeripheralFeatures';
 import { CommunicationInterface } from './CommunicationInterfaces';
 import { ElectricalCharateristics } from './ElectricalCharateristics';
@@ -11,7 +11,7 @@ import { MemorySegment } from './MemorySegment';
  * - imageSrc: è un array perchè avrò un'immagine per ogni package
  */
 export class MicrocontrollerBase {
-    name: string;
+    name: MicrocontrollerNamesEnum;
     brand: MicroBrandsEnum;
     family: MicroFamiliesEnum;
     datasheetUrl: string;
@@ -29,6 +29,11 @@ export enum MicroFamiliesEnum {
 
 export enum MicroBrandsEnum {
     Atmel = "Atmel"
+}
+
+export enum MicrocontrollerNamesEnum {
+    Atmega32 = "Atmega32",
+    Atmega328 = "Atmega328"
 }
 
 

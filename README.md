@@ -10,7 +10,7 @@ https://drive.google.com/file/d/1h6sAK3r9Q5_x8mgi7zyu9XG9QzDNmcY-/view?usp=shari
 
 ## Windows
 
-Download the dirderm-micro softwre for windows here:<br />
+Download the dirderm-micro software for windows here:<br />
 https://drive.google.com/file/d/1h6sAK3r9Q5_x8mgi7zyu9XG9QzDNmcY-/view?usp=sharing
 
 You need to install the avr-toolchain and avrdude, get both from here:<br />

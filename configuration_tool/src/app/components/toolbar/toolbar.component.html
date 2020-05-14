@@ -12,7 +12,7 @@
   </span>
 
   <button mat-icon-button (click)="burnArduinoUnoBootloader()"  class="dirdem-icons" matTooltip="Burn Arduino UNO bootloader"
-   style="position: absolute; right: 0;" [disabled]="microcontroller.avrMicrocontrollerBase.name != 'Atmega328'">
+   style="position: absolute; right: 0;" [disabled]="microcontroller.name != 'Atmega328'">
     <mat-icon>whatshot</mat-icon>
   </button>
 

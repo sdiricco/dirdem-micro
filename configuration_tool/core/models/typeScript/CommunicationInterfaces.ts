@@ -1,4 +1,4 @@
-export class CommunicationInterface {
+export interface CommunicationInterface {
     name: CommunicationInterfaceNamesEnum;
     type: CommunicationInterfaceTypesEnum;
 }

@@ -4,7 +4,7 @@
     <mat-label>Microcontroller</mat-label>
     <mat-select [(value)]="microcontroller" (selectionChange)="onMicroSelected($event)" #selectedMicro>
       <mat-option *ngFor="let micro of microcontrollers" [value]="micro">
-        {{ micro.avrMicrocontrollerBase.name }}
+        {{ micro.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>

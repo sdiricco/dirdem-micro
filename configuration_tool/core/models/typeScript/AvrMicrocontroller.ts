@@ -7,12 +7,22 @@ export class AvrMicrocontrollerBase extends MicrocontrollerBase {
   fuses: Fuse[];
 }
 
-export class AvrMicrocontroller {
-  avrMicrocontrollerBase: AvrMicrocontrollerBase;
-
+export class AvrMicrocontroller extends AvrMicrocontrollerBase {
   constructor(avrMicrocontrollerBase?: AvrMicrocontrollerBase) {
+    super();
     if (avrMicrocontrollerBase) {
-      this.avrMicrocontrollerBase = avrMicrocontrollerBase;
+      this.name = avrMicrocontrollerBase.name;
+      this.brand = avrMicrocontrollerBase.brand;
+      this.family = avrMicrocontrollerBase.family;
+      this.datasheetUrl = avrMicrocontrollerBase.datasheetUrl;
+      this.dataBus = avrMicrocontrollerBase.dataBus;
+      this.memorySegments = avrMicrocontrollerBase.memorySegments;
+      this.electricalCharateristics = avrMicrocontrollerBase.electricalCharateristics;
+      this.microcontrollerPinConfigurations = avrMicrocontrollerBase.microcontrollerPinConfigurations;
+      this.peripheralFeatures = avrMicrocontrollerBase.peripheralFeatures;
+      this.communicationInterfaces = avrMicrocontrollerBase.communicationInterfaces;
+      this.avrLabel = avrMicrocontrollerBase.avrLabel;
+      this.fuses = avrMicrocontrollerBase.fuses;
     }
   }
 
@@ -23,7 +33,7 @@ export class AvrMicrocontroller {
    * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere il numero di pin
    */
   pinCount(microcontrollerPackage: MicrocontrollerPackageEnum): number {
-    let pinConfiguration = this.avrMicrocontrollerBase.microcontrollerPinConfigurations.find(config => {
+    let pinConfiguration = this.microcontrollerPinConfigurations.find(config => {
       return config.microcontrollerPackage == microcontrollerPackage;
     })
     let pc = pinConfiguration.pins.length;
@@ -39,7 +49,7 @@ export class AvrMicrocontroller {
    * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere il numero di I/O lines
    */
   programmableIoLines(microcontrollerPackage: MicrocontrollerPackageEnum): number {
-    let pinConfiguration = this.avrMicrocontrollerBase.microcontrollerPinConfigurations.find(config => {
+    let pinConfiguration = this.microcontrollerPinConfigurations.find(config => {
       return config.microcontrollerPackage == microcontrollerPackage;
     })
     let ioLines = pinConfiguration.pins.filter(pin => {

@@ -1,4 +1,4 @@
-<div *ngIf="microcontroller.avrMicrocontrollerBase">
+<div *ngIf="microcontroller.name">
   <app-toolbar></app-toolbar>
 </div>
 
@@ -6,7 +6,7 @@
 
   <app-micro-selector></app-micro-selector>
 
-  <div *ngIf="microcontroller.avrMicrocontrollerBase" class="row d-flex justify-content-around">
+  <div *ngIf="microcontroller.name" class="row d-flex justify-content-around">
     <div class="col-md-1"></div>
     <div class="col-md-4 d-flex flex-column">
       <app-avr-technical-specification-card> </app-avr-technical-specification-card>

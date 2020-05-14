@@ -1,6 +1,6 @@
 #closeButton:hover {
     cursor: pointer;
-    color: var(--accent);
+    color: var(--matAccent);
 }
 
 #logMessageContainer {
@@ -17,7 +17,7 @@
     background-color: var(--nerdDark);
     color: var(--nerdAccent);
     padding: 15px;
-    box-shadow: 2px 2px 10px 0px var(--dark);
+    box-shadow: 2px 2px 10px 0px var(--nerdDark);
 }
 
 #closeButton {

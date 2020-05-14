@@ -1,4 +1,4 @@
-export class MicrocontrollerPins {
+export interface MicrocontrollerPins {
     microcontrollerPackage: MicrocontrollerPackageEnum; 
     defaultPinCount: number;
     pinoutImagesSrc?: string [];
@@ -11,7 +11,7 @@ export enum MicrocontrollerPackageEnum{
     MLF = "MLF"
 } 
 
-export class Pin {
+export interface Pin {
     number: number;
     pinLabels: PinLabelsEnum [];
     pinType: PinTypesEnum;
