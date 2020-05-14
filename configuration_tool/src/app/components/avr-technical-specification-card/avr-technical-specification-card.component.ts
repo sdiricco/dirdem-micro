@@ -19,6 +19,10 @@ export class AvrTechnicalSpecificationCardComponent implements OnInit {
     return this.microcontroller.pinCount(this.microService.microcontrollerPackage);
   }
 
+  get microcontrollerIoLines(): number {
+    return this.microcontroller.programmableIoLines(this.microService.microcontrollerPackage);
+  }
+
   constructor(private microService: MicroService) { }
 
   ngOnInit(): void {
