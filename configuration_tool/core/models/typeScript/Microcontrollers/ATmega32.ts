@@ -1,4 +1,4 @@
-import { AvrMicrocontrollerBase } from '../AvrMicrocontroller';
+import { AvrMicrocontrollerBase, AvrMicrocontroller } from '../AvrMicrocontroller';
 import { MicroBrandsEnum, MicroFamiliesEnum, MicrocontrollerNamesEnum } from '../Microcontroller';
 import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeasuresEnum, TemperatureMeasuresEnum, CurrentsMeasureUnitEnum } from '../Utilities/ElectronicUtilities';
 import { MicrocontrollerTimerNames } from '../PeripheralFeatures';
@@ -48,7 +48,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
     ],
     electricalCharateristics:
     {
-        clockFrequencyMaxValue: 
+        clockFrequencyMaxValue:
         {
             frequencyValue: 16,
             frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
@@ -968,7 +968,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 }
             ]
         },
-        
+
         {
             microcontrollerPackage:  MicrocontrollerPackageEnum.MLF,
             defaultPinCount: 44,

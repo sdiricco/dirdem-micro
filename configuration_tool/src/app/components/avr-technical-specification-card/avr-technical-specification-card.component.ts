@@ -23,6 +23,15 @@ export class AvrTechnicalSpecificationCardComponent implements OnInit {
     return this.microcontroller.programmableIoLines(this.microService.microcontrollerPackage);
   }
 
+  get operatingVoltagesStringify(): string {
+    let orderedvalues = this.microcontroller.electricalCharateristics.operatingVoltages[0].operatingVoltageRange.sort((a, b) => {
+      return a.value - b.value;
+    })
+    return `${orderedvalues[0].value} ${orderedvalues[0].measureUnit} - ${orderedvalues[1].value} ${orderedvalues[1].measureUnit}`;
+  }
+
+
+
   constructor(private microService: MicroService) { }
 
   ngOnInit(): void {

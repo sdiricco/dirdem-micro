@@ -46,11 +46,16 @@
   </div>
   <!-- Speed grades -->
   <div>
-    <span> Speed grade (Max): </span>
+    <span> Speed grades (Max): </span>
     <span class="dirdem-technical-specification-values">
       {{ microcontroller.electricalCharateristics.clockFrequencyMaxValue.frequencyValue }}
       {{ microcontroller.electricalCharateristics.clockFrequencyMaxValue.frequencyMeasureUnit }}
     </span>
   </div>
+  <!-- Operating voltages -->
+<div>
+  <span> Operating voltages: </span>
+  <span class="dirdem-technical-specification-values"> {{ operatingVoltagesStringify }} </span>
+</div>
 
 </mat-card>
