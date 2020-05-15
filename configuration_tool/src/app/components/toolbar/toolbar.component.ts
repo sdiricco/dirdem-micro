@@ -4,6 +4,7 @@ import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
 import { MicroService } from 'src/app/services/micro.service';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { MicrocontrollerNamesEnum } from 'core/models/typeScript/Microcontroller';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,6 +15,9 @@ export class ToolbarComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
   get linkToHexFile(): string {
     return this.microService.compiledHexFilePath;
+  }
+  get atmega328Name(): string {
+    return MicrocontrollerNamesEnum.Atmega328;
   }
 
   constructor(private electronService: ElectronService, private loaderService: LoaderService, private microService: MicroService) { }
