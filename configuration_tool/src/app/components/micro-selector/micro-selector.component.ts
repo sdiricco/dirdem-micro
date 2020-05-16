@@ -3,6 +3,7 @@ import { MicroService } from 'src/app/services/micro.service';
 import { MatSelectChange } from '@angular/material/select';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { ATMEGA32 } from 'core/models/typeScript/Microcontrollers/ATmega32';
+import { ATMEGA328P } from 'core/models/typeScript/Microcontrollers/ATmega328P';
 
 @Component({
   selector: 'app-micro-selector',
@@ -38,9 +39,10 @@ export class MicroSelectorComponent implements OnInit {
     let atmega32 = new AvrMicrocontroller(ATMEGA32);
     microcontrollersList.push(atmega32);
     /**
-     * inserimento Atmega328 toDo
+     * inserimento Atmega328
      */
-
+    let atmega328p = new AvrMicrocontroller(ATMEGA328P);
+    microcontrollersList.push(atmega328p);
      /**
       * restituzione della lista valorizzata con i microcontrollori
       */

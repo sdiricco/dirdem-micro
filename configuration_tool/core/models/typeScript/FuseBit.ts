@@ -16,7 +16,7 @@ export class Fuse {
   set hexValue(hexValue) {
     this.hexValue = hexValue;
   } 
-  type: FusesType;
+  type: FusesTypeEnum;
   bits: FuseBit [];
 }
 
@@ -25,7 +25,7 @@ export interface FuseBit {
   value: boolean;
 }
 
-export enum FusesType {
+export enum FusesTypeEnum {
   LOW = "LOW",
   HIGH = "HIGH",
   EXTENDED = "EXTENDED",

@@ -18,3 +18,9 @@ export class AvrMicrocontroller extends AvrMicrocontrollerBase {
 }
 
 
+export enum AvrdudeFuseTypeEnum {
+  lfsue = 'lfuse',
+  hfuse = 'hfuse',
+  efuse = 'efuse',
+  lock = 'lock'
+}

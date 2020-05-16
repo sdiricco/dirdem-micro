@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { ElectronService } from 'ngx-electron';
 import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
-import { FuseBit, Fuse, FusesType } from 'core/models/typeScript/FuseBit';
+import { FuseBit, Fuse, FusesTypeEnum } from 'core/models/typeScript/FuseBit';
 import { ConverterUtilities } from 'core/models/typeScript/Utilities/ConverterUtilities';
 
 
@@ -42,14 +42,14 @@ export class FuseBitComponent {
   /**
    * Setta i fuse bit sul microcontrollore
    */
-  setFuses() {
+  burnFuses() {
     this.loaderService.updateProcess(ProcessStatus.pending);
-    let microLabel = this.microService.microcontrollerSelected.getValue();
-    console.log(microLabel);
-    let lowFuse = '0x' + this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.LOW).hexValue;
-    let highFuse = '0x' +this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesType.HIGH).hexValue;
+    let avrdudeMicroLabel = this.microService.microcontrollerSelected.getValue().avrLabel;
+    console.log(avrdudeMicroLabel);
+    let lowFuse = '0x' + this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesTypeEnum.LOW).hexValue;
+    let highFuse = '0x' +this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesTypeEnum.HIGH).hexValue;
 
-    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuse, [microLabel, lowFuse, highFuse]);
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuse, [avrdudeMicroLabel, lowFuse, highFuse]);
   };
 
   /**

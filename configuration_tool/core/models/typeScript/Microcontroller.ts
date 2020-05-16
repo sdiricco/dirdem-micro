@@ -17,11 +17,11 @@ export class MicrocontrollerBase {
   family: MicroFamiliesEnum;
   datasheetUrl: string;
   dataBus: ElectronicUnit;
-  memorySegments: MemorySegment[];
+  memorySegments: MemorySegment [];
   electricalCharateristics: ElectricalCharateristics;
-  microcontrollerPinConfigurations: MicrocontrollerPinConfiguaration[];
+  microcontrollerPinConfigurations: MicrocontrollerPinConfiguaration [];
   peripheralFeatures: PeripheralFeatures;
-  communicationInterfaces: CommunicationInterface[];
+  communicationInterfaces: CommunicationInterface [];
 
   constructor(microcontrollerBase?: MicrocontrollerBase | AvrMicrocontrollerBase) {
     if (microcontrollerBase) {
@@ -64,7 +64,6 @@ export class MicrocontrollerBase {
     let ioLines = pinConfiguration.pins.filter(pin => {
       return pin.pinType == PinTypesEnum.IO
     })
-
     return ioLines.length;
   }
 }

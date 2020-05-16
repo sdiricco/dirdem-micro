@@ -120,6 +120,18 @@ export class AppComponent implements OnInit{
         this.cdr.detectChanges();
       }
     });
+    /**
+    * Sottoscrizione al completamento lettura fuse bit;
+    */
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.readFuseCompleted, (evt, arg) => {
+      this.loaderService.updateProcess(ProcessStatus.complete);
+      let stdout = arg.stdout;
+      let stderr = arg.stderr;
+      if (stdout) {
+        this.logMessage = `Fuse readed with value: ${stdout}`;
+        this.cdr.detectChanges(); 
+      }
+    })
   }
 
   onCloseLogMessage(evt) {

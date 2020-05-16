@@ -55,10 +55,14 @@ body {
   z-index: 9999999;
 }
 
-#linkToHexFile {
+.outputResults {
   color: var(--nerdAccent);
   background-color: var(--nerdDark);
   padding: 5px;
+}
+
+.outputFuseReaded {
+  width: 50px;
 }
 
 .centered-text {

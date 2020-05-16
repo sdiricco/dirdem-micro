@@ -1,7 +1,10 @@
+import { Fuse, FusesTypeEnum } from '../FuseBit';
+import { AvrdudeFuseTypeEnum } from '../AvrMicrocontroller';
+
 export class ConverterUtilities {
     /**
      * Converte un numero esadecimale (string) in un numero in base decimale
-     */ 
+     */
     static hexToNumber(hex: string): number {
         return parseInt('0x' + hex);
     }
@@ -57,7 +60,7 @@ export class ConverterUtilities {
         let n = this.binaryArraytoUnint8(arr);
         return this.numberToHex(n);
     }
-    
+
     /**
      * Trasposizione di una matrice, le righe diventano colonne e viceversa 
      */
@@ -86,6 +89,26 @@ export class ConverterUtilities {
             }
         }
         return t;
+    }
+
+    /**
+    * Converte il tipo di fuse bit nel tipo di fuse di Avrdude
+    */
+    static fuseBitTypeToAvrdudeFuseBitType(fuseType: FusesTypeEnum): AvrdudeFuseTypeEnum {
+        switch (fuseType) {
+            case FusesTypeEnum.LOW:
+                return AvrdudeFuseTypeEnum.lfsue;
+            case FusesTypeEnum.HIGH:
+                return AvrdudeFuseTypeEnum.hfuse;
+            case FusesTypeEnum.EXTENDED:
+            return AvrdudeFuseTypeEnum.efuse;
+                break;
+            case FusesTypeEnum.LOCKBIT:
+            return AvrdudeFuseTypeEnum.lock;
+                break;
+            default:
+                break;
+        }
     }
 
 }

@@ -10,6 +10,7 @@ const MAIN_IN_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN
 const MAIN_OUT_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN_OUT_PROCESSES;
 
 const USB_PROGRAMMER = 'usbasp';
+const AVRDUDE_LOG_FILE = 'AvrdudeLogfile.txt';
 
 function createWindow() {
   let win = new BrowserWindow({
@@ -22,7 +23,7 @@ function createWindow() {
     },
   })
   win.loadFile('./dist/index.html');
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null
@@ -50,10 +51,10 @@ app.on('activate', () => {
  * Flash bootloader Aruino UNO su ATmega328
  */
 ipcMain.on(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, (event, arg) => {
-  const microcontrollerLabel = 'm328p';
+  const avrdudeMicroLabel = arg[0];
   const bootloaderPath = './core/bootloaders/arduino/optiboot_atmega328.hex';
 
-  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${microcontrollerLabel} -e -U flash:w:"${bootloaderPath}":a`;
+  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -e -U flash:w:"${bootloaderPath}":a`;
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
@@ -69,11 +70,11 @@ ipcMain.on(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, (event, arg) => {
  * Flash fuse bit
  */
 ipcMain.on(MAIN_IN_PROCESSES.burnFuse, (event, arg) => {
-  const microLabel = arg[0];
+  const avrdudeMicroLabel = arg[0];
   const lowFuse = arg[1];
   const highFuse = arg[2];
 
-  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${microLabel} -U lfuse:w:${lowFuse}:m -U hfuse:w:${highFuse}:m`;
+  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U lfuse:w:${lowFuse}:m -U hfuse:w:${highFuse}:m`;
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
@@ -84,6 +85,28 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuse, (event, arg) => {
     event.reply(MAIN_OUT_PROCESSES.burnFuseCompleted, response);
   });
 })
+
+
+/**
+ * Lettura singolo fuse bit
+ */
+ ipcMain.on(MAIN_IN_PROCESSES.readFuse, (event, arg) => {
+  const avrdudeMicroLabel = arg[0];
+  const avrdudeFuseType = arg[1];
+  const fuseType = arg[2];
+
+  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h`;
+  child.exec(commandLine, (err, stdout, stderr) => {
+    if (err) {
+        event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
+        return;
+    }
+    let response = { stdout: stdout, stderr: stderr, fuseType: fuseType};
+    event.reply(MAIN_OUT_PROCESSES.readFuseCompleted, response);
+  })
+
+})
+
 
 /**
  * Compilazione progetto con files .c
@@ -118,10 +141,10 @@ ipcMain.on(MAIN_IN_PROCESSES.compileCProject, (event, arg) => {
  * Flash del file .hex compilato
  */
 ipcMain.on(MAIN_IN_PROCESSES.burnHexFile, (event, arg) => {
-  const microLabel = arg[0];
+  const avrdudeMicroLabel = arg[0];
   const hexFilePath = arg[1];
 
-  const commandLine = `avrdude -c ${USB_PROGRAMMER} -p ${microLabel} -U flash:w:${hexFilePath}:i`;
+  const commandLine = `avrdude -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U flash:w:${hexFilePath}:i`;
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {

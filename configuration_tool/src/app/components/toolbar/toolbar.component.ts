@@ -42,9 +42,9 @@ export class ToolbarComponent implements OnInit {
    */
   burnCProject() {
     this.loaderService.updateProcess(ProcessStatus.pending);
-    let microcontrollerLabel = this.microcontroller.avrLabel;
+    let avrdudeMicroLabel = this.microcontroller.avrLabel;
     let hexFilePath = this.microService.compiledHexFilePath;
-    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnHexFile, [microcontrollerLabel, hexFilePath]);
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnHexFile, [avrdudeMicroLabel, hexFilePath]);
   }
 
   /**
@@ -52,7 +52,8 @@ export class ToolbarComponent implements OnInit {
    */
   burnArduinoUnoBootloader() {
     this.loaderService.updateProcess(ProcessStatus.pending);
-    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnArduinoUnoBootloader);
+    let avrdudeMicroLabel = this.microService.microcontrollerSelected.getValue().avrLabel;
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, [avrdudeMicroLabel]);
   }
 
 }

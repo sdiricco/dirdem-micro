@@ -1,8 +1,7 @@
 import { ElectronicUnit } from './Utilities/ElectronicUtilities';
-import { MicrocontrollerNamesEnum } from './Microcontroller';
 import { PinLabelsEnum } from './MicrocontrollerPins';
 
-export class PeripheralFeatures {
+export interface PeripheralFeatures {
     microcontrollerTimers?: MicrocontrollerTimer [];
     microcontrollerPwms?: MicrocontrollerPwm [];
     microcontrollerWdgs?: MicrocontrollerWdg [];
@@ -11,27 +10,27 @@ export class PeripheralFeatures {
     microcontrollerSleepModes?: MicrontrollerSleepMode [];
 }
 
-export class MicrocontrollerTimer {
+export interface MicrocontrollerTimer {
     microcontrollerTimerName: MicrocontrollerTimerNamesEnum;
     microcontrollerWidthCounter: ElectronicUnit;
     microcontrollerTimerPrescaler : MicrocontrollerTimerPrescaler;
     microcontrollerTimerInterruptSources: MicrocontrollerTimerInterruptSource;
-    microcontrollerTimerPinInvolved: PinLabelsEnum [];
+    microcontrollerTimerPinInvolved?: PinLabelsEnum [];
     microcontrollerTimerFeatures?: MicrocontrollerTimerFeature [];
 }
 
-export class MicrocontrollerTimerPrescaler {
+export interface MicrocontrollerTimerPrescaler {
     microcontrollerTimerPrescalerEnable: boolean;
     microcontrollerTimerPrescalerValuesList?: number [];
     microcontrollerTimerPrescalerRange?: number []
 }
 
-export class MicrocontrollerTimerFeature {
+export interface MicrocontrollerTimerFeature {
     microcontrollerTimerFeaturesName: MicrocontrollerTimerFeaturesNameEnum;
     microcontrollerTimerFeaturesDescription?: MicrocontrollerTimerFeaturesDescriptionEnum [];
 }
 
-export class MicrocontrollerTimerInterruptSource {
+export interface MicrocontrollerTimerInterruptSource {
     microcontrollerTimerInterruptSourceEnable: boolean;
     microcontrollerTimerInterruptSourcesList?: MicrocontrollerTimerInterruptSourcesListEnum;
 }

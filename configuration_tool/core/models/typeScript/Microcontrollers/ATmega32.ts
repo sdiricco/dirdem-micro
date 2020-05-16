@@ -4,7 +4,7 @@ import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeas
 import { MicrocontrollerTimerNamesEnum } from '../PeripheralFeatures';
 import { PinLabelsEnum, MicrocontrollerPackageEnum, PinTypesEnum } from '../MicrocontrollerPins';
 import { CommunicationInterfaceNamesEnum, CommunicationInterfaceTypesEnum } from '../CommunicationInterfaces';
-import { FusesType as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '../FuseBit';
+import { FusesTypeEnum as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '../FuseBit';
 import { ClockFrequenciesOscillatorTypeEnum, ClockFrequenciesOscillatorMaterialEnum, PowerConsumptionModeNamesEnum } from '../ElectricalCharateristics';
 import { MemorySegmentNamesEnum } from '../MemorySegment';
 

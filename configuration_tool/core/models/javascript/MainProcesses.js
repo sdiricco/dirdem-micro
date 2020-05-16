@@ -7,6 +7,7 @@
 exports.__esModule = true;
 exports.MAIN_IN_PROCESSES = {
     burnFuse: 'burnFuse',
+    readFuse: 'readFuse',
     burnArduinoUnoBootloader: 'burnArduinoUnoBootloader',
     compileCProject: 'compileCProject',
     burnHexFile: 'burnHexFile'
@@ -14,6 +15,7 @@ exports.MAIN_IN_PROCESSES = {
 exports.MAIN_OUT_PROCESSES = {
     mainProcessError: 'mainProcessError',
     burnFuseCompleted: 'burnFuseCompleted',
+    readFuseCompleted: 'readFuseCompleted',
     burnArduinoUnoBootloaderCompleted: 'burnArduinoUnoBootloaderCompleted',
     compileCProjectCompleted: 'compileCProjectCompleted',
     burnHexFileCompleted: 'burnHexFileCompleted',
