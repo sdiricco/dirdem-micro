@@ -1,7 +1,7 @@
 import { AvrMicrocontrollerBase, AvrMicrocontroller } from '../AvrMicrocontroller';
 import { MicroBrandsEnum, MicroFamiliesEnum, MicrocontrollerNamesEnum } from '../Microcontroller';
 import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeasuresEnum, TemperatureMeasuresEnum, CurrentsMeasureUnitEnum } from '../Utilities/ElectronicUtilities';
-import { MicrocontrollerTimerNames } from '../PeripheralFeatures';
+import { MicrocontrollerTimerNamesEnum } from '../PeripheralFeatures';
 import { PinLabelsEnum, MicrocontrollerPackageEnum, PinTypesEnum } from '../MicrocontrollerPins';
 import { CommunicationInterfaceNamesEnum, CommunicationInterfaceTypesEnum } from '../CommunicationInterfaces';
 import { FusesType as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '../FuseBit';
@@ -10,12 +10,12 @@ import { MemorySegmentNamesEnum } from '../MemorySegment';
 
 export const ATMEGA32: AvrMicrocontrollerBase =
 {
-    name: MicrocontrollerNamesEnum.Atmega32,
+    name: MicrocontrollerNamesEnum.ATmega32,
     brand: MicroBrandsEnum.Atmel,
     family: MicroFamiliesEnum.AVR,
     datasheetUrl: "http://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf",
     dataBus:
-    {
+    {   
         value: 8,
         measureUnit: ElectronicUnitMeasuresEnum.Bit
     },
@@ -26,7 +26,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
             memorySegmentValue:
             {
                 value: 32,
-                measureUnit: ElectronicUnitMeasuresEnum.Kilobytes
+                measureUnit: ElectronicUnitMeasuresEnum.KBytes
             }
         },
         {
@@ -42,7 +42,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
             memorySegmentValue:
             {
                 value: 2,
-                measureUnit: ElectronicUnitMeasuresEnum.Kilobytes
+                measureUnit: ElectronicUnitMeasuresEnum.KBytes
             }
         }
     ],
@@ -149,25 +149,15 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
             },
         ],
-        operatingVoltages:
+        operatingVoltageRange:
         [
             {
-               operatingVoltageValue:
-               {
-                   value: 5,
-                   measureUnit: VoltageUnitMeasuresEnum.V
-               },
-               operatingVoltageRange:
-               [
-                   {
-                       value: 4.5,
-                       measureUnit: VoltageUnitMeasuresEnum.V
-                   },
-                   {
-                       value: 5.5,
-                       measureUnit: VoltageUnitMeasuresEnum.V
-                   }
-               ]
+                value: 4.5,
+                measureUnit: VoltageUnitMeasuresEnum.V
+            },
+            {
+                value: 5.5,
+                measureUnit: VoltageUnitMeasuresEnum.V
             }
         ],
         powerConsumption:
@@ -208,7 +198,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
             defaultPinCount: 40,
             pinoutImagesSrc:
             [
-                "assets/images/ATmega32pinoutPDIP_A.png",
+                "assets/images/ATmega32/ATmega32pinoutPDIP.png",
             ],
             pins:
             [
@@ -575,7 +565,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
             defaultPinCount: 44,
             pinoutImagesSrc:
             [
-                "assets/images/ATmega32pinoutTQFP_MLF_A.png",
+                "assets/images/ATmega32/ATmega32pinoutTQFP.png",
             ],
             pins:
             [
@@ -974,7 +964,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
             defaultPinCount: 44,
             pinoutImagesSrc:
             [
-                "assets/images/ATmega32pinoutTQFP_MLF_A.png",
+                "assets/images/ATmega32/ATmega32pinoutMLF.png",
             ],
             pins:
             [
@@ -1370,30 +1360,54 @@ export const ATMEGA32: AvrMicrocontrollerBase =
     ],
     peripheralFeatures:
     {
-        timers:
+        microcontrollerTimers:
         [
             {
-                name: MicrocontrollerTimerNames.Timer0,
-                widthCounter:
+                microcontrollerTimerName: MicrocontrollerTimerNamesEnum.Timer0,
+                microcontrollerWidthCounter:
                 {
                     value: 8,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
+                },
+                microcontrollerTimerPrescaler:
+                {
+                    microcontrollerTimerPrescalerEnable: true
+                },
+                microcontrollerTimerInterruptSources:
+                {
+                    microcontrollerTimerInterruptSourceEnable: true
                 }
             },
             {
-                name: MicrocontrollerTimerNames.Timer1,
-                widthCounter:
+                microcontrollerTimerName: MicrocontrollerTimerNamesEnum.Timer1,
+                microcontrollerWidthCounter:
                 {
                     value: 16,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
+                },
+                microcontrollerTimerPrescaler:
+                {
+                    microcontrollerTimerPrescalerEnable: true
+                },
+                microcontrollerTimerInterruptSources:
+                {
+                    microcontrollerTimerInterruptSourceEnable: true
                 }
             },
             {
-                name: MicrocontrollerTimerNames.Timer2,
-                widthCounter:
+                microcontrollerTimerName: MicrocontrollerTimerNamesEnum.Timer2,
+                microcontrollerWidthCounter:
                 {
                     value: 8,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
+                },
+                microcontrollerTimerPrescaler:
+                {
+                    microcontrollerTimerPrescalerEnable: true
+                },
+                microcontrollerTimerInterruptSources:
+                {
+                    microcontrollerTimerInterruptSourceEnable: true
                 }
             },
 

@@ -1,7 +1,7 @@
 import { AvrMicrocontrollerBase } from '../AvrMicrocontroller';
-import { MicroBrandsEnum, MicroFamiliesEnum } from '../Microcontroller';
+import { MicroBrandsEnum, MicroFamiliesEnum, MicrocontrollerNamesEnum } from '../Microcontroller';
 import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeasuresEnum, TemperatureMeasuresEnum, CurrentsMeasureUnitEnum } from '../Utilities/ElectronicUtilities';
-import { MicrocontrollerTimerNames } from '../PeripheralFeatures';
+import { MicrocontrollerTimerNamesEnum } from '../PeripheralFeatures';
 import { PinLabelsEnum, MicrocontrollerPackageEnum, PinTypesEnum } from '../MicrocontrollerPins';
 import { CommunicationInterfaceNamesEnum, CommunicationInterfaceTypesEnum } from '../CommunicationInterfaces';
 import { FusesType as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '../FuseBit';
@@ -10,7 +10,7 @@ import { MemorySegmentNamesEnum } from '../MemorySegment';
 
 export const ATMEGA328P: AvrMicrocontrollerBase =
 {
-    name: "ATmega32P",
+    name: MicrocontrollerNamesEnum.ATmega328P,
     brand: MicroBrandsEnum.Atmel,
     family: MicroFamiliesEnum.AVR,
     datasheetUrl: "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf",
@@ -26,15 +26,15 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
             memorySegmentValue:
             {
                 value: 32,
-                measureUnit: ElectronicUnitMeasuresEnum.Kilobytes
+                measureUnit: ElectronicUnitMeasuresEnum.KBytes
             }
         },
         {
             memorySegmentName: MemorySegmentNamesEnum.EEPROM,
             memorySegmentValue:
             {
-                value: 1024,
-                measureUnit: ElectronicUnitMeasuresEnum.Bytes,
+                value: 1,
+                measureUnit: ElectronicUnitMeasuresEnum.KBytes,
             }
         },
         {
@@ -42,7 +42,7 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
             memorySegmentValue:
             {
                 value: 2,
-                measureUnit: ElectronicUnitMeasuresEnum.Kilobytes
+                measureUnit: ElectronicUnitMeasuresEnum.KBytes
             }
         }
     ],
@@ -50,7 +50,7 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
     {
         clockFrequencyMaxValue: 
         {
-            frequencyValue: 16,
+            frequencyValue: 20,
             frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
         },
         clockFrequencyOscillator:
@@ -149,25 +149,15 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
             },
         ],
-        operatingVoltages:
+        operatingVoltageRange:
         [
             {
-               operatingVoltageValue:
-               {
-                   value: 5,
-                   measureUnit: VoltageUnitMeasuresEnum.V
-               },
-               operatingVoltageRange:
-               [
-                   {
-                       value: 4.5,
-                       measureUnit: VoltageUnitMeasuresEnum.V
-                   },
-                   {
-                       value: 5.5,
-                       measureUnit: VoltageUnitMeasuresEnum.V
-                   }
-               ]
+                value: 1.8,
+                measureUnit: VoltageUnitMeasuresEnum.V
+            },
+            {
+                value: 5.5,
+                measureUnit: VoltageUnitMeasuresEnum.V
             }
         ],
         powerConsumption:
@@ -208,7 +198,7 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
             defaultPinCount: 28,
             pinoutImagesSrc:
             [
-                "assets/images/ATmega32pinoutPDIP_A.png",
+                "assets/images/ATmega328P/ATmega328P_28DIP.png",
             ],
             pins:
             [
@@ -462,9 +452,238 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                         PinLabelsEnum.TOSC1
                     ],
                     pinType: PinTypesEnum.IO
+                }
+            ]
+        },
+        {
+            microcontrollerPackage:  MicrocontrollerPackageEnum.MLF,
+            defaultPinCount:28,
+            pinoutImagesSrc:
+            [
+                "assets/images/ATmega328P/ATmega328P_28MLF.png",
+            ],
+            pins:
+            [
+                {
+                    number: 1,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PB5,
+                        PinLabelsEnum.MOSI
+                    ],
+                    pinType: PinTypesEnum.IO
                 },
                 {
-                    number: 29,
+                    number: 2,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PB6,
+                        PinLabelsEnum.MISO
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 3,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PB7,
+                        PinLabelsEnum.SCK
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 4,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.RESET
+                    ],
+                    pinType: PinTypesEnum.I
+                },
+                {
+                    number: 5,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.VCC
+                    ],
+                    pinType: PinTypesEnum.I
+                },
+                {
+                    number: 6,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.GND
+                    ],
+                    pinType: PinTypesEnum.I
+                },
+                {
+                    number: 7,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.XTAL2
+                    ],
+                    pinType: PinTypesEnum.I
+                },
+                {
+                    number: 8,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.XTAL1
+                    ],
+                    pinType: PinTypesEnum.I
+                },
+                {
+                    number: 9,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD0,
+                        PinLabelsEnum.RXD
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 10,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD1,
+                        PinLabelsEnum.TXD
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 11,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD2,
+                        PinLabelsEnum.INT0
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 12,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD3,
+                        PinLabelsEnum.INT1
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 13,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD4,
+                        PinLabelsEnum.OC1B
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 14,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD5,
+                        PinLabelsEnum.OC1A
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 15,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD6,
+                        PinLabelsEnum.ICP1
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 16,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PD7,
+                        PinLabelsEnum.OC2
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 17,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.VCC
+                    ],
+                    pinType: PinTypesEnum.I
+                },
+                {
+                    number: 18,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.GND
+                    ],
+                    pinType: PinTypesEnum.I
+                },
+                {
+                    number: 19,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PC0,
+                        PinLabelsEnum.SCL
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 20,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PC1,
+                        PinLabelsEnum.SDA
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 21,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PC2,
+                        PinLabelsEnum.TCK
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 22,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PC3,
+                        PinLabelsEnum.TMS
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 23,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PC4,
+                        PinLabelsEnum.TDO
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 24,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PC5,
+                        PinLabelsEnum.TDI
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 25,
+                    pinLabels:
+                    [
+                        PinLabelsEnum.PC6,
+                        PinLabelsEnum.TOSC1
+                    ],
+                    pinType: PinTypesEnum.IO
+                },
+                {
+                    number: 26,
                     pinLabels:
                     [
                         PinLabelsEnum.PC7,
@@ -473,7 +692,7 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     pinType: PinTypesEnum.IO
                 },
                 {
-                    number: 30,
+                    number: 27,
                     pinLabels:
                     [
                         PinLabelsEnum.AVCC
@@ -481,101 +700,21 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     pinType: PinTypesEnum.I
                 },
                 {
-                    number: 31,
+                    number: 28,
                     pinLabels:
                     [
                         PinLabelsEnum.GND
                     ],
                     pinType: PinTypesEnum.I
-                },
-                {
-                    number: 32,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.AREF
-                    ],
-                    pinType: PinTypesEnum.I
-                },
-                {
-                    number: 33,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA7,
-                        PinLabelsEnum.ADC7
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 34,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA6,
-                        PinLabelsEnum.ADC6
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 35,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA5,
-                        PinLabelsEnum.ADC5
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 36,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA4,
-                        PinLabelsEnum.ADC4
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 37,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA3,
-                        PinLabelsEnum.ADC3
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 38,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA2,
-                        PinLabelsEnum.ADC2
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 39,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA1,
-                        PinLabelsEnum.ADC1
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 40,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA0,
-                        PinLabelsEnum.ADC0
-                    ],
-                    pinType: PinTypesEnum.IO
                 }
             ]
         },
         {
-            microcontrollerPackage:  MicrocontrollerPackageEnum.TQFP,
-            defaultPinCount: 44,
+            microcontrollerPackage:  MicrocontrollerPackageEnum.MLF,
+            defaultPinCount:32,
             pinoutImagesSrc:
             [
-                "assets/images/ATmega32pinoutTQFP_MLF_A.png",
+                "assets/images/ATmega328P/ATmega328P_28MLF.png",
             ],
             pins:
             [
@@ -826,16 +965,17 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     number: 29,
                     pinLabels:
                     [
-                        PinLabelsEnum.AREF
+                        PinLabelsEnum.PC6,
+                        PinLabelsEnum.TOSC1
                     ],
-                    pinType: PinTypesEnum.I
+                    pinType: PinTypesEnum.IO
                 },
                 {
                     number: 30,
                     pinLabels:
                     [
-                        PinLabelsEnum.PA7,
-                        PinLabelsEnum.ADC7
+                        PinLabelsEnum.PC7,
+                        PinLabelsEnum.TOSC2
                     ],
                     pinType: PinTypesEnum.IO
                 },
@@ -843,138 +983,27 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     number: 31,
                     pinLabels:
                     [
-                        PinLabelsEnum.PA6,
-                        PinLabelsEnum.ADC6
+                        PinLabelsEnum.AVCC
                     ],
-                    pinType: PinTypesEnum.IO
+                    pinType: PinTypesEnum.I
                 },
                 {
                     number: 32,
                     pinLabels:
                     [
-                        PinLabelsEnum.PA5,
-                        PinLabelsEnum.ADC5
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 33,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA4,
-                        PinLabelsEnum.ADC4
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 34,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA3,
-                        PinLabelsEnum.ADC3
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 35,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA2,
-                        PinLabelsEnum.ADC2
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 36,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA1,
-                        PinLabelsEnum.ADC1
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 37,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA0,
-                        PinLabelsEnum.ADC0
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 38,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.VCC
-                    ],
-                    pinType: PinTypesEnum.I
-                },
-                {
-                    number: 39,
-                    pinLabels:
-                    [
                         PinLabelsEnum.GND
                     ],
                     pinType: PinTypesEnum.I
-                },
-                {
-                    number: 40,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB0,
-                        PinLabelsEnum.XCK,
-                        PinLabelsEnum.T0
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 41,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB1,
-                        PinLabelsEnum.T1
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 42,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB2,
-                        PinLabelsEnum.AIN0,
-                        PinLabelsEnum.INT2
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 43,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB3,
-                        PinLabelsEnum.AIN1,
-                        PinLabelsEnum.OC0
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 44,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB4,
-                        PinLabelsEnum.SS
-                    ],
-                    pinType: PinTypesEnum.IO
                 }
             ]
         },
         
         {
-            microcontrollerPackage:  MicrocontrollerPackageEnum.MLF,
-            defaultPinCount: 44,
+            microcontrollerPackage:  MicrocontrollerPackageEnum.TQFP,
+            defaultPinCount: 32,
             pinoutImagesSrc:
             [
-                "assets/images/ATmega32pinoutTQFP_MLF_A.png",
+                "assets/images/ATmega328P/ATmega328P_TQFP32.png",
             ],
             pins:
             [
@@ -1253,115 +1282,6 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     [
                         PinLabelsEnum.PA5,
                         PinLabelsEnum.ADC5
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 33,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA4,
-                        PinLabelsEnum.ADC4
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 34,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA3,
-                        PinLabelsEnum.ADC3
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 35,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA2,
-                        PinLabelsEnum.ADC2
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 36,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA1,
-                        PinLabelsEnum.ADC1
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 37,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PA0,
-                        PinLabelsEnum.ADC0
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 38,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.VCC
-                    ],
-                    pinType: PinTypesEnum.I
-                },
-                {
-                    number: 39,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.GND
-                    ],
-                    pinType: PinTypesEnum.I
-                },
-                {
-                    number: 40,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB0,
-                        PinLabelsEnum.XCK,
-                        PinLabelsEnum.T0
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 41,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB1,
-                        PinLabelsEnum.T1
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 42,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB2,
-                        PinLabelsEnum.AIN0,
-                        PinLabelsEnum.INT2
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 43,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB3,
-                        PinLabelsEnum.AIN1,
-                        PinLabelsEnum.OC0
-                    ],
-                    pinType: PinTypesEnum.IO
-                },
-                {
-                    number: 44,
-                    pinLabels:
-                    [
-                        PinLabelsEnum.PB4,
-                        PinLabelsEnum.SS
                     ],
                     pinType: PinTypesEnum.IO
                 }
@@ -1370,30 +1290,54 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
     ],
     peripheralFeatures:
     {
-        timers:
+        microcontrollerTimers:
         [
             {
-                name: MicrocontrollerTimerNames.Timer0,
-                widthCounter:
+                microcontrollerTimerName: MicrocontrollerTimerNamesEnum.Timer0,
+                microcontrollerWidthCounter:
                 {
                     value: 8,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
+                },
+                microcontrollerTimerPrescaler:
+                {
+                    microcontrollerTimerPrescalerEnable: true
+                },
+                microcontrollerTimerInterruptSources:
+                {
+                    microcontrollerTimerInterruptSourceEnable: true
                 }
             },
             {
-                name: MicrocontrollerTimerNames.Timer1,
-                widthCounter:
+                microcontrollerTimerName: MicrocontrollerTimerNamesEnum.Timer1,
+                microcontrollerWidthCounter:
                 {
                     value: 16,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
+                },
+                microcontrollerTimerPrescaler:
+                {
+                    microcontrollerTimerPrescalerEnable: true
+                },
+                microcontrollerTimerInterruptSources:
+                {
+                    microcontrollerTimerInterruptSourceEnable: true
                 }
             },
             {
-                name: MicrocontrollerTimerNames.Timer2,
-                widthCounter:
+                microcontrollerTimerName: MicrocontrollerTimerNamesEnum.Timer2,
+                microcontrollerWidthCounter:
                 {
                     value: 8,
                     measureUnit: ElectronicUnitMeasuresEnum.Bit
+                },
+                microcontrollerTimerPrescaler:
+                {
+                    microcontrollerTimerPrescalerEnable: true
+                },
+                microcontrollerTimerInterruptSources:
+                {
+                    microcontrollerTimerInterruptSourceEnable: true
                 }
             },
 

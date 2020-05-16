@@ -17,7 +17,7 @@ export class ToolbarComponent implements OnInit {
     return this.microService.compiledHexFilePath;
   }
   get atmega328Name(): string {
-    return MicrocontrollerNamesEnum.Atmega328;
+    return MicrocontrollerNamesEnum.ATmega328P;
   }
 
   constructor(private electronService: ElectronService, private loaderService: LoaderService, private microService: MicroService) { }

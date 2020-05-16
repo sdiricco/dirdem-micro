@@ -26,7 +26,7 @@ export interface Temperature {
 export enum ElectronicUnitMeasuresEnum {
     Bit = "Bit",
     Bytes = "Bytes",
-    Kilobytes = "Kilobytes",
+    KBytes = "KBytes",
     Megabytes = "Megabytes",
     Gigabytes = "Gigabytes"
 }

@@ -79,8 +79,8 @@ export enum MicroBrandsEnum {
 }
 
 export enum MicrocontrollerNamesEnum {
-  Atmega32 = "Atmega32",
-  Atmega328 = "Atmega328"
+  ATmega32 = "ATmega32",
+  ATmega328P = "ATmega328P"
 }
 
 

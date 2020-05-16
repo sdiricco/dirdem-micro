@@ -24,7 +24,7 @@ export class AvrTechnicalSpecificationCardComponent implements OnInit {
   }
 
   get operatingVoltagesStringify(): string {
-    let orderedvalues = this.microcontroller.electricalCharateristics.operatingVoltages[0].operatingVoltageRange.sort((a, b) => {
+    let orderedvalues = this.microcontroller.electricalCharateristics.operatingVoltageRange.sort((a, b) => {
       return a.value - b.value;
     })
     return `${orderedvalues[0].value} ${orderedvalues[0].measureUnit} - ${orderedvalues[1].value} ${orderedvalues[1].measureUnit}`;
