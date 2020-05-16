@@ -78,34 +78,53 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuse, (event, arg) => {
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
-      event.reply(MAIN_OUT_PROCESSES.burnFuseFailed, err);
+      event.reply(MAIN_OUT_PROCESSES.burnFusesFailed, err);
       return;
     }
     let response = { stdout: stdout, stderr: stderr };
-    event.reply(MAIN_OUT_PROCESSES.burnFuseCompleted, response);
+    event.reply(MAIN_OUT_PROCESSES.burnFusesCompleted, response);
   });
 })
 
 
 /**
- * Lettura singolo fuse bit
+ * Lettura di tutti i fuse bit di un microcontrollere
  */
- ipcMain.on(MAIN_IN_PROCESSES.readFuse, (event, arg) => {
+ ipcMain.on(MAIN_IN_PROCESSES.readFuses, (event, arg) => {
   const avrdudeMicroLabel = arg[0];
-  const avrdudeFuseType = arg[1];
-  const fuseType = arg[2];
+  const avrdudeFusesType = arg[1];  // array
+  const fusesType = arg[2];         // array
 
-  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h`;
-  child.exec(commandLine, (err, stdout, stderr) => {
-    if (err) {
-        event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
-        return;
-    }
-    let response = { stdout: stdout, stderr: stderr, fuseType: fuseType};
-    event.reply(MAIN_OUT_PROCESSES.readFuseCompleted, response);
-  })
+  var fusesReaded = [];
 
+  avrdudeFusesType.forEach((avrdudeFuseType, index) => {
+    const fuseType = fusesType[index];
+    const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h`;
+    execFuseReading(fuseType, commandLine).then(response => {
+      fusesReaded.push(response);
+      if (fusesReaded.length == avrdudeFusesType.length) {
+        event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, fusesReaded);
+      }   
+    })
+  })  
 })
+
+
+/**
+* Processo sincrono lettura di un fuse bit
+*/
+function execFuseReading(fuseType, commandLine) {
+  return new Promise((resolve, reject) => {
+    child.exec(commandLine, (err, stdout, stderr) => {
+      if (err) {
+          event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
+          return;
+      }
+      let response = { stdout: stdout, stderr: stderr, fuseType: fuseType};
+      resolve(response);
+    })
+  })
+}
 
 
 /**

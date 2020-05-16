@@ -49,7 +49,7 @@ export class FuseBitComponent {
     let lowFuse = '0x' + this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesTypeEnum.LOW).hexValue;
     let highFuse = '0x' +this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesTypeEnum.HIGH).hexValue;
 
-    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuse, [avrdudeMicroLabel, lowFuse, highFuse]);
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuses, [avrdudeMicroLabel, lowFuse, highFuse]);
   };
 
   /**

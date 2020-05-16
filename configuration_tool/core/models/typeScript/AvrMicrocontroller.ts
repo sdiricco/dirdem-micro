@@ -3,7 +3,8 @@ import { MicrocontrollerBase } from './Microcontroller';
 
 export class AvrMicrocontrollerBase extends MicrocontrollerBase {
   avrLabel: string;
-  fuses: Fuse[];
+  fuses: Fuse [];
+  
 }
 
 

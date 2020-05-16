@@ -18,15 +18,6 @@ import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 export class FuseBitCardComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
 
-  fusesReaded: { value: string, type: FusesTypeEnum }[] = [];
-
-  /*
-  lowFuseReaded: { value:string, type: FusesTypeEnum };
-  highFuseReaded: { value: string, type: FusesTypeEnum };
-  extendedFusesReaded: { value: string, type: FusesTypeEnum };
-  lockFuseReaded: { value: string, type: FusesTypeEnum };
-  */
-
   constructor(public dialog: MatDialog, private overlay: Overlay, private microService: MicroService,
     private electronService: ElectronService, private loaderService: LoaderService, private cdr: ChangeDetectorRef) { }
 
@@ -40,20 +31,13 @@ export class FuseBitCardComponent implements OnInit {
     /**
     * Sottoscrizione al completamento lettura fuse bit;
     */
-    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.readFuseCompleted, (evt, arg) => {
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.readFusesCompleted, (evt, arg) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       let stdout = arg.stdout;
       let stderr = arg.stderr;
       let fuseType = arg.fuseType;
       if (stdout && fuseType) {
-        let fuse = this.fusesReaded.find(fuseReaded => fuseReaded.type == fuseType);
-        if (fuse) {
-          let fuseIndex = this.fusesReaded.indexOf(fuse);
-          this.fusesReaded.splice(fuseIndex, 1);
-          this.fusesReaded.push({ value: stdout, type: fuseType });
-        } else {
-          this.fusesReaded.push({ value: stdout, type: fuseType });
-        }
+        
       }
       this.cdr.detectChanges();
     })
@@ -74,12 +58,16 @@ export class FuseBitCardComponent implements OnInit {
   }
 
   /**
-  * Lettura singolo fuse bit
+  * Lettura hardware dei fuse bit
   */
-  readFuse(fuse: Fuse) {
+  readHWFuses(fuses: Fuse []) {
     this.loaderService.updateProcess(ProcessStatus.pending);
+    console.log(fuses);
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
-    let avrdudeFuseType = ConverterUtilities.fuseBitTypeToAvrdudeFuseBitType(fuse.type);
-    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.readFuse, [avrdudeMicroLabel, avrdudeFuseType, fuse.type]);
+    let avrdudeFusesType = fuses.map(fuse => ConverterUtilities.fuseBitTypeToAvrdudeFuseBitType(fuse.type));
+    let fusesType = fuses.map(fuse => fuse.type);
+    
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.readFuses, [avrdudeMicroLabel, avrdudeFusesType, fusesType]);
+    
   }
 }

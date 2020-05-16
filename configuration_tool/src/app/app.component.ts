@@ -49,7 +49,7 @@ export class AppComponent implements OnInit{
     /**
      * Sottoscrizione errore del flash fuse bit
      */
-    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnFuseFailed, (evt, err) => {
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnFusesFailed, (evt, err) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       this.logMessage = err.toString();
       this.cdr.detectChanges();
@@ -111,7 +111,7 @@ export class AppComponent implements OnInit{
     /**
      * Sottoscrizione al flash dei fuse bit
      */
-    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnFuseCompleted, (evt, arg) => {
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnFusesCompleted, (evt, arg) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       let stdout = arg.stdout;
       let stderr = arg.stderr;
@@ -123,7 +123,7 @@ export class AppComponent implements OnInit{
     /**
     * Sottoscrizione al completamento lettura fuse bit;
     */
-    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.readFuseCompleted, (evt, arg) => {
+    this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.readFusesCompleted, (evt, arg) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       let stdout = arg.stdout;
       let stderr = arg.stderr;

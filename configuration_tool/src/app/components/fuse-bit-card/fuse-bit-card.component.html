@@ -3,23 +3,18 @@
     <h6 class="centered-text">Fuses</h6>
   </div>
   <div class="row d-flex align-items-center">
-    <div class="col-8">
+    <div class="col-6">
       <div *ngFor="let fuse of microcontroller.fuses" class="d-flex justify-content-between align-items-center">
         <span> {{ fuse.type }} </span>
-        <span>
-          <!--span *ngFor="let fr of fusesReaded">
-            <span *ngIf="fr.type == fuse.type" class="outputResults" class="outputResults outputFuseReaded">
-              {{ fr.value }}
-            </span>
-            <span *ngIf="!fusesReaded.length || fr.type != fuse.type" class="outputResults outputFuseReaded">
-              N/A
-            </span-->
+        <span class="d-flex justify-content-end align-items-center">
+          <span class="outputResults outputFuseReaded">
+            0x{{ fuse.hexValue }}
           </span>
-          <button class="dirdem-buttons" (click)="readFuse(fuse)"> read </button>
         </span>
       </div>
     </div>
-    <div class="col-2">
+    <div class="col-6 d-flex justify-content-between align-items-center">
+      <button class="dirdem-buttons" (click)="readHWFuses(microcontroller.fuses)"> read </button>
       <button mat-icon-button (click)="openFuseBitComponent($event)" class="dirdem-icons">
         <mat-icon>settings</mat-icon>
       </button>
