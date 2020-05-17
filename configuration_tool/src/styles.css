@@ -55,13 +55,13 @@ body {
   z-index: 9999999;
 }
 
-.outputResults {
+.output-results {
   color: var(--nerdAccent);
   background-color: var(--nerdDark);
   padding: 5px;
 }
 
-.outputFuseReaded {
+.output-fuses-readed {
   width: 50px;
 }
 

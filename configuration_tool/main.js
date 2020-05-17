@@ -69,12 +69,22 @@ ipcMain.on(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, (event, arg) => {
 /**
  * Flash fuse bit
  */
-ipcMain.on(MAIN_IN_PROCESSES.burnFuse, (event, arg) => {
+ipcMain.on(MAIN_IN_PROCESSES.burnFuses, (event, arg) => {
   const avrdudeMicroLabel = arg[0];
-  const lowFuse = arg[1];
-  const highFuse = arg[2];
+  const avrdudeFuses = arg[1];        // array di oggetti [{ avrdudeFuseType, value }]
+  var commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} `;
 
-  const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U lfuse:w:${lowFuse}:m -U hfuse:w:${highFuse}:m`;
+  avrdudeFuses.forEach(fuse => {
+    if (fuse.avrdudeFuseType == 'lfuse') {
+      commandLine += `-U lfuse:w:${fuse.hexValue}:m `;
+    }
+    if (fuse.avrdudeFuseType == 'hfuse') {
+      commandLine += `-U hfuse:w:${fuse.hexValue}:m `;
+    }
+    if (fuse.avrdudeFuseType == 'efuse') {
+      commandLine += `-U efuse:w:${fuse.hexValue}:m `;
+    }
+  })
 
   child.exec(commandLine, (err, stdout, stderr) => {
     if (err) {
@@ -92,35 +102,35 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuse, (event, arg) => {
  */
  ipcMain.on(MAIN_IN_PROCESSES.readFuses, (event, arg) => {
   const avrdudeMicroLabel = arg[0];
-  const avrdudeFusesType = arg[1];  // array
-  const fusesType = arg[2];         // array
-
+  const fusesToRead = arg[1];
   var fusesReaded = [];
 
-  avrdudeFusesType.forEach((avrdudeFuseType, index) => {
-    const fuseType = fusesType[index];
+  fusesToRead.forEach(fuseToRead => {
+    const avrdudeFuseType = fuseToRead.avrdudeFuseType;
+    const fuseType = fuseToRead.fuseType;
     const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h`;
-    execFuseReading(fuseType, commandLine).then(response => {
+
+    execFuseReading(fuseType, commandLine, event).then(response => {
       fusesReaded.push(response);
-      if (fusesReaded.length == avrdudeFusesType.length) {
+      if (fusesReaded.length == fusesToRead.length) {
         event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, fusesReaded);
       }   
     })
-  })  
+  })
 })
 
 
 /**
 * Processo sincrono lettura di un fuse bit
 */
-function execFuseReading(fuseType, commandLine) {
+function execFuseReading(fuseType, commandLine, event) {
   return new Promise((resolve, reject) => {
     child.exec(commandLine, (err, stdout, stderr) => {
       if (err) {
           event.reply(MAIN_OUT_PROCESSES.mainProcessError, err);
           return;
       }
-      let response = { stdout: stdout, stderr: stderr, fuseType: fuseType};
+      let response = { type: fuseType, hexValue: stdout };
       resolve(response);
     })
   })

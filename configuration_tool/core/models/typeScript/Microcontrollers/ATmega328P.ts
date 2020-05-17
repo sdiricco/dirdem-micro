@@ -4,11 +4,11 @@ import { ElectronicUnitMeasuresEnum, FrequenciesMeasureUnitEnum, VoltageUnitMeas
 import { MicrocontrollerTimerNamesEnum } from '../PeripheralFeatures';
 import { PinLabelsEnum, MicrocontrollerPackageEnum, PinTypesEnum } from '../MicrocontrollerPins';
 import { CommunicationInterfaceNamesEnum, CommunicationInterfaceTypesEnum } from '../CommunicationInterfaces';
-import { FusesTypeEnum as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum } from '../FuseBit';
+import { FusesTypeEnum as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum, Fuse } from '../FuseBit';
 import { ClockFrequenciesOscillatorTypeEnum, ClockFrequenciesOscillatorMaterialEnum, PowerConsumptionModeNamesEnum } from '../ElectricalCharateristics';
 import { MemorySegmentNamesEnum } from '../MemorySegment';
 
-export const ATMEGA328P: AvrMicrocontrollerBase =
+export const ATMEGA328P: any =
 {
     name: MicrocontrollerNamesEnum.ATmega328P,
     brand: MicroBrandsEnum.Atmel,
@@ -1369,33 +1369,31 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
     fuses:
     [
         {
-            hexValue: '64',
             type: FusesTypeEnum.LOW,
-            bits:
-            [
-                { label: FuseBitLabelEnum.BODLEVEL, value: false },
-                { label: FuseBitLabelEnum.BODEN, value: true },
-                { label: FuseBitLabelEnum.SUT1, value: true },
-                { label: FuseBitLabelEnum.SUT0, value: false },
-                { label: FuseBitLabelEnum.CKSEL3, value: false },
-                { label: FuseBitLabelEnum.CKSEL2, value: false },
-                { label: FuseBitLabelEnum.CKSEL1, value: true },
-                { label: FuseBitLabelEnum.CKSEL0, value: false }
+            defaultBits:
+            [         
+                { label: FuseBitLabelEnum.CKSEL0, value: false, bit: 0 },
+                { label: FuseBitLabelEnum.CKSEL1, value: true, bit: 1 },
+                { label: FuseBitLabelEnum.CKSEL2, value: false, bit: 2 },
+                { label: FuseBitLabelEnum.CKSEL3, value: false, bit: 3 },
+                { label: FuseBitLabelEnum.SUT0, value: false, bit: 4 },
+                { label: FuseBitLabelEnum.SUT1, value: true, bit: 5 },
+                { label: FuseBitLabelEnum.BODEN, value: true, bit: 6 },
+                { label: FuseBitLabelEnum.BODLEVEL, value: false, bit: 7 }
             ]
         },
         {
-            hexValue: 'DE',
             type: FusesTypeEnum.HIGH,
-            bits:
+            defaultBits:
             [
-                { label: FuseBitLabelEnum.OCDEN, value: true },
-                { label: FuseBitLabelEnum.JTAGEN, value: true },
-                { label: FuseBitLabelEnum.SPIEN, value: false },
-                { label: FuseBitLabelEnum.CKOPT, value: true },
-                { label: FuseBitLabelEnum.EESAVE, value: true },
-                { label: FuseBitLabelEnum.BOOTSZ1, value: false },
-                { label: FuseBitLabelEnum.BOOTSZ0, value: false },
-                { label: FuseBitLabelEnum.BOOTRST, value: true }
+                { label: FuseBitLabelEnum.BOOTRST, value: true, bit: 0 },
+                { label: FuseBitLabelEnum.BOOTSZ0, value: false, bit: 1 },
+                { label: FuseBitLabelEnum.BOOTSZ1, value: false, bit: 2 },
+                { label: FuseBitLabelEnum.EESAVE, value: true, bit: 3 },
+                { label: FuseBitLabelEnum.CKOPT, value: true, bit: 4 },
+                { label: FuseBitLabelEnum.SPIEN, value: false, bit: 5 },
+                { label: FuseBitLabelEnum.JTAGEN, value: true, bit: 6 },
+                { label: FuseBitLabelEnum.OCDEN, value: true, bit: 7 }               
             ]
         }
     ]

@@ -7,14 +7,14 @@
       <div *ngFor="let fuse of microcontroller.fuses" class="d-flex justify-content-between align-items-center">
         <span> {{ fuse.type }} </span>
         <span class="d-flex justify-content-end align-items-center">
-          <span class="outputResults outputFuseReaded">
+          <span class="output-results output-fuses-readed centered-text">
             0x{{ fuse.hexValue }}
           </span>
         </span>
       </div>
     </div>
     <div class="col-6 d-flex justify-content-between align-items-center">
-      <button class="dirdem-buttons" (click)="readHWFuses(microcontroller.fuses)"> read </button>
+      <button class="dirdem-buttons" (click)="readHWFuses(microcontroller.fuses)"> Read </button>
       <button mat-icon-button (click)="openFuseBitComponent($event)" class="dirdem-icons">
         <mat-icon>settings</mat-icon>
       </button>

@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'driver-config';
   showSpinner: boolean = false;
   logMessage: string;
@@ -22,8 +22,8 @@ export class AppComponent implements OnInit{
     /**
      * Sottoscrizione allo stato dei processi asincroni per il loader
      */
-    this.loaderService.processStatus.subscribe((status: ProcessStatus)=> {
-      status == ProcessStatus.complete? this.showSpinner = false : this.showSpinner = true;
+    this.loaderService.processStatus.subscribe((status: ProcessStatus) => {
+      status == ProcessStatus.complete ? this.showSpinner = false : this.showSpinner = true;
       this.cdr.detectChanges();
     })
 
@@ -54,9 +54,9 @@ export class AppComponent implements OnInit{
       this.logMessage = err.toString();
       this.cdr.detectChanges();
     });
-        /**
-     * Sottoscrizione errore del flash bootloader Arduino Uno
-     */
+    /**
+ * Sottoscrizione errore del flash bootloader Arduino Uno
+ */
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.burnArduinoUnoBootloaderFailed, (evt, err) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
       this.logMessage = err.toString();
@@ -125,12 +125,8 @@ export class AppComponent implements OnInit{
     */
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.readFusesCompleted, (evt, arg) => {
       this.loaderService.updateProcess(ProcessStatus.complete);
-      let stdout = arg.stdout;
-      let stderr = arg.stderr;
-      if (stdout) {
-        this.logMessage = `Fuse readed with value: ${stdout}`;
-        this.cdr.detectChanges(); 
-      }
+      this.logMessage = `Fuse readed with success!`;
+      this.cdr.detectChanges();
     })
   }
 

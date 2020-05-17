@@ -1,28 +1,74 @@
-import { ConverterUtilities } from './Utilities/ConverterUtilities'
+import { ConverterUtilities } from './Utilities/ConverterUtilities';
 
 export class Fuse {
-  //hexValue: string;
-  get hexValue(): string {
-    let result = 0;
-
-    for (let i = this.bits.length-1 ; i >= 0; i--) {
-      const bit = this.bits[i];
-      let bitValue: number;
-      bit.value? bitValue = 1 : bitValue = 0;
-      result += (bitValue)*Math.pow(2, i);     
-    }
-    return ConverterUtilities.numberToHex(result)
-  }
-  set hexValue(hexValue) {
-    this.hexValue = hexValue;
-  } 
   type: FusesTypeEnum;
-  bits: FuseBit [];
+  defaultBits: FuseBit[];
+
+  private _hexValue: string;
+  get hexValue(): string { return this._hexValue };
+
+  private _bits: FuseBit[];
+  get bits(): FuseBit[] { return this._bits };
+
+  /**
+  * Aggiorna l'oggetto fuse attraverso un valore esadecimale
+  * @param newHexValue Valore esadeciamale aggiornato
+  */
+  updateFuseByHexValue(newHexValue: string) {
+    this._hexValue = newHexValue;
+    let decValue = ConverterUtilities.hexToDec(newHexValue);
+    this._bits.forEach(fuseBit => {
+      fuseBit.value = ((decValue >> fuseBit.bit) & 1) == 1 ? true : false;
+    })
+    console.log(this.bits);
+  }
+
+  /**
+  * Aggiorna l'oggetto fuse attraverso un array di FuseBit
+  * @param fuseBitArray Array di FuseBit aggiornato
+  */
+  updateFuseByFuseBitArray(fuseBitArray: FuseBit[]) {
+    this._bits = fuseBitArray;
+    this._hexValue = this.fuseBitArrayToHex(fuseBitArray);
+  }
+
+  /**
+  * Converte un array di FuseBit in una numero esadecimale 
+  */
+  fuseBitArrayToHex(fuseBits: FuseBit[]): string {
+    let decValue = this.fuseBitArrayToDec(fuseBits);
+    return ConverterUtilities.decToHex(decValue);
+  }
+
+  /**
+  * Converte un array di 8 bit in un numero intero segna segno (max 255)
+  */
+  fuseBitArrayToDec(fuseBits: FuseBit[]): number {
+    let result = 0;
+    fuseBits.forEach(fuseBit => {
+      if (fuseBit.value) {
+        result += Math.pow(2, fuseBit.bit);
+      }
+    })
+    return result;
+  }
+
+  constructor(deafultBits: FuseBit[], fuseType: FusesTypeEnum) {
+    this.updateFuseByFuseBitArray(deafultBits);
+    this.type = fuseType;
+  }
+
+
+  /**
+  * prop vera quando il fuse bit è stato letto o scritto
+  */
+  defined?: boolean;
 }
 
-export interface FuseBit {
+export class FuseBit {
   label: FuseBitLabel;
   value: boolean;
+  bit: number;
 }
 
 export enum FusesTypeEnum {
@@ -55,7 +101,7 @@ export enum FuseBitLabel {
   BODEN = "BODEN",
   OCDEN = "OCDEN",
   JTAGEN = "JTAGEN",
-  CKOPT = "CKOPT", 
+  CKOPT = "CKOPT",
   RSTDISBL = "RSTDISBL",
   Bit0 = "Bit0",
   Bit1 = "Bit1",

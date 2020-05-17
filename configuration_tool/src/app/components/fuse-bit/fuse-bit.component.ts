@@ -5,8 +5,9 @@ import * as _ from 'lodash';
 import { ElectronService } from 'ngx-electron';
 import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
-import { FuseBit, Fuse, FusesTypeEnum } from 'core/models/typeScript/FuseBit';
+import { FuseBit, Fuse } from 'core/models/typeScript/FuseBit';
 import { ConverterUtilities } from 'core/models/typeScript/Utilities/ConverterUtilities';
+import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 
 
 @Component({
@@ -18,80 +19,93 @@ export class FuseBitComponent {
   columns: FuseTableColumn[] = [];
   displayedColumns: string[] = [];
   dataSource: FuseBit[][] = [];
+  microcontroller: AvrMicrocontroller;
+  fuseBitTempConfig: Fuse[] = [];
 
   constructor(private electronService: ElectronService, dialogRef: MatDialogRef<FuseBitComponent>,
     private loaderService: LoaderService, private microService: MicroService, private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
-    // se già presente una configurazione viene caricata dai dati nel servizio
-    if (this.microService.fuseBitConfiguration.length) {
-      this.dataSource = ConverterUtilities.matrixTranspose(this.microService.fuseBitConfiguration.map(fuse => fuse.bits));
-    }
-    // altrimenti viene istanziata una nuova configurazioni con i dati di default passati dall'esterno (Microcontroller.ts)
-    else {
-      this.microService.fuseBitConfiguration = _.cloneDeep(this.fuses);
-      const fuseMatrix: FuseBit[][] = this.microService.fuseBitConfiguration.map(fuse => fuse.bits);
-      this.dataSource = ConverterUtilities.matrixTranspose(fuseMatrix);
-    }
+    // viene istanziata una nuova configurazione copiata con i dati di default passati dall'esterno
+    this.fuseBitTempConfig = _.cloneDeep(this.fuses);
+    // al posto della funzione reverse dobbiame farne una che inserisce il bit
+    const fuseMatrix: FuseBit[][] = this.fuseBitTempConfig.map(fuse => this.orderBitForGUI(fuse.bits));
+    this.dataSource = ConverterUtilities.matrixTranspose(fuseMatrix);
     // mappatura colonne
-    this.microService.fuseBitConfiguration.forEach((fuse, i) => {
+    this.fuseBitTempConfig.forEach((fuse, i) => {
       this.columns.push({ index: i, columnDef: fuse.type, header: fuse.type, footer: fuse.hexValue });
       this.displayedColumns.push(fuse.type);
     })
   }
 
   /**
-   * Setta i fuse bit sul microcontrollore
+   * Ordina i bit dal più significativo al meno siginificativo per la visualizzazione in 
+   * interfaccia grafica utilizzata per il datasource della tabella  
+   * @param fuseBitArray 
    */
-  burnFuses() {
-    this.loaderService.updateProcess(ProcessStatus.pending);
-    let avrdudeMicroLabel = this.microService.microcontrollerSelected.getValue().avrLabel;
-    console.log(avrdudeMicroLabel);
-    let lowFuse = '0x' + this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesTypeEnum.LOW).hexValue;
-    let highFuse = '0x' +this.microService.fuseBitConfiguration.find(fuse => fuse.type == FusesTypeEnum.HIGH).hexValue;
+  private orderBitForGUI(fuseBitArray: FuseBit[]) {
+    let result = fuseBitArray.sort((a, b) => b.bit - a.bit);
+    return result;
+  }
 
-    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuses, [avrdudeMicroLabel, lowFuse, highFuse]);
-  };
+  ngOnInit() {
+    /**
+    * Sottoscrizione al cambiamento del micro selezionato
+    */
+    this.microService.microcontrollerSelected.subscribe(microcontroller => {
+      this.microcontroller = microcontroller;
+    });
+  }
 
   /**
    * Evento scatenato click su checkbox di una singola cella
    */
-  onCellClicked(fuseType: string, cell: FuseBit) {
-    // settaggio del singolo bit direttamente nella configurazione del servizio
-    var fuse: Fuse = this.microService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
-    var bitToSet = fuse.bits.find(bit => bit.label == cell.label);
+  onCellClicked(fuseType: string, fuseBit: FuseBit) {
+    let fuse: Fuse = this.fuseBitTempConfig.find(fuse => fuse.type == fuseType);
+    let bitToSet = fuse.bits.find(bit => bit.label == fuseBit.label);
     bitToSet.value = !bitToSet.value;
-    fuse.hexValue = ConverterUtilities.binaryToHex((fuse.bits.map(bit => bit.value)).reverse());
-    // svuotamento colonne
-    this.columns = [];
-    this.displayedColumns = [];
-    this.cd.detectChanges();
-    // nuovo riempimento per visualizzazione su interfaccia
-    this.microService.fuseBitConfiguration.forEach((fuse, i) => {
-      this.columns.push({ index: i, columnDef: fuse.type, header: fuse.type, footer: fuse.hexValue });
-      this.displayedColumns.push(fuse.type);
-    })
+    let newHexValue = fuse.fuseBitArrayToHex(fuse.bits);
+    fuse.updateFuseByHexValue(newHexValue);    
   }
 
   /**
    * Evento scatenato quando viene impostato il valore esadecimale del byte nel footer della colonna
    */
-  onFooterChange(hexNumber: string, fuseType: string) {
-    let newBitsValue = ConverterUtilities.hexToBinaryArray(hexNumber).reverse();
-    let fuse: Fuse = this.microService.fuseBitConfiguration.find(fuse => fuse.type == fuseType);
-    fuse.hexValue = hexNumber;
-    for (let i = 0; i < fuse.bits.length; i++) {
-      var newBitValue = newBitsValue[i];
-      fuse.bits[i].value = newBitValue;   // vengono cambiati i singoli bit nella configurazione del driverService
-    }
+  onFooterChange(hexValue: string, fuseType: string) {
+    this.fuseBitTempConfig.forEach(fuse => {
+      if (fuse.type == fuseType) {
+        //fuse.hexValue = hexValue;
+        this.cd.detectChanges();
+      }
+    })
+
+    /*
+    let fuseToChange = this.fuseBitTempConfig.find(fuse => fuse.type == fuseType);
+    let fuseBitUpdated = ConverterUtilities.hexToBinaryArray(fuseToChange.hexValue);
+    fuseBitUpdated.forEach(fuseBit => {
+      for (let i = 0; i < fuseToChange.bits.length; i++) {
+        const oldFuseBit = fuseToChange.bits[i];
+        if (oldFuseBit.bit == fuseBit.bit) {
+          fuseBit.label = oldFuseBit.label;
+        }        
+      }
+    })
+    */
+
   }
 
-  /**
-  * Evento scatento sul click degli input nel footer
-  */
-  onFooterInputClick() {
-    var el = <HTMLInputElement>document.getElementById('footerInput');
-    // el.focus();
-  }
+    /**
+   * Flash dei fuse bit nel microcontrollore
+   */
+   burnFuses() {
+    this.loaderService.updateProcess(ProcessStatus.pending);
+    let avrdudeMicroLabel = this.microcontroller.avrLabel;
+    let fusesToBurn = this.fuseBitTempConfig.map(fuse => {
+      return ({ avrdudeFuseType: AvrMicrocontroller.fuseBitTypeToAvrdudeFuseBitType(fuse.type), hexValue: `0x${fuse.hexValue}` });
+    });      
+    this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuses, [avrdudeMicroLabel, fusesToBurn]);
+  };
+
+
 }
 
 

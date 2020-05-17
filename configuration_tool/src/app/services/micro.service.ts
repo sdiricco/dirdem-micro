@@ -10,7 +10,7 @@ import { MicrocontrollerPackageEnum } from 'core/models/typeScript/Microcontroll
 })
 export class MicroService {
   gptDriverConfiguration: GptDriverConfig [] = [];
-  fuseBitConfiguration: Fuse [] = [];
+
   microcontrollerSelected = new BehaviorSubject<AvrMicrocontroller>(new AvrMicrocontroller());
   microcontrollerPackage: MicrocontrollerPackageEnum = MicrocontrollerPackageEnum.TQFP;
   compiledHexFilePath: string;
@@ -22,7 +22,6 @@ export class MicroService {
    */
   clearAllConfigurations(): void {
     this.gptDriverConfiguration = [];
-    this.fuseBitConfiguration = [];
   }
 
   /**
