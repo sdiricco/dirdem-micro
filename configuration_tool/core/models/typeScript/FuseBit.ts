@@ -22,32 +22,31 @@ export class Fuse extends FuseBase {
     this._bits.forEach(fuseBit => {
       fuseBit.value = ((decValue >> fuseBit.bit) & 1) == 1 ? true : false;
     })
-    console.log(this.bits);
   }
 
   /**
   * Aggiorna l'oggetto fuse attraverso un array di FuseBit
-  * @param fuseBitArray Array di FuseBit aggiornato
+  * @param newFuseBitArray Array di FuseBit aggiornato
   */
-  updateFuseByFuseBitArray(fuseBitArray: FuseBit[]) {
-    this._bits = fuseBitArray;
-    this._hexValue = this.fuseBitArrayToHex(fuseBitArray);
+  updateFuseByFuseBitArray(newFuseBitArray: FuseBit[]) {
+    this._bits = newFuseBitArray;
+    this._hexValue = this.fuseBitArrayToHex(newFuseBitArray);
   }
 
   /**
   * Converte un array di FuseBit in una numero esadecimale
   */
-  fuseBitArrayToHex(fuseBits: FuseBit[]): string {
-    let decValue = this.fuseBitArrayToDec(fuseBits);
+  fuseBitArrayToHex(fuseBitArray: FuseBit[]): string {
+    let decValue = this.fuseBitArrayToDec(fuseBitArray);
     return ConverterUtilities.decToHex(decValue);
   }
 
   /**
   * Converte un array di 8 bit in un numero intero segna segno (max 255)
   */
-  fuseBitArrayToDec(fuseBits: FuseBit[]): number {
+  fuseBitArrayToDec(fusebitArray: FuseBit[]): number {
     let result = 0;
-    fuseBits.forEach(fuseBit => {
+    fusebitArray.forEach(fuseBit => {
       if (fuseBit.value) {
         result += Math.pow(2, fuseBit.bit);
       }
@@ -55,9 +54,9 @@ export class Fuse extends FuseBase {
     return result;
   }
 
-  constructor(deafultBits: FuseBit[], fuseType: FusesTypeEnum) {
+  constructor(fuseBitArray: FuseBit[], fuseType: FusesTypeEnum) {
     super();
-    this.updateFuseByFuseBitArray(deafultBits);
+    this.updateFuseByFuseBitArray(fuseBitArray);
     this.type = fuseType;
   }
 

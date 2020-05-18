@@ -10,7 +10,7 @@ const MAIN_IN_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN
 const MAIN_OUT_PROCESSES = require('./core/models/javascript/MainProcesses').MAIN_OUT_PROCESSES;
 
 const USB_PROGRAMMER = 'usbasp';
-const AVRDUDE_LOG_FILE = 'AvrdudeLogfile.txt';
+const AVRDUDE_LOG_FILE = 'avrdude-log.txt';
 
 function createWindow() {
   let win = new BrowserWindow({
