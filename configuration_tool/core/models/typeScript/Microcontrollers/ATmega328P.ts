@@ -8,7 +8,7 @@ import { FusesTypeEnum as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum, Fuse 
 import { ClockFrequenciesOscillatorTypeEnum, ClockFrequenciesOscillatorMaterialEnum, PowerConsumptionModeNamesEnum } from '../ElectricalCharateristics';
 import { MemorySegmentNamesEnum } from '../MemorySegment';
 
-export const ATMEGA328P: any =
+export const ATMEGA328P: AvrMicrocontrollerBase =
 {
     name: MicrocontrollerNamesEnum.ATmega328P,
     brand: MicroBrandsEnum.Atmel,
@@ -48,7 +48,7 @@ export const ATMEGA328P: any =
     ],
     electricalCharateristics:
     {
-        clockFrequencyMaxValue: 
+        clockFrequencyMaxValue:
         {
             frequencyValue: 20,
             frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
@@ -997,7 +997,7 @@ export const ATMEGA328P: any =
                 }
             ]
         },
-        
+
         {
             microcontrollerPackage:  MicrocontrollerPackageEnum.TQFP,
             defaultPinCount: 32,
@@ -1371,7 +1371,7 @@ export const ATMEGA328P: any =
         {
             type: FusesTypeEnum.LOW,
             defaultBits:
-            [         
+            [
                 { label: FuseBitLabelEnum.CKSEL0, value: false, bit: 0 },
                 { label: FuseBitLabelEnum.CKSEL1, value: true, bit: 1 },
                 { label: FuseBitLabelEnum.CKSEL2, value: false, bit: 2 },
@@ -1393,7 +1393,7 @@ export const ATMEGA328P: any =
                 { label: FuseBitLabelEnum.CKOPT, value: true, bit: 4 },
                 { label: FuseBitLabelEnum.SPIEN, value: false, bit: 5 },
                 { label: FuseBitLabelEnum.JTAGEN, value: true, bit: 6 },
-                { label: FuseBitLabelEnum.OCDEN, value: true, bit: 7 }               
+                { label: FuseBitLabelEnum.OCDEN, value: true, bit: 7 }
             ]
         }
     ]

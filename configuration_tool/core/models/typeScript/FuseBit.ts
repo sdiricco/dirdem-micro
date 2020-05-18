@@ -1,9 +1,11 @@
 import { ConverterUtilities } from './Utilities/ConverterUtilities';
 
-export class Fuse {
+export class FuseBase {
   type: FusesTypeEnum;
   defaultBits: FuseBit[];
+}
 
+export class Fuse extends FuseBase {
   private _hexValue: string;
   get hexValue(): string { return this._hexValue };
 
@@ -33,7 +35,7 @@ export class Fuse {
   }
 
   /**
-  * Converte un array di FuseBit in una numero esadecimale 
+  * Converte un array di FuseBit in una numero esadecimale
   */
   fuseBitArrayToHex(fuseBits: FuseBit[]): string {
     let decValue = this.fuseBitArrayToDec(fuseBits);
@@ -54,6 +56,7 @@ export class Fuse {
   }
 
   constructor(deafultBits: FuseBit[], fuseType: FusesTypeEnum) {
+    super();
     this.updateFuseByFuseBitArray(deafultBits);
     this.type = fuseType;
   }

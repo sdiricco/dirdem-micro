@@ -110,11 +110,12 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuses, (event, arg) => {
     const fuseType = fuseToRead.fuseType;
     const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h -F`;
     try {
-        var res = child.execSync(commandLine).toString();
-        event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, res);
+        let hexValue = child.execSync(commandLine).toString();
+        let response = { type: fuseType, hexValue: hexValue };
+        event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, response);
       } catch (error) {
-        reject(error);
-      } 
+        event.reply(MAIN_OUT_PROCESSES.mainProcessError, error);
+      }
   })
 })
 

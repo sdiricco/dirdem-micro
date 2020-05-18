@@ -60,8 +60,8 @@ export class FuseBitCardComponent implements OnInit {
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
     let fusesToRead = fuses.map(fuse => {
       return ({ avrdudeFuseType: AvrMicrocontroller.fuseBitTypeToAvrdudeFuseBitType(fuse.type), fuseType: fuse.type });
-    });    
+    });
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.readFuses, [avrdudeMicroLabel, fusesToRead]);
-    
   }
+
 }

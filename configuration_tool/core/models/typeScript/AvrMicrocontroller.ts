@@ -1,11 +1,10 @@
-import { Fuse, FusesTypeEnum } from './FuseBit';
+import { Fuse, FusesTypeEnum, FuseBase } from './FuseBit';
 import { MicrocontrollerBase } from './Microcontroller';
 
 export class AvrMicrocontrollerBase extends MicrocontrollerBase {
   avrLabel: string;
-  fuses: Fuse [] = [];
+  fuses: FuseBase [] | Fuse [] = [];
 }
-
 
 export class AvrMicrocontroller extends AvrMicrocontrollerBase {
   constructor(avrMicrocontrollerBase?: AvrMicrocontrollerBase) {
@@ -23,9 +22,9 @@ export class AvrMicrocontroller extends AvrMicrocontrollerBase {
    * @param fusesReaded Fuse bit letti restituiti dalla lettura di Avrdude
    */
   setFusesReaded(fusesReaded: { type: FusesTypeEnum, hexValue: string }[]) {
-    fusesReaded.forEach(fr => {
+    fusesReaded.forEach((fr: Fuse) => {
       let hexValueReaded = fr.hexValue.substring(fr.hexValue.indexOf('x') + 1, fr.hexValue.indexOf('\n'));
-      let matchingFuse = this.fuses.find(fuse => fuse.type == fr.type);
+      let matchingFuse: Fuse = <Fuse>this.fuses.find(fuse => fuse.type == fr.type);
       matchingFuse.updateFuseByHexValue(hexValueReaded);
     })
   }
