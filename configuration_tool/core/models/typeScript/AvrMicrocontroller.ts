@@ -3,7 +3,7 @@ import { MicrocontrollerBase } from './Microcontroller';
 
 export class AvrMicrocontrollerBase extends MicrocontrollerBase {
   avrLabel: string;
-  fuses: FuseBase [] | Fuse [] = [];
+  fuses: Fuse [] | FuseBase [] = [];
 }
 
 export class AvrMicrocontroller extends AvrMicrocontrollerBase {
@@ -23,7 +23,7 @@ export class AvrMicrocontroller extends AvrMicrocontrollerBase {
    */
   setFusesReaded(fusesReaded: { type: FusesTypeEnum, hexValue: string }[]) {
     fusesReaded.forEach((fr: Fuse) => {
-      let hexValueReaded = fr.hexValue.substring(fr.hexValue.indexOf('x') + 1, fr.hexValue.indexOf('\n'));
+      let hexValueReaded = fr.hexValue.substring(fr.hexValue.indexOf('x') + 1, 4);
       let matchingFuse: Fuse = <Fuse>this.fuses.find(fuse => fuse.type == fr.type);
       matchingFuse.updateFuseByHexValue(hexValueReaded);
     })

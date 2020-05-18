@@ -1395,6 +1395,20 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                 { label: FuseBitLabelEnum.JTAGEN, value: true, bit: 6 },
                 { label: FuseBitLabelEnum.OCDEN, value: true, bit: 7 }
             ]
-        }
+        },
+        {
+            type: FusesTypeEnum.EXTENDED,
+            defaultBits:
+            [
+                { label: FuseBitLabelEnum.CKSEL0, value: true, bit: 0 },
+                { label: FuseBitLabelEnum.CKSEL1, value: false, bit: 1 },
+                { label: FuseBitLabelEnum.CKSEL2, value: true, bit: 2 },
+                { label: FuseBitLabelEnum.CKSEL3, value: true, bit: 3 },
+                { label: FuseBitLabelEnum.SUT0, value: true, bit: 4 },
+                { label: FuseBitLabelEnum.SUT1, value: true, bit: 5 },
+                { label: FuseBitLabelEnum.BODEN, value: true, bit: 6 },
+                { label: FuseBitLabelEnum.BODLEVEL, value: true, bit: 7 }
+            ]
+        },
     ]
 }

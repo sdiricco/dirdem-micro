@@ -106,16 +106,17 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuses, (event, arg) => {
   let commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} `;
   fusesToRead.forEach(fuseToRead => {
     const avrdudeFuseType = fuseToRead.avrdudeFuseType;
-    commandLine += `-U ${avrdudeFuseType}:r:-:h`;
+    commandLine += `-U ${avrdudeFuseType}:r:-:h `;
   })
   try {
     let response = [];
     let hexValues = child.execSync(commandLine).toString();
-    hexValues = hexValues.split('\\s+');
+    hexValues = hexValues.trim();
+    hexValues = hexValues.split('\n');
     for (let i = 0; i < fusesToRead.length; i++) {
-      const avrdudeFuseType = fusesToRead[i].avrdudeFuseType;
+      const fuseType = fusesToRead[i].fuseType;
       const hexValue = hexValues[i];
-      response.push({ type: avrdudeFuseType, hexValue: hexValue });
+      response.push({ type: fuseType, hexValue: hexValue });
     }
     event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, response);
   } catch (error) {
