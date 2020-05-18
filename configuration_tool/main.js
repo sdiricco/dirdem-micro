@@ -16,7 +16,7 @@ function createWindow() {
   let win = new BrowserWindow({
     width: 1300,
     height: 920,
-    icon: `${__dirname}/src/assets/logo/electronAppLogo.png`,
+    icon: `${__dirname}/src/assets/logo/electronAppLogo01.ico`,
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInWorker: true
@@ -108,17 +108,15 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuses, (event, arg) => {
   fusesToRead.forEach(fuseToRead => {
     const avrdudeFuseType = fuseToRead.avrdudeFuseType;
     const fuseType = fuseToRead.fuseType;
-    const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h`;
-
-    execFuseReading(fuseType, commandLine, event).then(response => {
-      fusesReaded.push(response);
-      if (fusesReaded.length == fusesToRead.length) {
-        event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, fusesReaded);
-      }   
-    })
+    const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h -F`;
+    try {
+        var res = child.execSync(commandLine).toString();
+        event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, res);
+      } catch (error) {
+        reject(error);
+      } 
   })
 })
-
 
 /**
 * Processo sincrono lettura di un fuse bit

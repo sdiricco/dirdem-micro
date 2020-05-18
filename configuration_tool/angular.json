@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "driver-config": {
+    "dirdem-micro": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "driver-config:build"
+            "browserTarget": "dirdem-micro:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "driver-config:build:production"
+              "browserTarget": "dirdem-micro:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "driver-config:build"
+            "browserTarget": "dirdem-micro:build"
           }
         },
         "test": {
@@ -110,16 +110,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "driver-config:serve"
+            "devServerTarget": "dirdem-micro:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "driver-config:serve:production"
+              "devServerTarget": "dirdem-micro:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "driver-config"
+  "defaultProject": "dirdem-micro"
 }

@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'driver-config';
+  title = 'dirdem-micro';
   showSpinner: boolean = false;
   logMessage: string;
 

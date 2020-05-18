@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to driver-config!');
+    expect(page.getTitleText()).toEqual('Welcome to dirdem-micro!');
   });
 
   afterEach(async () => {

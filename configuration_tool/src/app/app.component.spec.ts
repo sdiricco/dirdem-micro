@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'driver-config'`, () => {
+  it(`should have as title 'dirdem-micro'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('driver-config');
+    expect(app.title).toEqual('dirdem-micro');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to driver-config!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to dirdem-micro!');
   });
 });
