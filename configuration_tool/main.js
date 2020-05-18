@@ -102,21 +102,25 @@ ipcMain.on(MAIN_IN_PROCESSES.burnFuses, (event, arg) => {
  */
  ipcMain.on(MAIN_IN_PROCESSES.readFuses, (event, arg) => {
   const avrdudeMicroLabel = arg[0];
-  const fusesToRead = arg[1];
-  var fusesReaded = [];
-
+  const fusesToRead = arg[1];             // array di oggetti [{ avrdudeFuseType, value }]
+  let commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} `;
   fusesToRead.forEach(fuseToRead => {
     const avrdudeFuseType = fuseToRead.avrdudeFuseType;
-    const fuseType = fuseToRead.fuseType;
-    const commandLine = `avrdude -u -c ${USB_PROGRAMMER} -p ${avrdudeMicroLabel} -U ${avrdudeFuseType}:r:-:h -F`;
-    try {
-        let hexValue = child.execSync(commandLine).toString();
-        let response = { type: fuseType, hexValue: hexValue };
-        event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, response);
-      } catch (error) {
-        event.reply(MAIN_OUT_PROCESSES.mainProcessError, error);
-      }
+    commandLine += `-U ${avrdudeFuseType}:r:-:h`;
   })
+  try {
+    let response = [];
+    let hexValues = child.execSync(commandLine).toString();
+    hexValues = hexValues.split('\\s+');
+    for (let i = 0; i < fusesToRead.length; i++) {
+      const avrdudeFuseType = fusesToRead[i].avrdudeFuseType;
+      const hexValue = hexValues[i];
+      response.push({ type: avrdudeFuseType, hexValue: hexValue });
+    }
+    event.reply(MAIN_OUT_PROCESSES.readFusesCompleted, response);
+  } catch (error) {
+    event.reply(MAIN_OUT_PROCESSES.mainProcessError, error);
+  }
 })
 
 /**
