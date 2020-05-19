@@ -38,9 +38,9 @@ export class FuseBitComponent {
   }
 
   /**
-   * Ordina i bit dal più significativo al meno siginificativo per la visualizzazione in 
-   * interfaccia grafica utilizzata per il datasource della tabella  
-   * @param fuseBitArray 
+   * Ordina i bit dal più significativo al meno siginificativo per la visualizzazione in
+   * interfaccia grafica utilizzata per il datasource della tabella
+   * @param fuseBitArray
    */
   private orderBitForGUI(fuseBitArray: FuseBit[]) {
     let result = fuseBitArray.sort((a, b) => b.bit - a.bit);
@@ -63,8 +63,15 @@ export class FuseBitComponent {
     let fuse: Fuse = this.fuseBitTempConfig.find(fuse => fuse.type == fuseType);
     let bitToSet = fuse.bits.find(bit => bit.label == fuseBit.label);
     bitToSet.value = !bitToSet.value;
-    let newHexValue = fuse.fuseBitArrayToHex(fuse.bits);
-    fuse.updateFuseByHexValue(newHexValue);    
+    fuse.updateFuseByFuseBitArray(fuse.bits);
+    this.columns = [];
+    this.displayedColumns = [];
+    this.cd.detectChanges();
+    // nuovo riempimento per visualizzazione su interfaccia
+    this.fuseBitTempConfig.forEach((fuse, i) => {
+      this.columns.push({ index: i, columnDef: fuse.type, header: fuse.type, footer: fuse.hexValue });
+      this.displayedColumns.push(fuse.type);
+    })
   }
 
   /**
@@ -73,27 +80,12 @@ export class FuseBitComponent {
   onFooterChange(hexValue: string, fuseType: string) {
     this.fuseBitTempConfig.forEach(fuse => {
       if (fuse.type == fuseType) {
-        //fuse.hexValue = hexValue;
-        this.cd.detectChanges();
+        fuse.updateFuseByHexValue(hexValue);
       }
     })
-
-    /*
-    let fuseToChange = this.fuseBitTempConfig.find(fuse => fuse.type == fuseType);
-    let fuseBitUpdated = ConverterUtilities.hexToBinaryArray(fuseToChange.hexValue);
-    fuseBitUpdated.forEach(fuseBit => {
-      for (let i = 0; i < fuseToChange.bits.length; i++) {
-        const oldFuseBit = fuseToChange.bits[i];
-        if (oldFuseBit.bit == fuseBit.bit) {
-          fuseBit.label = oldFuseBit.label;
-        }        
-      }
-    })
-    */
-
   }
 
-    /**
+  /**
    * Flash dei fuse bit nel microcontrollore
    */
    burnFuses() {
@@ -101,10 +93,9 @@ export class FuseBitComponent {
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
     let fusesToBurn = this.fuseBitTempConfig.map(fuse => {
       return ({ avrdudeFuseType: AvrMicrocontroller.fuseBitTypeToAvrdudeFuseBitType(fuse.type), hexValue: `0x${fuse.hexValue}` });
-    });      
+    });
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuses, [avrdudeMicroLabel, fusesToBurn]);
   };
-
 
 }
 
