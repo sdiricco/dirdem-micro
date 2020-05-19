@@ -9,7 +9,6 @@ import { FuseBit, Fuse } from 'core/models/typeScript/FuseBit';
 import { ConverterUtilities } from 'core/models/typeScript/Utilities/ConverterUtilities';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 
-
 @Component({
   selector: 'app-fuse-bit',
   templateUrl: './fuse-bit.component.html',
@@ -25,8 +24,8 @@ export class FuseBitComponent {
   constructor(private electronService: ElectronService, dialogRef: MatDialogRef<FuseBitComponent>,
     private loaderService: LoaderService, private microService: MicroService, private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public fuses: Fuse[]) {
-    // viene istanziata una nuova configurazione copiata con i dati di default passati dall'esterno
-    this.fuseBitTempConfig = _.cloneDeep(this.fuses);
+    // viene istanziata una nuova configurazione copiata con i dati passati dall'esterno
+    this.fuseBitTempConfig = _.cloneDeep(fuses);
     // al posto della funzione reverse dobbiame farne una che inserisce il bit
     const fuseMatrix: FuseBit[][] = this.fuseBitTempConfig.map(fuse => this.orderBitForGUI(fuse.bits));
     this.dataSource = ConverterUtilities.matrixTranspose(fuseMatrix);
@@ -42,12 +41,12 @@ export class FuseBitComponent {
    * interfaccia grafica utilizzata per il datasource della tabella
    * @param fuseBitArray
    */
-  private orderBitForGUI(fuseBitArray: FuseBit[]) {
+  private orderBitForGUI(fuseBitArray: FuseBit[]): FuseBit[] {
     let result = fuseBitArray.sort((a, b) => b.bit - a.bit);
     return result;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     /**
     * Sottoscrizione al cambiamento del micro selezionato
     */
@@ -59,7 +58,7 @@ export class FuseBitComponent {
   /**
    * Evento scatenato click su checkbox di una singola cella
    */
-  onCellClicked(fuseType: string, fuseBit: FuseBit) {
+  onCellClicked(fuseType: string, fuseBit: FuseBit): void {
     let fuse: Fuse = this.fuseBitTempConfig.find(fuse => fuse.type == fuseType);
     let bitToSet = fuse.bits.find(bit => bit.label == fuseBit.label);
     bitToSet.value = !bitToSet.value;
@@ -77,7 +76,7 @@ export class FuseBitComponent {
   /**
    * Evento scatenato quando viene impostato il valore esadecimale del byte nel footer della colonna
    */
-  onFooterChange(hexValue: string, fuseType: string) {
+  onFooterChange(hexValue: string, fuseType: string): void {
     this.fuseBitTempConfig.forEach(fuse => {
       if (fuse.type == fuseType) {
         fuse.updateFuseByHexValue(hexValue);
@@ -88,7 +87,7 @@ export class FuseBitComponent {
   /**
    * Flash dei fuse bit nel microcontrollore
    */
-   burnFuses() {
+  burnFuses(): void {
     this.loaderService.updateProcess(ProcessStatus.pending);
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
     let fusesToBurn = this.fuseBitTempConfig.map(fuse => {

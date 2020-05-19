@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { GptDriverConfig } from 'core/models/typeScript/GptDriver';
-import { Fuse } from 'core/models/typeScript/FuseBit';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { BehaviorSubject } from 'rxjs';
 import { MicrocontrollerPackageEnum } from 'core/models/typeScript/MicrocontrollerPins';
@@ -27,7 +26,7 @@ export class MicroService {
   /**
    * Aggiorna il valore del microcontrollere selezionato
    */
-  updateMicrocontroller(avrMicrocontroller: AvrMicrocontroller) {
+  updateMicrocontroller(avrMicrocontroller: AvrMicrocontroller): void {
     this.microcontrollerSelected.next(avrMicrocontroller);
   }
 }

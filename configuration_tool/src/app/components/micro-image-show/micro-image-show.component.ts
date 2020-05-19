@@ -29,7 +29,7 @@ export class MicroImageShowComponent implements OnInit {
   /**
    * Evento scatenato su click sopra l'immagine
    */
-  showPinout() {
+  showPinout(): void {
     const dialogRef = this.dialog.open(MicroPinoutDialogComponent, {
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       data: this.microcontroller

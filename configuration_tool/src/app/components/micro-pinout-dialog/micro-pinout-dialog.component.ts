@@ -12,7 +12,7 @@ export class MicroPinoutDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<MicroPinoutDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log(this.data)
   }
 

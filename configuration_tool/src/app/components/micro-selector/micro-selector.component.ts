@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MicroService } from 'src/app/services/micro.service';
 import { MatSelectChange } from '@angular/material/select';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
@@ -10,20 +10,17 @@ import { ATMEGA328P } from 'core/models/typeScript/Microcontrollers/ATmega328P';
   templateUrl: './micro-selector.component.html',
   styleUrls: ['./micro-selector.component.css']
 })
-export class MicroSelectorComponent implements OnInit {
+export class MicroSelectorComponent {
   microcontrollers: AvrMicrocontroller [];
 
   constructor(private driverService: MicroService) {
     this.microcontrollers = this.generateMicocontrollersList();
   }
 
-  ngOnInit(): void {
-  }
-
   /**
    * Evento scatenato sulla selezione di un nuovo micro
    */
-  onMicroSelected(evt: MatSelectChange):void {
+  onMicroSelected(evt: MatSelectChange): void {
     this.driverService.clearAllConfigurations();
     this.driverService.updateMicrocontroller(evt.value);
   }

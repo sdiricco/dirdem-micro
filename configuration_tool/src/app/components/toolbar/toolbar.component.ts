@@ -28,10 +28,10 @@ export class ToolbarComponent implements OnInit {
     })
   }
 
-    /**
-   * Compilazione di un file .C preso localmente dalla propria macchina
-   */
-  selectAndCompileCProject() {
+  /**
+ * Compilazione di un file .C preso localmente dalla propria macchina
+ */
+  selectAndCompileCProject(): void {
     this.loaderService.updateProcess(ProcessStatus.pending);
     let microcontrollerName = this.microcontroller.name;
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.compileCProject, [microcontrollerName]);
@@ -40,7 +40,7 @@ export class ToolbarComponent implements OnInit {
   /**
    * Compilazione e flash di un file .C preso localmente dalla propria macchina
    */
-  burnCProject() {
+  burnCProject(): void {
     this.loaderService.updateProcess(ProcessStatus.pending);
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
     let hexFilePath = this.microService.compiledHexFilePath;
@@ -50,7 +50,7 @@ export class ToolbarComponent implements OnInit {
   /**
    * Flash del bootloader di Arduino UNO su microcontrollore ATMega328p
    */
-  burnArduinoUnoBootloader() {
+  burnArduinoUnoBootloader(): void {
     this.loaderService.updateProcess(ProcessStatus.pending);
     let avrdudeMicroLabel = this.microService.microcontrollerSelected.getValue().avrLabel;
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnArduinoUnoBootloader, [avrdudeMicroLabel]);

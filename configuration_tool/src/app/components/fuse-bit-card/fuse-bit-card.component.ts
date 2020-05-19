@@ -6,7 +6,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { MicroService } from 'src/app/services/micro.service';
 import { Fuse } from 'core/models/typeScript/FuseBit';
 import { ElectronService } from 'ngx-electron';
-import { MAIN_IN_PROCESSES, MAIN_OUT_PROCESSES } from 'core/models/typeScript/MainProcesses';
+import { MAIN_OUT_PROCESSES, MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
 import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 
 @Component({
@@ -16,6 +16,7 @@ import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
 })
 export class FuseBitCardComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
+  fuseOutputIsFlashing: boolean = false;
 
   constructor(public dialog: MatDialog, private overlay: Overlay, private microService: MicroService,
     private electronService: ElectronService, private loaderService: LoaderService, private cdr: ChangeDetectorRef) { }
@@ -34,6 +35,7 @@ export class FuseBitCardComponent implements OnInit {
       this.loaderService.updateProcess(ProcessStatus.complete);
       this.microcontroller.setFusesReaded(results);
       this.cdr.detectChanges();
+      this.flashOutuptFuse(3);
     })
   }
 
@@ -54,7 +56,7 @@ export class FuseBitCardComponent implements OnInit {
   /**
   * Lettura hardware dei fuse bit
   */
-  readHWFuses(fuses: Fuse []) {
+  readHWFuses(fuses: Fuse []): void {
     this.loaderService.updateProcess(ProcessStatus.pending);
     console.log(fuses);
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
@@ -62,6 +64,18 @@ export class FuseBitCardComponent implements OnInit {
       return ({ avrdudeFuseType: AvrMicrocontroller.fuseBitTypeToAvrdudeFuseBitType(fuse.type), fuseType: fuse.type });
     });
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.readFuses, [avrdudeMicroLabel, fusesToRead]);
+  }
+
+  /**
+   * Lampeggiamento su GUI del fuse bit letto
+   * @param flashingTime Durata del' effetto di lampeggiamento che viene applicato al css
+   */
+  private flashOutuptFuse(flashingTime: number) {
+    this.fuseOutputIsFlashing = true;
+    setTimeout(()=> {
+      this.fuseOutputIsFlashing = false;
+    }, 3000);
+    this.cdr.detectChanges();
   }
 
 }

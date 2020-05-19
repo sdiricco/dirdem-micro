@@ -55,16 +55,6 @@ body {
   z-index: 9999999;
 }
 
-.output-results {
-  color: var(--nerdAccent);
-  background-color: var(--nerdDark);
-  padding: 5px;
-}
-
-.output-fuses-readed {
-  width: 50px;
-}
-
 .centered-text {
   text-align: center;
 }
@@ -75,6 +65,26 @@ body {
 
 .bolder {
   font-weight: bolder;
+}
+
+.dirdem-output-results {
+  color: var(--nerdAccent);
+  background-color: var(--nerdDark);
+  padding: 5px;
+}
+
+.dirdem-flashing-output-fuses {
+  color: var(--nerdAccent);
+  background-color: var(--nerdDark);
+  padding: 5px;
+  animation-name: flashingInput;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+}
+
+.dirdem-output-fuse {
+  width: 50px;
 }
 
 .dirdem-info-cards {
@@ -130,7 +140,7 @@ body {
   color: var(--nerdLight);
   animation-name: fadeInOpacity;
   animation-iteration-count: infinite;
-  animation-timing-function: ease-in;
+  animation-timing-function: ease;
   animation-duration: 1s;
 }
 
@@ -164,5 +174,16 @@ body {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes flashingInput {
+  0% {
+    color: var(--nerdDark);
+    background-color: var(--nerdAccent);
+  }
+  50% {
+    color: var(--nerdAccent);
+    background-color: var(--nerdDark);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MicroService } from 'src/app/services/micro.service';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { MicrocontrollerPackageEnum } from 'core/models/typeScript/MicrocontrollerPins';
@@ -30,8 +30,6 @@ export class AvrTechnicalSpecificationCardComponent implements OnInit {
     return `${orderedvalues[0].value} ${orderedvalues[0].measureUnit} - ${orderedvalues[1].value} ${orderedvalues[1].measureUnit}`;
   }
 
-
-
   constructor(private microService: MicroService) { }
 
   ngOnInit(): void {
@@ -39,6 +37,5 @@ export class AvrTechnicalSpecificationCardComponent implements OnInit {
       this.microcontroller = microcontroller;
     })
   }
-
 
 }
