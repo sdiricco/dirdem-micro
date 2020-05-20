@@ -2,7 +2,7 @@ import { ElectronicUnit } from './Utilities/ElectronicUtilities';
 import { PeripheralFeatures } from './PeripheralFeatures';
 import { CommunicationInterface } from './CommunicationInterfaces';
 import { ElectricalCharateristics } from './ElectricalCharateristics';
-import { MicrocontrollerPins as MicrocontrollerPinConfiguaration, MicrocontrollerPackageEnum, PinTypesEnum } from './MicrocontrollerPins';
+import { MicrocontrollerPinConfiguaration, MicrocontrollerPackageEnum, PinTypesEnum } from './MicrocontrollerPins';
 import { MemorySegment } from './MemorySegment';
 import { AvrMicrocontrollerBase } from './AvrMicrocontroller';
 
@@ -37,14 +37,21 @@ export class MicrocontrollerBase {
       this.communicationInterfaces = microcontrollerBase.communicationInterfaces;
     }
   }
+
   /**
-  * Restituiscre il numero di Pin di un dato Microcontrollore
+   * Restituisce la configurazione dei pin del microcontrollore
+   * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere la configurazione dei pin
+   */
+  microcontrollerPinConfiguration?(microcontrollerPackage: MicrocontrollerPackageEnum) {
+    return this.microcontrollerPinConfigurations.find(config => config.microcontrollerPackage == microcontrollerPackage);
+  }
+
+  /**
+  * Restituiscre il numero di Pin del microcontrollore
   * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere il numero di pin
   */
   pinCount?(microcontrollerPackage: MicrocontrollerPackageEnum): number {
-    let pinConfiguration = this.microcontrollerPinConfigurations.find(config => {
-      return config.microcontrollerPackage == microcontrollerPackage;
-    })
+    const pinConfiguration = this.microcontrollerPinConfiguration(microcontrollerPackage);
     let pc = pinConfiguration.pins.length;
     if (pc == pinConfiguration.defaultPinCount) {
       return pc;
@@ -54,13 +61,11 @@ export class MicrocontrollerBase {
   };
 
   /**
-   * Restituisce il numero delle I/O lines programmabili
+   * Restituisce il numero delle I/O lines programmabili del microcontrollore
    * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere il numero di I/O lines
    */
   programmableIoLines?(microcontrollerPackage: MicrocontrollerPackageEnum): number {
-    let pinConfiguration = this.microcontrollerPinConfigurations.find(config => {
-      return config.microcontrollerPackage == microcontrollerPackage;
-    })
+    const pinConfiguration = this.microcontrollerPinConfiguration(microcontrollerPackage);
     let ioLines = pinConfiguration.pins.filter(pin => {
       return pin.pinType == PinTypesEnum.IO
     })

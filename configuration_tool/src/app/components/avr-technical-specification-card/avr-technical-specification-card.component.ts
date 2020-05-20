@@ -11,16 +11,17 @@ import { MicrocontrollerPackageEnum } from 'core/models/typeScript/Microcontroll
 export class AvrTechnicalSpecificationCardComponent implements OnInit {
 
   microcontroller: AvrMicrocontroller;
-  get microcontrollerPackage(): MicrocontrollerPackageEnum { return this.microService.microcontrollerPackage };
+  microcontrollerPackage: MicrocontrollerPackageEnum;
+  flashPackageOutput: boolean = false;
   /**
    * se ritorna nullo il defaultPinCount non corrisponde alla somma dei pin nell'array pins in MicrocontrollerPinConfiguaration
    */
   get microcontrollerPinCount(): number {
-    return this.microcontroller.pinCount(this.microService.microcontrollerPackage);
+    return this.microcontroller.pinCount(this.microcontrollerPackage);
   }
 
   get microcontrollerIoLines(): number {
-    return this.microcontroller.programmableIoLines(this.microService.microcontrollerPackage);
+    return this.microcontroller.programmableIoLines(this.microcontrollerPackage);
   }
 
   get operatingVoltagesStringify(): string {
@@ -33,9 +34,29 @@ export class AvrTechnicalSpecificationCardComponent implements OnInit {
   constructor(private microService: MicroService) { }
 
   ngOnInit(): void {
+    /**
+     * Sottoscrizione al cambiamento del microcotrollore selezionato
+     */
     this.microService.microcontrollerSelected.subscribe(microcontroller => {
       this.microcontroller = microcontroller;
     })
+    /**
+     * Sottoscrizione al cambiamento del package del microcotrollore
+     */
+    this.microService.microcontrollerPackage.subscribe(microcontrollerPackage => {
+      this.microcontrollerPackage = microcontrollerPackage;
+      this.fireFlashingPackageOutput();
+    })
+  }
+
+  /**
+   * Scatena il flashing dell'output contenente il package del microcontrollore
+   */
+  private fireFlashingPackageOutput(): void {
+    this.flashPackageOutput = true;
+    setTimeout(() => {
+      this.flashPackageOutput = false;
+    }, 2000);
   }
 
 }

@@ -67,17 +67,22 @@ body {
   font-weight: bolder;
 }
 
+.dirdem-image-show:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 .dirdem-output-results {
   color: var(--nerdAccent);
   background-color: var(--nerdDark);
   padding: 5px;
 }
 
-.dirdem-flashing-output-fuses {
+.dirdem-flashing-output {
   color: var(--nerdAccent);
   background-color: var(--nerdDark);
   padding: 5px;
-  animation-name: flashingInput;
+  animation-name: flashingOutput;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in;
   animation-duration: 0.5s;
@@ -161,6 +166,11 @@ body {
   margin-top: 10px;
 }
 
+#dirdem-micro-package-show {
+  height: 50px;
+  width: 100%;
+}
+
 /**
 * Animazioni
 */
@@ -177,7 +187,7 @@ body {
   }
 }
 
-@keyframes flashingInput {
+@keyframes flashingOutput {
   0% {
     color: var(--nerdDark);
     background-color: var(--nerdAccent);

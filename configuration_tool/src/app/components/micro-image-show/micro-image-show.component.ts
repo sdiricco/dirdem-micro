@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
-import { MicroPinoutDialogComponent } from '../micro-pinout-dialog/micro-pinout-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Overlay } from '@angular/cdk/overlay';
 import { MicroService } from 'src/app/services/micro.service';
+
 
 @Component({
   selector: 'app-micro-image-show',
@@ -12,11 +12,11 @@ import { MicroService } from 'src/app/services/micro.service';
 })
 export class MicroImageShowComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
-  get imgSrc():string { let microPackage = this.microcontroller.microcontrollerPinConfigurations.find(config => {
-    return config.microcontrollerPackage == this.microService.microcontrollerPackage
-  })
-  return microPackage.pinoutImagesSrc[0];
- }
+
+  get imgSrc(): string {
+    const currentPingConfig = this.microcontroller.microcontrollerPinConfiguration(this.microService.microcontrollerPackage.getValue());
+    return currentPingConfig.pinoutImagesSrc[0];
+  }
 
   constructor(public dialog: MatDialog, private overlay: Overlay, private microService: MicroService) { }
 
@@ -27,16 +27,13 @@ export class MicroImageShowComponent implements OnInit {
   }
 
   /**
-   * Evento scatenato su click sopra l'immagine
+   * Evento scatenato su click immagine
    */
-  showPinout(): void {
-    const dialogRef = this.dialog.open(MicroPinoutDialogComponent, {
-      scrollStrategy: this.overlay.scrollStrategies.noop(),
-      data: this.microcontroller
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+  changeMicrocontrollerPackage() {
+    const currentPinConfig = this.microcontroller.microcontrollerPinConfiguration(this.microService.microcontrollerPackage.getValue());
+    const configIndex = this.microcontroller.microcontrollerPinConfigurations.findIndex(pinConfig => pinConfig == currentPinConfig);
+    let newIndex = (configIndex + 1) == this.microcontroller.microcontrollerPinConfigurations.length ? 0 : (configIndex + 1);
+    this.microService.updateMicrocontrollerPackage(this.microcontroller.microcontrollerPinConfigurations[newIndex].microcontrollerPackage);
   }
 
 }

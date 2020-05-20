@@ -1,5 +1,5 @@
-export interface MicrocontrollerPins {
-    microcontrollerPackage: MicrocontrollerPackageEnum; 
+export interface MicrocontrollerPinConfiguaration {
+    microcontrollerPackage: MicrocontrollerPackageEnum;
     defaultPinCount: number;
     pinoutImagesSrc?: string [];
     pins?: Pin [];
@@ -9,7 +9,7 @@ export enum MicrocontrollerPackageEnum{
     PDIP = "PDIP",
     TQFP = "TQFP",
     MLF = "MLF"
-} 
+}
 
 export interface Pin {
     number: number;
@@ -19,7 +19,7 @@ export interface Pin {
     pinDisabled?: boolean;
     pinColor?: string;
 }
- 
+
 
 export enum PinLabelsEnum {
     PA0 = "PA0",
@@ -76,7 +76,7 @@ export enum PinLabelsEnum {
     ICP1 = "ICP1",
     MOSI = "MOSI",
     MISO = "MISO",
-    XCK = "XCK", 
+    XCK = "XCK",
     SCK = "SCK",
     RXD = "RXD",
     TXD = "TXD",

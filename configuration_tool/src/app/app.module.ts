@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
-import { MicroPinoutDialogComponent } from './components/micro-pinout-dialog/micro-pinout-dialog.component';
 import { FuseBitComponent } from './components/fuse-bit/fuse-bit.component';
 import { GptCfgConfigComponent } from './components/gpt-config/gpt-config.component';
 import { MaterialModule } from './modules/material/material.module';
@@ -26,7 +25,6 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     AppComponent,
     GptCfgConfigComponent,
     HomeComponent,
-    MicroPinoutDialogComponent,
     FuseBitComponent,
     LogMessageComponent,
     FuseBitCardComponent,

@@ -19,5 +19,4 @@ export class HomeComponent {
       this.microcontroller = micro;
     })
   }
-
 }

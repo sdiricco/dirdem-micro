@@ -32,14 +32,17 @@
     <span> Memory Segments: </span>
     <div *ngFor="let segment of microcontroller.memorySegments">
       <li class="dirdem-technical-specification-values">
-        {{ segment.memorySegmentName }}:{{ segment.memorySegmentValue.value }}
+        {{ segment.memorySegmentName }}: {{ segment.memorySegmentValue.value }}
         {{ segment.memorySegmentValue.measureUnit }}
       </li>
     </div>
   </div>
   <!-- I/O -->
   <div>
-    <span> Pin (package {{ microcontrollerPackage }}): </span>
+    <span> Pin (package
+      <span [ngClass]="{'dirdem-flashing-output': flashPackageOutput}"> {{ microcontrollerPackage }}</span>
+      ):
+    </span>
     <span class="dirdem-technical-specification-values">
       {{ microcontrollerPinCount }} ({{ microcontrollerIoLines }} Programmable I/O Lines)
     </span>
@@ -53,9 +56,9 @@
     </span>
   </div>
   <!-- Operating voltages -->
-<div>
-  <span> Operating voltages: </span>
-  <span class="dirdem-technical-specification-values"> {{ operatingVoltagesStringify }} </span>
-</div>
+  <div>
+    <span> Operating voltages: </span>
+    <span class="dirdem-technical-specification-values"> {{ operatingVoltagesStringify }} </span>
+  </div>
 
 </mat-card>

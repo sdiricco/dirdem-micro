@@ -2,19 +2,16 @@ import { Injectable } from '@angular/core';
 import { GptDriverConfig } from 'core/models/typeScript/GptDriver';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { BehaviorSubject } from 'rxjs';
-import { MicrocontrollerPackageEnum } from 'core/models/typeScript/MicrocontrollerPins';
+import { MicrocontrollerPackageEnum, MicrocontrollerPinConfiguaration } from 'core/models/typeScript/MicrocontrollerPins';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MicroService {
   gptDriverConfiguration: GptDriverConfig [] = [];
-
-  microcontrollerSelected = new BehaviorSubject<AvrMicrocontroller>(new AvrMicrocontroller());
-  microcontrollerPackage: MicrocontrollerPackageEnum = MicrocontrollerPackageEnum.TQFP;
   compiledHexFilePath: string;
-
-  constructor() { }
+  microcontrollerSelected = new BehaviorSubject<AvrMicrocontroller>(new AvrMicrocontroller());
+  microcontrollerPackage = new BehaviorSubject<MicrocontrollerPackageEnum>(MicrocontrollerPackageEnum.TQFP);
 
   /**
    * Svuota tutte le configurazioni - Driver GPT e Fuse bit
@@ -28,5 +25,12 @@ export class MicroService {
    */
   updateMicrocontroller(avrMicrocontroller: AvrMicrocontroller): void {
     this.microcontrollerSelected.next(avrMicrocontroller);
+  }
+
+  /**
+   * Aggiorna il package del microcontrollore
+   */
+  updateMicrocontrollerPackage(microcontrollerPackage: MicrocontrollerPackageEnum): void {
+    this.microcontrollerPackage.next(microcontrollerPackage);
   }
 }
