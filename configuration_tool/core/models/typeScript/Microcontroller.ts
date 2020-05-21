@@ -42,16 +42,16 @@ export class MicrocontrollerBase {
    * Restituisce la configurazione dei pin del microcontrollore
    * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere la configurazione dei pin
    */
-  microcontrollerPinConfiguration?(microcontrollerPackage: MicrocontrollerPackageEnum) {
-    return this.microcontrollerPinConfigurations.find(config => config.microcontrollerPackage == microcontrollerPackage);
+  microcontrollerPinConfiguration?(microcontrollerPackage: MicrocontrollerPackageEnum, defaultPinCount: number) {
+    return this.microcontrollerPinConfigurations.find(config => config.microcontrollerPackage == microcontrollerPackage && config.defaultPinCount == defaultPinCount);
   }
 
   /**
   * Restituiscre il numero di Pin del microcontrollore
   * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere il numero di pin
   */
-  pinCount?(microcontrollerPackage: MicrocontrollerPackageEnum): number {
-    const pinConfiguration = this.microcontrollerPinConfiguration(microcontrollerPackage);
+  pinCount?(microcontrollerPackage: MicrocontrollerPackageEnum, defaultPinCount: number): number {
+    const pinConfiguration = this.microcontrollerPinConfiguration(microcontrollerPackage, defaultPinCount);
     let pc = pinConfiguration.pins.length;
     if (pc == pinConfiguration.defaultPinCount) {
       return pc;
@@ -64,8 +64,8 @@ export class MicrocontrollerBase {
    * Restituisce il numero delle I/O lines programmabili del microcontrollore
    * @param microcontrollerPackage Tipo di package per il quale si vuole conoscere il numero di I/O lines
    */
-  programmableIoLines?(microcontrollerPackage: MicrocontrollerPackageEnum): number {
-    const pinConfiguration = this.microcontrollerPinConfiguration(microcontrollerPackage);
+  programmableIoLines?(microcontrollerPackage: MicrocontrollerPackageEnum, defaultPinCount: number): number {
+    const pinConfiguration = this.microcontrollerPinConfiguration(microcontrollerPackage, defaultPinCount);
     let ioLines = pinConfiguration.pins.filter(pin => {
       return pin.pinType == PinTypesEnum.IO
     })

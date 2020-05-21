@@ -1,4 +1,4 @@
-export interface MicrocontrollerPinConfiguaration {
+export class MicrocontrollerPinConfiguaration {
     microcontrollerPackage: MicrocontrollerPackageEnum;
     defaultPinCount: number;
     pinoutImagesSrc?: string [];

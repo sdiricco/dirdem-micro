@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MicroService } from 'src/app/services/micro.service';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
-import { MicrocontrollerPackageEnum } from 'core/models/typeScript/MicrocontrollerPins';
+import { MicrocontrollerPinConfiguaration } from 'core/models/typeScript/MicrocontrollerPins';
 
 @Component({
   selector: 'app-avr-technical-specification-card',
@@ -11,17 +11,17 @@ import { MicrocontrollerPackageEnum } from 'core/models/typeScript/Microcontroll
 export class AvrTechnicalSpecificationCardComponent implements OnInit {
 
   microcontroller: AvrMicrocontroller;
-  microcontrollerPackage: MicrocontrollerPackageEnum;
+  microcontrollerPinConfiguration: MicrocontrollerPinConfiguaration;
   flashPackageOutput: boolean = false;
   /**
    * se ritorna nullo il defaultPinCount non corrisponde alla somma dei pin nell'array pins in MicrocontrollerPinConfiguaration
    */
   get microcontrollerPinCount(): number {
-    return this.microcontroller.pinCount(this.microcontrollerPackage);
+    return this.microcontroller.pinCount(this.microcontrollerPinConfiguration.microcontrollerPackage, this.microcontrollerPinConfiguration.defaultPinCount);
   }
 
   get microcontrollerIoLines(): number {
-    return this.microcontroller.programmableIoLines(this.microcontrollerPackage);
+    return this.microcontroller.programmableIoLines(this.microcontrollerPinConfiguration.microcontrollerPackage, this.microcontrollerPinConfiguration.defaultPinCount);
   }
 
   get operatingVoltagesStringify(): string {
@@ -43,8 +43,8 @@ export class AvrTechnicalSpecificationCardComponent implements OnInit {
     /**
      * Sottoscrizione al cambiamento del package del microcotrollore
      */
-    this.microService.microcontrollerPackage.subscribe(microcontrollerPackage => {
-      this.microcontrollerPackage = microcontrollerPackage;
+    this.microService.microcontrollerPinConfiguration.subscribe(microcontrollerPinConfiguration => {
+      this.microcontrollerPinConfiguration = microcontrollerPinConfiguration;
       this.fireFlashingPackageOutput();
     })
   }

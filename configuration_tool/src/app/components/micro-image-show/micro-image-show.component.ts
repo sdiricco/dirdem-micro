@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
 import { MatDialog } from '@angular/material/dialog';
 import { Overlay } from '@angular/cdk/overlay';
@@ -14,8 +14,10 @@ export class MicroImageShowComponent implements OnInit {
   microcontroller: AvrMicrocontroller;
 
   get imgSrc(): string {
-    const currentPingConfig = this.microcontroller.microcontrollerPinConfiguration(this.microService.microcontrollerPackage.getValue());
-    return currentPingConfig.pinoutImagesSrc[0];
+    const microcontrollerPackage = this.microService.microcontrollerPinConfiguration.getValue().microcontrollerPackage;
+    const defaultPinCount = this.microService.microcontrollerPinConfiguration.getValue().defaultPinCount;
+    const currentPinConfig = this.microcontroller.microcontrollerPinConfiguration(microcontrollerPackage, defaultPinCount);
+    return currentPinConfig.pinoutImagesSrc[0];
   }
 
   constructor(public dialog: MatDialog, private overlay: Overlay, private microService: MicroService) { }
@@ -29,11 +31,13 @@ export class MicroImageShowComponent implements OnInit {
   /**
    * Evento scatenato su click immagine
    */
-  changeMicrocontrollerPackage() {
-    const currentPinConfig = this.microcontroller.microcontrollerPinConfiguration(this.microService.microcontrollerPackage.getValue());
+  changeMicrocontrollerPinConfiguration() {
+    const microcontrollerPackage = this.microService.microcontrollerPinConfiguration.getValue().microcontrollerPackage;
+    const defaultPinCount = this.microService.microcontrollerPinConfiguration.getValue().defaultPinCount;
+    const currentPinConfig = this.microcontroller.microcontrollerPinConfiguration(microcontrollerPackage, defaultPinCount);
     const configIndex = this.microcontroller.microcontrollerPinConfigurations.findIndex(pinConfig => pinConfig == currentPinConfig);
     let newIndex = (configIndex + 1) == this.microcontroller.microcontrollerPinConfigurations.length ? 0 : (configIndex + 1);
-    this.microService.updateMicrocontrollerPackage(this.microcontroller.microcontrollerPinConfigurations[newIndex].microcontrollerPackage);
+    this.microService.updateMicrocontrollerPinConfiguration(this.microcontroller.microcontrollerPinConfigurations[newIndex]);
   }
 
 }

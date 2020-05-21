@@ -11,7 +11,7 @@ export class MicroService {
   gptDriverConfiguration: GptDriverConfig [] = [];
   compiledHexFilePath: string;
   microcontrollerSelected = new BehaviorSubject<AvrMicrocontroller>(new AvrMicrocontroller());
-  microcontrollerPackage = new BehaviorSubject<MicrocontrollerPackageEnum>(MicrocontrollerPackageEnum.TQFP);
+  microcontrollerPinConfiguration = new BehaviorSubject<MicrocontrollerPinConfiguaration>(new MicrocontrollerPinConfiguaration());
 
   /**
    * Svuota tutte le configurazioni - Driver GPT e Fuse bit
@@ -30,7 +30,7 @@ export class MicroService {
   /**
    * Aggiorna il package del microcontrollore
    */
-  updateMicrocontrollerPackage(microcontrollerPackage: MicrocontrollerPackageEnum): void {
-    this.microcontrollerPackage.next(microcontrollerPackage);
+  updateMicrocontrollerPinConfiguration(microcontrollerPinConfiguration: MicrocontrollerPinConfiguaration): void {
+    this.microcontrollerPinConfiguration.next(microcontrollerPinConfiguration);
   }
 }

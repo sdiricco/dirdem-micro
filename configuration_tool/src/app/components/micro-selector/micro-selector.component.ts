@@ -23,6 +23,7 @@ export class MicroSelectorComponent {
   onMicroSelected(evt: MatSelectChange): void {
     this.driverService.clearAllConfigurations();
     this.driverService.updateMicrocontroller(evt.value);
+    this.driverService.updateMicrocontrollerPinConfiguration(evt.value.microcontrollerPinConfigurations[0]);
   }
 
   /**
