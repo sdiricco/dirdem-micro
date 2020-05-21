@@ -16,7 +16,7 @@ function createWindow() {
   let win = new BrowserWindow({
     width: 1300,
     height: 920,
-    icon: `${__dirname}/src/assets/logo/electronAppLogo01.ico`,
+    icon: `${__dirname}/src/assets/logo/dirdem-micro-icon-app.ico`,
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInWorker: true

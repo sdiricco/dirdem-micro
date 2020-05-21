@@ -1,6 +1,6 @@
 {
     "dest": "release-builds/",
-    "icon": "src/assets/logo/electronAppLogo01.png",
+    "icon": "src/assets/logo/dirdem-micro-icon-app.png",
     "categories": [
       "Utility"
     ],
