@@ -12,7 +12,7 @@
     <!-- celle -->
     <td mat-cell *cdkCellDef="let row">
       <mat-checkbox [checked]="!row[column.index].value" (change)="onCellClicked(column.columnDef, row[column.index])">
-        {{ row[column.index].label }} </mat-checkbox>
+        {{ row[column.index].bit }} {{ row[column.index].label }} </mat-checkbox>
     </td>
     <!-- footer -->
     <td mat-footer-cell *matFooterCellDef class="footerCells">
