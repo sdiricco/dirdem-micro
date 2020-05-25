@@ -714,7 +714,7 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
             defaultPinCount:32,
             pinoutImagesSrc:
             [
-                "assets/images/ATmega328P/ATmega328P_MLF28.png",
+                "assets/images/ATmega328P/ATmega328P_MLF32.png",
             ],
             pins:
             [
