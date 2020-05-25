@@ -5,7 +5,7 @@ export class MicrocontrollerPinConfiguaration {
     pins?: Pin [];
 }
 
-export enum MicrocontrollerPackageEnum{
+export enum MicrocontrollerPackageEnum {
     PDIP = "PDIP",
     TQFP = "TQFP",
     MLF = "MLF"
@@ -19,7 +19,6 @@ export interface Pin {
     pinDisabled?: boolean;
     pinColor?: string;
 }
-
 
 export enum PinLabelsEnum {
     PA0 = "PA0",

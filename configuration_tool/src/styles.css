@@ -14,18 +14,18 @@
 
 @font-face {
   font-family: DirdemCustomFont;
-  src: url('assets/fonts/PressStart2P-Regular.ttf');
+  src: url('assets/fonts/Consolas.ttf');
 }
 
 * {
-  font-family: consolas;
+  font-family: DirdemCustomFont;
 }
 
 html {
   height: 100%;
   margin: 0;
   overflow-x: hidden;
-  font-family: consolas;
+  font-family: DirdemCustomFont;
 }
 
 body {

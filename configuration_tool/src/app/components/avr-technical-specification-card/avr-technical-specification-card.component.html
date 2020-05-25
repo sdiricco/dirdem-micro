@@ -37,11 +37,23 @@
       </li>
     </div>
   </div>
+  <!-- Peripheral Features -->
+  <div> Peripheral Features: </div>
+  <span> Timers </span>
+  <div *ngFor="let pf of microcontroller.peripheralFeatures.microcontrollerTimers">
+    <li class="dirdem-technical-specification-values"> 
+      {{ pf.microcontrollerTimerName }} - {{ pf.microcontrollerWidthCounter.value }} {{ pf.microcontrollerWidthCounter.measureUnit }} 
+    </li>
+  </div>
+  <!-- Communication Interfaces -->
+  <span> Communication Interfaces: </span>
+  <div *ngFor="let interface of this.microcontroller.communicationInterfaces">
+    <li class="dirdem-technical-specification-values"> {{ interface.name }} </li>
+  </div>
   <!-- I/O -->
   <div>
     <span> Pin (package
-      <span [ngClass]="{'dirdem-flashing-output': flashPackageOutput}"> {{ microcontrollerPinConfiguration.microcontrollerPackage }}</span>
-      ):
+      <span [ngClass]="{'dirdem-flashing-output': flashPackageOutput}"> {{ microcontrollerPinConfiguration.microcontrollerPackage }}</span>):
     </span>
     <span class="dirdem-technical-specification-values">
       {{ microcontrollerPinCount }} ({{ microcontrollerIoLines }} Programmable I/O Lines)
