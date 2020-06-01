@@ -7,7 +7,7 @@ v0.1.1 released on June 1st, 2020
 ## Windows
 
 To download the dirderm-micro software for windows click here:<br />
-https://drive.google.com/file/d/1IpmesjylqjN5DS_8p3SguDK50ejMGO7m/view?usp=sharing
+https://drive.google.com/file/d/1IpmesjylqjN5DS_8p3SguDK50ejMGO7m/view?usp=sharing<br />
 To ensure that the dirdem-micro software runs smoothly, please follow the steps below:<br />
 
 - download the avr-toolchain and avrdude packages from the following link: 
@@ -28,7 +28,7 @@ To check if avr-gcc and avrdude have been installed correctly, open your termina
 
 ## Linux
 To download the dirderm-micro software for linux click the following link:<br />
-https://drive.google.com/file/d/1h6sAK3r9Q5_x8mgi7zyu9XG9QzDNmcY-/view?usp=sharing
+https://drive.google.com/file/d/1egZrHCpr1LS-EiuV0b0khwFxhUTdKMRS/view?usp=sharing
 
 To ensure that dirdem-micro software runs smoothly, open your terminal and type the following commands:<br />
 ```
