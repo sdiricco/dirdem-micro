@@ -1,43 +1,42 @@
 # We are Dirdem-Micro
 
-April 30, 2020
-Frist Release v0.1.0
-
-Download here:<br />
-https://drive.google.com/file/d/1h6sAK3r9Q5_x8mgi7zyu9XG9QzDNmcY-/view?usp=sharing
+v0.1.1 released on June 1st, 2020
 
 # Setup
 
 ## Windows
 
-Download the dirderm-micro software for windows here:<br />
-https://drive.google.com/file/d/1h6sAK3r9Q5_x8mgi7zyu9XG9QzDNmcY-/view?usp=sharing
+To download the dirderm-micro software for windows click here:<br />
+https://drive.google.com/file/d/1IpmesjylqjN5DS_8p3SguDK50ejMGO7m/view?usp=sharing
+To ensure that the dirdem-micro software runs smoothly, please follow the steps below:<br />
 
-You need to install the avr-toolchain and avrdude, get both from here:<br />
+- download the avr-toolchain and avrdude packages from the following link: 
 https://drive.google.com/file/d/1yDNwaGXGj1FiG_AYdIu4By9Xr00mLHyV/view?usp=sharing
 
-Extract the content and copy it under your local disk: `C:\AvrTools`<br />
-Add the following paths to the environment variables:<br />
+- Extract and copy the content in your local disk: `C:\AvrTools`<br />
+
+- Add the following paths to the environment variables:<br />
 `C:\AvrTools\avrdude`<br />
 `C:\AvrTools\avr-toolchain\bin`
 
-To check if avr-gcc and avrdude are installed correctly, open cmd and digit:<br />
+
+To check if avr-gcc and avrdude have been installed correctly, open your terminal and type the following commands:<br />
 ```
 >>>avr-gcc --version
 >>>avrdude
 ```
 
 ## Linux
-Download the dirderm-micro softwre for linux here:<br />
+To download the dirderm-micro software for linux click the following link:<br />
 https://drive.google.com/file/d/1h6sAK3r9Q5_x8mgi7zyu9XG9QzDNmcY-/view?usp=sharing
 
-You need to install the avr-toolchain and avrdude, open the terminal and digit:<br />
+To ensure that dirdem-micro software runs smoothly, open your terminal and type the following commands:<br />
 ```
 $ sudo apt-get install gcc-avr binutils-avr avr-libc
 $ sudo apt-get install avrdude
 ```
 
-To check if avr-gcc and avrdude are installed correctly, open the terminal and digit:<br />
+To check if avr-gcc and avrdude have been installed correctly, open your  terminal and type:<br />
 ```
 $ avr-gcc --version
 $ avrdude
