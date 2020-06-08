@@ -18,6 +18,7 @@ import { AvrTechnicalSpecificationCardComponent } from './components/avr-technic
 import { MicroSelectorComponent } from './components/micro-selector/micro-selector.component';
 import { MicroImageShowComponent } from './components/micro-image-show/micro-image-show.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { FuseBitWizardComponent } from './components/fuse-bit-wizard/fuse-bit-wizard.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     AvrTechnicalSpecificationCardComponent,
     MicroSelectorComponent,
     MicroImageShowComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    FuseBitWizardComponent
   ],
   imports: [
     BrowserModule,
