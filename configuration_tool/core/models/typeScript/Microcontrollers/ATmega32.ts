@@ -53,7 +53,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
             frequencyValue: 16,
             frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
         },
-        clockFrequencyOscillator:
+        clockFrequencyOscillators:
         [
             {
                 clockFrequencyOscillatorValue:
@@ -135,19 +135,7 @@ export const ATMEGA32: AvrMicrocontrollerBase =
                 ],
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
                 clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC
-            },
-            {
-                clockFrequencyOscillatorValue:
-                {
-                    frequencyValue: 32.768,
-                    frequencyMeasureUnit: FrequenciesMeasureUnitEnum.KHz
-                },
-                clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.Crystal
-            },
-            {
-                clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
-            },
+            }
         ],
         operatingVoltageRange:
         [

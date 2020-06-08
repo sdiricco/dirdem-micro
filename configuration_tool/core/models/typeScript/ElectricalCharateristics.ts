@@ -2,7 +2,7 @@ import { Voltage, Frequency, Temperature, Current } from './Utilities/Electronic
 
 export interface ElectricalCharateristics {
     clockFrequencyMaxValue: Frequency;
-    clockFrequencyOscillator: ClockFrequencyOscillator [];
+    clockFrequencyOscillators: ClockFrequencyOscillator [];
     operatingVoltageRange: Voltage [];
     powerConsumption?: PowerConsumption;
 }
@@ -18,6 +18,7 @@ export interface ClockFrequencyOscillator {
     clockFrequencyOscillatorRange?: Frequency [];
     clockFrequencyOscillatorType?: ClockFrequenciesOscillatorTypeEnum;
     clockFrequencyOscillatorMaterial?: ClockFrequenciesOscillatorMaterialEnum;
+    clockFrequencyOscillatorHexValue?: string;
 }
 
 export interface PowerConsumption {
