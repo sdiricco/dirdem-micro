@@ -1,13 +1,34 @@
 <div id="fuse-bit-wizard-container">
+    <!-- Frequency value -->
     <mat-form-field appearance="outline">
         <mat-label>Frequency value</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="clockFrequencyOscillatorValueSelected.frequencyValue" (keyup)="onSelectedSystemFrequencyKeyup()">
         <mat-hint align="start">
-            <strong> 
-                (0 - {{ microcontroller.electricalCharateristics.clockFrequencyMaxValue.frequencyValue }})                
+            <strong>
+                (0 - {{ microcontroller.electricalCharateristics.clockFrequencyMaxValue.frequencyValue }})
                 {{ microcontroller.electricalCharateristics.clockFrequencyMaxValue.frequencyMeasureUnit }}
             </strong>
         </mat-hint>
+    </mat-form-field>
+
+    <!-- Oscillator type -->
+    <mat-form-field appearance="outline">
+        <mat-label>Oscillator type</mat-label>
+        <mat-select (selectionChange)="onOscillatorTypeChange($event)">
+            <mat-option *ngFor="let oscilatorType of clockFrequencyOscillatorTypes" [value]="oscilatorType">
+                {{ oscilatorType }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- Oscillator material -->
+    <mat-form-field appearance="outline">
+        <mat-label>Oscillator material</mat-label>
+        <mat-select (selectionChange)="onOscillatorMaterialChange($event)">
+            <mat-option *ngFor="let oscillatorMaterial of clockFrequencyOscillatorMaterials" [value]="oscillatorMaterial">
+                {{ oscillatorMaterial }}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 </div>
 

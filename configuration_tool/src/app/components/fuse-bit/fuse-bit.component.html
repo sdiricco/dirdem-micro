@@ -1,4 +1,4 @@
-<app-fuse-bit-wizard></app-fuse-bit-wizard>
+<app-fuse-bit-wizard (systemClockOscillator)="onSystemClockOscillatorChange($event)"></app-fuse-bit-wizard>
 
 <div id="legendRow"> <span> Remember: </span>
   <mat-checkbox [checked]="true"> = 0 (programmed)</mat-checkbox>
@@ -18,7 +18,7 @@
     </td>
     <!-- footer -->
     <td mat-footer-cell *matFooterCellDef class="footerCells">
-      <div class="d-flex"> 0x<input matInput [(ngModel)]="column.footer" id="footerInput"
+      <div class="d-flex"> 0x<input matInput [(ngModel)]="column.footer"
           (ngModelChange)="onFooterChange($event, column.header)"> </div>
     </td>
   </ng-container>

@@ -8,6 +8,7 @@ import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
 import { FuseBit, Fuse } from 'core/models/typeScript/FuseBit';
 import { ConverterUtilities } from 'core/models/typeScript/Utilities/ConverterUtilities';
 import { AvrMicrocontroller } from 'core/models/typeScript/AvrMicrocontroller';
+import { SystemClockOscillator } from '../fuse-bit-wizard/fuse-bit-wizard.component';
 
 @Component({
   selector: 'app-fuse-bit',
@@ -95,6 +96,13 @@ export class FuseBitComponent {
     });
     this.electronService.ipcRenderer.send(MAIN_IN_PROCESSES.burnFuses, [avrdudeMicroLabel, fusesToBurn]);
   };
+
+  /**
+  * Funzione scatenata quando tutti i valori del componente figlio (fuse-bit-wizard) sono valorizzati
+  */
+  onSystemClockOscillatorChange(evt: SystemClockOscillator): void {
+    console.log(evt);
+  }
 
 }
 
