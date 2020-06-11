@@ -18,7 +18,9 @@ export interface ClockFrequencyOscillator {
     clockFrequencyOscillatorRange?: Frequency [];
     clockFrequencyOscillatorType?: ClockFrequenciesOscillatorTypeEnum;
     clockFrequencyOscillatorMaterial?: ClockFrequenciesOscillatorMaterialEnum;
-    clockFrequencyOscillatorHexValue?: string;
+    clockFrequencyOscillatorHexValueLow?: string;
+    clockFrequencyOscillatorHexValueHigh?: string;
+    clockFrequencyOscillatorHexValueExtended?: string;
 }
 
 export interface PowerConsumption {

@@ -7,6 +7,7 @@ import { CommunicationInterfaceNamesEnum, CommunicationInterfaceTypesEnum } from
 import { FusesTypeEnum as FusesTypeEnum, FuseBitLabel as FuseBitLabelEnum, Fuse } from '../FuseBit';
 import { ClockFrequenciesOscillatorTypeEnum, ClockFrequenciesOscillatorMaterialEnum, PowerConsumptionModeNamesEnum } from '../ElectricalCharateristics';
 import { MemorySegmentNamesEnum } from '../MemorySegment';
+import { ProviderAst } from '@angular/compiler';
 
 export const ATMEGA328P: AvrMicrocontrollerBase =
 {
@@ -62,7 +63,10 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
                 },
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.Internal,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC,
+                clockFrequencyOscillatorHexValueLow: "0x01",
+                clockFrequencyOscillatorHexValueHigh: "0x01",
+                clockFrequencyOscillatorHexValueExtended: "0x01"
             },
             {
                 clockFrequencyOscillatorValue:
@@ -71,7 +75,10 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
                 },
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.Internal,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC,
+                clockFrequencyOscillatorHexValueLow: "0x02",
+                clockFrequencyOscillatorHexValueHigh: "0x02",
+                clockFrequencyOscillatorHexValueExtended: "0x02"
             },
             {
                 clockFrequencyOscillatorValue:
@@ -80,7 +87,10 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
                 },
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.Internal,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC,
+                clockFrequencyOscillatorHexValueLow: "0x03",
+                clockFrequencyOscillatorHexValueHigh: "0x03",
+                clockFrequencyOscillatorHexValueExtended: "0x03"
             },
             {
                 clockFrequencyOscillatorValue:
@@ -89,7 +99,10 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     frequencyMeasureUnit: FrequenciesMeasureUnitEnum.MHz
                 },
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.Internal,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC,
+                clockFrequencyOscillatorHexValueLow: "0x04",
+                clockFrequencyOscillatorHexValueHigh: "0x04",
+                clockFrequencyOscillatorHexValueExtended: "0x04"
             },
             {
                 clockFrequencyOscillatorRange:
@@ -104,7 +117,10 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     },
                 ],
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.Ceramic
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.Ceramic,
+                clockFrequencyOscillatorHexValueLow: "0x05",
+                clockFrequencyOscillatorHexValueHigh: "0x05",
+                clockFrequencyOscillatorHexValueExtended: "0x05"
             },
             {
                 clockFrequencyOscillatorRange:
@@ -119,7 +135,10 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     },
                 ],
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.Crystal
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.Crystal,
+                clockFrequencyOscillatorHexValueLow: "0x06",
+                clockFrequencyOscillatorHexValueHigh: "0x06",
+                clockFrequencyOscillatorHexValueExtended: "0x06"
             },
             {
                 clockFrequencyOscillatorRange:
@@ -134,7 +153,10 @@ export const ATMEGA328P: AvrMicrocontrollerBase =
                     },
                 ],
                 clockFrequencyOscillatorType: ClockFrequenciesOscillatorTypeEnum.External,
-                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC
+                clockFrequencyOscillatorMaterial: ClockFrequenciesOscillatorMaterialEnum.RC,
+                clockFrequencyOscillatorHexValueLow: "0x07",
+                clockFrequencyOscillatorHexValueHigh: "0x07",
+                clockFrequencyOscillatorHexValueExtended: "0x07"
             }
         ],
         operatingVoltageRange:
