@@ -1,11 +1,6 @@
-<div id="microSelection">
-  <h5 class="centered-text" *ngIf="!selectedMicro.value">Please select one device to start</h5>
-  <mat-form-field appearance="outline">
-    <mat-label>Microcontroller</mat-label>
-    <mat-select [(value)]="microcontroller" (selectionChange)="onMicroSelected($event)" #selectedMicro>
-      <mat-option *ngFor="let micro of microcontrollers" [value]="micro">
-        {{ micro.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+<select name="microSelector" id="micro-selector" [(ngModel)]="microSelected" (change)="onMicroSelectChange($event)" required>
+  <option value="" disabled selected>Select microcontroller</option>
+  <option *ngFor="let micro of microcontrollers" [ngValue]="micro">
+    {{ micro.name }}
+  </option>
+</select>

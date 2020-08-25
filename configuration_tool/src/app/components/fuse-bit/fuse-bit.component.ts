@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MicroService } from 'src/app/services/micro.service';
 import * as _ from 'lodash';
 import { ElectronService } from 'ngx-electron';
-import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
 import { FuseBit, Fuse } from 'core/models/typeScript/FuseBit';
 import { ConverterUtilities } from 'core/models/typeScript/Utilities/ConverterUtilities';
@@ -89,7 +89,7 @@ export class FuseBitComponent {
    * Flash dei fuse bit nel microcontrollore
    */
   burnFuses(): void {
-    this.loaderService.updateProcess(ProcessStatus.pending);
+    this.loaderService.show();
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
     let fusesToBurn = this.fuseBitTempConfig.map(fuse => {
       return ({ avrdudeFuseType: AvrMicrocontroller.fuseBitTypeToAvrdudeFuseBitType(fuse.type), hexValue: `0x${fuse.hexValue}` });

@@ -2,3 +2,31 @@
   opacity: 0.7;
 }
 
+#main-page-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  height: 70vh;
+}
+
+#left-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 370px;
+}
+
+#center-page-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#right-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 370px;
+}

@@ -3,6 +3,10 @@
     color: var(--matAccent);
 }
 
+#closeButton {
+  text-align: end;
+}
+
 #logMessageContainer {
     font-size: 13px;
     font-family: consolas;
@@ -20,9 +24,7 @@
     box-shadow: 2px 2px 10px 0px var(--nerdDark);
 }
 
-#closeButton {
-    text-align: end;
-}
+
 
 #logMessageText {
     text-align: left;

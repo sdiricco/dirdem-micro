@@ -11,6 +11,7 @@ import { ATMEGA328P } from 'core/models/typeScript/Microcontrollers/ATmega328P';
   styleUrls: ['./micro-selector.component.css']
 })
 export class MicroSelectorComponent {
+  microSelected: AvrMicrocontroller;
   microcontrollers: AvrMicrocontroller [];
 
   constructor(private driverService: MicroService) {
@@ -20,10 +21,10 @@ export class MicroSelectorComponent {
   /**
    * Evento scatenato sulla selezione di un nuovo micro
    */
-  onMicroSelected(evt: MatSelectChange): void {
+  onMicroSelectChange(evt): void {
     this.driverService.clearAllConfigurations();
-    this.driverService.updateMicrocontroller(evt.value);
-    this.driverService.updateMicrocontrollerPinConfiguration(evt.value.microcontrollerPinConfigurations[0]);
+    this.driverService.updateMicrocontroller(this.microSelected);
+    this.driverService.updateMicrocontrollerPinConfiguration(this.microSelected.microcontrollerPinConfigurations[0]);
   }
 
   /**

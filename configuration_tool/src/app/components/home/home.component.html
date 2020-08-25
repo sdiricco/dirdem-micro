@@ -1,24 +1,19 @@
-<div *ngIf="microcontroller.name">
-  <app-toolbar></app-toolbar>
-</div>
+<app-toolbar></app-toolbar>
 
-<div class="dirdem-page-container">
-
-  <app-micro-selector></app-micro-selector>
-
-  <div *ngIf="microcontroller.name" class="row d-flex justify-content-around">
-    <div class="col-md-1"></div>
-    <div class="col-md-4 d-flex flex-column">
-      <app-avr-technical-specification-card> </app-avr-technical-specification-card>
-      <app-fuse-bit-card> </app-fuse-bit-card>
-    </div>
-    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
-      <!--div id="dirdem-micro-package-show"-->
-        <div> {{ microcontrollerPackage }} </div>
-      <!--/div-->
-      <app-micro-image-show (microcontrollerPackageChange)="onMicrocontrollerPackageChange($event)"> </app-micro-image-show>
-    </div>
-    <div class="col-md-1"></div>
+<div *ngIf="microcontroller.name" id="main-page-container">
+  <div id="left-page-container">
+    <app-avr-technical-specification-card class="full-height"> </app-avr-technical-specification-card>
   </div>
 
+  <div id="center-page-container">
+    <app-micro-image-show> </app-micro-image-show>
+  </div>
+
+  <div id="right-page-container">
+    <app-fuse-bit-card class="full-height"> </app-fuse-bit-card>
+  </div>
 </div>
+
+
+
+

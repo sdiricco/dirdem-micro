@@ -1,0 +1,22 @@
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flashingOutput {
+  0% {
+    color: var(--nerdDark);
+    background-color: var(--nerdAccent);
+  }
+  50% {
+    color: var(--nerdAccent);
+    background-color: var(--nerdDark);
+  }
+}

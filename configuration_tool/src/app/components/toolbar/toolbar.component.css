@@ -1,0 +1,15 @@
+#dirdem-toolbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--matPrimary);
+  height: 40px;
+  border-bottom: solid 2px var( --nerdAccent);
+  color: var(--nerdDark);
+}
+
+.dirdem-toolbar-icon-buttons {
+  font-size: 20px;
+  height: 100% !important;
+  width: 100% !important;
+}

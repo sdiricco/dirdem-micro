@@ -7,7 +7,7 @@ import { MicroService } from 'src/app/services/micro.service';
 import { Fuse } from 'core/models/typeScript/FuseBit';
 import { ElectronService } from 'ngx-electron';
 import { MAIN_OUT_PROCESSES, MAIN_IN_PROCESSES } from 'core/models/typeScript/MainProcesses';
-import { LoaderService, ProcessStatus } from 'src/app/services/loader.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-fuse-bit-card',
@@ -32,7 +32,7 @@ export class FuseBitCardComponent implements OnInit {
     * Sottoscrizione al completamento lettura fuse bit;
     */
     this.electronService.ipcRenderer.on(MAIN_OUT_PROCESSES.readFusesCompleted, (evt, results) => {
-      this.loaderService.updateProcess(ProcessStatus.complete);
+      this.loaderService.show();
       this.microcontroller.setFusesReaded(results);
       this.cdr.detectChanges();
       this.flashOutuptFuse(3);
@@ -57,7 +57,7 @@ export class FuseBitCardComponent implements OnInit {
   * Lettura hardware dei fuse bit
   */
   readHWFuses(fuses: Fuse []): void {
-    this.loaderService.updateProcess(ProcessStatus.pending);
+    this.loaderService.show();
     console.log(fuses);
     let avrdudeMicroLabel = this.microcontroller.avrLabel;
     let fusesToRead = fuses.map(fuse => {

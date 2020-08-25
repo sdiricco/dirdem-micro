@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
 import { FuseBitComponent } from './components/fuse-bit/fuse-bit.component';
 import { GptCfgConfigComponent } from './components/gpt-config/gpt-config.component';
@@ -19,7 +18,6 @@ import { MicroSelectorComponent } from './components/micro-selector/micro-select
 import { MicroImageShowComponent } from './components/micro-image-show/micro-image-show.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FuseBitWizardComponent } from './components/fuse-bit-wizard/fuse-bit-wizard.component';
-
 
 @NgModule({
   declarations: [
@@ -43,8 +41,7 @@ import { FuseBitWizardComponent } from './components/fuse-bit-wizard/fuse-bit-wi
     MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot() // ToastrModule added
+    ReactiveFormsModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

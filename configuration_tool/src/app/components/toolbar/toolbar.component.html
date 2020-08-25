@@ -1,19 +1,22 @@
 <div id="dirdem-toolbar-container">
-  <button mat-icon-button (click)="selectAndCompileCProject()"  class="dirdem-icons" matTooltip="Build .C file">
-    <mat-icon>build</mat-icon>
-  </button>
+  <div>
+    <button mat-icon-button (click)="selectAndCompileCProject()" class="dirdem-icons" matTooltip="Build .C file" [disabled]="!microcontroller.name">
+      <mat-icon>build</mat-icon>
+    </button>
 
-  <button mat-icon-button (click)="burnCProject()" class="dirdem-icons" matTooltip="Flash .hex file">
-    <mat-icon>flash_on</mat-icon>
-  </button>
+    <button mat-icon-button (click)="burnCProject()" class="dirdem-icons" matTooltip="Flash .hex file" [disabled]="!microcontroller.name">
+      <mat-icon>flash_on</mat-icon>
+    </button>
 
-  <span class="dirdem-output-results" *ngIf="linkToHexFile">
-    {{ linkToHexFile }}
-  </span>
+    <span class="dirdem-output-results" *ngIf="linkToHexFile">
+      {{ linkToHexFile }}
+    </span>
+  </div>
 
-  <button mat-icon-button (click)="burnArduinoUnoBootloader()"  class="dirdem-icons" matTooltip="Burn Arduino UNO bootloader"
-   style="position: absolute; right: 0;" [disabled]="microcontroller.name != atmega328Name">
-    <mat-icon>whatshot</mat-icon>
-  </button>
+  <app-micro-selector></app-micro-selector>
 
+    <button mat-icon-button (click)="burnArduinoUnoBootloader()" class="dirdem-icons"
+      matTooltip="Burn Arduino UNO bootloader" [disabled]="microcontroller.name != atmega328Name">
+      <mat-icon>whatshot</mat-icon>
+    </button>
 </div>

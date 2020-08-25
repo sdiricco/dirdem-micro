@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoaderService {
+  visibility$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  private _status = new BehaviorSubject<ProcessStatus>(ProcessStatus.complete);
-  processStatus = this._status.asObservable();
+  constructor() { console.log('loader service started') };
 
-  /**
-   * Aggiorna lo stato di un processo - pending o completato
-   */
-  updateProcess(status: ProcessStatus) {
-    this._status.next(status);
+  show() {
+    this.visibility$.next(true);
   }
 
-  constructor() { }
+  hide() {
+    this.visibility$.next(false);
+  }
+
+  isVisible(): Observable<boolean> {
+    return this.visibility$.asObservable().pipe(share());
+  }
+
 }
 
-export enum ProcessStatus {
-  pending,
-  complete
-}

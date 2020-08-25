@@ -22,37 +22,21 @@
 }
 
 html {
-  height: 100%;
-  margin: 0;
-  overflow-x: hidden;
-  font-family: DirdemCustomFont;
+  width: 100vw;
+  height: 100vh;
 }
 
 body {
-  margin: 0;
-}
-
-#dirdem-toolbar-container {
-  display: flex;
-  align-items: center;
-  background-color: var(--matPrimary);
-  height: 40px;
-  border-bottom: solid 2px var( --nerdAccent);
-  color: var(--nerdDark);
-}
-
-#spinner {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--nerdPrimary);
-  opacity: 0.5;
-  z-index: 9999999;
+  margin: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+mat-card-content {
+  height: 95%;
+  overflow-y: auto;
 }
 
 .centered-text {
@@ -97,7 +81,6 @@ body {
   flex-direction: column;
   background-color: var(--matPrimary);
   color: var(--nerdLight);
-  min-width: 280px;
   z-index: 1;
 }
 
@@ -156,44 +139,6 @@ body {
   color: var(--nerdAccent);
 }
 
-.dirdem-toolbar-icon-buttons {
-  font-size: 20px;
-  height: 100% !important;
-  width: 100% !important;
-}
-
-#dirdem-fuse-bit-card {
-  margin-top: 10px;
-}
-
-#dirdem-micro-package-show {
-  height: 50px;
-  width: 100%;
-}
-
-/**
-* Animazioni
-*/
-
-@keyframes fadeInOpacity {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes flashingOutput {
-  0% {
-    color: var(--nerdDark);
-    background-color: var(--nerdAccent);
-  }
-  50% {
-    color: var(--nerdAccent);
-    background-color: var(--nerdDark);
-  }
+.full-height {
+  height: 100%;
 }

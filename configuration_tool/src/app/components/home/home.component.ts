@@ -19,4 +19,8 @@ export class HomeComponent {
       this.microcontroller = micro;
     })
   }
+
+  onMicrocontrollerPackageChange(evt) {
+    console.log(evt);
+  }
 }
